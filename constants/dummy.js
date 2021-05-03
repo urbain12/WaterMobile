@@ -27,74 +27,74 @@ export const trendingCurrencies = [
         transactionHistory: [
             {
                 id: 1,
-                description: "Sold Bitcoin",
+                description: "Installment",
                 amount: -2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "S",      // S - Sold, B - Bought
                 date: "14:20 12 Apr"
             },
             {
                 id: 2,
-                description: "Bought Bitcoin",
+                description: "buy water",
                 amount: 2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 3,
-                description: "Sold Bitcoin",
+                description: "Installment",
                 amount: -2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "S",
                 date: "14:20 12 Apr"
             },
             {
                 id: 4,
-                description: "Bought Bitcoin",
+                description: "buy water",
                 amount: 2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 5,
-                description: "Bought Bitcoin",
+                description: "buy water",
                 amount: 2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
 
             {
                 id: 6,
-                description: "Bought Bitcoin",
+                description: "buy water",
                 amount: 2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 7,
-                description: "Bought Bitcoin",
+                description: "buy water",
                 amount: 2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 8,
-                description: "Bought Bitcoin",
+                description: "buy water",
                 amount: 2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 9,
-                description: "Bought Bitcoin",
+                description: "buy water",
                 amount: 2.0034,
-                currency: "BTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
@@ -123,74 +123,74 @@ export const trendingCurrencies = [
         transactionHistory: [
             {
                 id: 1,
-                description: "Sold Ethereum",
+                description: "Installment",
                 amount: -2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "S",      // S - Sold, B - Bought
                 date: "14:20 12 Apr"
             },
             {
                 id: 2,
-                description: "Bought Ethereum",
+                description: "Installment",
                 amount: 2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 3,
-                description: "Sold Ethereum",
+                description: "Installment",
                 amount: -2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "S",
                 date: "14:20 12 Apr"
             },
             {
                 id: 4,
-                description: "Bought Ethereum",
+                description: "Installment",
                 amount: 2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 5,
-                description: "Bought Ethereum",
+                description: "Installment",
                 amount: 2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
 
             {
                 id: 6,
-                description: "Bought Ethereum",
+                description: "Installment",
                 amount: 2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 7,
-                description: "Bought Ethereum",
+                description: "Installment",
                 amount: 2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 8,
-                description: "Bought Ethereum",
+                description: "Installment",
                 amount: 2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 9,
-                description: "Bought Ethereum",
+                description: "Installment",
                 amount: 2.0034,
-                currency: "ETH",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
@@ -218,73 +218,73 @@ export const trendingCurrencies = [
         transactionHistory: [
             {
                 id: 1,
-                description: "Sold Litecoin",
+                description: "Installmen",
                 amount: -2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "S",      // S - Sold, B - Bought
                 date: "14:20 12 Apr"
             },
             {
                 id: 2,
-                description: "Bought Litecoin",
+                description: "BUy water",
                 amount: 2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 3,
-                description: "Sold Litecoin",
+                description: "Installmen",
                 amount: -2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "S",
                 date: "14:20 12 Apr"
             },
             {
                 id: 4,
-                description: "Bought Litecoin",
+                description: "BUy water",
                 amount: 2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 5,
-                description: "Bought Litecoin",
+                description: "BUy water",
                 amount: 2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 6,
-                description: "Bought Litecoin",
+                description: "BUy water",
                 amount: 2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 7,
-                description: "Bought Litecoin",
+                description: "BUy water",
                 amount: 2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 8,
-                description: "Bought Litecoin",
+                description: "BUy water",
                 amount: 2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
             {
                 id: 9,
-                description: "Bought Litecoin",
+                description: "BUy water",
                 amount: 2.0034,
-                currency: "LTC",
+                currency: "inuma",
                 type: "B",
                 date: "14:20 12 Apr"
             },
@@ -296,74 +296,74 @@ export const trendingCurrencies = [
 export const transactionHistory = [
     {
         id: 1,
-        description: "Sold Ethereum",
+        description: "Installment",
         amount: -2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "S",      // S - Sold, B - Bought
         date: "14:20 12 Apr"
     },
     {
         id: 2,
-        description: "Bought Ethereum",
+        description: "Installment",
         amount: 2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "B",
         date: "14:20 12 Apr"
     },
     {
         id: 3,
-        description: "Sold Ethereum",
+        description: "Installment",
         amount: -2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "S",
         date: "14:20 12 Apr"
     },
     {
         id: 4,
-        description: "Bought Ethereum",
+        description: "Installment",
         amount: 2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "B",
         date: "14:20 12 Apr"
     },
     {
         id: 5,
-        description: "Bought Ethereum",
+        description: "Installment",
         amount: 2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "B",
         date: "14:20 12 Apr"
     },
 
     {
         id: 6,
-        description: "Bought Ethereum",
+        description: "Installment",
         amount: 2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "B",
         date: "14:20 12 Apr"
     },
     {
         id: 7,
-        description: "Bought Ethereum",
+        description: "Installment",
         amount: 2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "B",
         date: "14:20 12 Apr"
     },
     {
         id: 8,
-        description: "Bought Ethereum",
+        description: "Installment",
         amount: 2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "B",
         date: "14:20 12 Apr"
     },
     {
         id: 9,
-        description: "Bought Ethereum",
+        description: "Installment",
         amount: 2.0034,
-        currency: "ETH",
+        currency: "inuma",
         type: "B",
         date: "14:20 12 Apr"
     },
