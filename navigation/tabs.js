@@ -199,7 +199,7 @@ const Tabs = () => {
 
       <Tab.Screen
         name="Transaction"
-        component={setIsVisible}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
