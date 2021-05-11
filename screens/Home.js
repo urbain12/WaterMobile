@@ -82,7 +82,7 @@ const Home = ({ navigation }) => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => console.log("Notification on pressed")}
+              onPress={() => navigation.navigate('Login')}
             >
               <AntDesign
                 name="logout"

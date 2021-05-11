@@ -2,7 +2,7 @@ import React from 'react';
 import { CryptoDetail, Transaction } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
-
+import Login from './screens/Login'
 import { useFonts } from 'expo-font';
 import Tabs from "./navigation/tabs";
 
@@ -26,8 +26,12 @@ const App = () => {
         screenOptions={{
           headerShown: false
         }}
-        initialRouteName={'Home'}
-      >
+        initialRouteName={'Login'}
+      > 
+        <Stack.Screen
+          name="Login"
+          component={Login}
+        />
         <Stack.Screen
           name="Home"
           component={Tabs}
