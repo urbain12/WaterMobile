@@ -57,6 +57,7 @@ const Transaction = ({ route }) => {
 
     axios.post('http://wateraccess.t3ch.rw:8234/Request/create/', postObj).then((res) => {
       console.log(res.status)
+      alert('Your request is submitted')
     }).catch(err => {
       console.log(err)
     })
