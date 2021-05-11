@@ -213,8 +213,8 @@ const Tabs = () => {
                   source={icons.transaction}
                   resizeMode="contain"
                   style={{
-                    width: 30,
-                    height: 30,
+                    width: 40,
+                    height: 40,
                     tintColor: COLORS.white,
                   }}
                 />

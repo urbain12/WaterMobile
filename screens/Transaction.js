@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -16,9 +16,54 @@ import {
   TransactionHistory,
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS } from "../constants";
+import axios from 'axios';
+
 
 const Transaction = ({ route }) => {
   const [selectedCurrency, setSelectedCurrency] = React.useState(null);
+  const [Names, setNames] = useState('')
+  const [IDnumber, setIDnumber] = useState('')
+  const [Phonenumber, setPhonenumber] = useState('')
+  const [Province, setProvince] = useState('')
+  const [District, setDistrict] = useState('')
+  const [Sector, setSector] = useState('')
+  const [Cell, setCell] = useState('')
+
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const postObj = JSON.stringify({
+      'Names': Names,
+      'Idnumber': IDnumber,
+      'phonenumber': Phonenumber,
+      'Province': Province,
+      'District': District,
+      'Sector': Sector,
+      'Cell': Cell,
+
+    })
+    console.log(postObj)
+
+    // let my_token = localStorage.getItem('token');
+
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      // Authorization: `Token ${my_token}`,
+    };
+
+    axios.post('http://wateraccess.t3ch.rw:8234/Request/create/', postObj).then((res) => {
+      console.log(res.status)
+    }).catch(err => {
+      console.log(err)
+    })
+
+
+
+  }
 
   React.useEffect(() => {
     const { currency } = route.params;
@@ -26,6 +71,7 @@ const Transaction = ({ route }) => {
   });
 
   function renderTrade() {
+
     return (
       <View
         style={{
@@ -53,6 +99,7 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="Names"
+              onChangeText={text => setNames(text)}
             />
             
             <TextInput
@@ -67,6 +114,7 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="ID number"
+              onChangeText={text => setIDnumber(text)}
             />
             <TextInput
               style={{
@@ -80,6 +128,7 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="Phone Number"
+              onChangeText={text => setPhonenumber(text)}
             />
             <TextInput
               style={{
@@ -93,6 +142,7 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="Province"
+              onChangeText={text => setProvince(text)}
             />
             <TextInput
               style={{
@@ -106,6 +156,7 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="District"
+              onChangeText={text => setDistrict(text)}
             />
             <TextInput
               style={{
@@ -119,6 +170,7 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="Sector"
+              onChangeText={text => setSector(text)}
             />
             <TextInput
               style={{
@@ -133,13 +185,15 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="Cell"
+              onChangeText={text => setCell(text)}
             />
+            
           </TouchableOpacity>
         </View>
 
         <TextButton
           label="Request"
-          onPress={() => console.log("Trade")}
+          onPress={(e) => { handleSubmit(e) }}
           style={{ marginTop: 100 }}
         />
       </View>
