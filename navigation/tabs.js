@@ -209,7 +209,7 @@ const Tabs = () => {
   
         <Tab.Screen
           name="Transaction"
-          component={setIsVisible}
+          component={Home}
           options={{
             tabBarIcon: ({ focused }) => (
               <View>
@@ -223,8 +223,8 @@ const Tabs = () => {
                     source={icons.transaction}
                     resizeMode="contain"
                     style={{
-                      width: 30,
-                      height: 30,
+                      width: 40,
+                      height: 40,
                       tintColor: COLORS.white,
                     }}
                   />
