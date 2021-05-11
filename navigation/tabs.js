@@ -247,7 +247,7 @@ const Tabs = () => {
                   style={{
                     width: 30,
                     height: 30,
-                    tintColor: COLORS.white,
+                    tintColor: focused ? COLORS.primary : COLORS.black,
                   }}
                 />
                 <Text
