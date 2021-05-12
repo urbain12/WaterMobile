@@ -16,21 +16,21 @@ import Icon from '@expo/vector-icons/Entypo';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useTheme } from '@react-navigation/native';
 import {images} from '../constants'
-// import { AuthContext } from '../context/Context';
+import { AuthContext } from '../context/Context';
 
 
 
 const Login = ({navigation}) => {
 
     const [data, setData] = React.useState({
-        username: '',
+        phone: '',
         password: '',
         loading: false,
         check_textInputChange: false,
         secureTextEntry: true,
     });
 
-    // const {signIn} = React.useContext(AuthContext);
+    const {signIn} = React.useContext(AuthContext);
 
     const { colors } = useTheme();
 
@@ -39,13 +39,13 @@ const Login = ({navigation}) => {
         if( val.length != 0 ) {
             setData({
                 ...data,
-                username: val,
+                phone: val,
                 check_textInputChange: true,
             });
         } else {
             setData({
                 ...data,
-                username: val,
+                phone: val,
                 check_textInputChange: false,
             });
         }
@@ -68,19 +68,19 @@ const Login = ({navigation}) => {
         });
     }
 
-    const loginHandle = (username,password) => {
-        // setData({
-        //     ...data,
-        //     loading:true
-        // });
-        // console.log(username,password)
-        // // signIn(username,password);
-        // setTimeout(()=>{
-        //     setData({
-        //         ...data,
-        //         loading:false
-        //     });
-        // },10000)
+    const loginHandle = (phone,password) => {
+        setData({
+            ...data,
+            loading:true
+        });
+        console.log(phone,password)
+        signIn(phone,password);
+        setTimeout(()=>{
+            setData({
+                ...data,
+                loading:false
+            });
+        },10000)
         
     }
     
@@ -175,7 +175,7 @@ const Login = ({navigation}) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={()=>{navigation.navigate('Home')}}
+                    onPress={()=>{loginHandle(data.phone,data.password)}}
                 >
                 <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}
