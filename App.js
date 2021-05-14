@@ -6,7 +6,9 @@ import Login from './screens/Login'
 import { useFonts } from 'expo-font';
 import { ActivityIndicator, View } from 'react-native';
 import Tabs from "./navigation/tabs";
-import AuthContext from './context/Context'
+import {AuthContext} from './context/Context'
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
