@@ -100,7 +100,7 @@ const Login = ({navigation}) => {
 
             <Text style={[styles.text_footer, {
                 color: colors.text
-            }]}>Email</Text>
+            }]}>Phone</Text>
 
             <View style={styles.action}>
                 <Icon 
@@ -109,7 +109,7 @@ const Login = ({navigation}) => {
                 size={20}
                 />
                 <TextInput 
-                    placeholder="Your Email"
+                    placeholder="07--------"
                     placeholderTextColor="#666666"
                     style={[styles.textInput, {
                         color: colors.text

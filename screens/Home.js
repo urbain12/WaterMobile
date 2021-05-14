@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -11,18 +11,41 @@ import {
   LogBox,
 } from "react-native";
 import { MaterialIcons, AntDesign, EvilIcons } from "@expo/vector-icons";
-
+import {AuthContext} from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from 'axios';
 
 const Home = ({ navigation }) => {
   const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
+  const [customer,setCustomer]=useState({})
+  const [category,setCategory]=useState('')
   const [transactionHistory, setTransactionHistory] = React.useState(
     dummyData.transactionHistory
   );
+ 
+  
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    async function getEmail() {
+      const id = await AsyncStorage.getItem('user_id')
+      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+        setCustomer(res.data[0])
+      }).catch(err => {
+        console.log(err)
+      })
+      axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+        setCategory(res.data.category)
+      }).catch(err => {
+        console.log(err)
+      })
+
+    }
+
+    getEmail()
+    
   }, []);
 
   function renderHeader() {
@@ -49,7 +72,7 @@ const Home = ({ navigation }) => {
         </View>
       </TouchableOpacity>
     );
-
+    const context=React.useContext(AuthContext)
     return (
       <View
         style={{
@@ -82,7 +105,7 @@ const Home = ({ navigation }) => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => {context.signOut()}}
             >
               <AntDesign
                 name="logout"
@@ -101,10 +124,10 @@ const Home = ({ navigation }) => {
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              Rukundo Aimable
+              {customer.FirstName} {customer.LastName}
             </Text>
             <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              raimable@gmail.com
+              {customer.Phone}
             </Text>
             <Text
               style={{
@@ -113,7 +136,7 @@ const Home = ({ navigation }) => {
                 ...FONTS.h3,
               }}
             >
-              INUMA
+              {category}
             </Text>
           </View>
 
@@ -153,35 +176,51 @@ const Home = ({ navigation }) => {
 
   function renderNotice() {
     return (
-      <View
-        style={{
-          marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          padding: 20,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.secondary,
-          ...styles.shadow,
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            marginTop: SIZES.base,
-          }}
-          onPress={() => console.log("Learn More")}
-        >
-          <Text
+        <View
             style={{
-              textDecorationLine: "underline",
-              color: COLORS.green,
-              ...FONTS.h3,
+                marginTop: SIZES.padding,
+                marginHorizontal: SIZES.padding,
+                padding: 20,
+                borderRadius: SIZES.radius,
+                backgroundColor: COLORS.secondary,
+                ...styles.shadow
             }}
-          >
-            Learn More
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+        >   
+            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
+            {category.toUpperCase() === 'AMAZI' ? (
+
+              <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
+            ):(
+              <View>
+              {category.toUpperCase() === 'UHIRA' ? (
+                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
+Encourage your farmer friends to join our UHIRA.RW network!!</Text>
+              ):(
+                <View>
+              {category.toUpperCase() === 'INUMA' ? (
+                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
+Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
+              ):(
+                  <Text></Text>
+              )}
+              </View>
+              )}
+              </View>
+            )}
+
+            
+
+            <TouchableOpacity
+                style={{
+                    marginTop: SIZES.base
+                }}
+                onPress={() => console.log("Learn More")}
+            >
+                <Text style={{ textDecorationLine: 'underline', color: COLORS.green, ...FONTS.h3 }}>Learn More</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
 
   function renderTransactionHistory() {
     return (
@@ -197,6 +236,7 @@ const Home = ({ navigation }) => {
       <View style={{ flex: 1, paddingBottom: 130 }}>
         {renderHeader()}
         {renderAlert()}
+        {renderNotice()}
         {renderTransactionHistory()}
       </View>
     </ScrollView>

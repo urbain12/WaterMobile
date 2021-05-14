@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useMemo,useEffect} from 'react';
 import { CryptoDetail, Transaction } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,7 +6,9 @@ import Login from './screens/Login'
 import { useFonts } from 'expo-font';
 import { ActivityIndicator, View } from 'react-native';
 import Tabs from "./navigation/tabs";
-import AuthContext from './context/Context'
+import {AuthContext} from './context/Context';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -17,7 +19,7 @@ const screenOptionStyle = {
     const initialState = {
         isLoading:true,
         user_id:'',
-        token:''
+        token:null
     }
 
     const loginReducer = (prevState,action)=>{
@@ -26,14 +28,14 @@ const screenOptionStyle = {
                 return {
                     ...prevState,
                     token:action.token,
-                    user_id:action.name,
+                    user_id:action.user_id,
                     isLoading:false
                 };
             case 'LOGIN':
                 return {
                     ...prevState,
                     token:action.token,
-                    user_id:action.name,
+                    user_id:action.user_id,
                     isLoading:false
                 };
             case 'LOGOUT':
@@ -69,23 +71,29 @@ const screenOptionStyle = {
             };
         
          
-            await axios.post("http://localhost:8000/customer_login/", postObj)
+            await axios.post("http://wateraccess.t3ch.rw:8234/customer_login/", postObj)
             .then(res => {
-              if (res.status === 200) {
-                  console.log(res.data)
+               
+              if (res.data.code == 200) {
+                  // console.log(res.data)
+                  console.log(res.data.code)
                   
-                const items = [['token',res.data.token], 
-                ['user_id', res.data.user_id],
+                  
+                const items = [['token', JSON.stringify(res.data.token)], 
+                ['user_id', JSON.stringify(res.data.user_id)],
             ]
                 AsyncStorage.multiSet(items, () => {
                     console.log('asyncstorage set successfully')
                 });
                 dispatch({ type:'LOGIN', 
-                token: res.data.token,  
-                user_id: res.data.user_id,
+                token: JSON.stringify(res.data.token),  
+                user_id: JSON.stringify(res.data.user_id),
                
             })
                 
+              }
+              else{
+                alert('Invalid email or password!')
               }
             }).catch((error)=>{
               if(error.response){
@@ -136,15 +144,15 @@ const screenOptionStyle = {
         },2000)
     },[])
 
-  // const [loaded] = useFonts({
-  //       "Roboto-Black" : require('./assets/fonts/Roboto-Black.ttf'),
-  //       "Roboto-Bold" : require('./assets/fonts/Roboto-Bold.ttf'),
-  //       "Roboto-Regular" : require('./assets/fonts/Roboto-Regular.ttf'),
-  //   })
+  const [loaded] = useFonts({
+        "Roboto-Black" : require('./assets/fonts/Roboto-Black.ttf'),
+        "Roboto-Bold" : require('./assets/fonts/Roboto-Bold.ttf'),
+        "Roboto-Regular" : require('./assets/fonts/Roboto-Regular.ttf'),
+    })
 
-  // if(!loaded){
-  //     return null;
-  // }
+  if(!loaded){
+      return null;
+  }
 
   if(loginState.isLoading){
     return(
@@ -160,6 +168,7 @@ else{
   if(loginState.token !== null){
       
     return (
+      <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -182,6 +191,7 @@ else{
           />
         </Stack.Navigator>
       </NavigationContainer>
+      </AuthContext.Provider>
     )
      
   }else{
