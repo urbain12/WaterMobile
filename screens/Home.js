@@ -10,7 +10,7 @@ import {
   ImageBackground,
   LogBox,
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome } from "@expo/vector-icons";
 import {AuthContext} from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -29,7 +29,7 @@ const Home = ({ navigation }) => {
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    async function getEmail() {
+    async function setInfo() {
       const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
@@ -44,7 +44,7 @@ const Home = ({ navigation }) => {
 
     }
 
-    getEmail()
+    setInfo()
     
   }, []);
 
@@ -94,10 +94,27 @@ const Home = ({ navigation }) => {
             style={{
               marginTop: SIZES.padding * 2,
               width: "100%",
-              alignItems: "flex-end",
+              flexDirection:"row",
               paddingHorizontal: SIZES.padding,
             }}
           >
+            <TouchableOpacity
+              style={{
+                width: 35,
+                height: 35,
+                marginRight:'80%',
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onPress={() => navigation.navigate('Shop')}
+            >
+              <FontAwesome
+                name="shopping-bag"
+                size={28}
+                color="white"
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
             <TouchableOpacity
               style={{
                 width: 35,

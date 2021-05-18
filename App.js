@@ -9,6 +9,7 @@ import Tabs from "./navigation/tabs";
 import {AuthContext} from './context/Context';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
+import Shop from './screens/Shop';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -184,6 +185,10 @@ else{
           <Stack.Screen
             name="CryptoDetail"
             component={CryptoDetail}
+          />
+          <Stack.Screen
+            name="Shop"
+            component={Shop}
           />
           <Stack.Screen
             name="Transaction"
