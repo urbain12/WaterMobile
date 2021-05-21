@@ -21,9 +21,7 @@ const Home = ({ navigation }) => {
   const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
   const [customer,setCustomer]=useState({})
   const [category,setCategory]=useState('')
-  const [transactionHistory, setTransactionHistory] = React.useState(
-    dummyData.transactionHistory
-  );
+  const [transactionHistory, setTransactionHistory] = useState([]);
  
   
 
@@ -38,6 +36,11 @@ const Home = ({ navigation }) => {
       })
       axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
         setCategory(res.data.category)
+      }).catch(err => {
+        console.log(err)
+      })
+      axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
+        setTransactionHistory(res.data)
       }).catch(err => {
         console.log(err)
       })

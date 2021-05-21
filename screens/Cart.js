@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {inject, observer} from 'mobx-react';
+import {inject,observer} from 'mobx-react';
 import {
   StyleSheet,
   View,
@@ -15,81 +15,18 @@ import {
 } from "react-native";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather } from "@expo/vector-icons";
 import {AuthContext} from '../context/Context';
-import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from 'axios';
-import ProductCard from "../components/ProductCard";
 
 const BoxAnimated= Animated.createAnimatedComponent(View)
-
-@inject('productsStore')
 @inject('shoppingCartStore')
 @observer
-class Shop extends React.Component {
-  // const [customer,setCustomer]=useState({})
-  // const [quantity,setQuantity]=useState(0)
-  // const [category,setCategory]=useState('')
-  // const [opacity,setOpacity]=useState(new Animated.Value(1))
-  // const [isHover,setIsHover]=useState(false)
+class Cart extends React.Component {
 
-  state={
-    quantity:0,
-    opacity:new Animated.Value(1),
-    qtyOpacity:new Animated.Value(0),
-    isHover:false,
-  }
-
-
-  
- 
-  
-  // React.useEffect(() => {
-  //   LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  //   async function setInfo() {
-  //     const id = await AsyncStorage.getItem('user_id')
-  //     axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
-  //       setCustomer(res.data[0])
-  //     }).catch(err => {
-  //       console.log(err)
-  //     })
-  //     axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-  //       setCategory(res.data.category)
-  //     }).catch(err => {
-  //       console.log(err)
-  //     })
-
-  //   }
-
-  //   setInfo()
+   renderHeader=()=> {
     
-  // }, []);
-
-  renderHeader=()=> {
-    // const renderItem = ({ item, index }) => (
-    //   <TouchableOpacity
-    //     style={{
-    //       width: 180,
-    //       paddingVertical: SIZES.padding,
-    //       paddingHorizontal: SIZES.padding,
-    //       marginLeft: index == 0 ? SIZES.padding : 0,
-    //       marginRight: SIZES.radius,
-    //       borderRadius: 10,
-    //       backgroundColor: COLORS.white,
-    //     }}
-    //     onPress={() => props.navigation.navigate("CryptoDetail", { currency: item })}
-    //   >
-    //     <View style={{ flexDirection: "row" }}>
-    //       <View style={{ marginLeft: SIZES.base }}>
-    //         <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-    //         <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-    //           water access
-    //         </Text>
-    //       </View>
-    //     </View>
-    //   </TouchableOpacity>
-    // );
-    // const context=React.useContext(AuthContext)
+    
     return (
       <View
         style={{
@@ -123,7 +60,7 @@ class Shop extends React.Component {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => this.props.navigation.navigate('Home')}
+              onPress={() => this.props.navigation.navigate('Shop')}
             >
               <Ionicons
                 name="arrow-back"
@@ -159,7 +96,7 @@ class Shop extends React.Component {
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-              Our products
+              My Cart
             </Text>
           </View>
 
@@ -171,68 +108,45 @@ class Shop extends React.Component {
   }
 
 
-
   render(){
-    
+    const {products}=this.props.shoppingCartStore;
     return (
     
       <View style={{ flex: 1, paddingBottom: 130 }}>
     <View>
-         {this.renderHeader()}
-    {/* <Text style={{color:'black'}}>flskdjf    {JSON.stringify(this.props.productsStore.data)}</Text> */}
-        <ScrollView style={{flexDirection:'row'}}>
-        {this.props.productsStore.data.map(product=>{
-          return(
+        {this.renderHeader()}
+
+
+        {products.length===0?(
             <View>
-
-            <ProductCard key={product.id} product={product}/>
+            <Text>Empty Cart</Text>
             </View>
-          )
-        })}
-
-        </ScrollView>
+        ):(
+            <View style={{alignSelf:'center'}}>
+            {products.map(product=>{
+              return(
+                <View>
+                    <Text>Name:{product.Title}</Text>
+                    <Text>Quantity:{product.cartQuantity}</Text>
+                </View>
+              )
+                
+            })}
+            </View>
+        )}
         
     </View>
 
-
-    {/* shopping cart icon */}
-    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Cart')}} style={{
-                   position:"relative",
-                   
-               }}>
-                 <View style={{backgroundColor:"#000",
-                   height:45,
-                   width:45,
-                   bottom:20,
-                   alignItems:"center",
-                   justifyContent:"center",
-                   alignSelf:"center",
-                   borderRadius:22.5}}>
-                   <View style={{marginTop:10}}>
-
-                 <FontAwesome 
-                 name="shopping-cart"
-                 size={24}
-                 color="#fff"/>
-                   </View>
-                 {this.props.shoppingCartStore.totalProducts>0 && (
-                  <View style={{positions:'absolute',height:18,width:18,borderRadius:9,backgroundColor:'red',alignItems:'center',top:-30,right:-18}}>
-                  <Text style={{color:'white'}}>{this.props.shoppingCartStore.totalProducts}</Text>
-                 </View>
-                 )}
-                 
-                 </View>
-               </TouchableOpacity>
       </View>
         
         
   );
+  }
+ 
+  // page content
+  
 };
 
-  }
-  
-
-  
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -349,4 +263,4 @@ cardDetails:{
 },
 });
 
-export default Shop;
+export default Cart;
