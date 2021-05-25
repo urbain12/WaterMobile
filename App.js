@@ -1,4 +1,5 @@
 import React,{useMemo,useEffect} from 'react';
+import { Provider } from 'mobx-react';
 import { CryptoDetail, Transaction } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,8 +8,11 @@ import { useFonts } from 'expo-font';
 import { ActivityIndicator, View } from 'react-native';
 import Tabs from "./navigation/tabs";
 import {AuthContext} from './context/Context';
+import { store } from './models/index';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
+import Shop from './screens/Shop';
+import Cart from './screens/Cart';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -168,6 +172,7 @@ else{
   if(loginState.token !== null){
       
     return (
+      <Provider {...store}>
       <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <Stack.Navigator
@@ -182,8 +187,16 @@ else{
             component={Tabs}
           />
           <Stack.Screen
+            name="Cart"
+            component={Cart}
+          />
+          <Stack.Screen
             name="CryptoDetail"
             component={CryptoDetail}
+          />
+          <Stack.Screen
+            name="Shop"
+            component={Shop}
           />
           <Stack.Screen
             name="Transaction"
@@ -192,6 +205,7 @@ else{
         </Stack.Navigator>
       </NavigationContainer>
       </AuthContext.Provider>
+      </Provider>
     )
      
   }else{

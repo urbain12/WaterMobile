@@ -30,12 +30,12 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
             />
 
             <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                <Text style={{ ...FONTS.h3 }}>{item.description}</Text>
-                <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>{item.date}</Text>
+                <Text style={{ ...FONTS.h3 }}>Instalment</Text>
+                <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>{item.PaymentDate}</Text>
             </View>
 
             <View style={{ flexDirection: 'row', height: '100%', alignItems: 'center' }}>
-                <Text style={{ color: item.type == "B" ? COLORS.green : COLORS.black, ...FONTS.h3 }}>{item.amount} {item.currency}</Text>
+                <Text style={{ color: item.type == "B" ? COLORS.green : COLORS.black, ...FONTS.h3 }}>{item.Paidamount} Rwf</Text>
                 <Image
                     source={icons.right_arrow}
                     style={{
@@ -58,8 +58,10 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
                 backgroundColor: COLORS.white,
                 ...customContainerStyle
             }}
-        >
-            <Text style={{ ...FONTS.h2 }}>Transaction History</Text>
+        >   
+                <Text style={{ ...FONTS.h2 }}>Transaction History</Text>
+            {history.length>0?(
+                <View>
             <FlatList
                 contentContainerStyle={{ marginTop: SIZES.radius }}
                 scrollEnabled={false}
@@ -73,6 +75,13 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
                     )
                 }}
             />
+                </View>
+            ):(
+                <View style={{justifyContent:'center',alignItems:'center',marginTop:20,marginBottom:20}}>
+                    <Text>No Transaction yet!</Text>
+                </View>
+            )}
+            
         </View>
     )
 }
