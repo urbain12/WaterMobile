@@ -132,22 +132,25 @@ class Shop extends React.Component {
                 resizeMode="contain"
               />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: 35,
-                height: 35,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              onPress={() => {context.signOut()}}
-            >
-              <AntDesign
-                name="logout"
-                size={28}
-                color="red"
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Cart')}} style={{
+                   position:"relative",
+                   marginTop:10
+               }}>
+                 
+
+                 <FontAwesome 
+                 name="shopping-cart"
+                 size={24}
+                 color="#fff"/>
+                  
+                 {this.props.shoppingCartStore.totalProducts>0 && (
+                  <View style={{positions:'absolute',height:18,width:18,borderRadius:9,backgroundColor:'red',alignItems:'center',top:-30,right:-18}}>
+                  <Text style={{color:'white'}}>{this.props.shoppingCartStore.totalProducts}</Text>
+                 </View>
+                 )}
+                 
+                 
+               </TouchableOpacity>
           </View>
 
           {/* Balance */}
@@ -176,19 +179,21 @@ class Shop extends React.Component {
     
     return (
     
-      <View style={{ flex: 1, paddingBottom: 130 }}>
+      <View>
     <View>
          {this.renderHeader()}
     {/* <Text style={{color:'black'}}>flskdjf    {JSON.stringify(this.props.productsStore.data)}</Text> */}
-        <ScrollView style={{flexDirection:'row'}}>
-        {this.props.productsStore.data.map(product=>{
-          return(
-            <View>
-
-            <ProductCard key={product.id} product={product}/>
-            </View>
-          )
-        })}
+        <ScrollView>
+        
+        <FlatList
+          data={this.props.productsStore.data}
+          numColumns={2}
+          renderItem={({ item }) => (
+          
+            <ProductCard key={item.id} product={item}/>
+          
+        )}
+        />
 
         </ScrollView>
         
@@ -196,33 +201,7 @@ class Shop extends React.Component {
 
 
     {/* shopping cart icon */}
-    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Cart')}} style={{
-                   position:"relative",
-                   
-               }}>
-                 <View style={{backgroundColor:"#000",
-                   height:45,
-                   width:45,
-                   bottom:20,
-                   alignItems:"center",
-                   justifyContent:"center",
-                   alignSelf:"center",
-                   borderRadius:22.5}}>
-                   <View style={{marginTop:10}}>
-
-                 <FontAwesome 
-                 name="shopping-cart"
-                 size={24}
-                 color="#fff"/>
-                   </View>
-                 {this.props.shoppingCartStore.totalProducts>0 && (
-                  <View style={{positions:'absolute',height:18,width:18,borderRadius:9,backgroundColor:'red',alignItems:'center',top:-30,right:-18}}>
-                  <Text style={{color:'white'}}>{this.props.shoppingCartStore.totalProducts}</Text>
-                 </View>
-                 )}
-                 
-                 </View>
-               </TouchableOpacity>
+    
       </View>
         
         

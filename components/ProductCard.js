@@ -7,6 +7,7 @@ import {
   View,
   TouchableWithoutFeedback,
   Animated,
+  Dimensions
 } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather } from "@expo/vector-icons";
@@ -17,6 +18,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import axios from 'axios';
 
 const BoxAnimated= Animated.createAnimatedComponent(View)
+const windowWidth = Dimensions.get('window').width/2-20;
 
 @observer
 class ProductCard extends Component {
@@ -45,6 +47,7 @@ class ProductCard extends Component {
     handleInc=()=>{
     this.props.product.incCartQuantity()
     }
+
 
     handleDec=()=>{
     this.props.product.decCartQuantity()
@@ -75,14 +78,14 @@ class ProductCard extends Component {
     render(){
         const {product}=this.props;
         return(
-            <View key={product.id} style={{backgroundColor:'white',width:150,position:'relative',margin:5,alignItems:'center',justifyContent:'center'}}>
+            <View key={product.id} style={{backgroundColor:'white',width:windowWidth,position:'relative',margin:10,alignItems:'center',justifyContent:'center',borderRadius:10}}>
         <TouchableWithoutFeedback onPress={this.handleClose}>
           <BoxAnimated opacity={this.state.opacity}>
             <View style={{marginBottom:10,marginTop:30}}>
               <Image style={{width:120,height:100}} resizeMode="contain" source={images.tool}/>
             </View>
             <View>
-              <Text>{product.Amount} Rwf</Text>
+              <Text style={{fontWeight:'bold'}}>{product.Amount} Rwf</Text>
             </View>
           </BoxAnimated>
           </TouchableWithoutFeedback>
