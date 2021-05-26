@@ -144,10 +144,10 @@ const Home = ({ navigation }) => {
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {customer.FirstName} {customer.LastName}
+              {/* {customer.FirstName} {customer.LastName} */}
             </Text>
             <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {customer.Phone}
+              {/* {customer.Phone} */}
             </Text>
             <Text
               style={{

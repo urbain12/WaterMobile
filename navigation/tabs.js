@@ -18,7 +18,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Home } from "../screens";
 import { COLORS, FONTS, icons } from "../constants";
 import Modal from "react-native-modal";
-import Login from '../screens/Login'
+import Login from '../screens/Login';
+import Settings from '../screens/Settings';
+import { MaterialIcons, AntDesign, Ionicons, FontAwesome, Entypo} from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 // const Stack = createStackNavigator();
 
@@ -33,16 +35,17 @@ const TabBarCustomButton = ({ children, onPress }) => {
       }}
       onPress={onPress}
     >
-      <LinearGradient
-        colors={[COLORS.primary, COLORS.secondary]}
+      <View
+        
         style={{
           width: 70,
           height: 70,
           borderRadius: 35,
+          backgroundColor:'#01B0F1'
         }}
       >
         {children}
-      </LinearGradient>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -185,18 +188,10 @@ const Tabs = () => {
                     </TouchableWithoutFeedback>
                   </TouchableOpacity>
                 </Modal>
-                <Image
-                  source={icons.home}
-                  resizeMode="contain"
-                  style={{
-                    width: 30,
-                    height: 30,
-                    tintColor: focused ? COLORS.primary : COLORS.black,
-                  }}
-                />
+                <Entypo name="home" size={30} color={focused ? '#01B0F1' : COLORS.black}/>
                 <Text
                   style={{
-                    color: focused ? COLORS.primary : COLORS.black,
+                    color: focused ? '#01B0F1' : COLORS.black,
                     ...FONTS.body5,
                   }}
                 >
@@ -237,22 +232,14 @@ const Tabs = () => {
   
         <Tab.Screen
           name="Settings"
-          component={Home}
+          component={Settings}
           options={{
             tabBarIcon: ({ focused }) => (
               <View style={{ alignItems: "center", justifyContent: "center" }}>
-                <Image
-                  source={icons.settings}
-                  resizeMode="contain"
-                  style={{
-                    width: 30,
-                    height: 30,
-                    tintColor: focused ? COLORS.primary : COLORS.black,
-                  }}
-                />
+                <Ionicons name="settings-sharp" size={30} color={focused ? '#01B0F1' : COLORS.black}/>
                 <Text
                   style={{
-                    color: focused ? COLORS.primary : COLORS.black,
+                    color: focused ? '#01B0F1' : COLORS.black,
                     ...FONTS.body5,
                   }}
                 >
