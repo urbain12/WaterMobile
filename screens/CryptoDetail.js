@@ -1,217 +1,326 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
     StyleSheet,
-    SafeAreaView,
     View,
     Text,
+    ScrollView,
+    FlatList,
     TouchableOpacity,
     Image,
-    ScrollView,
-    Animated
-} from 'react-native';
+    ImageBackground,
+    LogBox,
+} from "react-native";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
+import { AuthContext } from '../context/Context';
+import { PriceAlert, TransactionHistory } from "../components";
+import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from 'axios';
 
-import { VictoryScatter, VictoryLine, VictoryChart, VictoryAxis } from "victory-native";
+const CryptoDetail = ({ navigation, }) => {
+    const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
+    const [customer, setCustomer] = useState({})
+    const [category, setCategory] = useState('')
+    const [transactionHistory, setTransactionHistory] = useState([]);
 
-import { VictoryCustomTheme } from "../styles"
 
-import { HeaderBar, CurrencyLabel, TextButton, PriceAlert } from "../components"
-
-import { dummyData, COLORS, SIZES, FONTS, icons } from "../constants";
-
-const CryptoDetail = ({ route, navigation }) => {
-
-    const scrollX = new Animated.Value(0);
-    const numberOfCharts = [1, 2, 3];
-
-    const [selectedCurrency, setSelectedCurrency] = React.useState(null)
-    const [chartOptions, setChartOptions] = React.useState(dummyData.chartOptions)
-    const [selectedOption, setSelectedOption] = React.useState(chartOptions[0])
 
     React.useEffect(() => {
-        const { currency } = route.params;
-        setSelectedCurrency(currency)
-    }, [])
+        LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+        async function setInfo() {
+            const id = await AsyncStorage.getItem('user_id')
+            axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+                setCustomer(res.data[0])
+            }).catch(err => {
+                console.log(err)
+            })
+            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+                setCategory(res.data.category)
+            }).catch(err => {
+                console.log(err)
+            })
+            axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
+                setTransactionHistory(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
 
-    function optionOnClickHandler(option) {
-        setSelectedOption(option)
-    }
+        }
 
-    function renderDots() {
-        const dotPosition = Animated.divide(scrollX, SIZES.width)
+        setInfo()
 
-        return (
-            <View style={{ height: 30, marginTop: 15 }}>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
-                >
-                    {numberOfCharts.map((item, index) => {
-                        const opacity = dotPosition.interpolate({
-                            inputRange: [index - 1, index, index + 1],
-                            outputRange: [0.3, 1, 0.3],
-                            extrapolate: 'clamp'
-                        })
+    }, []);
 
-                        const dotSize = dotPosition.interpolate({
-                            inputRange: [index - 1, index, index + 1],
-                            outputRange: [SIZES.base * 0.8, 10, SIZES.base * 0.8],
-                            extrapolate: 'clamp'
-                        })
-
-                        const dotColor = dotPosition.interpolate({
-                            inputRange: [index - 1, index, index + 1],
-                            outputRange: [COLORS.gray, COLORS.primary, COLORS.gray],
-                            extrapolate: 'clamp'
-                        })
-
-                        return (
-                            <Animated.View
-                                key={`dot-${index}`}
-                                opacity={opacity}
-                                style={{
-                                    borderRadius: SIZES.radius,
-                                    marginHorizontal: 6,
-                                    width: dotSize,
-                                    height: dotSize,
-                                    backgroundColor: dotColor
-                                }}
-                            />
-                        )
-                    })}
-                </View>
-            </View>
-        )
-    }
-
-    function renderChart() {
-        return (
-            <View
+    function renderHeader() {
+        const renderItem = ({ item, index }) => (
+            <TouchableOpacity
                 style={{
-                    marginTop: SIZES.padding,
-                    marginHorizontal: SIZES.radius,
-                    alignItems: 'center',
-                    borderRadius: SIZES.radius,
+                    width: 180,
+                    paddingVertical: SIZES.padding,
+                    paddingHorizontal: SIZES.padding,
+                    marginLeft: index == 0 ? SIZES.padding : 0,
+                    marginRight: SIZES.radius,
+                    borderRadius: 10,
                     backgroundColor: COLORS.white,
-                    ...styles.shadow
                 }}
+                onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
             >
-                {/* Header */}
-                
-
-                {/* Chart */}
-                
-
-                {/* Options */}
-                
-
-                {/* Dots */}
-                
-            </View>
-        )
-    }
-
-    function renderBuy() {
-        return (
-            <View
-                style={{
-                    marginTop: SIZES.padding,
-                    marginHorizontal: SIZES.radius,
-                    padding: SIZES.radius,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: COLORS.white,
-                    ...styles.shadow
-                }}
-            >
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        marginBottom: SIZES.radius
-                    }}
-                >
-                    {/* Currency */}
-                    <View style={{ flex: 1 }}>
-                        <CurrencyLabel
-                            currency={`${selectedCurrency?.currency} Service`}
-                        />
-                    </View>
-
-                    {/* Amount */}
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ marginRight: SIZES.base }}>
-                            <Text style={{ ...FONTS.h3 }}>Rwf {selectedCurrency?.wallet.value}</Text>
-                            <Text style={{ textAlign: 'right', color: COLORS.gray, ...FONTS.body4 }}>{selectedCurrency?.wallet.crypto} {selectedCurrency?.code}</Text>
+                <View style={{ flexDirection: "row" }}>
+                    <View style={{ marginLeft: SIZES.base }}>
+                        <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
+                        <View style={{ marginLeft: 10, borderBottomWidth: 2, width: 40, borderBottomColor: "black" }}>
                         </View>
-                        <Image
-                            source={icons.right_arrow}
-                            resizeMode="cover"
-                            style={{
-                                width: 20,
-                                height: 20,
-                                tintColor: COLORS.gray
-                            }}
-                        />
+
+                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                            {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                        </Text>
                     </View>
                 </View>
-
-                <TextButton
-                    label="Subscribe"
-                    onPress={() => navigation.navigate("Transaction", { currency: selectedCurrency })}
-                />
-            </View>
-
-        )
-    }
-
-    function renderAbout() {
+            </TouchableOpacity>
+        );
+        const context = React.useContext(AuthContext)
         return (
             <View
                 style={{
-                    marginTop: SIZES.padding,
-                    marginHorizontal: SIZES.radius,
-                    padding: SIZES.radius,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: COLORS.white,
-                    ...styles.shadow
+                    width: "100%",
+                    height: 290,
+                    ...styles.shadow,
                 }}
             >
-                <Text style={{ ...FONTS.h3 }}>About {selectedCurrency?.currency}</Text>
-                <Text style={{ marginTop: SIZES.base, ...FONTS.body3 }}>{selectedCurrency?.description}</Text>
+                <ImageBackground
+                    source={images.banner}
+                    resizeMode="cover"
+                    style={{
+                        flex: 1,
+                        alignItems: "center",
+                    }}
+                >
+                    {/* Header Bar */}
+                    <View
+                        style={{
+                            marginTop: SIZES.padding * 2,
+                            width: "100%",
+                            flexDirection: "row",
+                            paddingHorizontal: SIZES.padding,
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                width: 35,
+                                height: 35,
+                                marginRight: '80%',
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                            onPress={() => navigation.navigate('Home')}
+                        >
+                            <Ionicons
+                                name="arrow-back"
+                                size={40}
+                                color="white"
+                                resizeMode="contain"
+                            />
+                        </TouchableOpacity>
+
+                    </View>
+
+                    {/* Balance */}
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginTop: 30,
+                            marginLeft: 30
+                        }}
+                    >
+                        {/* Currency */}
+                        <View style={{ flex: 1, borderRightWidth: 2, borderRightColor: "white" }}>
+                            <Text style={{ fontSize: 40, color: "white",fontWeight:"bold" }}>23 Days</Text>
+                            <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
+                        </View>
+
+                        {/* Amount */}
+                        <View style={{ flex: 1, marginLeft: 20 }}>
+                            <Text style={{ fontSize: 40, color: "white",fontWeight:"bold" }}>48 Days</Text>
+                            <Text style={{ color: "white" }}>remaining to your next Installment</Text>
+                        </View>
+                    </View>
+
+                    {/* Trending */}
+                    <View
+                        style={{
+                            position: "absolute",
+                            bottom: "-30%",
+                        }}
+                    >
+                        <Text
+                            style={{
+                                marginLeft: SIZES.padding,
+                                color: COLORS.white,
+                                ...FONTS.h2,
+                            }}
+                        >
+
+                        </Text>
+                        <FlatList
+                            contentContainerStyle={{ marginTop: SIZES.base }}
+                            data={trending}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => `${item.id}`}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                        />
+                    </View>
+                </ImageBackground>
             </View>
+        );
+    }
+
+    function renderAlert() {
+        return <PriceAlert />;
+    }
+
+    function renderNotice() {
+        return (
+            <View
+            style={{
+              flexDirection: "row",
+              marginTop: SIZES.padding,
+              marginHorizontal: SIZES.padding,
+              padding: 20,
+              borderRadius: SIZES.radius,
+              backgroundColor: "#01b0f1",
+              ...styles.shadow
+            }}
+          >
+            <View style={{ width: '10%' }}>
+              <Image
+                source={icons.clap}
+                resizeMode="contain"
+                style={{
+                  width: 30,
+                  height: 90,
+                }}
+              />
+    
+            </View>
+            <View style={{ width: '90%' }}>
+              <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
+              {category.toUpperCase() === 'AMAZI' ? (
+    
+                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
+              ) : (
+                <View>
+                  {category.toUpperCase() === 'UHIRA' ? (
+                    <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
+                        Encourage your farmer friends to join our UHIRA.RW network!!</Text>
+                  ) : (
+                    <View>
+                      {category.toUpperCase() === 'INUMA' ? (
+                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
+                        Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
+                      ) : (
+                        <Text></Text>
+                      )}
+                    </View>
+                  )}
+                </View>
+              )}
+            </View>
+    
+          </View>
         )
     }
+
+
+
 
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                backgroundColor: COLORS.lightGray1
-            }}
-        >
-            <HeaderBar
-                right={true}
-            />
-            <ScrollView>
-                <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-                    {renderChart()}
-                    {renderBuy()}
-                    {renderAbout()}
-                    
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+        <ScrollView>
+            <View style={{ flex: 1, paddingBottom: 130 }}>
+                {renderHeader()}
+                {renderAlert()}
+                {renderNotice()}
+                <View
+                    style={{
+                        marginTop: SIZES.padding,
+                        marginHorizontal: SIZES.padding,
+                        width:'90%',
+                        padding: 20,
+                        borderRadius: SIZES.radius,
+                        backgroundColor: COLORS.white,
+                        ...styles.shadow
+                    }}
+                >
+                    <Text style={{ ...FONTS.h2 }}>Services</Text>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginBottom: SIZES.radius
+                        }}
+                    >
+                        {/* Currency */}
+                        <View style={{width:"30%"}}>
+                        <View style={{marginLeft:'3%',backgroundColor:"#01B0F1",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
 
-    )
-}
+                            <Image
+                                source={icons.filter}
+                                resizeMode="contain"
+                                style={{
+                                    width: 90,
+                                    height: 120,
+
+                                }}
+                            />
+                            </View>
+                            <Text style={{ textAlign: "center", fontWeight: "bold" }}>Our systems</Text>
+                        </View>
+
+                        {/* Amount */}
+                        <View style={{ flex: 1, marginLeft: 10 ,width:'30%'}}>
+                        <View style={{marginLeft:'2%',backgroundColor:"#01B0F1",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+
+                            <Image
+                                source={icons.pipe}
+                                resizeMode="contain"
+                                style={{
+                                    width: 90,
+                                    height: 120,
+
+                                }}
+                            />
+                            </View>
+                            <Text style={{ textAlign: "center", fontWeight: "bold" }}>Maintanance</Text>
+                        </View>
+                        <View style={{ flex: 1, marginLeft: 10,width:'30%' }}>
+                        <View style={{marginLeft:'2%',backgroundColor:"#01B0F1",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+
+                            <Image
+                                source={icons.support}
+                                resizeMode="contain"
+                                style={{
+                                    width: 90,
+                                    height: 120,
+                                }}
+                            />
+                            </View>
+                            <Text style={{ textAlign: "center", fontWeight: "bold" }}>Support</Text>
+                        </View>
+                    </View>
+
+
+                </View>
+            </View>
+        </ScrollView>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: "center",
+        justifyContent: "center",
     },
     shadow: {
         shadowColor: "#000",
@@ -219,11 +328,11 @@ const styles = StyleSheet.create({
             width: 0,
             height: 4,
         },
-        shadowOpacity: 0.30,
+        shadowOpacity: 0.3,
         shadowRadius: 4.65,
 
         elevation: 8,
-    }
-})
+    },
+});
 
 export default CryptoDetail;

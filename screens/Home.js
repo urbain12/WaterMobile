@@ -11,7 +11,7 @@ import {
   LogBox,
 } from "react-native";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome } from "@expo/vector-icons";
-import {AuthContext} from '../context/Context';
+import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -19,11 +19,11 @@ import axios from 'axios';
 
 const Home = ({ navigation }) => {
   const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
-  const [customer,setCustomer]=useState({})
-  const [category,setCategory]=useState('')
+  const [customer, setCustomer] = useState({})
+  const [category, setCategory] = useState('')
   const [transactionHistory, setTransactionHistory] = useState([]);
- 
-  
+
+
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -48,7 +48,7 @@ const Home = ({ navigation }) => {
     }
 
     setInfo()
-    
+
   }, []);
 
   function renderHeader() {
@@ -67,15 +67,20 @@ const Home = ({ navigation }) => {
       >
         <View style={{ flexDirection: "row" }}>
           <View style={{ marginLeft: SIZES.base }}>
+
             <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
+            <View style={{ marginLeft: 10, borderBottomWidth: 2, width: 40, borderBottomColor: "black" }}>
+            </View>
+
             <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-              water access
+              {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
             </Text>
+
           </View>
         </View>
       </TouchableOpacity>
     );
-    const context=React.useContext(AuthContext)
+    const context = React.useContext(AuthContext)
     return (
       <View
         style={{
@@ -85,7 +90,7 @@ const Home = ({ navigation }) => {
         }}
       >
         <ImageBackground
-          source={images.banner}
+          source={images.bannerhome}
           resizeMode="cover"
           style={{
             flex: 1,
@@ -97,43 +102,11 @@ const Home = ({ navigation }) => {
             style={{
               marginTop: SIZES.padding * 2,
               width: "100%",
-              flexDirection:"row",
+              flexDirection: "row",
               paddingHorizontal: SIZES.padding,
             }}
           >
-            <TouchableOpacity
-              style={{
-                width: 35,
-                height: 35,
-                marginRight:'80%',
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              onPress={() => navigation.navigate('Shop')}
-            >
-              <FontAwesome
-                name="shopping-bag"
-                size={28}
-                color="white"
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: 35,
-                height: 35,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              onPress={() => {context.signOut()}}
-            >
-              <AntDesign
-                name="logout"
-                size={28}
-                color="red"
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
+
           </View>
 
           {/* Balance */}
@@ -143,21 +116,7 @@ const Home = ({ navigation }) => {
               justifyContent: "center",
             }}
           >
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {customer.FirstName} {customer.LastName}
-            </Text>
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {customer.Phone}
-            </Text>
-            <Text
-              style={{
-                marginTop: SIZES.base,
-                color: COLORS.white,
-                ...FONTS.h3,
-              }}
-            >
-              {category}
-            </Text>
+            
           </View>
 
           {/* Trending */}
@@ -196,51 +155,55 @@ const Home = ({ navigation }) => {
 
   function renderNotice() {
     return (
-        <View
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: SIZES.padding,
+          marginHorizontal: SIZES.padding,
+          padding: 20,
+          borderRadius: SIZES.radius,
+          backgroundColor: "#01b0f1",
+          ...styles.shadow
+        }}
+      >
+        <View style={{ width: '10%' }}>
+          <Image
+            source={icons.clap}
+            resizeMode="contain"
             style={{
-                marginTop: SIZES.padding,
-                marginHorizontal: SIZES.padding,
-                padding: 20,
-                borderRadius: SIZES.radius,
-                backgroundColor: COLORS.secondary,
-                ...styles.shadow
+              width: 30,
+              height: 90,
             }}
-        >   
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
-            {category.toUpperCase() === 'AMAZI' ? (
+          />
 
-              <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
-            ):(
-              <View>
+        </View>
+        <View style={{ width: '90%' }}>
+          <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
+          {category.toUpperCase() === 'AMAZI' ? (
+
+            <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
+          ) : (
+            <View>
               {category.toUpperCase() === 'UHIRA' ? (
                 <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
-Encourage your farmer friends to join our UHIRA.RW network!!</Text>
-              ):(
+                    Encourage your farmer friends to join our UHIRA.RW network!!</Text>
+              ) : (
                 <View>
-              {category.toUpperCase() === 'INUMA' ? (
-                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
-Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
-              ):(
-                  <Text></Text>
+                  {category.toUpperCase() === 'INUMA' ? (
+                    <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
+                    Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
+                  ) : (
+                    <Text></Text>
+                  )}
+                </View>
               )}
-              </View>
-              )}
-              </View>
-            )}
-
-            
-
-            <TouchableOpacity
-                style={{
-                    marginTop: SIZES.base
-                }}
-                onPress={() => console.log("Learn More")}
-            >
-                <Text style={{ textDecorationLine: 'underline', color: COLORS.green, ...FONTS.h3 }}>Learn More</Text>
-            </TouchableOpacity>
+            </View>
+          )}
         </View>
+
+      </View>
     )
-}
+  }
 
   function renderTransactionHistory() {
     return (

@@ -7,7 +7,7 @@ export const trendingCurrencies = [
     {
         id: 1,
         currency: "AMAZI",
-        code: "Mo",
+        code: "242",
         amount: "29,455.74",
         type: "I",      // I - Increased, D - Decreased
         description: "We keep a good range of filters and pumps in our inventory for all kinds of application at home, in industry, on the farm, in the office, etc.Head to amazi.rw, the dedicated shop website to learn more",
@@ -103,7 +103,7 @@ export const trendingCurrencies = [
     {
         id: 2,
         currency: "UHIRA",
-        code: "Mo",
+        code: "2,342",
         amount: "919.03",
         type: "D",
         description: "You don't have to live near a river, lake or other surface water to execute a water project. Through well-constructed boreholes, you can access underground aquifers for reliable access to clean water for your project. Our groundwater systems are ideal for farms, schools, health facilities, and other institutions. To get your water project done, we follow a simple 3-step process. Read more by clicking on each below. ",
@@ -199,7 +199,7 @@ export const trendingCurrencies = [
     {
         id: 3,
         currency: "INUMA",
-        code: "Mo",
+        code: "3,142",
         type: "I",
         description: "Households living near INUMA are experiencing transformation in the way they access water. INUMA water is reliable, affordable and completely safe to consume at the tap. ",
         chartData: [

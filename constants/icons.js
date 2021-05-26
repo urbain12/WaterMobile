@@ -11,12 +11,20 @@ const airtel = require("../assets/icons/airtel.png");
 const visa = require("../assets/icons/visa.png");
 const masters = require("../assets/icons/master.png");
 const star = require("../assets/icons/star.png");
+const clap = require("../assets/icons/clap.png");
+const filter = require("../assets/icons/filter.png");
+const pipe = require("../assets/icons/pipe.png");
+const support = require("../assets/icons/support.png");
 const transaction = require("../assets/icons/transaction.png");
 
 export default {
     back_arrow,
     mtn,
+    filter,
+    pipe,
+    support,
     airtel,
+    clap,
     visa,
     masters,
     home,
