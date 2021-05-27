@@ -75,7 +75,7 @@ const Settings = ({ navigation }) => {
         </View>
       </TouchableOpacity>
     );
-    const context=React.useContext(AuthContext)
+    
     return (
       <View
         style={{
@@ -167,7 +167,7 @@ const Settings = ({ navigation }) => {
       />
     );
   }
-
+  const context=React.useContext(AuthContext)
   return (
     <ScrollView>
       <View style={{ flex: 1, paddingBottom: 130 }}>
@@ -190,7 +190,7 @@ const Settings = ({ navigation }) => {
                         <Text style={{ ...FONTS.h5 ,marginBottom:10,marginLeft:20}}>+250788888884</Text>
                         </View>
                         <View style={{justifyContent:'center',alignItems:'flex-end',width:'40%'}}>
-                        <MaterialCommunityIcons name="pencil-minus" size={24} color="black" />
+                        <Image resizeMode='contain' style={{width:30,height:30,marginRight:10}} source={require('../assets/icons/editing.png')}/>
                         </View>
                     </View>
                     
@@ -223,7 +223,7 @@ const Settings = ({ navigation }) => {
                     </View>
                     <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
                         <View>
-                            <MaterialIcons name="subscriptions" size={30}/>
+                            <Image resizeMode='contain' style={{width:30,height:30}} source={require('../assets/icons/subscription.png')}/>
                         </View>
                         <View style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
@@ -239,9 +239,9 @@ const Settings = ({ navigation }) => {
             <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
                 <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>User Agreement</Text>
             </View>
-            <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
+            <TouchableOpacity onPress={()=> context.signOut()} style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
                 <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Sign Out</Text>
-            </View>
+            </TouchableOpacity>
             <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
                 <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Version: 0.1</Text>
             </View>

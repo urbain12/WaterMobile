@@ -26,6 +26,7 @@ const PriceAlert = ({ customContainerStyle }) => {
             }}
         >
             <Image
+                resizeMode='contain'
                 source={icons.notification_color}
                 style={{
                     width: 30,

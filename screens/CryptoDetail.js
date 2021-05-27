@@ -88,7 +88,7 @@ const CryptoDetail = ({ navigation, }) => {
                 }}
             >
                 <ImageBackground
-                    source={images.banner}
+                    source={images.modalbanner}
                     resizeMode="cover"
                     style={{
                         flex: 1,
