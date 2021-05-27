@@ -200,6 +200,7 @@ const CryptoDetail = ({ navigation, }) => {
                 style={{
                   width: 30,
                   height: 90,
+                  
                 }}
               />
     
@@ -268,13 +269,13 @@ const CryptoDetail = ({ navigation, }) => {
                                 source={icons.filter}
                                 resizeMode="contain"
                                 style={{
-                                    width: 90,
+                                    width: 75,
                                     height: 120,
 
                                 }}
                             />
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold" }}>Our systems</Text>
+                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop:10 }}>Our systems</Text>
                         </View>
 
                         {/* Amount */}
@@ -285,13 +286,13 @@ const CryptoDetail = ({ navigation, }) => {
                                 source={icons.pipe}
                                 resizeMode="contain"
                                 style={{
-                                    width: 90,
+                                    width: 75,
                                     height: 120,
 
                                 }}
                             />
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold" }}>Maintanance</Text>
+                            <Text style={{ textAlign: "center", fontWeight: "bold",paddingTop:10 }}>Maintanance</Text>
                         </View>
                         <View style={{ flex: 1, marginLeft: 10,width:'30%' }}>
                         <View style={{marginLeft:'2%',backgroundColor:"#01B0F1",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
@@ -300,12 +301,12 @@ const CryptoDetail = ({ navigation, }) => {
                                 source={icons.support}
                                 resizeMode="contain"
                                 style={{
-                                    width: 90,
+                                    width: 75,
                                     height: 120,
                                 }}
                             />
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold" }}>Support</Text>
+                            <Text style={{ textAlign: "center", fontWeight: "bold",paddingTop:10 }}>Support</Text>
                         </View>
                     </View>
 
