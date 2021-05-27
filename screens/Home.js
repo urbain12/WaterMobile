@@ -63,7 +63,7 @@ const Home = ({ navigation }) => {
           borderRadius: 10,
           backgroundColor: COLORS.white,
         }}
-        onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
+        onPress={() => navigation.navigate("CryptoDetail")}
       >
         <View style={{ flexDirection: "row" }}>
           <View style={{ marginLeft: SIZES.base }}>
@@ -181,18 +181,18 @@ const Home = ({ navigation }) => {
           ...styles.shadow
         }}
       >
-        <View style={{ width: '10%' }}>
+        <View style={{ width: '10%', marginRight:"2%" }}>
           <Image
             source={icons.clap}
             resizeMode="contain"
             style={{
-              width: 30,
+              width: 35,
               height: 90,
             }}
           />
 
         </View>
-        <View style={{ width: '90%' }}>
+        <View style={{ width: '90%',marginLeft:"2%" }}>
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
           {category.toUpperCase() === 'AMAZI' ? (
 

@@ -36,7 +36,7 @@ const PriceAlert = ({ customContainerStyle }) => {
 
             <View style={{ flex: 1, marginLeft: SIZES.radius }}>
                 <Text style={{ ...FONTS.h3 }}>Notifications</Text>
-                <Text stlye={{ ...FONTS.body4 }}>See your notifications here!!!</Text>
+                <Text stlye={{ color:"#707070" }}>See your notifications here!!!</Text>
             </View>
 
             <Image

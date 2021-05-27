@@ -21,11 +21,11 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
             onPress={() => console.log(item)}
         >
             <Image
-                source={icons.transaction}
+                source={icons.exchange}
                 style={{
-                    width: 30,
-                    height: 30,
-                    tintColor: COLORS.primary
+                    width: 20,
+                    height: 20,
+                    
                 }}
             />
 

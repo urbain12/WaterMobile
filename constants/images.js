@@ -7,11 +7,13 @@ const ethereum = require("../assets/images/ethereum.png");
 const litecoin = require("../assets/images/litecoin.png");
 const ripple = require("../assets/images/ripple.png");
 const tool = require("../assets/images/tool.jpg");
+const loginbanner = require("../assets/images/loginbanner.png");
 
 export default {
     banner,
     banner_settings,
     bannerhome,
+    loginbanner,
     modalbanner,
     bitcoin,
     ethereum,

@@ -135,13 +135,13 @@ const CryptoDetail = ({ navigation, }) => {
                     >
                         {/* Currency */}
                         <View style={{ flex: 1, borderRightWidth: 2, borderRightColor: "white" }}>
-                            <Text style={{ fontSize: 40, color: "white",fontWeight:"bold" }}>23 Days</Text>
+                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>23 Days</Text>
                             <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
                         </View>
 
                         {/* Amount */}
                         <View style={{ flex: 1, marginLeft: 20 }}>
-                            <Text style={{ fontSize: 40, color: "white",fontWeight:"bold" }}>48 Days</Text>
+                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>48 Days</Text>
                             <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                         </View>
                     </View>
@@ -183,53 +183,52 @@ const CryptoDetail = ({ navigation, }) => {
     function renderNotice() {
         return (
             <View
-            style={{
-              flexDirection: "row",
-              marginTop: SIZES.padding,
-              marginHorizontal: SIZES.padding,
-              padding: 20,
-              borderRadius: SIZES.radius,
-              backgroundColor: "#01b0f1",
-              ...styles.shadow
-            }}
-          >
-            <View style={{ width: '10%' }}>
-              <Image
-                source={icons.clap}
-                resizeMode="contain"
                 style={{
-                  width: 30,
-                  height: 90,
-                  
+                    flexDirection: "row",
+                    marginTop: SIZES.padding,
+                    marginHorizontal: SIZES.padding,
+                    padding: 20,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: "#01b0f1",
+                    ...styles.shadow
                 }}
-              />
-    
-            </View>
-            <View style={{ width: '90%' }}>
-              <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
-              {category.toUpperCase() === 'AMAZI' ? (
-    
-                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
-              ) : (
-                <View>
-                  {category.toUpperCase() === 'UHIRA' ? (
-                    <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
-                        Encourage your farmer friends to join our UHIRA.RW network!!</Text>
-                  ) : (
-                    <View>
-                      {category.toUpperCase() === 'INUMA' ? (
-                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
-                        Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
-                      ) : (
-                        <Text></Text>
-                      )}
-                    </View>
-                  )}
+            >
+                <View style={{ width: '10%', marginRight: "2%" }}>
+                    <Image
+                        source={icons.clap}
+                        resizeMode="contain"
+                        style={{
+                            width: 35,
+                            height: 90,
+                        }}
+                    />
+
                 </View>
-              )}
+                <View style={{ width: '90%', marginLeft: "2%" }}>
+                    <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
+                    {category.toUpperCase() === 'AMAZI' ? (
+
+                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
+                    ) : (
+                        <View>
+                            {category.toUpperCase() === 'UHIRA' ? (
+                                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
+                        Encourage your farmer friends to join our UHIRA.RW network!!</Text>
+                            ) : (
+                                <View>
+                                    {category.toUpperCase() === 'INUMA' ? (
+                                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
+                        Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
+                                    ) : (
+                                        <Text></Text>
+                                    )}
+                                </View>
+                            )}
+                        </View>
+                    )}
+                </View>
+
             </View>
-    
-          </View>
         )
     }
 
@@ -246,7 +245,7 @@ const CryptoDetail = ({ navigation, }) => {
                     style={{
                         marginTop: SIZES.padding,
                         marginHorizontal: SIZES.padding,
-                        width:'90%',
+                        width: '90%',
                         padding: 20,
                         borderRadius: SIZES.radius,
                         backgroundColor: COLORS.white,
@@ -262,52 +261,64 @@ const CryptoDetail = ({ navigation, }) => {
                         }}
                     >
                         {/* Currency */}
-                        <View style={{width:"30%"}}>
-                        <View style={{marginLeft:'3%',backgroundColor:"#01B0F1",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                        <TouchableOpacity style={{ width: "30%" }}>
 
-                            <Image
-                                source={icons.filter}
-                                resizeMode="contain"
-                                style={{
-                                    width: 75,
-                                    height: 120,
+                        <View >
+                            <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                }}
-                            />
+                                <Image
+                                    source={icons.filter}
+                                    resizeMode="contain"
+                                    style={{
+                                        width: 75,
+                                        height: 120,
+                                        
+                                    }}
+                                    />
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop:10 }}>Our systems</Text>
+                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
                         </View>
+                    </TouchableOpacity>
 
                         {/* Amount */}
-                        <View style={{ flex: 1, marginLeft: 10 ,width:'30%'}}>
-                        <View style={{marginLeft:'2%',backgroundColor:"#01B0F1",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                        <TouchableOpacity style={{ flex: 1, marginLeft: 10,width: '30%' }}>
 
-                            <Image
-                                source={icons.pipe}
-                                resizeMode="contain"
-                                style={{
-                                    width: 75,
-                                    height: 120,
+                        <View >
+                            <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                }}
-                            />
+                                <Image
+                                    source={icons.pipe}
+                                    resizeMode="contain"
+                                    style={{
+                                        width: 75,
+                                        height: 120,
+                                        
+                                    }}
+                                    />
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold",paddingTop:10 }}>Maintanance</Text>
+                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Maintanance</Text>
                         </View>
-                        <View style={{ flex: 1, marginLeft: 10,width:'30%' }}>
-                        <View style={{marginLeft:'2%',backgroundColor:"#01B0F1",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                                    </TouchableOpacity>
 
-                            <Image
-                                source={icons.support}
-                                resizeMode="contain"
-                                style={{
-                                    width: 75,
-                                    height: 120,
-                                }}
-                            />
+
+                        <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }}>
+
+                        <View >
+                            <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+
+                                <Image
+                                    source={icons.support}
+                                    resizeMode="contain"
+                                    style={{
+                                        width: 75,
+                                        height: 120,
+                                    }}
+                                    />
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold",paddingTop:10 }}>Support</Text>
+                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Support</Text>
                         </View>
+                                    </TouchableOpacity>
+
                     </View>
 
 

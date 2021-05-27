@@ -15,6 +15,7 @@ const clap = require("../assets/icons/clap.png");
 const filter = require("../assets/icons/filter.png");
 const pipe = require("../assets/icons/pipe.png");
 const support = require("../assets/icons/support.png");
+const exchange = require("../assets/icons/exchange.png");
 const transaction = require("../assets/icons/transaction.png");
 
 export default {
@@ -22,6 +23,7 @@ export default {
     mtn,
     filter,
     pipe,
+    exchange,
     support,
     airtel,
     clap,
