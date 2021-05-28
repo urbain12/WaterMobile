@@ -119,21 +119,21 @@ const Tabs = () => {
                       <ImageBackground source={images.modalbanner} style={{width: '100%', height: '100%',borderRadius:40,overflow: 'hidden'}}>
                        
                 
-                      <ScrollView showsVerticalScrollIndicator={false}>
+                      <ScrollView showsVerticalScrollIndicator={false} style={{width:'100%'}}>
                       
                         <Text style={{ textAlign: "center", fontSize: 30, color:"white",marginTop:30,paddingBottom:30 }}>
                           Quick Access
                           </Text>
-                        <TouchableOpacity activeOpacity={1}>
                           <View
                             style={{
                               flexDirection: "row",
                               alignContent: "center",
+                              width:'100%'
                             }}
                           >
-                            <TouchableOpacity>
-                              <View style={{ alignContent: "center"}}>
-                              <View style={{marginLeft:'3%',backgroundColor:"white",width:110,height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                            
+                              <View style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}>
+                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
                                 <Image
                                   source={icons.visa}
                                   resizeMode="contain"
@@ -146,43 +146,40 @@ const Tabs = () => {
                                 </View>
                                 <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10  }}>Our systems</Text>
                               </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                              <View style={{ alignContent: "center"}}>
-                                <View style={{marginLeft:'2%',backgroundColor:"white",width:110,height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                            
+                            
+                              <View style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}>
+                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
                                 <Image
                                   source={icons.mtn}
                                   resizeMode="contain"
                                   style={{
                                     width: 90,
                                     height: 120,
-                                    marginLeft: 0,
+                                    marginLeft: 2,
                                   }}
-                                  />
-                                  </View>
-                                <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10 }}>Maintanance</Text>
-                              </View>
-                            </TouchableOpacity>
-                            <View>
-                              <TouchableOpacity>
-                                <View>
-                                <View style={{marginLeft:'2%',backgroundColor:"white",width:110,height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
-                                  <Image
-                                    source={icons.airtel}
-                                    resizeMode="contain"
-                                    style={{
-                                      width: 90,
-                                      height: 120,
-                                      marginLeft: 2,
-                                    }}
-                                  />
-                                  </View>
-                                  <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10 }}>Support</Text>
+                                />
                                 </View>
-                              </TouchableOpacity>
+                                <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10  }}>Maintanance</Text>
+                              </View>
+                            
+                            
+                              <View style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}>
+                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                                <Image
+                                  source={icons.airtel}
+                                  resizeMode="contain"
+                                  style={{
+                                    width: 90,
+                                    height: 120,
+                                    marginLeft: 2,
+                                  }}
+                                />
+                                </View>
+                                <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10  }}>Support</Text>
+                              </View>
+                           
                             </View>
-                            </View>
-                          </TouchableOpacity>
                         </ScrollView>
                         </ImageBackground>
                       </View>

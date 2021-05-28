@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  Dimensions,
   LogBox,
 } from "react-native";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome } from "@expo/vector-icons";
@@ -24,6 +25,7 @@ const Home = ({ navigation }) => {
   const [transactionHistory, setTransactionHistory] = useState([]);
 
 
+  const windowWidth = Dimensions.get('window').width
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -232,7 +234,47 @@ const Home = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={{ flex: 1, paddingBottom: 130 }}>
-        {renderHeader()}
+        
+            <View style={{zIndex:0,position:'absolute'}}>
+            <Image resizeMode='cover' source={images.bannerhome} style={{height:250,width:windowWidth}}/>
+            </View>
+            <FlatList
+                            contentContainerStyle={{ marginTop:'50%'}}
+                            data={trending}
+                            renderItem={
+                                ({ item, index }) => (
+            <TouchableOpacity
+                style={{
+                    width: 180,
+                    paddingVertical: SIZES.padding,
+                    paddingHorizontal: SIZES.padding,
+                    marginLeft: index == 0 ? SIZES.padding : 0,
+                    marginRight: SIZES.radius,
+                    borderRadius: 10,
+                    backgroundColor: COLORS.white,
+                    marginBottom:15,
+                    ...styles.shadow
+                    
+                }}
+                onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
+            >
+                <View style={{ flexDirection: 'row' }}>
+                   
+                    <View style={{ marginLeft: SIZES.base }}>
+                        <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
+                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>water access</Text>
+                    </View>
+                </View>
+
+                
+            </TouchableOpacity>
+        )
+                            }
+                            keyExtractor={item => `${item.id}`}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                        />
+                
         {renderAlert()}
         {renderNotice()}
         {renderTransactionHistory()}

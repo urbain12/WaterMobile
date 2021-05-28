@@ -24,6 +24,8 @@ import { RadioButton } from 'react-native-paper'
 
 const Login = ({ navigation }) => {
 
+    const year = new Date().getFullYear()
+
     const [data, setData] = React.useState({
         phone: '',
         password: '',
@@ -213,7 +215,7 @@ const Login = ({ navigation }) => {
                     <Text style={{ color: '#1B1C1E', marginTop: 10, fontWeight: "bold" }}>Don't have an account?  <Text style={{ color: "#01B0F1", fontWeight: "bold" }}>Create one</Text></Text>
                 </TouchableOpacity>
                 <View style={{ alignItems: "center", marginTop: "45%" }}>
-                    <Text style={{ fontSize: 12, fontWeight: "bold", color: "#707070" }}>Copyright @ 2021 Water access Rwanda</Text>
+                    <Text style={{ fontSize: 12, fontWeight: "bold", color: "#707070" }}>Copyright @ {year} Water access Rwanda</Text>
                 </View>
 
             </Animatable.View>

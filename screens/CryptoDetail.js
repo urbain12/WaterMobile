@@ -6,6 +6,7 @@ import {
     ScrollView,
     FlatList,
     TouchableOpacity,
+    Dimensions,
     Image,
     ImageBackground,
     LogBox,
@@ -23,7 +24,7 @@ const CryptoDetail = ({ navigation, }) => {
     const [category, setCategory] = useState('')
     const [transactionHistory, setTransactionHistory] = useState([]);
 
-
+    const windowWidth = Dimensions.get('window').width
 
     React.useEffect(() => {
         LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -238,8 +239,97 @@ const CryptoDetail = ({ navigation, }) => {
     return (
         <ScrollView>
             <View style={{ flex: 1, paddingBottom: 130 }}>
-                {renderHeader()}
-                {renderAlert()}
+            <View style={{zIndex:0,position:'absolute'}}>
+            <Image resizeMode='cover' source={images.modalbanner} style={{height:250,width:windowWidth}}/>
+            </View>
+            <View>
+            <View
+                        style={{
+                            marginTop: SIZES.padding * 1,
+                            width: "100%",
+                            flexDirection: "row",
+                            paddingHorizontal: SIZES.padding,
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                width: 35,
+                                height: 35,
+                                marginRight: '80%',
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                            onPress={() => navigation.navigate('Home')}
+                        >
+                            <Ionicons
+                                name="arrow-back"
+                                size={40}
+                                color="white"
+                                resizeMode="contain"
+                            />
+                        </TouchableOpacity>
+
+                    </View>
+            <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginTop: '2%',
+                            marginLeft: 30
+                        }}
+                    >
+                        {/* Currency */}
+                        <View style={{ flex: 1, borderRightWidth: 2, borderRightColor: "white" }}>
+                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>23 Days</Text>
+                            <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
+                        </View>
+
+                        {/* Amount */}
+                        <View style={{ flex: 1, marginLeft: 20 }}>
+                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>48 Days</Text>
+                            <Text style={{ color: "white" }}>remaining to your next Installment</Text>
+                        </View>
+                    </View>
+            <FlatList
+                            contentContainerStyle={{ marginTop:'15%'}}
+                            data={trending}
+                            renderItem={
+                                ({ item, index }) => (
+            <TouchableOpacity
+                style={{
+                    width: 180,
+                    paddingVertical: SIZES.padding,
+                    paddingHorizontal: SIZES.padding,
+                    marginLeft: index == 0 ? SIZES.padding : 0,
+                    marginRight: SIZES.radius,
+                    borderRadius: 10,
+                    backgroundColor: COLORS.white,
+                    marginBottom:15,
+                    ...styles.shadow
+                    
+                }}
+                onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
+            >
+                <View style={{ flexDirection: 'row' }}>
+                   
+                    <View style={{ marginLeft: SIZES.base }}>
+                        <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
+                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>water access</Text>
+                    </View>
+                </View>
+
+                
+            </TouchableOpacity>
+        )
+                            }
+                            keyExtractor={item => `${item.id}`}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                        />
+            </View>
+            
+                
+        {renderAlert()}
                 {renderNotice()}
                 <View
                     style={{

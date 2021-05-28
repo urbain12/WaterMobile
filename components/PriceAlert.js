@@ -15,7 +15,7 @@ const PriceAlert = ({ customContainerStyle }) => {
             style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: SIZES.padding * 4.5,
+                marginTop: SIZES.padding * 1,
                 marginHorizontal: SIZES.padding,
                 paddingVertical: SIZES.padding,
                 paddingHorizontal: SIZES.radius,
