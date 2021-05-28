@@ -178,7 +178,7 @@ const Login = ({ navigation }) => {
                 <View style={{ flexDirection: "row", marginTop: 10, marginBottom: 10, marginLeft: "20%" }}>
                     <TouchableOpacity>
                         <CheckBox
-                            value={true}
+                            value={false}
 
                             style={{ height: 15, width: 15, marginLeft: 10 }}
                         />
