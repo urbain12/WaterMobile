@@ -96,28 +96,7 @@ const Settings = ({ navigation }) => {
           
 
           {/* Balance */}
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {/* {customer.FirstName} {customer.LastName} */}
-            </Text>
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {/* {customer.Phone} */}
-            </Text>
-            <Text
-              style={{
-                marginTop: SIZES.base,
-                color: COLORS.white,
-                ...FONTS.h3,
-              }}
-            >
-              {category}
-            </Text>
-          </View>
+          
 
           {/* Trending */}
           <View
@@ -186,12 +165,15 @@ const Settings = ({ navigation }) => {
             >   
                     <View style={{flexDirection:'row'}}>
                         <View style={{width:'60%'}}>
-                        <Text style={{ ...FONTS.h2 ,marginTop:20,marginLeft:20}}>Eden Benimana</Text>
-                        <Text style={{ ...FONTS.h5 ,marginBottom:10,marginLeft:20}}>+250788888884</Text>
+                        <Text style={{ ...FONTS.h2 ,marginTop:20,marginLeft:10}}> {customer.FirstName} {customer.LastName} </Text>
+                        <Text style={{ ...FONTS.h5 ,marginBottom:10,marginLeft:12,fontWeight:"bold",fontSize:15}}> {customer.Phone}</Text>
                         </View>
-                        <View style={{justifyContent:'center',alignItems:'flex-end',width:'40%'}}>
+                        <TouchableOpacity style={{justifyContent:'center',alignItems:'flex-end',width:'40%'}}>
+                        <View >
                         <Image resizeMode='contain' style={{width:30,height:30,marginRight:10}} source={require('../assets/icons/editing.png')}/>
                         </View>
+                        </TouchableOpacity>
+
                     </View>
                     
                     <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
@@ -200,7 +182,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <View style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
-                            <Text style={{color:'#707070'}}>eden.benimana@gmail.com</Text>
+                            <Text style={{color:'#707070'}}>{customer.email}</Text>
                         </View>
                     </View>
                     <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
@@ -209,7 +191,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <View style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Location</Text>
-                            <Text style={{color:'#707070'}}>KK 696 st-kigali,Rwanda</Text>
+                            <Text style={{color:'#707070'}}>{customer.Province},{customer.District},{customer.Sector},{customer.Cell}</Text>
                         </View>
                     </View>
                     <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
@@ -227,7 +209,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <View style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
-                            <Text style={{color:'#707070'}}>Your subscriptions details</Text>
+                            <Text style={{color:'#707070'}}>{category}</Text>
                         </View>
                     </View>
                 
