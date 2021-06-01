@@ -182,7 +182,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <View style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
-                            <Text style={{color:'#707070'}}>{customer.email}</Text>
+                            <Text style={{color:'#707070'}}>{customer.user.email}</Text>
                         </View>
                     </View>
                     <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
