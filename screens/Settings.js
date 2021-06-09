@@ -213,7 +213,8 @@ const Settings = ({ navigation }) => {
                         </View>
                     </View>
                     <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}
-                    onPress={() => navigation.navigate("Transaction")}>
+                    onPress={() => navigation.navigate("query")}
+                    >
                         <View>
                             <Image resizeMode='contain' style={{width:50,height:50}} source={require('../assets/icons/query.png')}/>
                         </View>

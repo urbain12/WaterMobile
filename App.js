@@ -12,7 +12,7 @@ import { store } from './models/index';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Shop from './screens/Shop';
-import Cart from './screens/Cart';
+import query from './screens/Query';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -187,8 +187,8 @@ else{
             component={Tabs}
           />
           <Stack.Screen
-            name="Cart"
-            component={Cart}
+            name="query"
+            component={query}
           />
           <Stack.Screen
             name="CryptoDetail"

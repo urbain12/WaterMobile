@@ -54,34 +54,7 @@ const Home = ({ navigation }) => {
   }, []);
 
   function renderHeader() {
-    const renderItem = ({ item, index }) => (
-      <TouchableOpacity
-        style={{
-          width: 180,
-          paddingVertical: SIZES.padding,
-          paddingHorizontal: SIZES.padding,
-          marginLeft: index == 0 ? SIZES.padding : 0,
-          marginRight: SIZES.radius,
-          borderRadius: 10,
-          backgroundColor: COLORS.white,
-        }}
-        onPress={() => navigation.navigate("CryptoDetail")}
-      >
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ marginLeft: SIZES.base }}>
-
-            <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-            <View style={{ marginLeft: 10, borderBottomWidth: 2, width: 40, borderBottomColor: "black" }}>
-            </View>
-
-            <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-              {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
-            </Text>
-
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+    
     const context = React.useContext(AuthContext)
     return (
       <View
@@ -133,7 +106,7 @@ const Home = ({ navigation }) => {
             >
               {category}
             </Text>
-            
+
           </View>
 
           {/* Trending */}
@@ -183,7 +156,7 @@ const Home = ({ navigation }) => {
           ...styles.shadow
         }}
       >
-        <View style={{ width: '10%', marginRight:"2%" }}>
+        <View style={{ width: '10%', marginRight: "2%" }}>
           <Image
             source={icons.clap}
             resizeMode="contain"
@@ -194,7 +167,7 @@ const Home = ({ navigation }) => {
           />
 
         </View>
-        <View style={{ width: '90%',marginLeft:"2%" }}>
+        <View style={{ width: '90%', marginLeft: "2%" }}>
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
           {category.toUpperCase() === 'AMAZI' ? (
 
@@ -234,47 +207,49 @@ const Home = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={{ flex: 1, paddingBottom: 130 }}>
-        
-            <View style={{zIndex:0,position:'absolute'}}>
-            <Image resizeMode='cover' source={images.bannerhome} style={{height:250,width:windowWidth}}/>
-            </View>
-            <FlatList
-                            contentContainerStyle={{ marginTop:'50%'}}
-                            data={trending}
-                            renderItem={
-                                ({ item, index }) => (
-            <TouchableOpacity
+
+        <View style={{ zIndex: 0, position: 'absolute' }}>
+          <Image resizeMode='cover' source={images.bannerhome} style={{ height: 250, width: windowWidth }} />
+        </View>
+        <FlatList
+          contentContainerStyle={{ marginTop: '50%' }}
+          data={trending}
+          renderItem={
+            ({ item, index }) => (
+              <TouchableOpacity
                 style={{
-                    width: 180,
-                    paddingVertical: SIZES.padding,
-                    paddingHorizontal: SIZES.padding,
-                    marginLeft: index == 0 ? SIZES.padding : 0,
-                    marginRight: SIZES.radius,
-                    borderRadius: 10,
-                    backgroundColor: COLORS.white,
-                    marginBottom:15,
-                    ...styles.shadow
-                    
+                  width: 180,
+                  paddingVertical: SIZES.padding,
+                  paddingHorizontal: SIZES.padding,
+                  marginLeft: index == 0 ? SIZES.padding : 0,
+                  marginRight: SIZES.radius,
+                  borderRadius: 10,
+                  backgroundColor: COLORS.white,
+                  marginBottom: 15,
+                  ...styles.shadow
+
                 }}
                 onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
-            >
+              >
                 <View style={{ flexDirection: 'row' }}>
-                   
-                    <View style={{ marginLeft: SIZES.base }}>
-                        <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>water access</Text>
-                    </View>
+
+                  <View style={{ marginLeft: SIZES.base }}>
+                    <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
+                    <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                      {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                    </Text>
+                  </View>
                 </View>
 
-                
-            </TouchableOpacity>
-        )
-                            }
-                            keyExtractor={item => `${item.id}`}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                        />
-                
+
+              </TouchableOpacity>
+            )
+          }
+          keyExtractor={item => `${item.id}`}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+
         {renderAlert()}
         {renderNotice()}
         {renderTransactionHistory()}

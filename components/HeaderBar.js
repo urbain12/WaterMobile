@@ -3,7 +3,8 @@ import {
     View,
     Text,
     TouchableOpacity,
-    Image
+    Image,
+    StatusBar
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 
@@ -15,11 +16,13 @@ const HeaderBar = ({ right }) => {
 
     return (
         <View style={{ paddingHorizontal: SIZES.padding, flexDirection: 'row' }}>
+            
             <View style={{ flex: 1, alignItems: 'flex-start' }}>
                 <TouchableOpacity
                     style={{
                         flexDirection: 'row',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        marginTop: 20
                     }}
                     onPress={() => navigation.goBack()}
                 >

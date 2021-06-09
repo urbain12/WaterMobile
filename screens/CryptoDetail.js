@@ -314,7 +314,9 @@ const CryptoDetail = ({ navigation, }) => {
                    
                     <View style={{ marginLeft: SIZES.base }}>
                         <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>water access</Text>
+                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                      {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                    </Text>
                     </View>
                 </View>
 

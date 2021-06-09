@@ -20,9 +20,8 @@ import axios from 'axios';
 
 
 const Transaction = ({ route }) => {
-  const [selectedCurrency, setSelectedCurrency] = React.useState(null);
   const [Names, setNames] = useState('')
-  const [IDnumber, setIDnumber] = useState('')
+  const [Message, setMessage] = useState('')
   const [Phonenumber, setPhonenumber] = useState('')
   const [Province, setProvince] = useState('')
   const [District, setDistrict] = useState('')
@@ -36,7 +35,7 @@ const Transaction = ({ route }) => {
     e.preventDefault()
     const postObj = JSON.stringify({
       'Names': Names,
-      'Idnumber': IDnumber,
+      'Message': Message,
       'phonenumber': Phonenumber,
       'Province': Province,
       'District': District,
@@ -66,10 +65,6 @@ const Transaction = ({ route }) => {
 
   }
 
-  React.useEffect(() => {
-    const { currency } = route.params;
-    setSelectedCurrency(currency);
-  });
 
   function renderTrade() {
 
@@ -99,21 +94,6 @@ const Transaction = ({ route }) => {
               name="Names"
               placeholder="Names"
               onChangeText={text => setNames(text)}
-            />
-            
-            <TextInput
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 35,
-                width: "100%",
-                marginTop: 20,
-                textAlign: "center",
-              }}
-              name="Names"
-              placeholder="ID number"
-              onChangeText={text => setIDnumber(text)}
             />
             <TextInput
               style={{
@@ -185,6 +165,21 @@ const Transaction = ({ route }) => {
               name="Names"
               placeholder="Cell"
               onChangeText={text => setCell(text)}
+            />
+            <TextInput
+              style={{
+                borderColor: "gray",
+                borderWidth: 1,
+                borderRadius: 10,
+                height:105,
+                width: "100%",
+                marginTop: 20,
+                marginBottom: 10,
+                textAlign: "center",
+              }}
+              name="Names"
+              placeholder="Message"
+              onChangeText={text => setMessage(text)}
             />
             
           </TouchableOpacity>
