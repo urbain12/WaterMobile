@@ -182,7 +182,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <View style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
-                            <Text style={{color:'#707070'}}>{customer.user.email}</Text>
+                            <Text style={{color:'#707070'}}>{customer.Province}</Text>
                         </View>
                     </View>
                     <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
@@ -212,6 +212,15 @@ const Settings = ({ navigation }) => {
                             <Text style={{color:'#707070'}}>{category}</Text>
                         </View>
                     </View>
+                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}
+                    onPress={() => navigation.navigate("Transaction")}>
+                        <View>
+                            <Image resizeMode='contain' style={{width:50,height:50}} source={require('../assets/icons/query.png')}/>
+                        </View>
+                        <View style={{marginLeft:8}}>
+                            <Text style={{fontSize:18,fontWeight:'bold'}}>Send query</Text>
+                        </View>
+                    </TouchableOpacity>
                 
                 
             </View>
