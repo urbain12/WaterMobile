@@ -107,6 +107,7 @@ const Transaction = ({ route }) => {
               }}
               name="Names"
               placeholder="Phone Number"
+              keyboardType="numeric"
               onChangeText={text => setPhonenumber(text)}
             />
             <TextInput

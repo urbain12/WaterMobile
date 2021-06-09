@@ -219,7 +219,8 @@ const Settings = ({ navigation }) => {
                             <Image resizeMode='contain' style={{width:50,height:50}} source={require('../assets/icons/query.png')}/>
                         </View>
                         <View style={{marginLeft:8}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Send query</Text>
+                            <Text style={{fontSize:18,fontWeight:'bold'}}>Contact Us</Text>
+                            <Text style={{color:'#707070'}}>Please send any query</Text>
                         </View>
                     </TouchableOpacity>
                 
