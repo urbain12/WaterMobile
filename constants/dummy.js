@@ -1,3 +1,5 @@
+
+
 export const portfolio = {
     balance: "12,724.33",
     changes: "+2.36%",
@@ -6,7 +8,7 @@ export const portfolio = {
 export const trendingCurrencies = [
     {
         id: 1,
-        currency: "AMAZI",
+        currency: require("../assets/images/Amazi.png"),
         code: "242",
         amount: "29,455.74",
         type: "I",      // I - Increased, D - Decreased
@@ -102,7 +104,7 @@ export const trendingCurrencies = [
     },
     {
         id: 2,
-        currency: "UHIRA",
+        currency: require("../assets/images/Uhira.png"),
         code: "2,342",
         amount: "919.03",
         type: "D",
@@ -198,7 +200,7 @@ export const trendingCurrencies = [
     },
     {
         id: 3,
-        currency: "INUMA",
+        currency: require("../assets/images/Inuma.png"),
         code: "3,142",
         type: "I",
         description: "Households living near INUMA are experiencing transformation in the way they access water. INUMA water is reliable, affordable and completely safe to consume at the tap. ",

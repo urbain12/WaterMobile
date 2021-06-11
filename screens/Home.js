@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
   }, []);
 
   function renderHeader() {
-    
+
     const context = React.useContext(AuthContext)
     return (
       <View
@@ -176,12 +176,12 @@ const Home = ({ navigation }) => {
             <View>
               {category.toUpperCase() === 'UHIRA' ? (
                 <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
-                    Encourage your farmer friends to join our UHIRA.RW network!!</Text>
+                  Encourage your farmer friends to join our UHIRA.RW network!!</Text>
               ) : (
                 <View>
                   {category.toUpperCase() === 'INUMA' ? (
                     <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
-                    Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
+                      Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
                   ) : (
                     <Text></Text>
                   )}
@@ -234,7 +234,25 @@ const Home = ({ navigation }) => {
                 <View style={{ flexDirection: 'row' }}>
 
                   <View style={{ marginLeft: SIZES.base }}>
-                    <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
+                    <Image source={item.currency}
+                      style={{
+                        resizeMode: 'contain',
+                        width: "100%",
+                        height: 30,
+
+                      }}
+
+                    />
+                    <View style={{
+                      borderBottomWidth: 2,
+                      borderBottomColor: "#47315a",
+                      width: 50,
+                      marginLeft: 20,
+                      marginTop: 5
+                    }}>
+
+                    </View>
+
                     <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                       {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
                     </Text>

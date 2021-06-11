@@ -214,12 +214,12 @@ const CryptoDetail = ({ navigation, }) => {
                         <View>
                             {category.toUpperCase() === 'UHIRA' ? (
                                 <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
-                        Encourage your farmer friends to join our UHIRA.RW network!!</Text>
+                                    Encourage your farmer friends to join our UHIRA.RW network!!</Text>
                             ) : (
                                 <View>
                                     {category.toUpperCase() === 'INUMA' ? (
                                         <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
-                        Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
+                                            Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
                                     ) : (
                                         <Text></Text>
                                     )}
@@ -239,11 +239,11 @@ const CryptoDetail = ({ navigation, }) => {
     return (
         <ScrollView>
             <View style={{ flex: 1, paddingBottom: 130 }}>
-            <View style={{zIndex:0,position:'absolute'}}>
-            <Image resizeMode='cover' source={images.modalbanner} style={{height:250,width:windowWidth}}/>
-            </View>
-            <View>
-            <View
+                <View style={{ zIndex: 0, position: 'absolute' }}>
+                    <Image resizeMode='cover' source={images.modalbanner} style={{ height: 250, width: windowWidth }} />
+                </View>
+                <View>
+                    <View
                         style={{
                             marginTop: SIZES.padding * 1,
                             width: "100%",
@@ -270,7 +270,7 @@ const CryptoDetail = ({ navigation, }) => {
                         </TouchableOpacity>
 
                     </View>
-            <View
+                    <View
                         style={{
                             flexDirection: 'row',
                             alignItems: 'center',
@@ -290,48 +290,66 @@ const CryptoDetail = ({ navigation, }) => {
                             <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                         </View>
                     </View>
-            <FlatList
-                            contentContainerStyle={{ marginTop:'15%'}}
-                            data={trending}
-                            renderItem={
-                                ({ item, index }) => (
-            <TouchableOpacity
-                style={{
-                    width: 180,
-                    paddingVertical: SIZES.padding,
-                    paddingHorizontal: SIZES.padding,
-                    marginLeft: index == 0 ? SIZES.padding : 0,
-                    marginRight: SIZES.radius,
-                    borderRadius: 10,
-                    backgroundColor: COLORS.white,
-                    marginBottom:15,
-                    ...styles.shadow
-                    
-                }}
-                onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
-            >
-                <View style={{ flexDirection: 'row' }}>
-                   
-                    <View style={{ marginLeft: SIZES.base }}>
-                        <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                      {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
-                    </Text>
-                    </View>
+                    <FlatList
+                        contentContainerStyle={{ marginTop: '15%' }}
+                        data={trending}
+                        renderItem={
+                            ({ item, index }) => (
+                                <TouchableOpacity
+                                    style={{
+                                        width: 180,
+                                        paddingVertical: SIZES.padding,
+                                        paddingHorizontal: SIZES.padding,
+                                        marginLeft: index == 0 ? SIZES.padding : 0,
+                                        marginRight: SIZES.radius,
+                                        borderRadius: 10,
+                                        backgroundColor: COLORS.white,
+                                        marginBottom: 15,
+                                        ...styles.shadow
+
+                                    }}
+                                    onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
+                                >
+                                    <View style={{ flexDirection: 'row' }}>
+
+                                        <View style={{ marginLeft: SIZES.base }}>
+                                            <Image source={item.currency}
+                                                style={{
+                                                    resizeMode: 'contain',
+                                                    width: "100%",
+                                                    height: 30,
+
+                                                }}
+
+                                            />
+                                            <View style={{
+                                                borderBottomWidth: 2,
+                                                borderBottomColor: "#47315a",
+                                                width: 50,
+                                                marginLeft: 20,
+                                                marginTop: 5
+                                            }}>
+
+                                            </View>
+
+                                            <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                                                {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                                            </Text>
+                                        </View>
+                                    </View>
+
+
+                                </TouchableOpacity>
+                            )
+                        }
+                        keyExtractor={item => `${item.id}`}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                    />
                 </View>
 
-                
-            </TouchableOpacity>
-        )
-                            }
-                            keyExtractor={item => `${item.id}`}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                        />
-            </View>
-            
-                
-        {renderAlert()}
+
+                {renderAlert()}
                 {renderNotice()}
                 <View
                     style={{
@@ -355,61 +373,61 @@ const CryptoDetail = ({ navigation, }) => {
                         {/* Currency */}
                         <TouchableOpacity style={{ width: "30%" }}>
 
-                        <View >
-                            <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                            <View >
+                                <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                <Image
-                                    source={icons.filter}
-                                    resizeMode="contain"
-                                    style={{
-                                        width: 75,
-                                        height: 120,
-                                        
-                                    }}
+                                    <Image
+                                        source={icons.filter}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 75,
+                                            height: 120,
+
+                                        }}
                                     />
+                                </View>
+                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
-                        </View>
-                    </TouchableOpacity>
+                        </TouchableOpacity>
 
                         {/* Amount */}
-                        <TouchableOpacity style={{ flex: 1, marginLeft: 10,width: '30%' }}>
+                        <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }}>
 
-                        <View >
-                            <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                            <View >
+                                <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                <Image
-                                    source={icons.pipe}
-                                    resizeMode="contain"
-                                    style={{
-                                        width: 75,
-                                        height: 120,
-                                        
-                                    }}
+                                    <Image
+                                        source={icons.pipe}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 75,
+                                            height: 120,
+
+                                        }}
                                     />
+                                </View>
+                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Maintanance</Text>
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Maintanance</Text>
-                        </View>
-                                    </TouchableOpacity>
+                        </TouchableOpacity>
 
 
                         <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }}>
 
-                        <View >
-                            <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                            <View >
+                                <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                <Image
-                                    source={icons.support}
-                                    resizeMode="contain"
-                                    style={{
-                                        width: 75,
-                                        height: 120,
-                                    }}
+                                    <Image
+                                        source={icons.support}
+                                        resizeMode="contain"
+                                        style={{
+                                            width: 75,
+                                            height: 120,
+                                        }}
                                     />
+                                </View>
+                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Support</Text>
                             </View>
-                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Support</Text>
-                        </View>
-                                    </TouchableOpacity>
+                        </TouchableOpacity>
 
                     </View>
 
