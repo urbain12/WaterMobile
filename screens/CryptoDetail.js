@@ -411,7 +411,11 @@ const CryptoDetail = ({ navigation, }) => {
                         </TouchableOpacity>
 
 
-                        <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }}>
+                        <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }}
+                        onPress={() => navigation.navigate("query")}
+                        
+                        >
+                            
 
                             <View >
                                 <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>

@@ -51,7 +51,7 @@ const TabBarCustomButton = ({ children, onPress }) => {
   );
 };
 
-const Tabs = () => {
+const Tabs = ( {navigation} ) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const modalHandler = () => {
@@ -122,7 +122,7 @@ const Tabs = () => {
                       <ScrollView showsVerticalScrollIndicator={false} style={{width:'100%'}}>
                       
                         <Text style={{ textAlign: "center", fontSize: 30, color:"white",marginTop:30,paddingBottom:30 }}>
-                          Quick Access
+                          Pay With
                           </Text>
                           <View
                             style={{
@@ -132,23 +132,11 @@ const Tabs = () => {
                             }}
                           >
                             
-                              <View style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}>
-                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
-                                <Image
-                                  source={icons.visa}
-                                  resizeMode="contain"
-                                  style={{
-                                    width: 90,
-                                    height: 120,
-                                    marginLeft: 2,
-                                  }}
-                                />
-                                </View>
-                                <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10  }}>Our systems</Text>
-                              </View>
-                            
-                            
-                              <View style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}>
+                              <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
+                              
+                              onPress={() => {navigation.navigate("momo"); setIsVisible(false); }}
+                              
+                              >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
                                 <Image
                                   source={icons.mtn}
@@ -160,11 +148,32 @@ const Tabs = () => {
                                   }}
                                 />
                                 </View>
-                                <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10  }}>Maintanance</Text>
-                              </View>
+                              </TouchableOpacity>
                             
                             
-                              <View style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}>
+                              <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
+                              
+                              onPress={() => {navigation.navigate("creditcard"); setIsVisible(false); }}
+                              
+                              >
+                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                                <Image
+                                  source={icons.visa}
+                                  resizeMode="contain"
+                                  style={{
+                                    width: 90,
+                                    height: 120,
+                                    marginLeft: 2,
+                                  }}
+                                />
+                                </View>
+                              </TouchableOpacity>
+                            
+                            
+                              <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
+                              
+                              onPress={() => {navigation.navigate("creditcard"); setIsVisible(false); }}
+                              >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
                                 <Image
                                   source={icons.airtel}
@@ -176,8 +185,7 @@ const Tabs = () => {
                                   }}
                                 />
                                 </View>
-                                <Text style={{ textAlign: "center",fontWeight:"bold",color:"white",paddingTop:10  }}>Support</Text>
-                              </View>
+                              </TouchableOpacity>
                            
                             </View>
                         </ScrollView>

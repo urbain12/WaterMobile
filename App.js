@@ -13,6 +13,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Shop from './screens/Shop';
 import query from './screens/Query';
+import momo from './screens/momopay';
+import creditcard from './screens/creditcard';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -191,9 +193,18 @@ else{
             component={query}
           />
           <Stack.Screen
+            name="momo"
+            component={momo}
+          />
+          <Stack.Screen
+            name="creditcard"
+            component={creditcard}
+          />
+          <Stack.Screen
             name="CryptoDetail"
             component={CryptoDetail}
           />
+          
           <Stack.Screen
             name="Shop"
             component={Shop}
