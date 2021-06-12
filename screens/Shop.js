@@ -99,7 +99,7 @@ class Shop extends React.Component {
         }}
       >
         <ImageBackground
-          source={images.banner}
+          source={images.banner_settings}
           resizeMode="cover"
           style={{
             flex: 1,
