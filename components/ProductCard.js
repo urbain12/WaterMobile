@@ -92,12 +92,12 @@ class ProductCard extends Component {
           
           {!this.state.isHover && (
           <TouchableOpacity onPress={this.handlePlusPress} style={{position:'absolute',width:25,height:25,borderRadius:12.5,
-                      borderColor:'#875ced',borderWidth:1,alignItems:'center',justifyContent:"center",top:10,right:5,backgroundColor: product.cartQuantity > 0 ? '#875ced':'white'}}>
+                      borderColor:'#01B0F1',borderWidth:1,alignItems:'center',justifyContent:"center",top:10,right:5,backgroundColor: product.cartQuantity > 0 ? '#01B0F1':'white'}}>
             {product.cartQuantity > 0 ? (
               <Text style={{color:'white'}}>{product.cartQuantity}</Text>
             ):(
 
-            <Feather name="plus" size={15} color="#875ced" />
+            <Feather name="plus" size={15} color="#01B0F1" />
             )}
           </TouchableOpacity>
           )}
@@ -107,11 +107,11 @@ class ProductCard extends Component {
               <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:2}}>
                 {product.cartQuantity>1?(
                   <TouchableOpacity onPress={this.handleDec}>
-                <Feather name="minus" size={20} color="#875ced"/>
+                <Feather name="minus" size={20} color="#01B0F1"/>
                 </TouchableOpacity>
                 ):(
                   <TouchableOpacity onPress={this.handleRemove}>
-                <Feather name="trash-2" size={20} color="#875ced"/>
+                <Feather name="trash-2" size={20} color="#01B0F1"/>
                 </TouchableOpacity>
                 )}
                 
@@ -119,7 +119,7 @@ class ProductCard extends Component {
                 <Text>{product.cartQuantity}</Text>
 
                 <TouchableOpacity onPress={this.handleInc}>
-                <Feather name="plus" size={20} color="#875ced"/>
+                <Feather name="plus" size={20} color="#01B0F1"/>
                 </TouchableOpacity>
 
               </View>

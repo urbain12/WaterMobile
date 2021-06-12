@@ -11,7 +11,7 @@ import {
   Dimensions,
   LogBox,
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -211,8 +211,32 @@ const Home = ({ navigation }) => {
         <View style={{ zIndex: 0, position: 'absolute' }}>
           <Image resizeMode='cover' source={images.bannerhome} style={{ height: 250, width: windowWidth }} />
         </View>
+        <View
+            style={{
+                alignItems: 'center',
+                marginTop: '8%',
+            }}
+        >
+             <TouchableOpacity
+                            style={{
+                                width: 40,
+                                height: 40,
+                                marginRight: '80%',
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                            onPress={() => navigation.navigate('Shop')}
+                        >
+                            <FontAwesome
+                                name="shopping-bag"
+                                size={40}
+                                color="white"
+                                resizeMode="contain"
+                            />
+                        </TouchableOpacity>
+        </View>
         <FlatList
-          contentContainerStyle={{ marginTop: '50%' }}
+          contentContainerStyle={{ marginTop: '35%' }}
           data={trending}
           renderItem={
             ({ item, index }) => (
