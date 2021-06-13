@@ -7,7 +7,15 @@ export const ProductModel=types.model('ProductModel',{
     Amount:types.number,
     cartQuantity:0,
     inCart:false
-}).actions(self=>({
+}).views(self => ({
+    get price() {
+      return self.unityPrice;
+    },
+    get totalPrice() {
+      return (self.cartQuantity * self.Amount);
+    },
+  }))
+.actions(self=>({
     incCartQuantity(){
         self.cartQuantity+=1;
     },
@@ -35,7 +43,14 @@ export const ShoppingCartStore=types.model('ShoppingCartStore',{
 }).views(self=>({
     get totalProducts(){
         return self.products.length;
-    }
+    },
+    get totalAmount() {
+        return self.products
+          .reduce((acc, current) => acc + parseFloat(current.totalPrice), 0);
+    },
+    get productsList() {
+        return self.products.slice();
+    },
 })).actions(self=>({
     addProduct(product){
         const entry= self.products.find(el=> el.id === product.id)

@@ -1,4 +1,11 @@
 import {ProductsStore,ShoppingCartStore,ProductModel} from './Product';
+import axios from 'axios';
+
+// axios.get(`http://wateraccess.t3ch.rw:8234/products/${id}`).then((res) => {
+    
+//     }).catch(err => {
+//     console.log(err)
+// })
 
 const shoppingCartStore=ShoppingCartStore.create({products:[]})
 const productsStore=ProductsStore.create({
@@ -17,7 +24,22 @@ const productsStore=ProductsStore.create({
             id:'3',
             Title:'robine2',
             Amount:200
-        })
+        }),
+        ProductModel.create({
+            id:'4',
+            Title:'Pipe',
+            Amount:2000
+        }),
+        ProductModel.create({
+            id:'5',
+            Title:'robinet4',
+            Amount:500
+        }),
+        ProductModel.create({
+            id:'6',
+            Title:'urbain',
+            Amount:500
+        }),
     ]
 })
 

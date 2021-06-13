@@ -85,7 +85,7 @@ class ProductCard extends Component {
               <Image style={{width:120,height:100}} resizeMode="contain" source={images.tool}/>
             </View>
             <View>
-              <Text style={{fontWeight:'bold'}}>{product.Amount} Rwf</Text>
+              <Text style={{fontWeight:'bold',color:'#01B0F1'}}>{product.Title}:  <Text style={{fontWeight:'bold', color:'black'}}>{product.Amount} Rwf</Text></Text>
             </View>
           </BoxAnimated>
           </TouchableWithoutFeedback>

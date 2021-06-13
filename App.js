@@ -12,6 +12,7 @@ import { store } from './models/index';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Shop from './screens/Shop';
+import Cart from './screens/Cart';
 import query from './screens/Query';
 import momo from './screens/momopay';
 import creditcard from './screens/creditcard';
@@ -209,6 +210,12 @@ else{
             name="Shop"
             component={Shop}
           />
+
+          <Stack.Screen
+            name="Cart"
+            component={Cart}
+          />
+
           <Stack.Screen
             name="Transaction"
             component={Transaction}
