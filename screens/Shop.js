@@ -28,10 +28,7 @@ const BoxAnimated= Animated.createAnimatedComponent(View)
 @observer
 class Shop extends React.Component {
   // const [customer,setCustomer]=useState({})
-  // const [quantity,setQuantity]=useState(0)
-  // const [category,setCategory]=useState('')
-  // const [opacity,setOpacity]=useState(new Animated.Value(1))
-  // const [isHover,setIsHover]=useState(false)
+ 
 
   state={
     quantity:0,
@@ -44,52 +41,10 @@ class Shop extends React.Component {
   
  
   
-  // React.useEffect(() => {
-  //   LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  //   async function setInfo() {
-  //     const id = await AsyncStorage.getItem('user_id')
-  //     axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
-  //       setCustomer(res.data[0])
-  //     }).catch(err => {
-  //       console.log(err)
-  //     })
-  //     axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-  //       setCategory(res.data.category)
-  //     }).catch(err => {
-  //       console.log(err)
-  //     })
-
-  //   }
-
-  //   setInfo()
-    
-  // }, []);
+  
 
   renderHeader=()=> {
-    // const renderItem = ({ item, index }) => (
-    //   <TouchableOpacity
-    //     style={{
-    //       width: 180,
-    //       paddingVertical: SIZES.padding,
-    //       paddingHorizontal: SIZES.padding,
-    //       marginLeft: index == 0 ? SIZES.padding : 0,
-    //       marginRight: SIZES.radius,
-    //       borderRadius: 10,
-    //       backgroundColor: COLORS.white,
-    //     }}
-    //     onPress={() => props.navigation.navigate("CryptoDetail", { currency: item })}
-    //   >
-    //     <View style={{ flexDirection: "row" }}>
-    //       <View style={{ marginLeft: SIZES.base }}>
-    //         <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-    //         <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-    //           water access
-    //         </Text>
-    //       </View>
-    //     </View>
-    //   </TouchableOpacity>
-    // );
-    // const context=React.useContext(AuthContext)
+    
     return (
       <View
         style={{
