@@ -1,7 +1,7 @@
 import {ProductsStore,ShoppingCartStore,ProductModel} from './Product';
 import axios from 'axios';
 
-// axios.get(`http://wateraccess.t3ch.rw:8234/products/${id}`).then((res) => {
+// axios.get(`http://wateraccess.t3ch.rw:8234/Productlist/`).then((res) => {
     
 //     }).catch(err => {
 //     console.log(err)

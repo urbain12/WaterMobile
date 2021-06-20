@@ -235,7 +235,7 @@ class Cart extends React.Component {
             <View
                 style={{ backgroundColor: "#01B0F1", width: "50%", height: "100%", alignItems: "center", borderRadius: 10, justifyContent:'center'}}
             >
-                <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Checkout</Text>
+                <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Order</Text>
             </View>
         </TouchableOpacity>
         )}

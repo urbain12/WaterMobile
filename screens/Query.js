@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import {
   HeaderBar,
@@ -26,21 +27,38 @@ const Transaction = ({ route }) => {
   const [Province, setProvince] = useState('')
   const [District, setDistrict] = useState('')
   const [Sector, setSector] = useState('')
+  const [customer, setCustomer] = useState({})
   const [Cell, setCell] = useState('')
 
 
+  useEffect(()=>{
+    async function setInfo() {
+     
+      const id = await AsyncStorage.getItem('user_id')
+      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+        setCustomer(res.data[0])
+        console.log(res.data[0].Province)
+      }).catch(err => {
+        console.log(err)
+      })
 
+    }
+
+    setInfo()
+    
+  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const names=customer.FirstName+' '+customer.LastName
     const postObj = JSON.stringify({
-      'Names': Names,
+      'Names': names,
       'Message': Message,
-      'phonenumber': Phonenumber,
-      'Province': Province,
-      'District': District,
-      'Sector': Sector,
-      'Cell': Cell,
+      'phonenumber': customer.user.phone,
+      'Province': customer.Province,
+      'District': customer.District,
+      'Sector': customer.Sector,
+      'Cell': customer.Cell,
 
     })
     console.log(postObj)
@@ -81,7 +99,7 @@ const Transaction = ({ route }) => {
       >
         <View>
           <TouchableOpacity activeOpacity={1}>
-            <TextInput
+            {/* <TextInput
               style={{
                 borderColor: "gray",
                 borderWidth: 1,
@@ -166,7 +184,7 @@ const Transaction = ({ route }) => {
               name="Names"
               placeholder="Cell"
               onChangeText={text => setCell(text)}
-            />
+            /> */}
             <TextInput
               style={{
                 borderColor: "gray",
@@ -178,6 +196,7 @@ const Transaction = ({ route }) => {
                 marginBottom: 10,
                 textAlign: "center",
               }}
+              multiline={true}
               name="Names"
               placeholder="Message"
               onChangeText={text => setMessage(text)}

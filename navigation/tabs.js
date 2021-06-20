@@ -9,6 +9,7 @@ import {
   StyleSheet,
   ImageBackground,
 } from "react-native";
+import * as Linking from 'expo-linking';
 // import { createStackNavigator } from '@react-navigation/stack';
 import {
   createBottomTabNavigator,
@@ -22,8 +23,15 @@ import Modal from "react-native-modal";
 import Login from '../screens/Login';
 import Settings from '../screens/Settings';
 import { MaterialIcons, AntDesign, Ionicons, FontAwesome, Entypo} from "@expo/vector-icons";
+import axios from "axios";
 const Tab = createBottomTabNavigator();
 // const Stack = createStackNavigator();
+
+// const handleSubmit=()=>{
+//   axios.get('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url').then(res=>{
+//     Linking.openURL(res.data.url)
+//   })
+// }
 
 const TabBarCustomButton = ({ children, onPress }) => {
   return (
@@ -134,7 +142,7 @@ const Tabs = ( {navigation} ) => {
                             
                               <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
                               
-                              onPress={() => {navigation.navigate("momo"); setIsVisible(false); }}
+                              onPress={() => {Linking.openURL('tel:*182*6*1#');}}
                               
                               >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
