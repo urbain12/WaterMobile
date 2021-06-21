@@ -25,13 +25,27 @@ import Settings from '../screens/Settings';
 import { MaterialIcons, AntDesign, Ionicons, FontAwesome, Entypo} from "@expo/vector-icons";
 import axios from "axios";
 const Tab = createBottomTabNavigator();
-// const Stack = createStackNavigator();
 
-// const handleSubmit=()=>{
-//   axios.get('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url').then(res=>{
-//     Linking.openURL(res.data.url)
-//   })
-// }
+const handleSubmit=()=>{
+  console.log('ok')
+  const options={
+    headers:{
+    "Content-Type":"application/json",
+    "app-type":"none",
+    "app-version":"v1",
+    "app-device":"Postman",
+    "app-device-os":"Postman",
+    "app-device-id":"0",
+    "x-auth":"705d3a96-c5d7-11ea-87d0-0242ac130003"
+  }
+}
+  axios.get('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url',options,).then(res=>{
+    const my_data=JSON.parse(res.data)
+    Linking.openURL(my_data.url)
+  }).catch(err=>{
+    console.log('there is an error')
+  })
+}
 
 const TabBarCustomButton = ({ children, onPress }) => {
   return (
@@ -161,7 +175,7 @@ const Tabs = ( {navigation} ) => {
                             
                               <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
                               
-                              onPress={() => {navigation.navigate("creditcard"); setIsVisible(false); }}
+                              onPress={() => {handleSubmit(); setIsVisible(false)}}
                               
                               >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
@@ -180,7 +194,7 @@ const Tabs = ( {navigation} ) => {
                             
                               <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
                               
-                              onPress={() => {navigation.navigate("creditcard"); setIsVisible(false); }}
+                              onPress={() => {handleSubmit(); setIsVisible(false); }}
                               >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
                                 <Image
