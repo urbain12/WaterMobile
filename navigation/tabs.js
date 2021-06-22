@@ -175,7 +175,7 @@ const Tabs = ( {navigation} ) => {
                             
                               <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
                               
-                              onPress={() => {handleSubmit(); setIsVisible(false)}}
+                              onPress={() => navigation.navigate("creditcard")}
                               
                               >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>

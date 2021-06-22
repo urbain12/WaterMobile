@@ -7,6 +7,7 @@ import {
     ScrollView,
     TextInput,
     TouchableOpacity,
+    LogBox,
 } from "react-native";
 
 import {
@@ -16,53 +17,63 @@ import {
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
-import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
+// import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 
 const Creditcards = ({ route }) => {
-    const [Names, setNames] = useState('')
-    const [Message, setMessage] = useState('')
-    const [Phonenumber, setPhonenumber] = useState('')
-    const [Province, setProvince] = useState('')
-    const [District, setDistrict] = useState('')
-    const [Sector, setSector] = useState('')
-    const [Cell, setCell] = useState('')
+    const [cname, setNames] = useState('')
+    const [amount, setAmount] = useState('')
+    const [msisdn, setPhonenumber] = useState('')
+    const [Email, setEmail] = useState('')
+    const [customer, setCustomer] = useState({})
 
 
+    React.useEffect(() => {
+        LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+        async function setInfo() {
+            const id = await AsyncStorage.getItem('user_id')
+            axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+                setCustomer(res.data[0])
+            }).catch(err => {
+                console.log(err)
+            })
+            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+                setCategory(res.data.category)
+            }).catch(err => {
+                console.log(err)
+            })
+            axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
+                setTransactionHistory(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+
+        }
+
+        setInfo()
+
+    }, []);
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        const postObj = JSON.stringify({
-            'Names': Names,
-            'Message': Message,
-            'phonenumber': Phonenumber,
-            'Province': Province,
-            'District': District,
-            'Sector': Sector,
-            'Cell': Cell,
-
-        })
-        console.log(postObj)
-
-        // let my_token = localStorage.getItem('token');
-
-        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-        axios.defaults.xsrfCookieName = "csrftoken";
-        axios.defaults.headers = {
-            "Content-Type": "application/json",
-            // Authorization: `Token ${my_token}`,
-        };
-
-        axios.post('http://wateraccess.t3ch.rw:8234/Request/create/', postObj).then((res) => {
-            console.log(res.status)
-            alert('Your request is submitted')
+    const handleSubmit = () => {
+        console.log('ok')
+        const options = {
+            headers: {
+                "Content-Type": "application/json",
+                "app-type": "none",
+                "app-version": "v1",
+                "app-device": "Postman",
+                "app-device-os": "Postman",
+                "app-device-id": "0",
+                "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
+            }
+        }
+        axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', options,).then(res => {
+            const my_data = JSON.parse(res.data)
+            Linking.openURL(my_data.url)
         }).catch(err => {
-            console.log(err)
+            console.log('there is an error')
         })
-
-
-
     }
 
 
@@ -81,37 +92,93 @@ const Creditcards = ({ route }) => {
             >
                 <View>
                     <TouchableOpacity activeOpacity={1}>
-                        
-                       
-                        
-                        
 
-                        <CreditCardInput 
-                        
-                        style={{
-                            borderColor: "gray",
-                            borderWidth: 1,
-                            borderRadius: 10,
-                            height: 35,
-                            width: "100%",
-                            marginTop: 20,
-                            marginBottom: 20,
-                            textAlign: "center",
-                        }}
-                        
+
+
+                        <TextInput
+                            style={{
+                                borderColor: "gray",
+                                borderWidth: 1,
+                                borderRadius: 10,
+                                height: 35,
+                                width: "100%",
+                                marginTop: 20,
+                                marginBottom: 20,
+                                textAlign: "center",
+                            }}
+                            name="Names"
+                            maxLength={12}
+                            placeholder="Names"
+                            onChangeText={text => setNames(text)}
+                        />
+
+
+                        <TextInput
+                            style={{
+                                borderColor: "gray",
+                                borderWidth: 1,
+                                borderRadius: 10,
+                                height: 35,
+                                width: "100%",
+                                marginTop: 20,
+                                marginBottom: 20,
+                                textAlign: "center",
+                            }}
+                            name="Names"
+                            maxLength={12}
+                            placeholder="Phone Number"
+                            keyboardType="numeric"
+                            value={JSON.stringify(customer) !== '{}' && customer.user.phone}
+                            onChangeText={text => setPhonenumber(text)}
+                        />
+
+                        <TextInput
+                            style={{
+                                borderColor: "gray",
+                                borderWidth: 1,
+                                borderRadius: 10,
+                                height: 35,
+                                width: "100%",
+                                marginTop: 20,
+                                marginBottom: 20,
+                                textAlign: "center",
+                            }}
+                            name="Names"
+                            maxLength={12}
+                            placeholder="email"
+                            keyboardType="numeric"
+                            onChangeText={text => setEmail(text)}
+                        />
+
+                        <TextInput
+                            style={{
+                                borderColor: "gray",
+                                borderWidth: 1,
+                                borderRadius: 10,
+                                height: 35,
+                                width: "100%",
+                                marginTop: 20,
+                                marginBottom: 20,
+                                textAlign: "center",
+                            }}
+                            name="Names"
+                            maxLength={12}
+                            placeholder="Amount"
+                            keyboardType="numeric"
+                            onChangeText={text => setAmount(text)}
                         />
 
 
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{marginTop:20}}>
+                <TouchableOpacity style={{ marginTop: 20 }}>
 
-                <TextButton
-                    label="Pay"
-                    onPress={(e) => { handleSubmit(e) }}
-                    style={{ marginTop: 200 }}
+                    <TextButton
+                        label="Pay"
+                        onPress={(e) => { handleSubmit(e) }}
+                        style={{ marginTop: 200 }}
                     />
-            </TouchableOpacity>
+                </TouchableOpacity>
             </View>
         );
     }
