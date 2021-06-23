@@ -16,11 +16,7 @@ import Cart from './screens/Cart';
 import query from './screens/Query';
 import momo from './screens/momopay';
 import creditcard from './screens/creditcard';
-<<<<<<< HEAD
 import Pay from './screens/Pay';
-=======
-import Pay from './screens/Pay'
->>>>>>> e65692dc7c58d7cfc3ce049c361fc7190508116f
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -184,7 +180,6 @@ const App = () => {
   return (
     <Provider {...store}>
       <AuthContext.Provider value={authContext}>
-<<<<<<< HEAD
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -235,7 +230,6 @@ const App = () => {
           />
         </Stack.Navigator>
       </NavigationContainer>
-=======
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -286,7 +280,6 @@ const App = () => {
             />
           </Stack.Navigator>
         </NavigationContainer>
->>>>>>> e65692dc7c58d7cfc3ce049c361fc7190508116f
       </AuthContext.Provider>
     </Provider>
   )
