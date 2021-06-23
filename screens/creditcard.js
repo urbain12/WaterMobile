@@ -25,38 +25,26 @@ const Creditcards = ({ route }) => {
     const [amount, setAmount] = useState('')
     const [msisdn, setPhonenumber] = useState('')
     const [Email, setEmail] = useState('')
-    const [customer, setCustomer] = useState({})
+    const [cnumber, setcnumber] = useState('07542121')
+    const [details, setdetails] = useState('Water-Access-Rwanda')
+    const [pmethod, setpmethod] = useState('cc')
+
+    const handlenames = (val) => {
+        setNames(val)
+    }
+    const handleamount = (val) => {
+        setAmount(val)
+    }
+    const handlephone = (val) => {
+        setPhonenumber(val)
+    }
+    const handlemail = (val) => {
+        setEmail(val)
+    }
 
 
-    React.useEffect(() => {
-        LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-        async function setInfo() {
-            const id = await AsyncStorage.getItem('user_id')
-            axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
-                setCustomer(res.data[0])
-            }).catch(err => {
-                console.log(err)
-            })
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-                setCategory(res.data.category)
-            }).catch(err => {
-                console.log(err)
-            })
-            axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
-                setTransactionHistory(res.data)
-            }).catch(err => {
-                console.log(err)
-            })
-
-        }
-
-        setInfo()
-
-    }, []);
-
-
-    const handleSubmit = () => {
-        console.log('ok')
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const options = {
             headers: {
                 "Content-Type": "application/json",
@@ -67,14 +55,41 @@ const Creditcards = ({ route }) => {
                 "app-device-id": "0",
                 "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
             }
-        }
-        axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', options,).then(res => {
-            const my_data = JSON.parse(res.data)
-            Linking.openURL(my_data.url)
-        }).catch(err => {
-            console.log('there is an error')
+        };
+        const postObj = new FormData();
+
+        postObj.append('msisdn', msisdn)
+        postObj.append('amount', amount)
+        postObj.append('cname', cname)
+        postObj.append('email', Email)
+        postObj.append('details', details)
+        postObj.append('cnumber', cnumber)
+        postObj.append('pmethod', pmethod)
+
+        axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', postObj, options).then(res => {
+            if (res.status === 200) {
+                setNames('')
+                setPhonenumber('')
+                setAmount('')
+                setcnumber('')
+                setdetails('')
+                setpmethod('')
+                setEmail('')
+                console.log('success')
+                console.log(res.data)
+                console.log(postObj)
+                navigation.navigate('Credit',{ my_url: "igihe.com"})
+            }
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response.data);
+                alert('NOT SENT!')
+            }
         })
-    }
+        setTimeout(() => {
+        }, 10000)
+
+    };
 
 
     function renderTrade() {
@@ -109,7 +124,8 @@ const Creditcards = ({ route }) => {
                             name="Names"
                             maxLength={12}
                             placeholder="Names"
-                            onChangeText={text => setNames(text)}
+                            onChangeText={(val) => { handlenames(val) }}
+
                         />
 
 
@@ -129,8 +145,7 @@ const Creditcards = ({ route }) => {
                             placeholder="Phone Number"
                             keyboardType="numeric"
                             value={JSON.stringify(customer) !== '{}' && customer.user.phone}
-                            onChangeText={text => setPhonenumber(text)}
-                        />
+                            onChangeText={(val) => { handlephone(val) }} />
 
                         <TextInput
                             style={{
@@ -147,8 +162,7 @@ const Creditcards = ({ route }) => {
                             maxLength={12}
                             placeholder="email"
                             keyboardType="numeric"
-                            onChangeText={text => setEmail(text)}
-                        />
+                            onChangeText={(val) => { handlemail(val) }} />
 
                         <TextInput
                             style={{
@@ -165,8 +179,7 @@ const Creditcards = ({ route }) => {
                             maxLength={12}
                             placeholder="Amount"
                             keyboardType="numeric"
-                            onChangeText={text => setAmount(text)}
-                        />
+                            onChangeText={(val) => { handleamount(val) }} />
 
 
                     </TouchableOpacity>
@@ -175,7 +188,9 @@ const Creditcards = ({ route }) => {
 
                     <TextButton
                         label="Pay"
-                        onPress={(e) => { handleSubmit(e) }}
+                        onPress={(event) => {
+                            handleSubmit(event)
+                        }}
                         style={{ marginTop: 200 }}
                     />
                 </TouchableOpacity>
