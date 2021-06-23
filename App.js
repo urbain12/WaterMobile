@@ -180,56 +180,6 @@ const App = () => {
   return (
     <Provider {...store}>
       <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false
-          }}
-          initialRouteName={'Home'}
-        > 
-          
-          <Stack.Screen
-            name="Home"
-            component={Tabs}
-          />
-          <Stack.Screen
-            name="query"
-            component={query}
-          />
-          <Stack.Screen
-            name="momo"
-            component={momo}
-          />
-          <Stack.Screen
-            name="creditcard"
-            component={creditcard}
-          />
-          <Stack.Screen
-            name="CryptoDetail"
-            component={CryptoDetail}
-          />
-          
-          <Stack.Screen
-            name="Shop"
-            component={Shop}
-          />
-
-          <Stack.Screen
-            name="Pay"
-            component={Pay}
-          />
-
-          <Stack.Screen
-            name="Cart"
-            component={Cart}
-          />
-
-          <Stack.Screen
-            name="Transaction"
-            component={Transaction}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{

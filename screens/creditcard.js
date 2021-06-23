@@ -7,8 +7,10 @@ import {
     ScrollView,
     TextInput,
     TouchableOpacity,
+    ActivityIndicator,
     LogBox,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import {
     HeaderBar,
@@ -23,8 +25,10 @@ import axios from 'axios';
 const Creditcards = ({ navigation }) => {
     const [cname, setNames] = useState('')
     const [amount, setAmount] = useState('')
+    const [loading, setLoading] = useState(false)
     const [msisdn, setPhonenumber] = useState('')
     const [Email, setEmail] = useState('')
+    const [customer, setCustomer] = useState('')
     const [cnumber, setcnumber] = useState('07542121')
     const [details, setdetails] = useState('Water-Access-Rwanda')
     const [pmethod, setpmethod] = useState('cc')
@@ -44,6 +48,7 @@ const Creditcards = ({ navigation }) => {
 
 
     const handleSubmit = (e) => {
+        setLoading(true)
         e.preventDefault();
         const options = {
             headers: {
@@ -58,29 +63,30 @@ const Creditcards = ({ navigation }) => {
         };
         const postObj = new FormData();
 
-        postObj.append('msisdn', msisdn)
+        postObj.append('msisdn', customer.user.phone)
         postObj.append('amount', amount)
-        postObj.append('cname', cname)
-        postObj.append('email', Email)
+        postObj.append('cname', customer.FirstName + ' ' + customer.LastName)
+        postObj.append('email', customer.user.email)
         postObj.append('details', details)
         postObj.append('cnumber', cnumber)
         postObj.append('pmethod', pmethod)
 
         axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', postObj, options).then(res => {
             // if (res.status === 200) {
-                const my_data=JSON.parse(res.data)
-                setNames('')
-                setPhonenumber('')
-                setAmount('')
-                setcnumber('')
-                setdetails('')
-                setpmethod('')
-                setEmail('')
-                console.log('success')
-                console.log(res.data)
-                console.log(my_data.url)
-                console.log(postObj)
-                navigation.navigate('Pay',{ my_url: my_data.url})
+            const my_data = JSON.parse(res.data)
+
+            setAmount('')
+
+            console.log('success')
+            console.log(res.data)
+            console.log(my_data.url)
+            console.log(postObj)
+            if (my_data.success == 1) {
+                navigation.navigate('Pay', { my_url: my_data.url })
+            }
+            else {
+                alert('Amount required')
+            }
             // }
         }).catch((error) => {
             if (error.response) {
@@ -89,9 +95,25 @@ const Creditcards = ({ navigation }) => {
             }
         })
         setTimeout(() => {
-        }, 10000)
+            setLoading(false)
+        }, 5000)
 
     };
+
+    React.useEffect(() => {
+        LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+        async function setInfo() {
+            const id = await AsyncStorage.getItem('user_id')
+            axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+                setCustomer(res.data[0])
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+
+        setInfo()
+
+    }, []);
 
 
     function renderTrade() {
@@ -110,59 +132,9 @@ const Creditcards = ({ navigation }) => {
                 <View>
                     <TouchableOpacity activeOpacity={1}>
 
-
-
-                        <TextInput
-                            style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
-                                borderRadius: 10,
-                                height: 35,
-                                width: "100%",
-                                marginTop: 20,
-                                marginBottom: 20,
-                                textAlign: "center",
-                            }}
-                            name="Names"
-                            maxLength={12}
-                            placeholder="Names"
-                            onChangeText={(val) => { handlenames(val) }}
-
-                        />
-
-
-                        <TextInput
-                            style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
-                                borderRadius: 10,
-                                height: 35,
-                                width: "100%",
-                                marginTop: 20,
-                                marginBottom: 20,
-                                textAlign: "center",
-                            }}
-                            name="Names"
-                            maxLength={12}
-                            placeholder="Phone Number"
-                            keyboardType="numeric"
-                            onChangeText={(val) => { handlephone(val) }} />
-
-                        <TextInput
-                            style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
-                                borderRadius: 10,
-                                height: 35,
-                                width: "100%",
-                                marginTop: 20,
-                                marginBottom: 20,
-                                textAlign: "center",
-                            }}
-                            name="Names"
-                            placeholder="email"
-                            onChangeText={(val) => { handlemail(val) }} />
-
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 30 }}>Pay Your Subscsription</Text>
+                        </View>
                         <TextInput
                             style={{
                                 borderColor: "gray",
@@ -183,15 +155,24 @@ const Creditcards = ({ navigation }) => {
 
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{ marginTop: 20 }}>
+                <TouchableOpacity style={{ marginTop: 20 }}
+                    onPress={(event) => {
+                        handleSubmit(event)
+                    }}>
 
-                    <TextButton
-                        label="Pay"
-                        onPress={(event) => {
-                            handleSubmit(event)
-                        }}
-                        style={{ marginTop: 200 }}
-                    />
+                    <View
+                        style={{ backgroundColor: "#01B0F1", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
+                    >
+                        {loading ? (
+                            <ActivityIndicator size='large' color='white' />
+                        ) :
+                            (
+                                <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Pay</Text>
+                            )}
+
+                    </View>
+
+
                 </TouchableOpacity>
             </View>
         );
@@ -202,11 +183,16 @@ const Creditcards = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <HeaderBar right={false} />
-
             <ScrollView>
                 <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-                    {renderTrade()}
-                    {renderTransactionHistory()}
+                    {customer===''?(
+                        <></>
+                    ):(
+                        <>
+                        {renderTrade()}
+                        </>
+                    )}
+                    
                 </View>
             </ScrollView>
         </SafeAreaView>
