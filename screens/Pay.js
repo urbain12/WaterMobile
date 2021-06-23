@@ -227,7 +227,7 @@ const Pay = ({ navigation }) => {
         </ImageBackground>
         
         <WebView
-        source={{ uri: 'https://github.com/facebook/react-native' }}
+        source={{ uri: 'https:\/\/pay.esicia.com\/checkout\/A23991624443372' }}
       />
       </>
     );

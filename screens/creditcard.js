@@ -144,7 +144,7 @@ const Creditcards = ({ route }) => {
                             maxLength={12}
                             placeholder="Phone Number"
                             keyboardType="numeric"
-                            value={JSON.stringify(customer) !== '{}' && customer.user.phone}
+                            
                             onChangeText={(val) => { handlephone(val) }} />
 
                         <TextInput
@@ -159,9 +159,7 @@ const Creditcards = ({ route }) => {
                                 textAlign: "center",
                             }}
                             name="Names"
-                            maxLength={12}
                             placeholder="email"
-                            keyboardType="numeric"
                             onChangeText={(val) => { handlemail(val) }} />
 
                         <TextInput
