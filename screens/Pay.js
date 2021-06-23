@@ -23,7 +23,7 @@ import axios from 'axios';
 // import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 
-const Pay = ({ navigation }) => {
+const Pay = ({ navigation,route }) => {
     const [cname, setNames] = useState('')
     const [amount, setAmount] = useState('')
     const [msisdn, setPhonenumber] = useState('')
@@ -227,7 +227,7 @@ const Pay = ({ navigation }) => {
         </ImageBackground>
         
         <WebView
-        source={{ uri: 'https://github.com/facebook/react-native' }}
+        source={{ uri: route.params.my_url }}
       />
       </>
     );

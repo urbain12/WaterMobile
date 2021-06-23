@@ -16,6 +16,7 @@ import Cart from './screens/Cart';
 import query from './screens/Query';
 import momo from './screens/momopay';
 import creditcard from './screens/creditcard';
+import Pay from './screens/Pay';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -209,6 +210,11 @@ const screenOptionStyle = {
           <Stack.Screen
             name="Shop"
             component={Shop}
+          />
+
+          <Stack.Screen
+            name="Pay"
+            component={Pay}
           />
 
           <Stack.Screen

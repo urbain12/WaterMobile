@@ -20,7 +20,7 @@ import axios from 'axios';
 // import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
 
-const Creditcards = ({ route }) => {
+const Creditcards = ({ navigation }) => {
     const [cname, setNames] = useState('')
     const [amount, setAmount] = useState('')
     const [msisdn, setPhonenumber] = useState('')
@@ -67,7 +67,8 @@ const Creditcards = ({ route }) => {
         postObj.append('pmethod', pmethod)
 
         axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', postObj, options).then(res => {
-            if (res.status === 200) {
+            // if (res.status === 200) {
+                const my_data=JSON.parse(res.data)
                 setNames('')
                 setPhonenumber('')
                 setAmount('')
@@ -77,9 +78,10 @@ const Creditcards = ({ route }) => {
                 setEmail('')
                 console.log('success')
                 console.log(res.data)
+                console.log(my_data.url)
                 console.log(postObj)
-                navigation.navigate('Credit',{ my_url: "igihe.com"})
-            }
+                navigation.navigate('Pay',{ my_url: my_data.url})
+            // }
         }).catch((error) => {
             if (error.response) {
                 console.log(error.response.data);
@@ -144,7 +146,6 @@ const Creditcards = ({ route }) => {
                             maxLength={12}
                             placeholder="Phone Number"
                             keyboardType="numeric"
-                            value={JSON.stringify(customer) !== '{}' && customer.user.phone}
                             onChangeText={(val) => { handlephone(val) }} />
 
                         <TextInput
@@ -159,9 +160,7 @@ const Creditcards = ({ route }) => {
                                 textAlign: "center",
                             }}
                             name="Names"
-                            maxLength={12}
                             placeholder="email"
-                            keyboardType="numeric"
                             onChangeText={(val) => { handlemail(val) }} />
 
                         <TextInput
