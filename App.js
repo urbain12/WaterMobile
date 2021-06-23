@@ -161,18 +161,18 @@ const screenOptionStyle = {
       return null;
   }
 
-  if(loginState.isLoading){
-    return(
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-            <ActivityIndicator size='large' color='#000'/>
-        </View>
-    )
-}
+//   if(loginState.isLoading){
+//     return(
+//         <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+//             <ActivityIndicator size='large' color='#000'/>
+//         </View>
+//     )
+// }
 
 
 
-else{
-  if(loginState.token !== null){
+// else{
+//   if(loginState.token !== null){
       
     return (
       <Provider {...store}>
@@ -226,15 +226,15 @@ else{
       </Provider>
     )
      
-  }else{
-      return (
-          <AuthContext.Provider value={authContext}>
-              <Login/>
-          </AuthContext.Provider>
-      )
-  }
+  // }else{
+  //     return (
+  //         <AuthContext.Provider value={authContext}>
+  //             <Login/>
+  //         </AuthContext.Provider>
+  //     )
+  // }
  
-}
+//}
 
 }
 

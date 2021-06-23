@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { AuthContext } from '../context/Context';
+import { WebView } from 'react-native-webview';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -169,6 +170,7 @@ const Home = ({ navigation }) => {
         </View>
         <View style={{ width: '90%', marginLeft: "2%" }}>
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
+          
           {category.toUpperCase() === 'AMAZI' ? (
 
             <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
@@ -206,6 +208,7 @@ const Home = ({ navigation }) => {
 
   return (
     <ScrollView>
+    
       <View style={{ flex: 1, paddingBottom: 130 }}>
 
         <View style={{ zIndex: 0, position: 'absolute' }}>
