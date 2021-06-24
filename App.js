@@ -17,6 +17,9 @@ import query from './screens/Query';
 import momo from './screens/momopay';
 import creditcard from './screens/creditcard';
 import Pay from './screens/Pay';
+import uhira from './screens/uhira';
+import inuma from './screens/inuma';
+import changepassword from './screens/changepassword';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -223,7 +226,18 @@ const App = () => {
               name="Pay"
               component={Pay}
             />
-
+            <Stack.Screen
+              name="uhira"
+              component={uhira}
+            />
+            <Stack.Screen
+              name="inuma"
+              component={inuma}
+            />
+            <Stack.Screen
+              name="changepassword"
+              component={changepassword}
+            />
             <Stack.Screen
               name="Transaction"
               component={Transaction}

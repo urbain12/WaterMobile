@@ -308,7 +308,7 @@ const CryptoDetail = ({ navigation, }) => {
               <View style={{ flexDirection: 'row',justifyContent:"center" }}>
 
                 <View style={{ marginLeft: SIZES.base }}>
-                  <Image source={require("../assets/images/Amazi.png")}
+                  <Image source={require("../assets/images/Inuma.png")}
                     style={{
                       resizeMode: 'contain',
                       width: "100%",
@@ -328,7 +328,7 @@ const CryptoDetail = ({ navigation, }) => {
                   </View>
 
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    245 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                    3,142 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
                   </Text>
                 </View>
               </View>

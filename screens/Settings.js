@@ -169,9 +169,9 @@ const Settings = ({ navigation }) => {
                         <Text style={{ ...FONTS.h5 ,marginBottom:10,marginLeft:12,fontWeight:"bold",fontSize:15}}> {customer.Phone}</Text>
                         </View>
                         <TouchableOpacity style={{justifyContent:'center',alignItems:'flex-end',width:'40%'}}>
-                        <View >
+                        <TouchableOpacity onPress={() => navigation.navigate("changepassword")}>
                         <Image resizeMode='contain' style={{width:30,height:30,marginRight:10}} source={require('../assets/icons/editing.png')}/>
-                        </View>
+                        </TouchableOpacity>
                         </TouchableOpacity>
 
                     </View>
