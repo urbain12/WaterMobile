@@ -30,7 +30,10 @@ const Momopay = ({ navigation }) => {
 
 
         const handleSubmit = (e) => {
-            setloading(true)
+            if(newpassword!==confirmpassword){
+                alert('Your passwords have to match!')
+            }
+           else{setloading(true)
             e.preventDefault()
             const postObj = JSON.stringify({
                 'old_password': oldpassword,
@@ -59,7 +62,7 @@ const Momopay = ({ navigation }) => {
             
             setTimeout(() => {
                 setloading(false)
-            }, 500)
+            }, 500)}
 
 
         }
