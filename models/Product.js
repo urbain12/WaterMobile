@@ -35,7 +35,7 @@ export const ProductModel=types.model('ProductModel',{
 }))
 
 export const ProductsStore=types.model('ProductsStore',{
-    data:types.array(types.reference(ProductModel))
+    data:types.array(ProductModel)
 })
 
 export const ShoppingCartStore=types.model('ShoppingCartStore',{

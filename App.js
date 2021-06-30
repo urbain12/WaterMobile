@@ -1,22 +1,25 @@
-import React, { useMemo, useEffect } from 'react';
-import { Provider } from 'mobx-react';
+import React, { useMemo, useEffect, useState } from 'react';
+import { Provider } from 'react-redux';
 import { CryptoDetail, Transaction } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './screens/Login'
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, Text } from 'react-native';
 import Tabs from "./navigation/tabs";
 import { AuthContext } from './context/Context';
-import { store } from './models/index';
+import store from './redux/store';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Shop from './screens/Shop';
 import Cart from './screens/Cart';
 import query from './screens/Query';
 import momo from './screens/momopay';
+import ProductDetails from './screens/ProductDetails';
 import creditcard from './screens/creditcard';
 import Pay from './screens/Pay';
+import { checkConnected } from './function';
+import NoInternet from './components/NoInternet';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -24,6 +27,10 @@ const screenOptionStyle = {
 }
 
 const App = () => {
+  const [netState,setNetState]=useState(false)
+  checkConnected().then(res=>{
+    setNetState(res)
+  })
   const initialState = {
     isLoading: true,
     user_id: '',
@@ -122,9 +129,12 @@ const App = () => {
       }
       dispatch({ type: 'LOGOUT' })
     }
-  }), [])
+  }))
 
   useEffect(() => {
+
+    
+
     setTimeout(async () => {
       // setIsLoading(false);
       let token;
@@ -160,89 +170,99 @@ const App = () => {
     "Roboto-Regular": require('./assets/fonts/Roboto-Regular.ttf'),
   })
 
-  if (!loaded) {
-    return null;
+  if(false){
+    if (!loaded) {
+      return null;
+    }
+  
+      if(loginState.isLoading){
+        return(
+            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                <ActivityIndicator size='large' color='#000'/>
+            </View>
+        )
+    }
+  
+  
+  
+    else{
+      if(loginState.token !== null){
+  
+    return (
+      <Provider store={store}>
+        <AuthContext.Provider value={authContext}>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false
+              }}
+              initialRouteName={'Home'}
+            >
+  
+              <Stack.Screen
+                name="Home"
+                component={Tabs}
+              />
+              <Stack.Screen
+                name="query"
+                component={query}
+              />
+              <Stack.Screen
+                name="momo"
+                component={momo}
+              />
+              <Stack.Screen
+                name="creditcard"
+                component={creditcard}
+              />
+              <Stack.Screen
+                name="ProductDetails"
+                component={ProductDetails}
+              />
+              <Stack.Screen
+                name="CryptoDetail"
+                component={CryptoDetail}
+              />
+  
+              <Stack.Screen
+                name="Shop"
+                component={Shop}
+              />
+  
+              <Stack.Screen
+                name="Cart"
+                component={Cart}
+              />
+  
+              <Stack.Screen
+                name="Pay"
+                component={Pay}
+              />
+  
+              <Stack.Screen
+                name="Transaction"
+                component={Transaction}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </AuthContext.Provider>
+      </Provider>
+    )
+  
+    }else{
+        return (
+            <AuthContext.Provider value={authContext}>
+                <Login/>
+            </AuthContext.Provider>
+        )
+    }
+  
+    }
+  }else{
+    return (
+      <NoInternet check={checkConnected}/>
+    )
   }
-
-  //   if(loginState.isLoading){
-  //     return(
-  //         <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-  //             <ActivityIndicator size='large' color='#000'/>
-  //         </View>
-  //     )
-  // }
-
-
-
-  // else{
-  //   if(loginState.token !== null){
-
-  return (
-    <Provider {...store}>
-      <AuthContext.Provider value={authContext}>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false
-            }}
-            initialRouteName={'Home'}
-          >
-
-            <Stack.Screen
-              name="Home"
-              component={Tabs}
-            />
-            <Stack.Screen
-              name="query"
-              component={query}
-            />
-            <Stack.Screen
-              name="momo"
-              component={momo}
-            />
-            <Stack.Screen
-              name="creditcard"
-              component={creditcard}
-            />
-            <Stack.Screen
-              name="CryptoDetail"
-              component={CryptoDetail}
-            />
-
-            <Stack.Screen
-              name="Shop"
-              component={Shop}
-            />
-
-            <Stack.Screen
-              name="Cart"
-              component={Cart}
-            />
-
-            <Stack.Screen
-              name="Pay"
-              component={Pay}
-            />
-
-            <Stack.Screen
-              name="Transaction"
-              component={Transaction}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </AuthContext.Provider>
-    </Provider>
-  )
-
-  // }else{
-  //     return (
-  //         <AuthContext.Provider value={authContext}>
-  //             <Login/>
-  //         </AuthContext.Provider>
-  //     )
-  // }
-
-  //}
 
 }
 
