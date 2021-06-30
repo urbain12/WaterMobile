@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   Image,
   ImageBackground,
+  ActivityIndicator,
   LogBox,
   Animated
 } from "react-native";
@@ -147,7 +148,8 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
     <View>
          {renderHeader()}
     {/* <Text style={{color:'black'}}>flskdjf    {JSON.stringify(this.props.productsStore.data)}</Text> */}
-        <ScrollView>
+        {products.length>0 ? (
+          <ScrollView>
         
         <FlatList
           data={products}
@@ -161,6 +163,13 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
         />
 
         </ScrollView>
+        ):(
+          <View style={{justifyContent:'center',alignItems:'center'}}>
+          <View style={{marginTop:50}}>
+          <ActivityIndicator size='large' color='black'/>
+          </View>
+          </View>
+        )}
         
     </View>
 

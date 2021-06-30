@@ -20,7 +20,7 @@ import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
 
 
-const Transaction = ({ route }) => {
+const Transaction = ({ navigation }) => {
   const [Names, setNames] = useState('')
   const [Message, setMessage] = useState('')
   const [Phonenumber, setPhonenumber] = useState('')
@@ -75,6 +75,7 @@ const Transaction = ({ route }) => {
     axios.post('http://wateraccess.t3ch.rw:8234/Request/create/', postObj).then((res) => {
       console.log(res.status)
       alert('Your request is submitted')
+      navigation.navigate('Home')
     }).catch(err => {
       console.log(err)
     })

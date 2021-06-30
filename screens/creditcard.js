@@ -164,7 +164,7 @@ const Creditcards = ({ navigation }) => {
                         style={{ backgroundColor: "#01B0F1", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
                     >
                         {loading ? (
-                            <ActivityIndicator size='large' color='white' />
+                            <ActivityIndicator size='large' color='white' style={{marginTop:10}}/>
                         ) :
                             (
                                 <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Pay</Text>

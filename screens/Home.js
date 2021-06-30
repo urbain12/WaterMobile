@@ -170,7 +170,7 @@ const Home = ({ navigation }) => {
         </View>
         <View style={{ width: '90%', marginLeft: "2%" }}>
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
-          
+
           {category.toUpperCase() === 'AMAZI' ? (
 
             <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
@@ -208,92 +208,192 @@ const Home = ({ navigation }) => {
 
   return (
     <ScrollView>
-    
+
       <View style={{ flex: 1, paddingBottom: 130 }}>
 
         <View style={{ zIndex: 0, position: 'absolute' }}>
           <Image resizeMode='cover' source={images.bannerhome} style={{ height: 250, width: windowWidth }} />
         </View>
         <View
-            style={{
-                alignItems: 'center',
-                marginTop: '8%',
-            }}
+          style={{
+            alignItems: 'center',
+            marginTop: '8%',
+          }}
         >
-             <TouchableOpacity
-                            style={{
-                                width: 40,
-                                height: 40,
-                                marginRight: '80%',
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
-                            onPress={() => navigation.navigate('Shop')}
-                        >
-                            <FontAwesome
-                                name="shopping-bag"
-                                size={40}
-                                color="white"
-                                resizeMode="contain"
-                            />
-                        </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: '80%',
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onPress={() => navigation.navigate('Shop')}
+          >
+            <FontAwesome
+              name="shopping-bag"
+              size={40}
+              color="white"
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
         </View>
-        <FlatList
-          contentContainerStyle={{ marginTop: '35%' }}
-          data={trending}
-          renderItem={
-            ({ item, index }) => (
-              <TouchableOpacity
-                style={{
-                  width: 180,
-                  paddingVertical: SIZES.padding,
-                  paddingHorizontal: SIZES.padding,
-                  marginLeft: index == 0 ? SIZES.padding : 0,
-                  marginRight: SIZES.radius,
-                  borderRadius: 10,
-                  backgroundColor: COLORS.white,
-                  marginBottom: 15,
-                  ...styles.shadow
 
-                }}
-                onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
-              >
-                <View style={{ flexDirection: 'row' }}>
 
-                  <View style={{ marginLeft: SIZES.base }}>
-                    <Image source={item.currency}
-                      style={{
-                        resizeMode: 'contain',
-                        width: "100%",
-                        height: 30,
 
-                      }}
 
-                    />
-                    <View style={{
-                      borderBottomWidth: 2,
-                      borderBottomColor: "#47315a",
-                      width: 50,
-                      marginLeft: 20,
-                      marginTop: 5
-                    }}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
 
-                    </View>
 
-                    <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                      {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
-                    </Text>
+
+          <View style={{ flexDirection: "row", marginTop:"20%"}}>
+
+
+
+            <TouchableOpacity
+              style={{
+                width: 180,
+                paddingVertical: SIZES.padding,
+                paddingHorizontal: SIZES.padding,
+                marginLeft: 10,
+                marginRight: SIZES.radius,
+                borderRadius: 10,
+                backgroundColor: COLORS.white,
+                marginBottom: 15,
+                ...styles.shadow
+
+              }}
+              onPress={() => navigation.navigate("CryptoDetail")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base }}>
+                  <Image source={require("../assets/images/Amazi.png")}
+                    style={{
+                      resizeMode: 'contain',
+                      width: "100%",
+                      height: 30,
+
+                    }}
+
+                  />
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 50,
+                    marginLeft: 20,
+                    marginTop: 5
+                  }}>
+
                   </View>
+
+                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                    245 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                  </Text>
                 </View>
+              </View>
 
 
-              </TouchableOpacity>
-            )
-          }
-          keyExtractor={item => `${item.id}`}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
+            </TouchableOpacity>
+
+
+            <TouchableOpacity
+              style={{
+                width: 180,
+                paddingVertical: SIZES.padding,
+                paddingHorizontal: SIZES.padding,
+                marginLeft: 10,
+                marginRight: SIZES.radius,
+                borderRadius: 10,
+                backgroundColor: COLORS.white,
+                marginBottom: 15,
+                ...styles.shadow
+
+              }}
+              onPress={() => navigation.navigate("uhira")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base }}>
+                  <Image source={require("../assets/images/Uhira.png")}
+                    style={{
+                      resizeMode: 'contain',
+                      width: "100%",
+                      height: 30,
+
+                    }}
+
+                  />
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 50,
+                    marginLeft: 20,
+                    marginTop: 5
+                  }}>
+
+                  </View>
+
+                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                  2,342 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                  </Text>
+                </View>
+              </View>
+
+
+            </TouchableOpacity>
+
+
+            <TouchableOpacity
+              style={{
+                width: 180,
+                paddingVertical: SIZES.padding,
+                paddingHorizontal: SIZES.padding,
+                marginLeft: 10,
+                marginRight: SIZES.radius,
+                borderRadius: 10,
+                backgroundColor: COLORS.white,
+                marginBottom: 15,
+                ...styles.shadow
+
+              }}
+              onPress={() => navigation.navigate("inuma")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base }}>
+                  <Image source={require("../assets/images/Inuma.png")}
+                    style={{
+                      resizeMode: 'contain',
+                      width: "100%",
+                      height: 30,
+
+                    }}
+
+                  />
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 50,
+                    marginLeft: 20,
+                    marginTop: 5
+                  }}>
+
+                  </View>
+
+                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                  3,142 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                  </Text>
+                </View>
+              </View>
+
+
+            </TouchableOpacity>
+
+          </View>
+
+        </ScrollView>
+
 
         {renderAlert()}
         {renderNotice()}
