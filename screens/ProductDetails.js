@@ -9,6 +9,12 @@ import { addToCart, decreaseQty } from '../redux/shopping/shopping-actions';
 const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
     const [productCart,setProductCart]=useState({})
     const [cartCount,setCartCount]=useState(0)
+    const format = (amount) =>{
+        return Number(amount)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+    
+    };
 
     useEffect(()=>{
         let count=0;
@@ -72,15 +78,17 @@ const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
                     flexDirection:"row",
                     alignSelf:"center",
                     alignItems:"center",
-                    backgroundColor:"#f6f3fb",
-                    paddingHorizontal:20,
+                    justifyContent:"center",
+                    backgroundColor:"#35b9e6",
+                    width:"80%",
                     paddingVertical:8,
-                    borderRadius:20
+                    marginTop:5
                 }}>
                   <TouchableOpacity onPress={()=>{addToCart(currentItem.id)}}>
                    <Text style={{
                        fontWeight:"bold",
-                       fontSize:18,
+                       color:"white",
+                       fontSize:30,
                    }}>+</Text>
                   </TouchableOpacity>
 
@@ -97,7 +105,8 @@ const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
                       }}>
                    <Text style={{
                        fontWeight:"bold",
-                       fontSize:18,
+                       color:"white",
+                       fontSize:30
                    }}>-</Text>
                   </TouchableOpacity>
 
@@ -119,7 +128,7 @@ const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
                       fontSize:28,
                       fontWeight:"bold",
                       marginLeft:80
-                  }}>Rwf {currentItem.price}</Text>
+                  }}>Rwf {format(currentItem.price)}</Text>
                 </View>
                 
 

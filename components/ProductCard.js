@@ -21,7 +21,15 @@ import { connect } from 'react-redux';
 const BoxAnimated= Animated.createAnimatedComponent(View)
 const windowWidth = Dimensions.get('window').width/2-20;
 
+
 const ProductCard = ({product})=> {
+
+  const format = (amount) =>{
+    return Number(amount)
+    .toFixed(2)
+    .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
+};
     // const [isHover,setHover]=useState(false)
     // const [opacity,setOpacity]=useState(new Animated.Value(1))
     // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
@@ -38,7 +46,7 @@ const ProductCard = ({product})=> {
               <Image style={{width:120,height:100}} resizeMode="contain" source={{uri:product.image}}/>
             </View>
             <View>
-              <Text style={{fontWeight:'bold',color:'#01B0F1'}}>{product.name}:  <Text style={{fontWeight:'bold', color:'black'}}>{product.price} Rwf</Text></Text>
+              <Text style={{fontWeight:'bold',color:'#01B0F1'}}>{product.name}:  <Text style={{fontWeight:'bold', color:'black'}}>{format(product.price)} Rwf</Text></Text>
             </View>
           </View>
           

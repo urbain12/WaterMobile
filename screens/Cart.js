@@ -34,6 +34,12 @@ const Cart = ({navigation,cart,removeFromCart}) => {
   // const [isHover,setIsHover]=useState(false)
   const [cartCount,setCartCount]=useState(0)
   const [totalAmount,setTotalAmount]=useState(0)
+  const format = (amount) =>{
+    return Number(amount)
+    .toFixed(2)
+    .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
+};
   useEffect(()=>{
     console.log(cart)
    let count=0;
@@ -198,11 +204,11 @@ const Cart = ({navigation,cart,removeFromCart}) => {
                         </View>
 
                         <View style={{ width:'25%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{product.price} Rwf</Text>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{format(product.price)} Rwf</Text>
                         </View>
 
                         <View style={{ width:'30%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: "green", }}>{product.total} Rwf</Text>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: "green", }}>{format(product.total)} Rwf</Text>
                         </View>
 
                         <View style={{ width:'20%',alignItems:'center' }}>
@@ -225,7 +231,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
                         </View>
 
                         <View style={{ width:'33%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#01B0F1", }}>{totalAmount} Rwf</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#01B0F1", }}>{format(totalAmount)} Rwf</Text>
                         </View>
                     </View>
 

@@ -10,7 +10,12 @@ import {
 import { COLORS, SIZES, FONTS, icons } from "../constants"
 
 const TransactionHistory = ({ customContainerStyle, history }) => {
+    const format = (amount) =>{
+        return Number(amount)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, '$&,')
 
+    };
     const renderItem = ({ item }) => (
         <TouchableOpacity
             style={{
@@ -35,7 +40,7 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
             </View>
 
             <View style={{ flexDirection: 'row', height: '100%', alignItems: 'center' }}>
-                <Text style={{ color: item.type == "B" ? COLORS.green : COLORS.black, ...FONTS.h3 }}>{item.Paidamount} Rwf</Text>
+                <Text style={{ color: item.type == "B" ? COLORS.green : COLORS.black, ...FONTS.h3 }}>{format(item.Paidamount)} Rwf</Text>
                 <Image
                     source={icons.right_arrow}
                     style={{
