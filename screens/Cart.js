@@ -35,6 +35,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
   const [cartCount,setCartCount]=useState(0)
   const [totalAmount,setTotalAmount]=useState(0)
   useEffect(()=>{
+    console.log(cart)
    let count=0;
    let amount=0
    cart.forEach(item => {
@@ -211,13 +212,16 @@ const Cart = ({navigation,cart,removeFromCart}) => {
                         </View>
                     </View>
                  ))}
-                 <View style={{ width:'92%',height: 60, borderTopColor: '#707070', borderTopWidth: 0.5, flexDirection: 'row', padding: 10 ,alignSelf:'center'}}>
+                 <View style={{ width:'100%',height: 60, borderTopColor: '#707070', borderTopWidth: 0.5, flexDirection: 'row', padding: 10 ,alignSelf:'center'}}>
                         
-                        <View style={{ width:'33%',alignItems:'center' }}>
+                        <View style={{ width:'25%',alignItems:'center' }}>
                         <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Total:</Text>
                         </View>
 
-                        <View style={{ width:'33%',alignItems:'center' }}>
+                        <View style={{ width:'25%',alignItems:'center' }}>
+                        </View>
+
+                        <View style={{ width:'17%',alignItems:'center' }}>
                         </View>
 
                         <View style={{ width:'33%',alignItems:'center' }}>
