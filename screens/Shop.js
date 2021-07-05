@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {inject, observer} from 'mobx-react';
 import {
   StyleSheet,
@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   Image,
   ImageBackground,
+  ActivityIndicator,
   LogBox,
   Animated
 } from "react-native";
@@ -20,30 +21,39 @@ import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from 'axios';
 import ProductCard from "../components/ProductCard";
+import { connect } from "react-redux";
+import { retrieveProducts } from "../redux/shopping/shopping-actions";
+import { loadCurrentItem } from "../redux/shopping/shopping-actions";
 
-const BoxAnimated= Animated.createAnimatedComponent(View)
 
-@inject('productsStore')
-@inject('shoppingCartStore')
-@observer
-class Shop extends React.Component {
+
+const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
+  const [cartCount,setCartCount]=useState(0)
+  useEffect(()=>{
+   let count=0;
+   cart.forEach(item => {
+     count+=item.qty;
+   });
+   setCartCount(count)
+  },[cart,cartCount])
+
+  useEffect(()=>{
+    retrieveProducts();
+  },[retrieveProducts])
   // const [customer,setCustomer]=useState({})
  
 
-  state={
-    quantity:0,
-    opacity:new Animated.Value(1),
-    qtyOpacity:new Animated.Value(0),
-    isHover:false,
-  }
+
+  // const [isHover,setHover]=useState(false)
+  // const [opacity,setOpacity]=useState(new Animated.Value(1))
+  // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
 
 
   
- 
   
   
 
-  renderHeader=()=> {
+  const renderHeader=()=> {
     
     return (
       <View
@@ -78,7 +88,7 @@ class Shop extends React.Component {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => this.props.navigation.navigate('Home')}
+              onPress={() => navigation.navigate('Home')}
             >
               <Ionicons
                 name="arrow-back"
@@ -87,7 +97,7 @@ class Shop extends React.Component {
                 resizeMode="contain"
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Cart')}} style={{
+            <TouchableOpacity onPress={()=>{navigation.navigate('Cart')}} style={{
                    position:"relative",
                    marginTop:10
                }}>
@@ -98,9 +108,9 @@ class Shop extends React.Component {
                  size={24}
                  color="#fff"/>
                   
-                 {this.props.shoppingCartStore.totalProducts>0 && (
+                 {cartCount>0 && (
                   <View style={{positions:'absolute',height:18,width:18,borderRadius:9,backgroundColor:'red',alignItems:'center',top:-30,right:-18}}>
-                  <Text style={{color:'white'}}>{this.props.shoppingCartStore.totalProducts}</Text>
+                  <Text style={{color:'white'}}>{cartCount}</Text>
                  </View>
                  )}
                  
@@ -130,27 +140,36 @@ class Shop extends React.Component {
 
 
 
-  render(){
+  
     
     return (
     
       <View>
     <View>
-         {this.renderHeader()}
+         {renderHeader()}
     {/* <Text style={{color:'black'}}>flskdjf    {JSON.stringify(this.props.productsStore.data)}</Text> */}
-        <ScrollView>
+        {products.length>0 ? (
+          <ScrollView>
         
         <FlatList
-          data={this.props.productsStore.data}
+          data={products}
           numColumns={2}
           renderItem={({ item }) => (
-          
+          <TouchableOpacity onPress={()=>{navigation.navigate('ProductDetails');loadCurrentItem(item)}}>
             <ProductCard key={item.id} product={item}/>
+          </TouchableOpacity>
           
         )}
         />
 
         </ScrollView>
+        ):(
+          <View style={{justifyContent:'center',alignItems:'center'}}>
+          <View style={{marginTop:50}}>
+          <ActivityIndicator size='large' color='black'/>
+          </View>
+          </View>
+        )}
         
     </View>
 
@@ -163,7 +182,7 @@ class Shop extends React.Component {
   );
 };
 
-  }
+  
   
 
   
@@ -283,4 +302,17 @@ cardDetails:{
 },
 });
 
-export default Shop;
+const mapStateToProps=state=>{
+  return{
+    products:state.shop.products,
+    cart:state.shop.cart
+  }
+}
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    loadCurrentItem:(item)=>dispatch(loadCurrentItem(item)),
+    retrieveProducts:()=>dispatch(retrieveProducts())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Shop);

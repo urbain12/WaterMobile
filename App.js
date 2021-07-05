@@ -1,22 +1,25 @@
-import React, { useMemo, useEffect } from 'react';
-import { Provider } from 'mobx-react';
+import React, { useMemo, useEffect, useState } from 'react';
+import { Provider } from 'react-redux';
 import { CryptoDetail, Transaction } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './screens/Login'
 import { useFonts } from 'expo-font';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, Text } from 'react-native';
 import Tabs from "./navigation/tabs";
 import { AuthContext } from './context/Context';
-import { store } from './models/index';
+import store from './redux/store';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Shop from './screens/Shop';
 import Cart from './screens/Cart';
 import query from './screens/Query';
 import momo from './screens/momopay';
+import ProductDetails from './screens/ProductDetails';
 import creditcard from './screens/creditcard';
 import Pay from './screens/Pay';
+import { checkConnected } from './function';
+import NoInternet from './components/NoInternet';
 import uhira from './screens/uhira';
 import inuma from './screens/inuma';
 import changepassword from './screens/changepassword';
@@ -28,6 +31,10 @@ const screenOptionStyle = {
 }
 
 const App = () => {
+  const [netState,setNetState]=useState(false)
+  checkConnected().then(res=>{
+    setNetState(res)
+  })
   const initialState = {
     isLoading: true,
     user_id: '',
@@ -126,9 +133,12 @@ const App = () => {
       }
       dispatch({ type: 'LOGOUT' })
     }
-  }), [])
+  }))
 
   useEffect(() => {
+
+    
+
     setTimeout(async () => {
       // setIsLoading(false);
       let token;
@@ -164,10 +174,11 @@ const App = () => {
     "Roboto-Regular": require('./assets/fonts/Roboto-Regular.ttf'),
   })
 
-  if (!loaded) {
-    return null;
-  }
-
+  if(netState===true){
+    if (!loaded) {
+      return null;
+    }
+  
     if(loginState.isLoading){
       return(
           <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
@@ -182,7 +193,7 @@ const App = () => {
     if(loginState.token !== null){
 
   return (
-    <Provider {...store}>
+    <Provider store={store}>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           <Stack.Navigator
@@ -203,6 +214,10 @@ const App = () => {
             <Stack.Screen
               name="momo"
               component={momo}
+            />
+            <Stack.Screen
+              name="ProductDetails"
+              component={ProductDetails}
             />
             <Stack.Screen
               name="creditcard"
@@ -262,6 +277,13 @@ const App = () => {
   }
 
   }
+  }else{
+    return (
+      <NoInternet check={checkConnected}/>
+    )
+  }
+
+    
 
 }
 

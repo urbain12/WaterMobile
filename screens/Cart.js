@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {inject, observer} from 'mobx-react';
 import {
   StyleSheet,
@@ -11,6 +11,7 @@ import {
   Image,
   ImageBackground,
   LogBox,
+  Alert,
   Animated
 } from "react-native";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather, Entypo } from "@expo/vector-icons";
@@ -20,52 +21,51 @@ import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from 'axios';
 import ProductCard from "../components/ProductCard";
+import { connect } from "react-redux";
+import { removeFromCart } from "../redux/shopping/shopping-actions";
 
-const BoxAnimated= Animated.createAnimatedComponent(View)
 
-@inject('productsStore')
-@inject('shoppingCartStore')
-@observer
-class Cart extends React.Component {
+
+const Cart = ({navigation,cart,removeFromCart}) => {
   // const [customer,setCustomer]=useState({})
   // const [quantity,setQuantity]=useState(0)
   // const [category,setCategory]=useState('')
   // const [opacity,setOpacity]=useState(new Animated.Value(1))
   // const [isHover,setIsHover]=useState(false)
+  const [cartCount,setCartCount]=useState(0)
+  const [totalAmount,setTotalAmount]=useState(0)
+  useEffect(()=>{
+    console.log(cart)
+   let count=0;
+   let amount=0
+   cart.forEach(item => {
+     count += item.qty;
+     amount += item.qty*item.price
+   });
+   setCartCount(count)
+   setTotalAmount(amount)
+  },[cart,cartCount,totalAmount,setCartCount,setTotalAmount])
+  
 
-  state={
-    quantity:0,
-    opacity:new Animated.Value(1),
-    qtyOpacity:new Animated.Value(0),
-    isHover:false,
-  }
-
-
+  const deleteAlert = (itemID) =>
+    Alert.alert(
+      "Delete",
+      "Are you sure you want to delete this item from your cart",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => removeFromCart(itemID) }
+      ]
+    );
   
  
   
-  // React.useEffect(() => {
-  //   LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  //   async function setInfo() {
-  //     const id = await AsyncStorage.getItem('user_id')
-  //     axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
-  //       setCustomer(res.data[0])
-  //     }).catch(err => {
-  //       console.log(err)
-  //     })
-  //     axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-  //       setCategory(res.data.category)
-  //     }).catch(err => {
-  //       console.log(err)
-  //     })
+  
 
-  //   }
-
-  //   setInfo()
-    
-  // }, []);
-
-  renderHeader=()=> {
+  const renderHeader=()=> {
     // const renderItem = ({ item, index }) => (
     //   <TouchableOpacity
     //     style={{
@@ -123,7 +123,7 @@ class Cart extends React.Component {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => this.props.navigation.navigate('Shop')}
+              onPress={() => navigation.navigate('Shop')}
             >
               <Ionicons
                 name="arrow-back"
@@ -157,16 +157,15 @@ class Cart extends React.Component {
 
 
 
-  render(){
+  
     return (
     
       <View>
     <View>
-         {this.renderHeader()}
-    {/* <Text style={{color:'black'}}>flskdjf    {JSON.stringify(this.props.productsStore.data)}</Text> */}
+         {renderHeader()}
         <ScrollView style={{height:'60%'}}>
         
-         {this.props.shoppingCartStore.totalProducts === 0 ? (
+         { cart.length === 0 ? (
              <View style={{width:'100%',height:400,alignItems:'center',justifyContent:'center'}}>
              <Text>Empty Cart</Text>
              </View>
@@ -174,46 +173,59 @@ class Cart extends React.Component {
              <View>
              <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10 }}>
             
-            <View style={{ width:'33%',alignItems:'center' }}>
+            <View style={{ width:'25%',alignItems:'center' }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Name</Text>
             </View>
 
-            <View style={{ width:'33%',alignItems:'center' }}>
+            <View style={{ width:'25%',alignItems:'center' }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Unity price</Text>
             </View>
 
-            <View style={{ width:'33%',alignItems:'center' }}>
+            <View style={{ width:'30%',alignItems:'center' }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Total</Text>
             </View>
+
+            <View style={{ width:'20%',alignItems:'center' }}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', }}></Text>
+            </View>
           </View>
-                 {this.props.shoppingCartStore.products.map(product => (
-                    <View style={{ width:'92%',height: 60, borderTopColor: '#707070', borderTopWidth: 0.5, flexDirection: 'row', padding: 10 ,alignSelf:'center'}}>
+                 {cart.map(product => (
+                    <View style={{ width:'100%',height: 60, borderTopColor: '#707070', borderTopWidth: 0.5, flexDirection: 'row', padding: 10 ,alignSelf:'center'}}>
                         
-                        <View style={{ width:'33%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{product.Title}</Text>
-                        <Text style={{ color: '#707070' }}>{product.cartQuantity} items</Text>
+                        <View style={{ width:'25%',alignItems:'center' }}>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{product.name}</Text>
+                        <Text style={{ color: '#707070' }}>{product.qty} items</Text>
                         </View>
 
-                        <View style={{ width:'33%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{product.Amount} Rwf</Text>
+                        <View style={{ width:'25%',alignItems:'center' }}>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{product.price} Rwf</Text>
                         </View>
 
-                        <View style={{ width:'33%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "green", }}>{product.totalPrice} Rwf</Text>
+                        <View style={{ width:'30%',alignItems:'center' }}>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: "green", }}>{product.total} Rwf</Text>
+                        </View>
+
+                        <View style={{ width:'20%',alignItems:'center' }}>
+                        <TouchableOpacity onPress={()=>{deleteAlert(product.id)}}>
+                        <AntDesign name="delete" size={24} color="red" />
+                        </TouchableOpacity>
                         </View>
                     </View>
                  ))}
-                 <View style={{ width:'92%',height: 60, borderTopColor: '#707070', borderTopWidth: 0.5, flexDirection: 'row', padding: 10 ,alignSelf:'center'}}>
+                 <View style={{ width:'100%',height: 60, borderTopColor: '#707070', borderTopWidth: 0.5, flexDirection: 'row', padding: 10 ,alignSelf:'center'}}>
                         
-                        <View style={{ width:'33%',alignItems:'center' }}>
+                        <View style={{ width:'25%',alignItems:'center' }}>
                         <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Total:</Text>
                         </View>
 
-                        <View style={{ width:'33%',alignItems:'center' }}>
+                        <View style={{ width:'25%',alignItems:'center' }}>
+                        </View>
+
+                        <View style={{ width:'17%',alignItems:'center' }}>
                         </View>
 
                         <View style={{ width:'33%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#01B0F1", }}>{this.props.shoppingCartStore.totalAmount} Rwf</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#01B0F1", }}>{totalAmount} Rwf</Text>
                         </View>
                     </View>
 
@@ -227,7 +239,7 @@ class Cart extends React.Component {
 
         </ScrollView>
           
-        {this.props.shoppingCartStore.totalProducts > 0 && (
+        {cartCount > 0 && (
             <TouchableOpacity
             style={styles.signIn}
             // onPress={() => { loginHandle(data.phone, data.password) }}
@@ -253,7 +265,7 @@ class Cart extends React.Component {
   );
 };
 
-  }
+  
   
 
   
@@ -380,4 +392,15 @@ signIn: {
 },
 });
 
-export default Cart;
+const mapDispatchToProps=(dispatch)=>{
+  return{
+      removeFromCart:(id)=>dispatch(removeFromCart(id)),
+  }
+  }
+
+const mapStateToProps=state=>{
+  return  {
+    cart:state.shop.cart,
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Cart);

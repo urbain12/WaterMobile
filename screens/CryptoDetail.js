@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
     StyleSheet,
     View,
@@ -18,13 +18,195 @@ import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from 'axios';
 
-const CryptoDetail = ({ navigation, }) => {
+
+
+const CryptoDetail = ({ navigation }) => {
+    const [balance,setBalance]=useState(0)
+    useEffect(()=>{
+        async function setInfo() {
+            const id = await AsyncStorage.getItem('user_id')
+            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+                setBalance(res.data.balance)
+            }).catch(err => {
+                console.log(err)
+            })
+      
+          }
+      
+          setInfo()
+        
+    },[])
     const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
     const [customer, setCustomer] = useState({})
     const [category, setCategory] = useState('')
+    const [days, setDays] = useState(0)
+    const [days2, setDays2] = useState(0)
     const [transactionHistory, setTransactionHistory] = useState([]);
 
     const windowWidth = Dimensions.get('window').width
+
+    const getInstalmentDays = () => {
+        var sub_date='2021-06-15'
+        var date=new Date(sub_date)
+        var today=new Date()
+        var year=new Date().getFullYear()
+        var today_month=today.getMonth()+1
+        var day=today.getDate()
+        var sub_day=date.getDate()
+        if(day<=sub_day){
+            var end_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+sub_day).slice(-2))
+            var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+            var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+            console.log(diffDays)
+            setDays2(diffDays)
+        }
+        else{
+            var end_month=today_month+1
+            var end_date= new Date(year+'-'+('0'+end_month).slice(-2)+'-'+('0'+sub_day).slice(-2))
+            var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+            var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+            console.log(diffDays)
+            setDays2(diffDays)
+
+        }
+    }
+
+    const getFilterDays = () => {
+        var sub_date='2021-06-15'
+        var date=new Date(sub_date)
+        var today=new Date()
+        var year=new Date().getFullYear()
+        var months=[1,2,3,4,5,6,7,8,9,10,11,12]
+        var paymentMonths=[]
+        var month=date.getMonth()+1
+        var today_month=today.getMonth()+1
+        var day=today.getDate()
+        var sub_day=date.getDate()
+        // console.log(parseInt((today-date)/(1000 * 60 * 60 * 24)))
+        for (var i=0; i<months.length;i++){
+            if(((months[i]-month)%3)===0){
+                paymentMonths.push(months[i])
+            }
+        }
+        if(today_month>=paymentMonths[0]&& today_month<paymentMonths[1]){
+            if(today_month===paymentMonths[0]){
+                if(day<=sub_day){
+                    var end_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                }
+                else{
+                    var end_date= new Date(year+'-'+('0'+paymentMonths[1]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                    console.log('niho bigitangura')
+                }
+            }
+            else{
+                var end_date= new Date(year+'-'+('0'+paymentMonths[1]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                console.log(diffDays)
+                setDays(diffDays)
+                // console.log('first')
+            }
+            console.log('first')
+        }
+        
+        else if(today_month>=paymentMonths[1]&& today_month<paymentMonths[2]){
+            if(today_month===paymentMonths[1]){
+                if(day<=sub_day){
+                    var end_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                }
+                else{
+                    var end_date= new Date(year+'-'+('0'+paymentMonths[2]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                    console.log('niho bigitangura')
+                }
+            }
+            else{
+                var end_date= new Date(year+'-'+('0'+paymentMonths[2]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                console.log(diffDays)
+                setDays(diffDays)
+                // console.log('second')
+            }
+            console.log('second')
+            
+        }
+
+        else if(today_month>=paymentMonths[2]&& today_month<paymentMonths[3]){
+            if(today_month===paymentMonths[2]){
+                if(day<=sub_day){
+                    var end_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                }
+                else{
+                    var end_date= new Date(year+'-'+('0'+paymentMonths[3]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                    console.log('niho bigitangura')
+                }
+            }
+            else{
+                var end_date= new Date(year+'-'+('0'+paymentMonths[3]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                console.log(diffDays)
+                setDays(diffDays)
+                // console.log('third')
+            }
+            console.log('third')
+        }
+        else{
+            if(today_month===paymentMonths[3]){
+                if(day<=sub_day){
+                    var end_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                }
+                else{
+                    var my_year=year+1
+                    var end_date= new Date(my_year+'-'+('0'+paymentMonths[0]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                    var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                    var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                    console.log(diffDays)
+                    setDays(diffDays)
+                    console.log('niho bigitangura')
+                }
+            }
+            else{
+                var my_year=year+1
+                var end_date= new Date(my_year+'-'+('0'+paymentMonths[0]).slice(-2)+'-'+('0'+sub_day).slice(-2))
+                var start_date= new Date(year+'-'+('0'+today_month).slice(-2)+'-'+('0'+day).slice(-2))
+                var diffDays= parseInt((end_date-start_date)/(1000 * 60 * 60 * 24))
+                console.log(diffDays)
+                setDays(diffDays)
+                // console.log('second')
+            }
+            console.log('ntanakimwe')
+        }
+        console.log(paymentMonths)
+    }
 
     React.useEffect(() => {
         LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -49,6 +231,8 @@ const CryptoDetail = ({ navigation, }) => {
         }
 
         setInfo()
+        getFilterDays()
+        getInstalmentDays()
 
     }, []);
 
@@ -278,13 +462,23 @@ const CryptoDetail = ({ navigation, }) => {
                     >
                         {/* Currency */}
                         <View style={{ flex: 1, borderRightWidth: 2, borderRightColor: "white" }}>
-                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>23 Days</Text>
+                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>{days > 0? (
+                                <Text>{days} Days</Text>
+                            ):(
+                                <Text>change your filter</Text>
+                            )} </Text>
                             <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
                         </View>
 
                         {/* Amount */}
                         <View style={{ flex: 1, marginLeft: 20 }}>
-                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>48 Days</Text>
+                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
+                            {days2 > 0? (
+                                <Text>{days2} Days</Text>
+                            ):(
+                                <Text>Day of payment</Text>
+                            )} 
+                            </Text>
                             <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                         </View>
                     </View>
@@ -337,7 +531,27 @@ const CryptoDetail = ({ navigation, }) => {
             </TouchableOpacity>
                            
                 </View>
+                <TouchableOpacity
+            style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: SIZES.padding * 1,
+                marginHorizontal: SIZES.padding,
+                paddingVertical: SIZES.padding,
+                paddingHorizontal: SIZES.radius,
+                backgroundColor: COLORS.white,
+                borderRadius: SIZES.radius,
+                ...styles.shadow
+            }}
+        >
+           
 
+            <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <Text style={{color:'green'}}>{balance} Rwf</Text> </Text>
+            </View>
+
+            
+        </TouchableOpacity>
 
                 {renderNotice()}
                 <View

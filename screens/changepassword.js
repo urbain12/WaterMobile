@@ -19,14 +19,25 @@ import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
 
 
-const Momopay = ({ navigation }) => {
+const ChangePassword = ({ navigation }) => {
+    const [user_id,setUserId]=useState('')
     const [oldpassword, setoldpassword] = useState('')
     const [newpassword, setnewpassword] = useState('')
     const [confirmpassword, setconfirmpassword] = useState('')
     const [loading, setloading] = useState('')
 
 
-
+    useEffect(()=>{
+        async function setInfo() {
+            const id = await AsyncStorage.getItem('user_id')
+            
+            setUserId(id)
+      
+          }
+      
+          setInfo()
+        
+    },[])
 
 
         const handleSubmit = (e) => {
@@ -36,6 +47,7 @@ const Momopay = ({ navigation }) => {
            else{setloading(true)
             e.preventDefault()
             const postObj = JSON.stringify({
+                'user_id':JSON.stringify(user_id),
                 'old_password': oldpassword,
                 'new_password': newpassword,
     
@@ -52,7 +64,7 @@ const Momopay = ({ navigation }) => {
                 // Authorization: `Token ${my_token}`,
             };
 
-            axios.post('http://wateraccess.t3ch.rw:8234/api/change-password/', postObj).then((res) => {
+            axios.put('http://wateraccess.t3ch.rw:8234/api/change-password/', postObj).then((res) => {
                 console.log(res.status)
                 alert('Your request is submitted')
                 navigation.navigate('Settings')
@@ -192,4 +204,4 @@ const Momopay = ({ navigation }) => {
         },
     });
 
-    export default Momopay;
+    export default ChangePassword;
