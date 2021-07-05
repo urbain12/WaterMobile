@@ -20,6 +20,7 @@ import Pay from './screens/Pay';
 import uhira from './screens/uhira';
 import inuma from './screens/inuma';
 import changepassword from './screens/changepassword';
+import Notifications from './screens/notifications'
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -235,8 +236,12 @@ const App = () => {
               component={inuma}
             />
             <Stack.Screen
-              name="changepassword"
+              name="changepaNotificationsssword"
               component={changepassword}
+            />
+            <Stack.Screen
+              name="Notifications"
+              component={Notifications}
             />
             <Stack.Screen
               name="Transaction"

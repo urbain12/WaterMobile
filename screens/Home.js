@@ -394,8 +394,9 @@ const Home = ({ navigation }) => {
 
         </ScrollView>
 
-
+        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
         {renderAlert()}
+        </TouchableOpacity>
         {renderNotice()}
         {renderTransactionHistory()}
       </View>

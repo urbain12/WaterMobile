@@ -9,9 +9,10 @@ import {
 
 import { COLORS, SIZES, FONTS, icons } from "../constants"
 
-const PriceAlert = ({ customContainerStyle }) => {
+const PriceAlert = ({ customContainerStyle,navigation }) => {
     return (
-        <TouchableOpacity
+        <View
+        
             style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -47,7 +48,7 @@ const PriceAlert = ({ customContainerStyle }) => {
                     tintColor: COLORS.gray
                 }}
             />
-        </TouchableOpacity>
+        </View>
     )
 }
 
