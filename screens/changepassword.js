@@ -19,7 +19,7 @@ import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
 
 
-const ChangePassword = ({ navigation }) => {
+const Changepassword = ({ navigation }) => {
     const [user_id,setUserId]=useState('')
     const [oldpassword, setoldpassword] = useState('')
     const [newpassword, setnewpassword] = useState('')
@@ -204,4 +204,4 @@ const ChangePassword = ({ navigation }) => {
         },
     });
 
-    export default ChangePassword;
+    export default Changepassword;

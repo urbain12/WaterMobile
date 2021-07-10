@@ -251,7 +251,7 @@ const App = () => {
               component={inuma}
             />
             <Stack.Screen
-              name="changepaNotificationsssword"
+              name="changepassword"
               component={changepassword}
             />
             <Stack.Screen
