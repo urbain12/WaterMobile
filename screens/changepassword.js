@@ -17,6 +17,8 @@ import {
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
+import AsyncStorage from "@react-native-community/async-storage";
+
 
 
 const Changepassword = ({ navigation }) => {
@@ -47,7 +49,7 @@ const Changepassword = ({ navigation }) => {
            else{setloading(true)
             e.preventDefault()
             const postObj = JSON.stringify({
-                'user_id':JSON.stringify(user_id),
+                'user_id':user_id,
                 'old_password': oldpassword,
                 'new_password': newpassword,
     
