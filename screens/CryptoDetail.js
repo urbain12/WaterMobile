@@ -553,7 +553,7 @@ const CryptoDetail = ({ navigation }) => {
            
 
             <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <Text style={{color:'green'}}>{format(balance)} Rwf</Text> </Text>
+                <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <git Text style={{color:'green'}}>{format(balance)} Rwf</git> </Text>
             </View>
 
             
