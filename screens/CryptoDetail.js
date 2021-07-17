@@ -36,6 +36,12 @@ const CryptoDetail = ({ navigation }) => {
           setInfo()
         
     },[])
+    const format = (amount) =>{
+        return Number(amount)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+    
+    };
     const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
     const [customer, setCustomer] = useState({})
     const [category, setCategory] = useState('')
@@ -547,7 +553,7 @@ const CryptoDetail = ({ navigation }) => {
            
 
             <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <Text style={{color:'green'}}>{balance} Rwf</Text> </Text>
+                <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <Text style={{color:'green'}}>{format(balance)} Rwf</Text> </Text>
             </View>
 
             
