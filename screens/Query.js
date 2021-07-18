@@ -18,7 +18,7 @@ import {
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
-
+import {Picker} from '@react-native-picker/picker';
 
 const Transaction = ({ navigation }) => {
   const [Names, setNames] = useState('')
@@ -29,6 +29,7 @@ const Transaction = ({ navigation }) => {
   const [Sector, setSector] = useState('')
   const [customer, setCustomer] = useState({})
   const [Cell, setCell] = useState('')
+  const [service, setservice] = useState('')
 
 
   useEffect(()=>{
@@ -54,6 +55,7 @@ const Transaction = ({ navigation }) => {
     const postObj = JSON.stringify({
       'Names': names,
       'Message': Message,
+      'service': service,
       'phonenumber': customer.user.phone,
       'Province': customer.Province,
       'District': customer.District,
@@ -100,92 +102,23 @@ const Transaction = ({ navigation }) => {
       >
         <View>
           <TouchableOpacity activeOpacity={1}>
-            {/* <TextInput
+            
+              <Picker
               style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 35,
-                width: "100%",
-                marginTop: 20,
-                textAlign: "center",
+                marginTop:-50
               }}
-              name="Names"
-              placeholder="Names"
-              onChangeText={text => setNames(text)}
-            />
-            <TextInput
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 35,
-                width: "100%",
-                marginTop: 20,
-                textAlign: "center",
-              }}
-              name="Names"
-              placeholder="Phone Number"
-              keyboardType="numeric"
-              onChangeText={text => setPhonenumber(text)}
-            />
-            <TextInput
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 35,
-                width: "100%",
-                marginTop: 20,
-                textAlign: "center",
-              }}
-              name="Names"
-              placeholder="Province"
-              onChangeText={text => setProvince(text)}
-            />
-            <TextInput
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 35,
-                width: "100%",
-                marginTop: 20,
-                textAlign: "center",
-              }}
-              name="Names"
-              placeholder="District"
-              onChangeText={text => setDistrict(text)}
-            />
-            <TextInput
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 35,
-                width: "100%",
-                marginTop: 20,
-                textAlign: "center",
-              }}
-              name="Names"
-              placeholder="Sector"
-              onChangeText={text => setSector(text)}
-            />
-            <TextInput
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 35,
-                width: "100%",
-                marginTop: 20,
-                marginBottom: 10,
-                textAlign: "center",
-              }}
-              name="Names"
-              placeholder="Cell"
-              onChangeText={text => setCell(text)}
-            /> */}
+                        selectedValue={service}
+                        onValueChange={(val) => { setservice(val) }}
+                      >
+                        <Picker.Item label="Select Service" value="" />
+                        <Picker.Item value="Maintenance" label="Maintenance" />
+                        <Picker.Item value="Claims" label="Claims" />
+                        <Picker.Item value="Query" label="query" />
+                      </Picker>
+
+
+            
+           
             <TextInput
               style={{
                 borderColor: "gray",
@@ -193,7 +126,7 @@ const Transaction = ({ navigation }) => {
                 borderRadius: 10,
                 height:105,
                 width: "100%",
-                marginTop: 20,
+                marginTop: 10,
                 marginBottom: 10,
                 textAlign: "center",
               }}

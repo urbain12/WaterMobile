@@ -62,7 +62,7 @@ const Changepassword = ({ navigation }) => {
             axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
             axios.defaults.xsrfCookieName = "csrftoken";
             axios.defaults.headers = {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
                 // Authorization: `Token ${my_token}`,
             };
 
@@ -70,8 +70,8 @@ const Changepassword = ({ navigation }) => {
                 console.log(res.status)
                 alert('Your request is submitted')
                 navigation.navigate('Settings')
-            }).catch(err => {
-                console.log(err)
+            }).catch(error => {
+                console.log(error.message)
             })
             
             setTimeout(() => {
