@@ -24,6 +24,7 @@ import uhira from './screens/uhira';
 import inuma from './screens/inuma';
 import changepassword from './screens/changepassword';
 import Notifications from './screens/notifications'
+import Responses from './screens/Responses';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -218,6 +219,10 @@ const App = () => {
             <Stack.Screen
               name="ProductDetails"
               component={ProductDetails}
+            />
+            <Stack.Screen
+              name="Responses"
+              component={Responses}
             />
             <Stack.Screen
               name="creditcard"

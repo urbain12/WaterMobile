@@ -27,13 +27,95 @@ import { removeFromCart } from "../redux/shopping/shopping-actions";
 
 
 const Cart = ({navigation,cart,removeFromCart}) => {
-  // const [customer,setCustomer]=useState({})
-  // const [quantity,setQuantity]=useState(0)
-  // const [category,setCategory]=useState('')
-  // const [opacity,setOpacity]=useState(new Animated.Value(1))
-  // const [isHover,setIsHover]=useState(false)
+  const [cname, setNames] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [msisdn, setPhonenumber] = useState('')
+  const [Email, setEmail] = useState('')
+  const [customer, setCustomer] = useState('')
+  const [cnumber, setcnumber] = useState('07542121')
+  const [details, setdetails] = useState('Water-Access-Rwanda')
+  const [pmethod, setpmethod] = useState('cc')
   const [cartCount,setCartCount]=useState(0)
   const [totalAmount,setTotalAmount]=useState(0)
+
+
+  const handleSubmit = (e) => {
+    console.log("vip?")
+    setLoading(true)
+    e.preventDefault();
+
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.headers = {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${my_token}`,
+    };
+
+    const postObj2 = JSON.stringify({
+      'customerID':customer.id,
+      'order': cart,
+
+
+  })
+  console.log(postObj2)
+
+    axios.post('http://wateraccess.t3ch.rw:8234/create_order/', postObj2).then((res) => {
+        console.log(res.status)
+        console.log('order created')
+    }).catch(err => {
+        console.log(err)
+    })
+
+    const options = {
+        headers: {
+            "Content-Type": "application/json",
+            "app-type": "none",
+            "app-version": "v1",
+            "app-device": "Postman",
+            "app-device-os": "Postman",
+            "app-device-id": "0",
+            "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
+        }
+    };
+    const postObj = new FormData();
+
+    postObj.append('msisdn', customer.user.phone)
+    postObj.append('amount', totalAmount)
+    postObj.append('cname', customer.FirstName + ' ' + customer.LastName)
+    postObj.append('email', customer.user.email)
+    postObj.append('details', details)
+    postObj.append('cnumber', cnumber)
+    postObj.append('pmethod', pmethod)
+
+    axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', postObj, options).then(res => {
+        // if (res.status === 200) {
+        const my_data = JSON.parse(res.data)
+
+
+        console.log('success')
+        console.log(res.data)
+        console.log(my_data.url)
+        console.log(postObj)
+        if (my_data.success == 1) {
+            navigation.navigate('Pay', { my_url: my_data.url })
+        }
+        else {
+            alert('Amount required')
+        }
+        // }
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+            alert('NOT SENT!')
+        }
+    })
+    setTimeout(() => {
+        setLoading(false)
+    }, 5000)
+
+};
+
+
   const format = (amount) =>{
     return Number(amount)
     .toFixed(2)
@@ -51,6 +133,19 @@ const Cart = ({navigation,cart,removeFromCart}) => {
    setCartCount(count)
    setTotalAmount(amount)
   },[cart,cartCount,totalAmount,setCartCount,setTotalAmount])
+
+  useEffect(() => {
+    async function setInfo() {
+      const id = await AsyncStorage.getItem('user_id')
+      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+          setCustomer(res.data[0])
+      }).catch(err => {
+          console.log(err)
+      })
+  }
+
+  setInfo()
+  }, [])
   
 
   const deleteAlert = (itemID) =>
@@ -248,7 +343,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
         {cartCount > 0 && (
             <TouchableOpacity
             style={styles.signIn}
-            // onPress={() => { loginHandle(data.phone, data.password) }}
+            onPress={(e) => handleSubmit(e) }
         >
             <View
                 style={{ backgroundColor: "#01B0F1", width: "50%", height: "100%", alignItems: "center", borderRadius: 10, justifyContent:'center'}}

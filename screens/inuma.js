@@ -380,22 +380,14 @@ const CryptoDetail = ({ navigation, }) => {
                         </TouchableOpacity>
 
                         {/* Amount */}
-                        <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }}>
+                        <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }} onPress={() => navigation.navigate("Responses")}>
 
                             <View >
                                 <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                    <Image
-                                        source={icons.pipe}
-                                        resizeMode="contain"
-                                        style={{
-                                            width: 75,
-                                            height: 120,
-
-                                        }}
-                                    />
+                                <FontAwesome name="envelope-open-o" size={70} color="white" />
                                 </View>
-                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Maintanance</Text>
+                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Responses</Text>
                             </View>
                         </TouchableOpacity>
 
