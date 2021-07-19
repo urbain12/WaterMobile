@@ -7,10 +7,7 @@ import axios from 'axios';
 
 
 const Responses = (props) => {
-    const [responses,setResponses]=useState([{
-        'queryDetails':'Amakuru? Nashaka kubaza niba filter zigihari!!',
-        'queryResponse':'Ni meza!! Filter zirahari wakora order'
-    }])
+    const [responses,setResponses]=useState([])
     useEffect(()=>{
         const options = {
             headers: {
@@ -24,11 +21,11 @@ const Responses = (props) => {
               "format": "json"
             }
           };
-        //   axios.get(`http://war.t3ch.rw:8231/prop_man/api/web/index.php?r=v1/app/get-query-by-tenant&tenantID=${props.mystate.tenant_info.tenantID}`, options).then(res => {
-        //     console.log(res.data)
-        //     const my_responses = res.data.data
-        //     setResponses(my_responses);
-        //   });
+          axios.get(`http://wateraccess.t3ch.rw:8234/Request/list/`).then(res => {
+            console.log(res.data)
+            const my_responses = res.data
+            setResponses(my_responses);
+          });
     },[])
     return(
     <View style={{flex:1}}>
@@ -74,7 +71,7 @@ const Responses = (props) => {
       <View>
       <View style={styles.container}>
             <View style={styles.gradient}>
-                <Text style={styles.text}>{response.queryDetails} </Text>
+                <Text style={styles.text}>{response.Message} </Text>
             </View>
             <Text style={styles.duration}>12:34 AM</Text>
         </View>
@@ -82,7 +79,7 @@ const Responses = (props) => {
         <View style={styles.container2}>
           <View>
           <View style={styles.gradient2} >
-                <Text style={styles.text}>{JSON.stringify(response.queryResponse)}</Text>
+                <Text style={styles.text}>{JSON.stringify(response.reply)}</Text>
             </View>
                <Text style={styles.duration2}>12:13 AM</Text>
           </View>
