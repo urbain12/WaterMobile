@@ -73,7 +73,6 @@ const Responses = (props) => {
             <View style={styles.gradient}>
                 <Text style={styles.text}>{response.Message} </Text>
             </View>
-            <Text style={styles.duration}>12:34 AM</Text>
         </View>
         
         <View style={styles.container2}>
@@ -81,7 +80,6 @@ const Responses = (props) => {
           <View style={styles.gradient2} >
                 <Text style={styles.text}>{JSON.stringify(response.reply)}</Text>
             </View>
-               <Text style={styles.duration2}>12:13 AM</Text>
           </View>
         </View>
         </View>
