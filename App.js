@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Shop from './screens/Shop';
 import Cart from './screens/Cart';
 import query from './screens/Query';
-import momo from './screens/momopay';
+import momo from './screens/Momopay';
 import ProductDetails from './screens/ProductDetails';
 import creditcard from './screens/creditcard';
 import Pay from './screens/Pay';
