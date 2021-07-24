@@ -79,7 +79,7 @@ const Momopay = ({ route,navigation}) => {
     postObj.append('payment_code', paymentcode)
 
 
-    axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
+    axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
       console.log('success')
       console.log(res.data)
       alert('Confirm with your phone and wait for approval')
@@ -90,7 +90,7 @@ const Momopay = ({ route,navigation}) => {
           console.log('not paid yet')
           const my_data=JSON.parse(res.data)
           console.log(my_data.transactionid)          
-          axios.get(`https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`,options).then(res => {
+          axios.get(`http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`,options).then(res => {
           const my_data2=JSON.parse(res.data)
           console.log(my_data2)  
           console.log(my_data2[0].payment_status)  

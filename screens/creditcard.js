@@ -71,7 +71,7 @@ const Creditcards = ({ navigation }) => {
         postObj.append('cnumber', cnumber)
         postObj.append('pmethod', pmethod)
 
-        axios.post('https://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', postObj, options).then(res => {
+        axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', postObj, options).then(res => {
             // if (res.status === 200) {
             const my_data = JSON.parse(res.data)
 
