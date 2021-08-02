@@ -127,13 +127,14 @@ const Momopay = ({ route,navigation}) => {
       }, 30000)
       
 
-      setTimeout(() => {
-        setLoading(false)
-    }, 5000)
+      
 
   
 
     })
+    setTimeout(() => {
+      setLoading(false)
+  }, 5000)
   }
     function renderTrade() {
 
@@ -199,7 +200,7 @@ const Momopay = ({ route,navigation}) => {
                         style={{ backgroundColor: "#01B0F1", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
                     >
                         {loading ? (
-                            <ActivityIndicator size='large' color='white' style={{marginTop:10}}/>
+                            <ActivityIndicator size='large' color='white' style={{margin:15}}/>
                         ) :
                             (
                                 <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Pay</Text>

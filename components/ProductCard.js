@@ -40,13 +40,13 @@ const ProductCard = ({product})=> {
     // }
 
         return(
-            <View key={product.id} style={{backgroundColor:'white',width:windowWidth,position:'relative',margin:10,alignItems:'center',justifyContent:'center',borderRadius:10}}>
+            <View key={product.id} style={{height:225,backgroundColor:'white',width:windowWidth,position:'relative',margin:10,alignItems:'center',justifyContent:'center',borderRadius:10}}>
           <View>
-            <View style={{marginBottom:10,marginTop:30}}>
+            <View style={{marginBottom:10,marginTop:30,alignItems:'center',justifyContent:'center'}}>
               <Image style={{width:120,height:100}} resizeMode="contain" source={{uri:product.image}}/>
             </View>
             <View>
-              <Text style={{fontWeight:'bold',color:'#01B0F1'}}>{product.name}:  <Text style={{fontWeight:'bold', color:'black'}}>{format(product.price)} Rwf</Text></Text>
+              <Text style={{fontWeight:'bold',color:'#01B0F1',margin:6}}>{product.name}:  <Text style={{fontWeight:'bold', color:'black'}}>{format(product.price)} Rwf</Text></Text>
             </View>
           </View>
           

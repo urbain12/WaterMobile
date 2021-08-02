@@ -59,7 +59,7 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
       <View
         style={{
           width: "100%",
-          height: 200,
+          height: 185,
           ...styles.shadow,
         }}
       >
@@ -144,8 +144,8 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
     
     return (
     
-      <View>
-    <View>
+      
+    <View style={{flex:1}}>
          {renderHeader()}
     {/* <Text style={{color:'black'}}>flskdjf    {JSON.stringify(this.props.productsStore.data)}</Text> */}
         {products.length>0 ? (
@@ -174,9 +174,7 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
     </View>
 
 
-    {/* shopping cart icon */}
     
-      </View>
         
         
   );

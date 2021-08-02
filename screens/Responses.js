@@ -78,7 +78,7 @@ const Responses = (props) => {
         <View style={styles.container2}>
           <View>
           <View style={styles.gradient2} >
-                <Text style={styles.text}>{JSON.stringify(response.reply)}</Text>
+                <Text style={styles.text}>{response.reply}</Text>
             </View>
           </View>
         </View>

@@ -23,9 +23,18 @@ const CryptoDetail = ({ navigation, }) => {
     const [customer, setCustomer] = useState({})
     const [category, setCategory] = useState('')
     const [transactionHistory, setTransactionHistory] = useState([]);
-
+    const [balance,setBalance]=useState(0)
+    
     const windowWidth = Dimensions.get('window').width
 
+
+    const format = (amount) =>{
+        return Number(amount)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+    
+    };
+    
     React.useEffect(() => {
         LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
         async function setInfo() {
@@ -37,6 +46,7 @@ const CryptoDetail = ({ navigation, }) => {
             })
             axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
+                setBalance(res.data.balance)
             }).catch(err => {
                 console.log(err)
             })
@@ -272,18 +282,15 @@ const CryptoDetail = ({ navigation, }) => {
                         style={{
                             flexDirection: 'row',
                             alignItems: 'center',
+                            justifyContent:'center',
                             marginTop: '2%',
                             marginLeft: 30
                         }}
                     >
-                        {/* Currency */}
-                        <View style={{ flex: 1, borderRightWidth: 2, borderRightColor: "white" }}>
-                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>23 Days</Text>
-                            <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
-                        </View>
+                    
 
                         {/* Amount */}
-                        <View style={{ flex: 1, marginLeft: 20 }}>
+                        <View>
                             <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>48 Days</Text>
                             <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                         </View>
@@ -337,7 +344,27 @@ const CryptoDetail = ({ navigation, }) => {
             </TouchableOpacity>
                            
                 </View>
+                <TouchableOpacity
+            style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: SIZES.padding * 1,
+                marginHorizontal: SIZES.padding,
+                paddingVertical: SIZES.padding,
+                paddingHorizontal: SIZES.radius,
+                backgroundColor: COLORS.white,
+                borderRadius: SIZES.radius,
+                ...styles.shadow
+            }}
+        >
+           
 
+            <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <Text style={{color:'green'}}>{format(balance)} Rwf</Text> </Text>
+            </View>
+
+            
+        </TouchableOpacity>
 
                 {renderNotice()}
                 <View

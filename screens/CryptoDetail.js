@@ -51,8 +51,8 @@ const CryptoDetail = ({ navigation }) => {
 
     const windowWidth = Dimensions.get('window').width
 
-    const getInstalmentDays = () => {
-        var sub_date='2021-06-15'
+    const getInstalmentDays = (my_date) => {
+        var sub_date=my_date
         var date=new Date(sub_date)
         var today=new Date()
         var year=new Date().getFullYear()
@@ -77,8 +77,8 @@ const CryptoDetail = ({ navigation }) => {
         }
     }
 
-    const getFilterDays = () => {
-        var sub_date='2021-06-15'
+    const getFilterDays = (my_date) => {
+        var sub_date=my_date
         var date=new Date(sub_date)
         var today=new Date()
         var year=new Date().getFullYear()
@@ -225,6 +225,8 @@ const CryptoDetail = ({ navigation }) => {
             })
             axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
+                getFilterDays(res.data.subscription_date.slice(0,10))
+                getInstalmentDays(res.data.subscription_date.slice(0,10))
             }).catch(err => {
                 console.log(err)
             })
@@ -237,8 +239,7 @@ const CryptoDetail = ({ navigation }) => {
         }
 
         setInfo()
-        getFilterDays()
-        getInstalmentDays()
+        
 
     }, []);
 

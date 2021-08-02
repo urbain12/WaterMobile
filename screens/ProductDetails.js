@@ -120,15 +120,11 @@ const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
                   <View>
                     <Text style={{
                         fontWeight:"bold",
-                        fontSize:25
-                    }}>{currentItem.name}</Text>
+                        fontSize:20
+                    }}>{currentItem.name}: Rwf {format(currentItem.price)}</Text>
                     
                   </View>
-                  <Text style={{
-                      fontSize:28,
-                      fontWeight:"bold",
-                      marginLeft:80
-                  }}>Rwf {format(currentItem.price)}</Text>
+                  
                 </View>
                 
 
@@ -143,13 +139,10 @@ const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
                     color:"#a4a4a9",
                     fontWeight:"bold",
                     fontSize:15,
-                    marginTop:10,
+                    marginVertical:10,
                     marginHorizontal:20,
                     textAlign:"justify"
-                }}>The most unique fire grilled patty,flame grilled, charred, seared, well-done.
-                 All natural beef, grass-feed beef, Fiery ,juicy, greacy. Delicious moist.
-                 The most unique fire grilled patty,flame grilled, charred, seared, well-done.
-                 All natural beef, grass-feed beef, Fiery ,juicy, greacy. Delicious moist</Text>
+                }}>{currentItem.description}</Text>
                </ScrollView> 
                
             </View>
