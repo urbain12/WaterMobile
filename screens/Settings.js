@@ -194,15 +194,26 @@ const Settings = ({ navigation }) => {
                             <Text style={{color:'#707070'}}>{customer.Province},{customer.District},{customer.Sector},{customer.Cell}</Text>
                         </View>
                     </View>
-                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
+                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}
+                    onPress={() => navigation.navigate("Notifications")}
+                    >
                         <View>
-                            <Entypo name="wallet" size={30}/>
+                            <Image 
+                            source={icons.notification_color}
+                            resizeMode="contain"
+                            style={{
+                              width:30 ,
+                              height: 30
+                            }}
+                            
+                            />
+
                         </View>
                         <View style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Wallet</Text>
-                            <Text style={{color:'#707070'}}>MTN mobile money and master card</Text>
+                            <Text style={{fontSize:18,fontWeight:'bold'}}>Notifications</Text>
+                            <Text style={{color:'#707070'}}>View your recent notifications</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                     <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
                         <View>
                             <Image resizeMode='contain' style={{width:30,height:30}} source={require('../assets/icons/subscription.png')}/>
@@ -213,6 +224,7 @@ const Settings = ({ navigation }) => {
                         </View>
                     </View>
                     <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}
+
                     onPress={() => navigation.navigate("query")}
                     >
                         <View>
