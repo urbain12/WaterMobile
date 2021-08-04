@@ -6,10 +6,14 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native';
-
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-community/async-storage";
 import { COLORS, SIZES, FONTS, icons } from "../constants"
 
 const PriceAlert = ({ customContainerStyle,navigation }) => {
+    const dismissNotification=  ()=>{
+        AsyncStorage.setItem('showNotification','false')
+    }
     return (
         <View
         
@@ -39,15 +43,15 @@ const PriceAlert = ({ customContainerStyle,navigation }) => {
                 <Text style={{ ...FONTS.h3 }}>Notifications</Text>
                 <Text stlye={{ color:"#707070" }}>See your notifications here!!!</Text>
             </View>
-
-            <Image
-                source={icons.right_arrow}
-                style={{
-                    width: 25,
-                    height: 25,
-                    tintColor: COLORS.gray
-                }}
-            />
+                <TouchableOpacity onPress={dismissNotification}>
+                   <FontAwesome
+              name="times"
+              size={20}
+              color="red"
+              resizeMode="contain"
+            /> 
+                </TouchableOpacity>
+            
         </View>
     )
 }

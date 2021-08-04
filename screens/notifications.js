@@ -72,7 +72,7 @@ const Notifications = ({ navigation }) => {
     }
 
 
-    function renderTrade() {
+    function renderTrade(message,date) {
 
         return (
             <View>
@@ -94,8 +94,8 @@ const Notifications = ({ navigation }) => {
                     <AntDesign name="infocirlceo" size={40} color="#35b9e6" style={{marginLeft:-10}} />          
                      </View>
                     <View style={{ width:"75%",}}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>05/07/2021</Text>
-                        <Text style={{ color: '#707070' }}>It is time to change your filters</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{date}</Text>
+                        <Text style={{ color: '#707070' }}>{message}</Text>
                     </View>
                     <TouchableOpacity style={{width:"10%",alignItems:"center",justifyContent:"center"}}>
                         <AntDesign name="close" size={30} color="red" />
@@ -116,7 +116,6 @@ const Notifications = ({ navigation }) => {
         );
     }
 
-    function renderTransactionHistory() { }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -124,8 +123,9 @@ const Notifications = ({ navigation }) => {
 
             <ScrollView>
                 <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-                    {renderTrade()}
-                    {renderTransactionHistory()}
+                    {renderTrade("It is time to change your filters","25/07/2021")}
+                    {renderTrade("Subscription paid successfully","02/08/2021")}
+                    {renderTrade("Order completed!!","03/08/2021")}
                 </View>
             </ScrollView>
         </SafeAreaView>

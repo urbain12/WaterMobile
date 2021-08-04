@@ -39,6 +39,7 @@ const App = () => {
   const initialState = {
     isLoading: true,
     user_id: '',
+    showAlert:true,
     token: null
   }
 
@@ -49,6 +50,7 @@ const App = () => {
           ...prevState,
           token: action.token,
           user_id: action.user_id,
+          showAlert:true,
           isLoading: false
         };
       case 'LOGIN':
@@ -56,6 +58,7 @@ const App = () => {
           ...prevState,
           token: action.token,
           user_id: action.user_id,
+          showAlert:true,
           isLoading: false
         };
       case 'LOGOUT':
@@ -63,6 +66,7 @@ const App = () => {
           ...prevState,
           token: null,
           user_id: null,
+          showAlert:true,
           isLoading: false
         };
     }
@@ -101,6 +105,8 @@ const App = () => {
 
             const items = [['token', JSON.stringify(res.data.token)],
             ['user_id', JSON.stringify(res.data.user_id)],
+            ['showAlert','true'],
+            ['showNotification','true']
             ]
             AsyncStorage.multiSet(items, () => {
               console.log('asyncstorage set successfully')

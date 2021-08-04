@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
       fontSize:11,
       marginTop:5,
       marginHorizontal:10,
-      fontFamily:'Montserrat_600SemiBold',
       alignSelf:'flex-end'
   },
   gradient:{
@@ -137,14 +136,12 @@ const styles = StyleSheet.create({
   },
   text:{
       color:'#fff',
-      fontFamily:'Montserrat_700Bold'
   },
   duration2:{
     color:'#b6b6b6',
     fontSize:11,
     marginHorizontal:10,
     marginTop:5,
-    fontFamily:'Montserrat_600SemiBold',
   },
   container2:{
     flexDirection:'row',
@@ -154,7 +151,6 @@ const styles = StyleSheet.create({
   message2:{
     fontSize:13,
     marginHorizontal:15,
-    fontFamily:'Montserrat_700Bold'
   }
 })
 

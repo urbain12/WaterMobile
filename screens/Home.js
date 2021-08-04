@@ -22,18 +22,44 @@ import axios from 'axios';
 const Home = ({ navigation }) => {
   const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
   const [customer, setCustomer] = useState({})
+  const [image, setImage] = useState({})
   const [category, setCategory] = useState('')
+  const [showAlert, setShowAlert] = useState('')
+  const [showNotification, setShowNotification] = useState('')
   const [transactionHistory, setTransactionHistory] = useState([]);
 
+  const dismissAlert=  ()=>{
+     AsyncStorage.setItem('showAlert','false').then(data=>{
+       AsyncStorage.getItem('showAlert').then(da=>{setShowAlert(da)})
+     })
+    
+  }
+
+  const dismissNotification=  ()=>{
+    AsyncStorage.setItem('showNotification','false').then(data=>{
+      AsyncStorage.getItem('showNotification').then(da=>{setShowNotification(da)})
+    })
+   
+ }
 
   const windowWidth = Dimensions.get('window').width
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
     async function setInfo() {
+      const show=  await AsyncStorage.getItem('showAlert')
+      const notification=  await AsyncStorage.getItem('showNotification')
+      console.log(show)
+      setShowAlert(show)
+      setShowNotification(notification)
       const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
+      }).catch(err => {
+        console.log(err)
+      })
+      axios.get(`http://wateraccess.t3ch.rw:8234/backgroundlist/`).then((res) => {
+        setImage(res.data[0])
       }).catch(err => {
         console.log(err)
       })
@@ -169,7 +195,19 @@ const Home = ({ navigation }) => {
 
         </View>
         <View style={{ width: '90%', marginLeft: "2%" }}>
+          <View style={{flexDirection:'row'}}>
+            <View style={{marginRight:'50%'}}>
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
+            </View>
+            <TouchableOpacity onPress={dismissAlert} style={{marginBottom:10}}>
+            <FontAwesome
+              name="times"
+              size={20}
+              color="white"
+              resizeMode="contain"
+            />
+            </TouchableOpacity>
+          </View>
 
           {category.toUpperCase() === 'AMAZI' ? (
 
@@ -212,7 +250,7 @@ const Home = ({ navigation }) => {
       <View style={{ flex: 1, paddingBottom: 130 }}>
 
         <View style={{ zIndex: 0, position: 'absolute' }}>
-          <Image resizeMode='cover' source={images.bannerhome} style={{ height: 250, width: windowWidth }} />
+          <Image resizeMode='cover' source={{uri:image.Image}} style={{ height: 250, width: windowWidth }} />
         </View>
         <View
           style={{
@@ -242,7 +280,7 @@ const Home = ({ navigation }) => {
 
 
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+        <ScrollView horizontal snapToInterval={180}  decelerationRate="fast" snapToAlignment={"center"} showsHorizontalScrollIndicator={false} >
 
 
 
@@ -395,9 +433,10 @@ const Home = ({ navigation }) => {
         </ScrollView>
 
         <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
-        {renderAlert()}
+        { showNotification=='true' && renderAlert()}
         </TouchableOpacity>
-        {renderNotice()}
+        {showAlert=='true' && renderNotice()}
+        
         {renderTransactionHistory()}
       </View>
     </ScrollView>

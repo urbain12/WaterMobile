@@ -175,7 +175,7 @@ const Tabs = ( {navigation} ) => {
                             
                               <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
                               
-                              onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
+                              // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
                               
                               >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
@@ -194,7 +194,7 @@ const Tabs = ( {navigation} ) => {
                             
                               <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
                               
-                              onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
+                              // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
                                                             >
                               <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
                                 <Image

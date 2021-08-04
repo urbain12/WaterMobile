@@ -17,6 +17,7 @@ import {
   TransactionHistory,
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS } from "../constants";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather, Entypo } from "@expo/vector-icons";
 import axios from 'axios';
 import {Picker} from '@react-native-picker/picker';
 
@@ -61,6 +62,7 @@ const Transaction = ({ navigation }) => {
       'District': customer.District,
       'Sector': customer.Sector,
       'Cell': customer.Cell,
+      'Language': customer.Language,
 
     })
     console.log(postObj)
@@ -102,10 +104,16 @@ const Transaction = ({ navigation }) => {
       >
         <View>
           <TouchableOpacity activeOpacity={1}>
+
+
+
+          <View style={{justifyContent:'center',alignItems:'center'}}>
+                <Text style={{fontSize:20,fontWeight:'bold'}}>Send Query</Text>
+              </View>
             
               <Picker
               style={{
-                marginTop:-50
+                marginTop:20
               }}
                         selectedValue={service}
                         onValueChange={(val) => { setservice(val) }}
@@ -152,7 +160,34 @@ const Transaction = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <HeaderBar right={false} />
+      <View
+            style={{
+              width: "100%",
+              flexDirection:"row",
+              paddingHorizontal: SIZES.padding,
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                width: 35,
+                height: 35,
+                marginTop:25,
+                marginBottom:20,
+                marginRight:'80%',
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onPress={() => navigation.navigate('Home')}
+            >
+              <Ionicons
+                name="arrow-back"
+                size={40}
+                color="black"
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+            
+          </View>
 
       <ScrollView>
         <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
