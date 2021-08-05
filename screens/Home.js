@@ -167,7 +167,46 @@ const Home = ({ navigation }) => {
   }
 
   function renderAlert() {
-    return <PriceAlert />;
+    return (
+      <View
+      
+          style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: SIZES.padding * 1,
+              marginHorizontal: SIZES.padding,
+              paddingVertical: SIZES.padding,
+              paddingHorizontal: SIZES.radius,
+              backgroundColor: COLORS.white,
+              borderRadius: SIZES.radius,
+              ...styles.shadow
+          }}
+      >
+          <Image
+              resizeMode='contain'
+              source={icons.notification_color}
+              style={{
+                  width: 30,
+                  height: 30
+              }}
+          />
+
+          <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+              <Text style={{ ...FONTS.h3 }}>Notifications</Text>
+              <Text stlye={{ color:"#707070" }}>See your notifications here!!!</Text>
+          </View>
+              <TouchableOpacity onPress={()=>{dismissNotification();
+      navigation.navigate('Home')}}>
+                 <FontAwesome
+            name="times"
+            size={30}
+            color="red"
+            resizeMode="contain"
+          /> 
+              </TouchableOpacity>
+          
+      </View>
+  )
   }
 
   function renderNotice() {
@@ -196,14 +235,14 @@ const Home = ({ navigation }) => {
         </View>
         <View style={{ width: '90%', marginLeft: "2%" }}>
           <View style={{flexDirection:'row'}}>
-            <View style={{marginRight:'50%'}}>
+            <View style={{marginRight:'48%'}}>
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
             </View>
             <TouchableOpacity onPress={dismissAlert} style={{marginBottom:10}}>
             <FontAwesome
               name="times"
-              size={20}
-              color="white"
+              size={30}
+              color="red"
               resizeMode="contain"
             />
             </TouchableOpacity>

@@ -43,7 +43,8 @@ const PriceAlert = ({ customContainerStyle,navigation }) => {
                 <Text style={{ ...FONTS.h3 }}>Notifications</Text>
                 <Text stlye={{ color:"#707070" }}>See your notifications here!!!</Text>
             </View>
-                <TouchableOpacity onPress={dismissNotification}>
+                <TouchableOpacity onPress={()=>{dismissNotification();
+        navigation.navigate('Home')}}>
                    <FontAwesome
               name="times"
               size={20}

@@ -112,7 +112,7 @@ const Login = ({ navigation }) => {
                         size={20}
                     />
                     <TextInput
-                        placeholder="+250--------"
+                        placeholder="07-------"
                         keyboardType="number-pad"
                         placeholderTextColor="#666666"
                         style={[styles.textInput, {
@@ -196,7 +196,7 @@ const Login = ({ navigation }) => {
                             style={{ backgroundColor: "#01B0F1", width: "100%", height: "100%", alignItems: "center", borderRadius: 10 }}
                         >
                             {data.loading ? (
-                                <ActivityIndicator size='large' color='white' />
+                                <ActivityIndicator size='large' color='white' style={{marginTop:10}} />
                             ) :
                                 (
                                     <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Sign In</Text>
