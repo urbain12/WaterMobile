@@ -282,7 +282,7 @@ const CryptoDetail = ({ navigation, }) => {
                             <Text style={{ ...FONTS.h3, color: 'green' }}>Your instalment is fully paid</Text>
                         ) : (
 
-                            <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <Text style={{ color: 'green' }}>{format(balance)} Rwf</Text> </Text>
+                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{JSON.stringify(format(balance)).substring(1,JSON.stringify(format(balance)).length-4)} Rwf</Text> </Text>
 
 
                         )}            

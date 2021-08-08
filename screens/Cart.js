@@ -312,39 +312,39 @@ const Cart = ({navigation,cart,removeFromCart}) => {
              <View>
              <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10 }}>
             
-            <View style={{ width:'25%',alignItems:'center' }}>
+            <View style={{ width:'35%',alignItems:'center' }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Name</Text>
             </View>
 
-            <View style={{ width:'25%',alignItems:'center' }}>
+            <View style={{ width:'30%',alignItems:'center' }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Unity price</Text>
             </View>
 
-            <View style={{ width:'30%',alignItems:'center' }}>
+            <View style={{ width:'25%',alignItems:'center' }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Total</Text>
             </View>
 
-            <View style={{ width:'20%',alignItems:'center' }}>
+            <View style={{ width:'10%',alignItems:'center' }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', }}></Text>
             </View>
           </View>
                  {cart.map(product => (
                     <View style={{ width:'100%',height: 60, borderTopColor: '#707070', borderTopWidth: 0.5, flexDirection: 'row', padding: 10 ,alignSelf:'center'}}>
                         
-                        <View style={{ width:'25%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{product.name}</Text>
+                        <View style={{ width:'35%',alignItems:'center' }}>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{product.name}:</Text>
                         <Text style={{ color: '#707070' }}>{product.qty} items</Text>
                         </View>
 
                         <View style={{ width:'25%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{format(product.price)} Rwf</Text>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold' }}>{JSON.stringify(format(product.price)).substring(1,JSON.stringify(format(product.price)).length-4)} Rwf</Text>
                         </View>
 
                         <View style={{ width:'30%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: "green", }}>{format(product.total)} Rwf</Text>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: "green", }}>{JSON.stringify(format(product.total)).substring(1,JSON.stringify(format(product.total)).length-4)} Rwf</Text>
                         </View>
 
-                        <View style={{ width:'20%',alignItems:'center' }}>
+                        <View style={{ width:'10%',alignItems:'center' }}>
                         <TouchableOpacity onPress={()=>{deleteAlert(product.id)}}>
                         <AntDesign name="delete" size={24} color="red" />
                         </TouchableOpacity>
@@ -364,7 +364,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
                         </View>
 
                         <View style={{ width:'33%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#01B0F1", }}>{format(totalAmount)} Rwf</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#01B0F1", }}>{JSON.stringify(format(totalAmount)).substring(1,JSON.stringify(format(totalAmount)).length-4)} Rwf</Text>
                         </View>
                     </View>
 

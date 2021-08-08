@@ -121,7 +121,7 @@ const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
                     <Text style={{
                         fontWeight:"bold",
                         fontSize:20
-                    }}>{currentItem.name}: Rwf {format(currentItem.price)}</Text>
+                    }}>{currentItem.name}:  {JSON.stringify(format(currentItem.price)).substring(1,JSON.stringify(format(currentItem.price)).length-4)} Rwf</Text>
                     
                   </View>
                   

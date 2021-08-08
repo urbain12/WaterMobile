@@ -40,7 +40,7 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
             </View>
 
             <View style={{ flexDirection: 'row', height: '100%', alignItems: 'center' }}>
-                <Text style={{ color: item.type == "B" ? COLORS.green : COLORS.black, ...FONTS.h3 }}>{format(item.Paidamount)} Rwf</Text>
+                <Text style={{ color: item.type == "B" ? COLORS.green : COLORS.black, ...FONTS.h3 }}>{JSON.stringify(format(item.Paidamount)).substring(1,JSON.stringify(format(item.Paidamount)).length-4)} Rwf</Text>
                 <Image
                     source={icons.right_arrow}
                     style={{

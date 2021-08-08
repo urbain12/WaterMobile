@@ -58,7 +58,6 @@ const CryptoDetail = ({ navigation, }) => {
             })
             axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
-                getFilterDays(res.data.subscription_date.slice(0, 10))
                 getInstalmentDays(res.data.subscription_date.slice(0, 10))
             }).catch(err => {
                 console.log(err)
@@ -312,7 +311,7 @@ const CryptoDetail = ({ navigation, }) => {
                             <Text style={{ ...FONTS.h3, color: 'green' }}>Your instalment is fully paid</Text>
                         ) : (
 
-                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{format(balance)} Rwf</Text> </Text>
+                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{JSON.stringify(format(balance)).substring(1,JSON.stringify(format(balance)).length-4)} Rwf</Text> </Text>
 
 
                         )}
