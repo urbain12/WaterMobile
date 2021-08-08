@@ -23,18 +23,19 @@ const CryptoDetail = ({ navigation, }) => {
     const [customer, setCustomer] = useState({})
     const [category, setCategory] = useState('')
     const [transactionHistory, setTransactionHistory] = useState([]);
-    const [balance,setBalance]=useState(0)
-    
+    const [balance, setBalance] = useState(0)
+    const [days2, setDays2] = useState(0)
+
     const windowWidth = Dimensions.get('window').width
 
 
-    const format = (amount) =>{
+    const format = (amount) => {
         return Number(amount)
-        .toFixed(2)
-        .replace(/\d(?=(\d{3})+\.)/g, '$&,')
-    
+            .toFixed(2)
+            .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
     };
-    
+
     React.useEffect(() => {
         LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
         async function setInfo() {
@@ -55,6 +56,13 @@ const CryptoDetail = ({ navigation, }) => {
             }).catch(err => {
                 console.log(err)
             })
+            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+                setCategory(res.data.category)
+                getFilterDays(res.data.subscription_date.slice(0, 10))
+                getInstalmentDays(res.data.subscription_date.slice(0, 10))
+            }).catch(err => {
+                console.log(err)
+            })
 
         }
 
@@ -62,132 +70,33 @@ const CryptoDetail = ({ navigation, }) => {
 
     }, []);
 
-    function renderHeader() {
-        const renderItem = ({ item, index }) => (
-            <TouchableOpacity
-                style={{
-                    width: 180,
-                    paddingVertical: SIZES.padding,
-                    paddingHorizontal: SIZES.padding,
-                    marginLeft: index == 0 ? SIZES.padding : 0,
-                    marginRight: SIZES.radius,
-                    borderRadius: 10,
-                    backgroundColor: COLORS.white,
-                }}
-                onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
-            >
-                <View style={{ flexDirection: "row" }}>
-                    <View style={{ marginLeft: SIZES.base }}>
-                        <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-                        <View style={{ marginLeft: 10, borderBottomWidth: 2, width: 40, borderBottomColor: "black" }}>
-                        </View>
+    const getInstalmentDays = (my_date) => {
+        var sub_date = my_date
+        var date = new Date(sub_date)
+        var today = new Date()
+        var year = new Date().getFullYear()
+        var today_month = today.getMonth() + 1
+        var day = today.getDate()
+        var sub_day = date.getDate()
+        if (day <= sub_day) {
+            var end_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
+            var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
+            var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
+            console.log(diffDays)
+            setDays2(diffDays)
+        }
+        else {
+            var end_month = today_month + 1
+            var end_date = new Date(year + '-' + ('0' + end_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
+            var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
+            var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
+            console.log(diffDays)
+            setDays2(diffDays)
 
-                        <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                            {item.code} <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
-                        </Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        );
-        const context = React.useContext(AuthContext)
-        return (
-            <View
-                style={{
-                    width: "100%",
-                    height: 290,
-                    ...styles.shadow,
-                }}
-            >
-                <ImageBackground
-                    source={images.modalbanner}
-                    resizeMode="cover"
-                    style={{
-                        flex: 1,
-                        alignItems: "center",
-                    }}
-                >
-                    {/* Header Bar */}
-                    <View
-                        style={{
-                            marginTop: SIZES.padding * 2,
-                            width: "100%",
-                            flexDirection: "row",
-                            paddingHorizontal: SIZES.padding,
-                        }}
-                    >
-                        <TouchableOpacity
-                            style={{
-                                width: 35,
-                                height: 35,
-                                marginRight: '80%',
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
-                            onPress={() => navigation.navigate('Home')}
-                        >
-                            <Ionicons
-                                name="arrow-back"
-                                size={40}
-                                color="white"
-                                resizeMode="contain"
-                            />
-                        </TouchableOpacity>
-
-                    </View>
-
-                    {/* Balance */}
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            marginTop: 30,
-                            marginLeft: 30
-                        }}
-                    >
-                        {/* Currency */}
-                        <View style={{ flex: 1, borderRightWidth: 2, borderRightColor: "white" }}>
-                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>23 Days</Text>
-                            <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
-                        </View>
-
-                        {/* Amount */}
-                        <View style={{ flex: 1, marginLeft: 20 }}>
-                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>48 Days</Text>
-                            <Text style={{ color: "white" }}>remaining to your next Installment</Text>
-                        </View>
-                    </View>
-
-                    {/* Trending */}
-                    <View
-                        style={{
-                            position: "absolute",
-                            bottom: "-30%",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                marginLeft: SIZES.padding,
-                                color: COLORS.white,
-                                ...FONTS.h2,
-                            }}
-                        >
-
-                        </Text>
-                        <FlatList
-                            contentContainerStyle={{ marginTop: SIZES.base }}
-                            data={trending}
-                            renderItem={renderItem}
-                            keyExtractor={(item) => `${item.id}`}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                        />
-                    </View>
-                </ImageBackground>
-            </View>
-        );
+        }
     }
 
-    
+
 
     function renderNotice() {
         return (
@@ -282,89 +191,135 @@ const CryptoDetail = ({ navigation, }) => {
                         style={{
                             flexDirection: 'row',
                             alignItems: 'center',
-                            justifyContent:'center',
+                            justifyContent: 'center',
                             marginTop: '2%',
                             marginLeft: 30
                         }}
                     >
-                    
+
 
                         {/* Amount */}
-                        <View>
-                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>48 Days</Text>
+                        <View style={{ flex: 1, marginLeft: 20 }}>
+                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
+                                {days2 > 0 ? (
+                                    <Text>{days2} Days</Text>
+                                ) : (
+                                    <Text>Day of payment</Text>
+                                )}
+                            </Text>
                             <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                         </View>
                     </View>
-                    
+
                     <TouchableOpacity
-              style={{
-                width: "80%",
-                paddingVertical: SIZES.padding,
-                paddingHorizontal: SIZES.padding,
-                marginLeft: 40,
-                marginTop:40,
-                marginRight: SIZES.radius,
-                borderRadius: 10,
-                backgroundColor: COLORS.white,
-                marginBottom: 15,
-                ...styles.shadow
+                        style={{
+                            width: "80%",
+                            paddingVertical: SIZES.padding,
+                            paddingHorizontal: SIZES.padding,
+                            marginLeft: 40,
+                            marginTop: 40,
+                            marginRight: SIZES.radius,
+                            borderRadius: 10,
+                            backgroundColor: COLORS.white,
+                            marginBottom: 15,
+                            ...styles.shadow
 
-              }}
-              
-            >
-              <View style={{ flexDirection: 'row',justifyContent:"center" }}>
+                        }}
 
-                <View style={{ marginLeft: SIZES.base }}>
-                  <Image source={require("../assets/images/Inuma.png")}
-                    style={{
-                      resizeMode: 'contain',
-                      width: "100%",
-                      height: 30,
+                    >
+                        <View style={{ flexDirection: 'row', justifyContent: "center" }}>
 
-                    }}
+                            <View style={{ marginLeft: SIZES.base }}>
+                                <Image source={require("../assets/images/Inuma.png")}
+                                    style={{
+                                        resizeMode: 'contain',
+                                        width: "100%",
+                                        height: 30,
 
-                  />
-                  <View style={{
-                    borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
-                    width: 50,
-                    marginLeft: 20,
-                    marginTop: 5
-                  }}>
+                                    }}
 
-                  </View>
+                                />
+                                <View style={{
+                                    borderBottomWidth: 2,
+                                    borderBottomColor: "#47315a",
+                                    width: 50,
+                                    marginLeft: 20,
+                                    marginTop: 5
+                                }}>
 
-                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    3,142 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
-                  </Text>
-                </View>
-              </View>
+                                </View>
+
+                                <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                                    3,142 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                                </Text>
+                            </View>
+                        </View>
 
 
-            </TouchableOpacity>
-                           
+                    </TouchableOpacity>
+
                 </View>
                 <TouchableOpacity
-            style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: SIZES.padding * 1,
-                marginHorizontal: SIZES.padding,
-                paddingVertical: SIZES.padding,
-                paddingHorizontal: SIZES.radius,
-                backgroundColor: COLORS.white,
-                borderRadius: SIZES.radius,
-                ...styles.shadow
-            }}
-        >
-           
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent:'center',
+                        marginLeft:40,
+                        marginTop: SIZES.padding * 1,
+                        paddingVertical: SIZES.padding,
+                        paddingHorizontal: SIZES.radius,
+                        backgroundColor: COLORS.white,
+                        borderRadius: SIZES.radius,
+                        width:"80%",
+                        ...styles.shadow
+                    }}
 
-            <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                <Text style={{ ...FONTS.h3 }}>Remaining Balance to pay : <Text style={{color:'green'}}>{format(balance)} Rwf</Text> </Text>
-            </View>
+                    onPress={() => navigation.navigate('paywater')}
 
-            
-        </TouchableOpacity>
+                >
+
+
+                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                       
+
+                     <Text style={{ color: 'green',alignSelf:"center",fontSize:20 }}>Pay water</Text> 
+
+
+                        
+                    </View>
+
+
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent:'center',
+                        marginLeft:40,
+                        marginTop: SIZES.padding * 1,
+                        paddingVertical: SIZES.padding,
+                        paddingHorizontal: SIZES.radius,
+                        backgroundColor: COLORS.white,
+                        borderRadius: SIZES.radius,
+                        width:"80%",
+                        ...styles.shadow
+                    }}
+                >
+
+
+                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                        {balance == 0 ? (
+                            <Text style={{ ...FONTS.h3, color: 'green' }}>Your instalment is fully paid</Text>
+                        ) : (
+
+                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{format(balance)} Rwf</Text> </Text>
+
+
+                        )}
+                    </View>
+
+
+                </TouchableOpacity>
 
                 {renderNotice()}
                 <View
@@ -412,7 +367,7 @@ const CryptoDetail = ({ navigation, }) => {
                             <View >
                                 <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                <FontAwesome name="envelope-open-o" size={70} color="white" />
+                                    <FontAwesome name="envelope-open-o" size={70} color="white" />
                                 </View>
                                 <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Responses</Text>
                             </View>
@@ -420,10 +375,10 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                         <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }}
-                        onPress={() => navigation.navigate("query")}
-                        
+                            onPress={() => navigation.navigate("query")}
+
                         >
-                            
+
 
                             <View >
                                 <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>

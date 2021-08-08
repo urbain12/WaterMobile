@@ -19,7 +19,7 @@ import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
 
 
-const Momopay = ({ route, navigation }) => {
+const Paywater = ({ route, navigation }) => {
   const [customer, setCustomer] = useState('')
   const [Amount, setAmount] = useState('')
   const [paidAmount, setPaidAmount] = useState('')
@@ -38,6 +38,7 @@ const Momopay = ({ route, navigation }) => {
       }).catch(error => {
         console.log(error.message)
       })
+
       axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
         setPaidAmount(res.data.paidAmount)
 
@@ -68,86 +69,82 @@ const Momopay = ({ route, navigation }) => {
   const handleSubmit = (e) => {
     setLoading(true)
     e.preventDefault();
-    if (Amount < paidAmount) {
-      alert('You are not allowed to pay amount below your monthly subscription payment!')
-      navigation.navigate('Home')
-    }
-    else {
-      const options = {
-        headers: {
-          "Content-Type": "application/json",
-          "app-type": "none",
-          "app-version": "v1",
-          "app-device": "Postman",
-          "app-device-os": "Postman",
-          "app-device-id": "0",
-          "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        "app-type": "none",
+        "app-version": "v1",
+        "app-device": "Postman",
+        "app-device-os": "Postman",
+        "app-device-id": "0",
+        "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
+      }
+    };
+    const postObj = new FormData();
+
+    postObj.append('phone_number', Phonenumber)
+    postObj.append('amount', Amount)
+    postObj.append('payment_code', paymentcode)
+
+
+    axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
+      console.log('success')
+      console.log(res.data)
+      alert('Confirm with your phone and wait for approval')
+      navigation.navigate('inuma')
+      const setint = setInterval(() => {
+        console.log('checking status')
+        if (!paid) {
+          console.log('not paid yet')
+          const my_data = JSON.parse(res.data)
+          console.log(my_data.transactionid)
+          axios.get(`http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`, options).then(res => {
+            const my_data2 = JSON.parse(res.data)
+            console.log(my_data2)
+            console.log(my_data2[0].payment_status)
+            if (my_data2[0].payment_status == "SUCCESSFUL") {
+
+              const postObj = JSON.stringify({
+                'Meternumber': customer.Meternumber.id,
+                'Amount': my_data2[0].amount,
+              })
+              console.log(postObj)
+              axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+              axios.defaults.xsrfCookieName = "csrftoken";
+              axios.defaults.headers = {
+                'Content-Type': 'application/json',
+                // Authorization: `Token ${my_token}`,
+              };
+
+              axios.post('http://wateraccess.t3ch.rw:8234/pay_Water/', postObj).then((res) => {
+                console.log(res.status)
+                alert('Water paid successfully!!')
+                setpaid(true)
+                clearInterval(setint)
+                navigation.navigate('inuma')
+
+              }).catch(error => {
+                console.log(error.message)
+              })
+
+            }
+
+          })
         }
-      };
-      const postObj = new FormData();
 
-      postObj.append('phone_number', Phonenumber)
-      postObj.append('amount', Amount)
-      postObj.append('payment_code', paymentcode)
-
-
-      axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
-        console.log('success')
-        console.log(res.data)
-        alert('Confirm with your phone and wait for approval')
-        navigation.navigate('Home')
-        const setint = setInterval(() => {
-          console.log('checking status')
-          if (!paid) {
-            console.log('not paid yet')
-            const my_data = JSON.parse(res.data)
-            console.log(my_data.transactionid)
-            axios.get(`http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`, options).then(res => {
-              const my_data2 = JSON.parse(res.data)
-              console.log(my_data2)
-              console.log(my_data2[0].payment_status)
-              if (my_data2[0].payment_status == "SUCCESSFUL") {
-
-                const postObj = JSON.stringify({
-                  'customerID': customer.id,
-                  'amount': my_data2[0].amount,
-                })
-                console.log(postObj)
-                axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-                axios.defaults.xsrfCookieName = "csrftoken";
-                axios.defaults.headers = {
-                  'Content-Type': 'application/json',
-                  // Authorization: `Token ${my_token}`,
-                };
-
-                axios.post('http://wateraccess.t3ch.rw:8234/pay_subscription/', postObj).then((res) => {
-                  console.log(res.status)
-                  alert('Subscription paid successfully!!')
-                  setpaid(true)
-                  clearInterval(setint)
-                  navigation.navigate('Home')
-
-                }).catch(error => {
-                  console.log(error.message)
-                })
-
-              }
-
-            })
-          }
-
-        }, 30000)
+      }, 30000)
 
 
 
 
 
 
-      })
-      setTimeout(() => {
-        setLoading(false)
-      }, 5000)
-    }
+    })
+    setTimeout(() => {
+      setLoading(false)
+    }, 5000)
+
   }
   function renderTrade() {
 
@@ -165,7 +162,7 @@ const Momopay = ({ route, navigation }) => {
         <View>
           <TouchableOpacity activeOpacity={1}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Pay instalment</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Pay Water</Text>
             </View>
             <TextInput
               style={{
@@ -264,4 +261,4 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
 });
-export default Momopay;
+export default Paywater;

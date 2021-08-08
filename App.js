@@ -25,6 +25,7 @@ import inuma from './screens/inuma';
 import changepassword from './screens/changepassword';
 import Notifications from './screens/notifications'
 import Responses from './screens/Responses';
+import paywater from './screens/paywater';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -221,6 +222,10 @@ const App = () => {
             <Stack.Screen
               name="momo"
               component={momo}
+            />
+             <Stack.Screen
+              name="paywater"
+              component={paywater}
             />
             <Stack.Screen
               name="ProductDetails"

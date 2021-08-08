@@ -197,12 +197,7 @@ const Home = ({ navigation }) => {
           </View>
               <TouchableOpacity onPress={()=>{dismissNotification();
       navigation.navigate('Home')}}>
-                 <FontAwesome
-            name="times"
-            size={30}
-            color="red"
-            resizeMode="contain"
-          /> 
+                 <AntDesign name="close" size={30} color="red" />
               </TouchableOpacity>
           
       </View>
@@ -235,16 +230,11 @@ const Home = ({ navigation }) => {
         </View>
         <View style={{ width: '90%', marginLeft: "2%" }}>
           <View style={{flexDirection:'row'}}>
-            <View style={{marginRight:'48%'}}>
+            <View style={{marginRight:'42%'}}>
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
             </View>
             <TouchableOpacity onPress={dismissAlert} style={{marginBottom:10}}>
-            <FontAwesome
-              name="times"
-              size={30}
-              color="red"
-              resizeMode="contain"
-            />
+            <AntDesign name="close" size={30} color="red" />
             </TouchableOpacity>
           </View>
 
