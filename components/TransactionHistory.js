@@ -36,7 +36,7 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
 
             <View style={{ flex: 1, marginLeft: SIZES.radius }}>
                 <Text style={{ ...FONTS.h3 }}>Instalment</Text>
-                <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>{item.PaymentDate}</Text>
+                <Text style={{ color: COLORS.gray, ...FONTS.body4 }}>{item.PaidMonth}</Text>
             </View>
 
             <View style={{ flexDirection: 'row', height: '100%', alignItems: 'center' }}>
