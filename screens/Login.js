@@ -14,7 +14,8 @@ import {
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from '@expo/vector-icons/Entypo';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { images } from '../constants'
 import { AuthContext } from '../context/Context';

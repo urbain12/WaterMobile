@@ -14,7 +14,8 @@ import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather } fr
 import {AuthContext} from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { connect } from 'react-redux';
 

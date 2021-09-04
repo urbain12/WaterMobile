@@ -17,7 +17,8 @@ import {
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from 'react-native';
 
 
 
