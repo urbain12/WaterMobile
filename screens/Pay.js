@@ -16,7 +16,8 @@ import {
     CurrencyLabel,
     TextButton,
 } from "../components";
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from 'react-native';
 import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather, Entypo } from "@expo/vector-icons";
 import axios from 'axios';

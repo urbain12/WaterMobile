@@ -10,7 +10,8 @@ import Tabs from "./navigation/tabs";
 import { AuthContext } from './context/Context';
 import store from './redux/store';
 import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
 import Shop from './screens/Shop';
 import Cart from './screens/Cart';
 import query from './screens/Query';
@@ -121,12 +122,12 @@ const App = () => {
 
           }
           else {
-            alert('Invalid email or password!')
+            alert('Invalid phone or password!')
           }
         }).catch((error) => {
           if (error.response) {
             console.log(error.response.data);
-            alert('Invalid email or password!')
+            alert('Invalid phone or password!')
           }
         })
 
