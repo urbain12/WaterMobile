@@ -24,7 +24,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "water.access.rwanda"
+      "package": "water.access.rwanda",
+      "versionCode":2
+    
     },
     "web": {
       "favicon": "./assets/favicon.png"
