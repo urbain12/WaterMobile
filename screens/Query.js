@@ -7,10 +7,11 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import {
   HeaderBar,
   CurrencyLabel,
@@ -18,9 +19,9 @@ import {
   TransactionHistory,
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS } from "../constants";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
 import axios from 'axios';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 const Transaction = ({ navigation }) => {
   const [Names, setNames] = useState('')
@@ -34,9 +35,9 @@ const Transaction = ({ navigation }) => {
   const [service, setservice] = useState('')
 
 
-  useEffect(()=>{
+  useEffect(() => {
     async function setInfo() {
-     
+
       const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
@@ -48,12 +49,12 @@ const Transaction = ({ navigation }) => {
     }
 
     setInfo()
-    
-  },[])
+
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const names=customer.FirstName+' '+customer.LastName
+    const names = customer.FirstName + ' ' + customer.LastName
     const postObj = JSON.stringify({
       'Names': names,
       'Message': Message,
@@ -93,7 +94,15 @@ const Transaction = ({ navigation }) => {
   function renderTrade() {
 
     return (
-      <View
+      <KeyboardAwareScrollView
+        contentContaineStyle={{
+          display: "flex",
+          fleex: 1,
+          justifyContent: "space-evenly0",
+          alignItems: "center",
+          height: Dimensions.get("window").height,
+          width: Dimensions.get("window").width,
+        }}
         style={{
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,
@@ -103,93 +112,96 @@ const Transaction = ({ navigation }) => {
           ...styles.shadow,
         }}
       >
-        <View>
-          <TouchableOpacity activeOpacity={1}>
+        <ScrollView>
+
+          <View>
+            <TouchableOpacity activeOpacity={1}>
 
 
 
-          <View style={{justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontSize:20,fontWeight:'bold'}}>Send Query</Text>
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Send Query</Text>
               </View>
-            
+
               <Picker
-              style={{
-                marginTop:20,
-                height:40
-              }}
-                        selectedValue={service}
-                        onValueChange={(val) => { setservice(val) }}
-                      >
-                        <Picker.Item label="Select Service" value="" />
-                        <Picker.Item value="Maintenance" label="Maintenance" />
-                        <Picker.Item value="Claims" label="Claims" />
-                        <Picker.Item value="Query" label="query" />
-                      </Picker>
+                style={{
+                  marginTop: 20
+                }}
+                selectedValue={service}
+                onValueChange={(val) => { setservice(val) }}
+              >
+                <Picker.Item label="Select Service" value="" />
+                <Picker.Item value="Maintenance" label="Maintenance" />
+                <Picker.Item value="Claims" label="Claims" />
+                <Picker.Item value="Query" label="query" />
+              </Picker>
 
 
-            
-           
-            <TextInput
-              style={{
-                borderColor: "gray",
-                borderWidth: 1,
-                borderRadius: 10,
-                height:105,
-                width: "100%",
-                marginTop: 10,
-                marginBottom: 10,
-                textAlign: "center",
-              }}
-              multiline={true}
-              name="Names"
-              placeholder="Message"
-              onChangeText={text => setMessage(text)}
-            />
-            
-          </TouchableOpacity>
-        </View>
 
-        <TextButton
-          label="Request"
-          onPress={(e) => { handleSubmit(e) }}
-          style={{ marginTop: 100 }}
-        />
-      </View>
+
+              <TextInput
+                style={{
+                  borderColor: "gray",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  height: 105,
+                  width: "100%",
+                  marginTop: 10,
+                  marginBottom: 10,
+                  textAlign: "center",
+                  padding: 10
+                }}
+                multiline={true}
+                name="Names"
+                placeholder="Message"
+                onChangeText={text => setMessage(text)}
+              />
+
+            </TouchableOpacity>
+          </View>
+
+          <TextButton
+            label="Request"
+            onPress={(e) => { handleSubmit(e) }}
+            style={{ marginTop: 100 }}
+          />
+        </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 
-  function renderTransactionHistory() {}
+  function renderTransactionHistory() { }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View
-            style={{
-              width: "100%",
-              flexDirection:"row",
-              paddingHorizontal: SIZES.padding,
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                width: 35,
-                height: 35,
-                marginTop:25,
-                marginBottom:20,
-                marginRight:'80%',
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              onPress={() => navigation.goBack()}
-            >
-              <Ionicons
-                name="arrow-back"
-                size={40}
-                color="black"
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-            
-          </View>
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          paddingHorizontal: SIZES.padding,
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            width: 35,
+            height: 35,
+            marginTop: 25,
+            marginBottom: 20,
+            marginRight: '80%',
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={() => navigation.navigate('Home')}
+        >
+          <Ionicons
+            name="arrow-back"
+            size={40}
+            color="black"
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+
+      </View>
 
       <ScrollView>
         <View style={{ flex: 1, paddingBottom: SIZES.padding }}>

@@ -75,7 +75,7 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
           {/* Header Bar */}
           <View
             style={{
-              marginTop: SIZES.padding * 2,
+              marginTop:20,
               width: "100%",
               flexDirection:"row",
               paddingHorizontal: SIZES.padding,
