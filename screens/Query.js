@@ -114,7 +114,8 @@ const Transaction = ({ navigation }) => {
             
               <Picker
               style={{
-                marginTop:20
+                marginTop:20,
+                height:40
               }}
                         selectedValue={service}
                         onValueChange={(val) => { setservice(val) }}
@@ -178,7 +179,7 @@ const Transaction = ({ navigation }) => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => navigation.goBack()}
             >
               <Ionicons
                 name="arrow-back"

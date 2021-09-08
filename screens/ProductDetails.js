@@ -72,7 +72,7 @@ const ProductDetails =({navigation,currentItem,addToCart,cart,decreaseQty}) => {
                  </View>
                 </View>
                 <Image source={{uri: currentItem.image}} 
-                  style={{height:300,width:300,alignSelf:"center",marginTop:20}}
+                  style={{height:300,width:300,alignSelf:"center",marginTop:20,resizeMode:'contain'}}
                 />
                 <View style={{
                     flexDirection:"row",

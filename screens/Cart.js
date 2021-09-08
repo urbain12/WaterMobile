@@ -506,7 +506,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
                 <Modal
                 animationType="slide"
                 visible={isVisible2}
-                // style={{ backgroundColor: "#000000AA", margin: 0 }}
+                style={{ backgroundColor: "#000000AA", margin: 0 }}
               >
                 
                 <TouchableOpacity

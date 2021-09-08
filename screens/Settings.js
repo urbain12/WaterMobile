@@ -219,10 +219,34 @@ const Settings = ({ navigation }) => {
                         <View>
                             <Image resizeMode='contain' style={{width:30,height:30}} source={require('../assets/icons/subscription.png')}/>
                         </View>
-                        <View style={{marginLeft:30}}>
+                        {category.toUpperCase() === 'AMAZI'  ? (
+                          <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
                             <Text style={{color:'#707070'}}>{category}</Text>
-                        </View>
+                        </TouchableOpacity>
+                        ):(
+                          <>
+                          {category.toUpperCase() === 'INUMA' ?  (
+                          <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{marginLeft:30}}>
+                            <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
+                            <Text style={{color:'#707070'}}>{category}</Text>
+                        </TouchableOpacity>
+                        ):(<>
+                          {category.toUpperCase() === 'UHIRA' ?  (
+                          <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{marginLeft:30}}>
+                            <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
+                            <Text style={{color:'#707070'}}>{category}</Text>
+                        </TouchableOpacity>
+                        ):(
+                          <TouchableOpacity style={{marginLeft:30}}>
+                            <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
+                            <Text style={{color:'#707070'}}>{category}</Text>
+                        </TouchableOpacity>
+                        )}
+                        </>)}
+                        </>
+                        )}
+                        
                     </View>
                     <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}
 

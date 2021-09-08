@@ -38,7 +38,7 @@ const Responses = (props) => {
               marginTop:'10%',
               marginBottom:'10%'
           }}>
-          <TouchableOpacity onPress={() => props.navigation.navigate("Home")}>
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
           <Ionicons name="ios-arrow-back" size={40} color="white" />
           </TouchableOpacity>
           </View>
