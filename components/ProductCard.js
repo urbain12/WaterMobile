@@ -1,4 +1,4 @@
-import React, { Component,useState } from 'react';
+import React, { Component, useState } from 'react';
 import {
   Image,
   Text,
@@ -10,8 +10,8 @@ import {
   Dimensions
 } from 'react-native';
 import { observer } from 'mobx-react/native';
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather } from "@expo/vector-icons";
-import {AuthContext} from '../context/Context';
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather } from "@expo/vector-icons";
+import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 // import AsyncStorage from "@react-native-community/async-storage";
@@ -19,50 +19,50 @@ import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-const BoxAnimated= Animated.createAnimatedComponent(View)
-const windowWidth = Dimensions.get('window').width/2-20;
+const BoxAnimated = Animated.createAnimatedComponent(View)
+const windowWidth = Dimensions.get('window').width / 2 - 20;
 
 
-const ProductCard = ({product})=> {
+const ProductCard = ({ product }) => {
 
-  const format = (amount) =>{
+  const format = (amount) => {
     return Number(amount)
-    .toFixed(2)
-    .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      .toFixed(2)
+      .replace(/\d(?=(\d{3})+\.)/g, '$&,')
 
-};
-    // const [isHover,setHover]=useState(false)
-    // const [opacity,setOpacity]=useState(new Animated.Value(1))
-    // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
-    
+  };
+  // const [isHover,setHover]=useState(false)
+  // const [opacity,setOpacity]=useState(new Animated.Value(1))
+  // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
 
-    // const handleClose=()=>{
-    // setHover(false)
-    // }
 
-        return(
-            <View key={product.id} style={{height:235,backgroundColor:'white',width:windowWidth,position:'relative',margin:10,alignItems:'center',justifyContent:'center',borderRadius:10}}>
-          <View>
-            <View style={{marginBottom:10,marginTop:30,alignItems:'center',justifyContent:'center'}}>
-              <Image style={{width:120,height:100}} resizeMode="contain" source={{uri:product.image}}/>
-            </View>
-            <View>
-              <Text style={{fontWeight:'bold',color:'#01B0F1',margin:10}}>{product.name}</Text>
-              <Text style={{fontWeight:'bold', color:'black'}}>{JSON.stringify(format(product.price)).substring(1,JSON.stringify(format(product.price)).length-4)} Rwf</Text>
-            </View>
-          </View>
-          
-          
-          <TouchableOpacity  style={{position:'absolute',width:25,height:25,alignItems:'center',justifyContent:"center",top:10,right:5,backgroundColor: product.cartQuantity > 0 ? '#01B0F1':'white'}}>
-            {product.cartQuantity > 0 ? (
-              <Text style={{color:'white'}}>{product.cartQuantity}</Text>
-            ):(
+  // const handleClose=()=>{
+  // setHover(false)
+  // }
 
-            <Text></Text>
-            )}
-          </TouchableOpacity>
-         
-          {/* {this.state.isHover && (
+  return (
+    <View key={product.id} style={{ height: 240, backgroundColor: 'white', width: windowWidth, position: 'relative', margin: 10, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
+      <View>
+        <View style={{ marginBottom: 10, marginTop: 30, alignItems: 'center', justifyContent: 'center' }}>
+          <Image style={{ width: 120, height: 100 }} resizeMode="contain" source={{ uri: product.image }} />
+        </View>
+        <View>
+          <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.name.slice(0, 24)} ...</Text>
+          <Text style={{ fontWeight: 'bold', color: 'black', margin: 10 }}>{JSON.stringify(format(product.price)).substring(1, JSON.stringify(format(product.price)).length - 4)} Rwf</Text>
+        </View>
+      </View>
+
+
+      <TouchableOpacity style={{ position: 'absolute', width: 25, height: 25, alignItems: 'center', justifyContent: "center", top: 10, right: 5, backgroundColor: product.cartQuantity > 0 ? '#01B0F1' : 'white' }}>
+        {product.cartQuantity > 0 ? (
+          <Text style={{ color: 'white' }}>{product.cartQuantity}</Text>
+        ) : (
+
+          <Text></Text>
+        )}
+      </TouchableOpacity>
+
+      {/* {this.state.isHover && (
             <BoxAnimated opacity={this.state.qtyOpacity} style={{backgroundColor:'#f2f0f5',borderRadius:6,position:'absolute',top:10,right:10,left:10,zIndex:99}}>
               <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:2}}>
                 {product.cartQuantity>1?(
@@ -85,11 +85,11 @@ const ProductCard = ({product})=> {
               </View>
             </BoxAnimated>
           )} */}
-          
-          
-        </View>
-        )
-    }
+
+
+    </View>
+  )
+}
 
 // const mapStateToProps=state=>{
 //   return{

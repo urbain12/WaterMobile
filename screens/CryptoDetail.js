@@ -429,12 +429,16 @@ const CryptoDetail = ({ navigation }) => {
                 >
 
 
-                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                    <View style={{ flex: 1, marginLeft: SIZES.radius,justifyContent:"center",alignItems:"center" }}>
                         {balance == 0 ? (
                             <Text style={{ ...FONTS.h3, color: 'green' }}>Your instalment is fully paid</Text>
                         ) : (
 
-                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{JSON.stringify(format(balance)).substring(1,JSON.stringify(format(balance)).length-4)} Rwf</Text> </Text>
+                            <View>
+                            <Text style={{ ...FONTS.h3,fontFamily:"bold" }}>Instalment balance </Text>
+                            <Text style={{ color: 'green',textAlign:"center",fontSize:30,fontFamily:"bold" }}>{JSON.stringify(format(balance)).substring(1,JSON.stringify(format(balance)).length-4)} Rwf</Text> 
+                            </View>
+
 
 
                         )}            
@@ -460,7 +464,7 @@ const CryptoDetail = ({ navigation }) => {
                         style={{
                             flexDirection: 'row',
                             alignItems: 'center',
-                            marginBottom: SIZES.radius
+                            // marginBottom: SIZES.radius
                         }}
                     >
                         {/* Currency */}
