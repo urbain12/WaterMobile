@@ -1,4 +1,5 @@
 const banner = require("../assets/images/banner.png");
+const Logo = require("../assets/images/Logo.png");
 const banner_settings = require("../assets/images/banner_settings.png");
 const modalbanner = require("../assets/images/modalbanner.png");
 const bannerhome = require("../assets/images/bannerhome.png");
@@ -11,6 +12,7 @@ const loginbanner = require("../assets/images/loginbanner.png");
 
 export default {
     banner,
+    Logo,
     banner_settings,
     bannerhome,
     loginbanner,

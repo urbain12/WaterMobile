@@ -95,8 +95,18 @@ const Login = ({ navigation }) => {
         <View style={styles.container}>
             <StatusBar backgroundColor='#0B0123' barStyle="light-content" />
             <View style={styles.header}>
-                <Image source={images.banner} />
+                <Image source={images.Logo} 
+                resizeMode="contain"
+                style={{
+                  width: 600,
+                  height: 180,
+                  marginTop:100,
+                  alignItems:"center",
+                  justifyContent:"center"
+                }}
+                />
             </View>
+            
             <Animatable.View
                 animation="fadeInUpBig"
                 style={[styles.footer, {
@@ -176,19 +186,10 @@ const Login = ({ navigation }) => {
                 </View>
 
 
-                <View style={{ flexDirection: "row", marginTop: 10, marginBottom: 10, marginLeft: "20%" }}>
-                    <TouchableOpacity>
-                        <CheckBox
-                            value={false}
-
-                            style={{ height: 15, width: 15, marginLeft: 10 }}
-                        />
-                    </TouchableOpacity>
-                    <Text style={{ marginLeft: 10, fontWeight: "bold" }}>Keep me signed in</Text>
-                </View>
+                
 
 
-                <View style={{}}>
+                <View style={{marginTop:30}}>
                     <TouchableOpacity
                         style={styles.signIn}
                         onPress={() => { loginHandle(data.phone, data.password) }}
