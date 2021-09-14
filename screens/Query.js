@@ -11,7 +11,7 @@ import {
 } from "react-native";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
   HeaderBar,
   CurrencyLabel,
@@ -170,10 +170,11 @@ const Transaction = ({ navigation }) => {
     );
   }
 
-  function renderTransactionHistory() { }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <KeyboardAwareScrollView 
+    
+    >
       <View
         style={{
           width: "100%",
@@ -202,14 +203,74 @@ const Transaction = ({ navigation }) => {
         </TouchableOpacity>
 
       </View>
-
       <ScrollView>
-        <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-          {renderTrade()}
-          {renderTransactionHistory()}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+
+          <View style={{marginTop: SIZES.padding,
+          marginBottom: SIZES.padding,
+          marginHorizontal: SIZES.padding,
+          padding: SIZES.padding,
+          borderRadius: SIZES.radius,
+          backgroundColor: COLORS.white,
+          ...styles.shadow,}}>
+            <TouchableOpacity activeOpacity={1}>
+
+
+
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Send Query</Text>
+              </View>
+
+              <Picker
+                style={{
+                  marginTop: 20,
+                  width:'100%',
+                  alignSelf:'center'
+                }}
+                selectedValue={service}
+                onValueChange={(val) => { setservice(val) }}
+              >
+                <Picker.Item label="Select Service" value="" />
+                <Picker.Item value="Maintenance" label="Maintenance" />
+                <Picker.Item value="Claims" label="Claims" />
+                <Picker.Item value="Query" label="query" />
+              </Picker>
+
+
+
+
+              <TextInput
+                style={{
+                  borderColor: "gray",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  alignSelf:'center',
+                  height: 105,
+                  width: "100%",
+                  marginTop: 10,
+                  marginBottom: 10,
+                  textAlign: "center",
+                  padding: 10
+                }}
+                multiline={true}
+                name="Names"
+                placeholder="Message"
+                onChangeText={text => setMessage(text)}
+              />
+
+              <TextButton
+            label="Request"
+            onPress={(e) => { handleSubmit(e) }}
+           
+          />
+
+            </TouchableOpacity>
+          </View>
+
+          
+        </ScrollView>
+
+        
+    </KeyboardAwareScrollView>
   );
 };
 

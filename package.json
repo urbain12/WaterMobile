@@ -31,6 +31,7 @@
     "react-native-credit-card-form": "^0.1.1",
     "react-native-credit-card-input": "^0.4.1",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-keyboard-aware-scrollview": "^2.1.0",
     "react-native-modal": "^11.10.0",
     "react-native-paper": "^4.8.1",

@@ -366,7 +366,7 @@ const CryptoDetail = ({ navigation }) => {
                         </View>
                     </View>
 
-                    <TouchableOpacity
+                    <View
                         style={{
                             width: "80%",
                             paddingVertical: SIZES.padding,
@@ -411,10 +411,10 @@ const CryptoDetail = ({ navigation }) => {
                         </View>
 
 
-                    </TouchableOpacity>
+                    </View>
 
                 </View>
-                <TouchableOpacity
+                <View
                     style={{
                         flexDirection: 'row',
                         alignItems: 'center',
@@ -445,7 +445,7 @@ const CryptoDetail = ({ navigation }) => {
                         </View>
 
 
-                </TouchableOpacity>
+                </View>
 
                 {renderNotice()}
                 <View
@@ -468,7 +468,7 @@ const CryptoDetail = ({ navigation }) => {
                         }}
                     >
                         {/* Currency */}
-                        <TouchableOpacity style={{ width: "30%" }}>
+                        <View style={{ width: "30%" }}>
 
                             <View >
                                 <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
@@ -485,7 +485,7 @@ const CryptoDetail = ({ navigation }) => {
                                 </View>
                                 <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
                             </View>
-                        </TouchableOpacity>
+                        </View>
 
                         {/* Amount */}
                         <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }} onPress={() => navigation.navigate("Responses")}>

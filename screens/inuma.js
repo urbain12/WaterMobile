@@ -211,7 +211,7 @@ const CryptoDetail = ({ navigation, }) => {
                         </View>
                     </View>
 
-                    <TouchableOpacity
+                    <View
                         style={{
                             width: "80%",
                             paddingVertical: SIZES.padding,
@@ -256,7 +256,7 @@ const CryptoDetail = ({ navigation, }) => {
                         </View>
 
 
-                    </TouchableOpacity>
+                    </View>
 
                 </View>
                 <TouchableOpacity
@@ -290,7 +290,7 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                 </TouchableOpacity>
-                <TouchableOpacity
+                <View
                     style={{
                         flexDirection: 'row',
                         alignItems: 'center',
@@ -319,7 +319,7 @@ const CryptoDetail = ({ navigation, }) => {
                     </View>
 
 
-                </TouchableOpacity>
+                </View>
 
                 {renderNotice()}
                 <View

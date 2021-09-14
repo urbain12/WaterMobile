@@ -545,7 +545,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
                             textAlign: "center",
                           }}
                           name="Names"
-                          placeholder="Amount"
+                          placeholder="Phone Number"
                           keyboardType="numeric"
                           onChangeText={text => handlePhone(text)}
                         />
