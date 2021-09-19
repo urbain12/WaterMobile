@@ -200,16 +200,16 @@ const CryptoDetail = ({ navigation, }) => {
 
                         {/* Amount */}
                         <View>
-                        <View style={{ flex: 1, marginLeft: 20 }}>
-                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
-                                {days2 > 0 ? (
-                                    <Text>{days2} Days</Text>
-                                ) : (
-                                    <Text>Day of payment</Text>
-                                )}
-                            </Text>
-                            <Text style={{ color: "white" }}>remaining to your next Installment</Text>
-                        </View>
+                            <View style={{ flex: 1, marginLeft: 20 }}>
+                                <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
+                                    {days2 > 0 ? (
+                                        <Text>{days2} Days</Text>
+                                    ) : (
+                                        <Text>Day of payment</Text>
+                                    )}
+                                </Text>
+                                <Text style={{ color: "white" }}>remaining to your next Installment</Text>
+                            </View>
                         </View>
                     </View>
 
@@ -283,11 +283,11 @@ const CryptoDetail = ({ navigation, }) => {
                             <Text style={{ ...FONTS.h3, color: 'green' }}>Your instalment is fully paid</Text>
                         ) : (
 
-                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{JSON.stringify(format(balance)).substring(1,JSON.stringify(format(balance)).length-4)} Rwf</Text> </Text>
+                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{JSON.stringify(format(balance)).substring(1, JSON.stringify(format(balance)).length - 4)} Rwf</Text> </Text>
 
 
-                        )}            
-                        </View>
+                        )}
+                    </View>
 
 
                 </View>
@@ -313,24 +313,47 @@ const CryptoDetail = ({ navigation, }) => {
                         }}
                     >
                         {/* Currency */}
-                        <View style={{ width: "30%" }}>
+                        {category.toUpperCase() === 'UHIRA' ? (
+                            <TouchableOpacity style={{ width: "30%" }}
 
-                            <View >
-                                <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                            >
 
-                                    <Image
-                                        source={icons.filter}
-                                        resizeMode="contain"
-                                        style={{
-                                            width: 75,
-                                            height: 120,
+                                <View >
+                                    <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                        }}
-                                    />
+                                        <Image
+                                            source={icons.filter}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 75,
+                                                height: 120,
+
+                                            }}
+                                        />
+                                    </View>
+                                    <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
                                 </View>
-                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
-                            </View>
-                        </View>
+                            </TouchableOpacity>
+
+                        ) : (
+                            <TouchableOpacity style={{ width: "30%" }}
+                                onPress={() => navigation.navigate('request')}
+                            >
+                                <View >
+                                    <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+
+                                        <FontAwesome
+                                            name="send"
+                                            size={60}
+                                            color="white"
+                                            resizeMode="contain"
+                                        />
+                                    </View>
+                                    <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Request</Text>
+                                </View>
+
+                            </TouchableOpacity>
+                        )}
 
                         {/* Amount */}
                         <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }} onPress={() => navigation.navigate("Responses")}>

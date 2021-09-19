@@ -298,14 +298,9 @@ const Home = ({ navigation }) => {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onPress={() => navigation.navigate('Shop')}
+            // onPress={() => navigation.navigate('Shop')}
           >
-            <FontAwesome
-              name="shopping-bag"
-              size={40}
-              color="white"
-              resizeMode="contain"
-            />
+            
           </TouchableOpacity>
         </View>
 
@@ -463,7 +458,37 @@ const Home = ({ navigation }) => {
           </View>
 
         </ScrollView>
+        <TouchableOpacity
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent:'center',
+                        marginLeft:"8%",
+                        marginTop: SIZES.padding * 1,
+                        paddingVertical: SIZES.padding,
+                        paddingHorizontal: SIZES.radius,
+                        backgroundColor: COLORS.white,
+                        borderRadius: SIZES.radius,
+                        width:"85%",
+                        ...styles.shadow
+                    }}
 
+                    onPress={() => navigation.navigate('momo')}
+
+                >
+
+
+                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                       
+
+                     <Text style={{ color: 'green',alignSelf:"center",fontSize:20,fontWeight:"bold" }}>Pay Subscriptions</Text> 
+
+
+                        
+                    </View>
+
+
+                </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
         { showNotification=='true' && renderAlert()}
         </TouchableOpacity>

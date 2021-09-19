@@ -14,6 +14,10 @@ const star = require("../assets/icons/star.png");
 const clap = require("../assets/icons/clap.png");
 const filter = require("../assets/icons/filter.png");
 const pipe = require("../assets/icons/pipe.png");
+const asset = require("../assets/icons/Asset.png");
+const waterfilter = require("../assets/icons/waterfilter.png");
+const waterpipe = require("../assets/icons/waterpipe.png");
+const watersupport = require("../assets/icons/watersupport.png");
 const support = require("../assets/icons/support.png");
 const exchange = require("../assets/icons/exchange.png");
 const transaction = require("../assets/icons/transaction.png");
@@ -37,5 +41,11 @@ export default {
     right_arrow,
     settings,
     star,
-    transaction
+    transaction,
+    watersupport,
+    waterpipe,
+    waterfilter,
+    asset
+
+
 }

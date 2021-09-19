@@ -23,27 +23,27 @@ import { COLORS, FONTS, icons, images } from "../constants";
 import Modal from "react-native-modal";
 import Login from '../screens/Login';
 import Settings from '../screens/Settings';
-import { MaterialIcons, AntDesign, Ionicons, FontAwesome, Entypo} from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, Ionicons, FontAwesome, Entypo } from "@expo/vector-icons";
 import axios from "axios";
 const Tab = createBottomTabNavigator();
 
-const handleSubmit=()=>{
+const handleSubmit = () => {
   console.log('ok')
-  const options={
-    headers:{
-    "Content-Type":"application/json",
-    "app-type":"none",
-    "app-version":"v1",
-    "app-device":"Postman",
-    "app-device-os":"Postman",
-    "app-device-id":"0",
-    "x-auth":"705d3a96-c5d7-11ea-87d0-0242ac130003"
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      "app-type": "none",
+      "app-version": "v1",
+      "app-device": "Postman",
+      "app-device-os": "Postman",
+      "app-device-id": "0",
+      "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
+    }
   }
-}
-  axios.get('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url',options,).then(res=>{
-    const my_data=JSON.parse(res.data)
+  axios.get('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', options,).then(res => {
+    const my_data = JSON.parse(res.data)
     Linking.openURL(my_data.url)
-  }).catch(err=>{
+  }).catch(err => {
     console.log('there is an error')
   })
 }
@@ -60,12 +60,12 @@ const TabBarCustomButton = ({ children, onPress }) => {
       onPress={onPress}
     >
       <View
-        
+
         style={{
           width: 70,
           height: 70,
           borderRadius: 35,
-          backgroundColor:'#01B0F1'
+          backgroundColor: '#01B0F1'
         }}
       >
         {children}
@@ -74,7 +74,7 @@ const TabBarCustomButton = ({ children, onPress }) => {
   );
 };
 
-const Tabs = ( {navigation} ) => {
+const Tabs = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const modalHandler = () => {
@@ -116,7 +116,7 @@ const Tabs = ( {navigation} ) => {
                 visible={isVisible}
                 style={{ backgroundColor: "#000000AA", margin: 0 }}
               >
-                
+
                 <TouchableOpacity
                   onPress={modalHandler}
                   style={{
@@ -125,9 +125,9 @@ const Tabs = ( {navigation} ) => {
                     alignItems: "center",
                   }}
                 >
-                  
+
                   <TouchableWithoutFeedback>
-                    
+
 
                     <View
                       style={{
@@ -135,34 +135,50 @@ const Tabs = ( {navigation} ) => {
                         width: "95%",
                         backgroundColor: "#fff",
                         borderRadius: 40,
-                        
+
                       }}
 
                     >
-                      <ImageBackground source={images.modalbanner} style={{width: '100%', height: '100%',borderRadius:40,overflow: 'hidden'}}>
-                       
-                
-                      <ScrollView showsVerticalScrollIndicator={false} style={{width:'100%'}}>
-                      
-                        <Text style={{ textAlign: "center", fontSize: 30, color:"white",marginTop:30,paddingBottom:30 }}>
-                          Pay With
-                          </Text>
+                      <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
+
+
+                        <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
+
+                          <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                            Quick Access </Text>
                           <View
                             style={{
                               flexDirection: "row",
                               alignContent: "center",
-                              width:'100%'
+                              width: '100%'
                             }}
                           >
-                            
-                              <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
-                              
-                              onPress={() => {navigation.navigate("momo"); setIsVisible(false);}}
-                              
-                              >
-                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+
+                            onPress={() => {navigation.navigate("Shop"); setIsVisible(false);}}
+
+                            >
+                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                <FontAwesome
+                                  name="shopping-bag"
+                                  size={80}
+                                  color="#01B0F1"
+                                  resizeMode="contain"
+                                />
+                              </View>
+                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Shop</Text>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+
+                            // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
+
+                            >
+                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
                                 <Image
-                                  source={icons.mtn}
+                                  source={icons.waterpipe}
                                   resizeMode="contain"
                                   style={{
                                     width: 90,
@@ -170,18 +186,18 @@ const Tabs = ( {navigation} ) => {
                                     marginLeft: 2,
                                   }}
                                 />
-                                </View>
-                              </TouchableOpacity>
-                            
-                            
-                              <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
-                              
-                              // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
-                              
-                              >
-                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
+                              </View>
+                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintanance</Text>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+
+                              onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
+                            >
+                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
                                 <Image
-                                  source={icons.visa}
+                                  source={icons.watersupport}
                                   resizeMode="contain"
                                   style={{
                                     width: 90,
@@ -189,91 +205,74 @@ const Tabs = ( {navigation} ) => {
                                     marginLeft: 2,
                                   }}
                                 />
-                                </View>
-                              </TouchableOpacity>
-                            
-                            
-                              <TouchableOpacity style={{ alignContent: "center",marginLeft:'2%',width:'30%'}}
-                              
-                              // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
-                                                            >
-                              <View style={{backgroundColor:"white",width:'100%',height:120,alignItems:"center",justifyContent:"center",borderRadius:20}}>
-                                <Image
-                                  source={icons.airtel}
-                                  resizeMode="contain"
-                                  style={{
-                                    width: 90,
-                                    height: 120,
-                                    marginLeft: 2,
-                                  }}
-                                />
-                                </View>
-                              </TouchableOpacity>
-                           
-                            </View>
+                              </View>
+                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Support</Text>
+                            </TouchableOpacity>
+
+                          </View>
                         </ScrollView>
-                        </ImageBackground>
-                      </View>
-                    </TouchableWithoutFeedback>
-                  </TouchableOpacity>
-                </Modal>
-                <Entypo name="home" size={30} color={focused ? '#01B0F1' : COLORS.black}/>
-                <Text
-                  style={{
-                    color: focused ? '#01B0F1' : COLORS.black,
-                    ...FONTS.body5,
-                  }}
-                >
-                  HOME
-                </Text>
-              </View>
-            ),
-          }}
-        />
-  
-        <Tab.Screen
-          name="Transaction"
-          component={Home}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <View>
-                <TouchableOpacity
-                  style={{ width: "60%", margin: "3%" }}
-                  onPress={() => {
-                    setIsVisible(true);
-                  }}
-                >
-                  <Image
-                    source={icons.transaction}
-                    resizeMode="contain"
-                    style={{
-                      width: 40,
-                      height: 40,
-                      tintColor: COLORS.white,
-                    }}
-                  />
+                      </ImageBackground>
+                    </View>
+                  </TouchableWithoutFeedback>
                 </TouchableOpacity>
-              </View>
-            ),
-            tabBarButton: (props) => <TabBarCustomButton {...props} />,
-          }}
-        />
-  
-        <Tab.Screen
-          name="Settings"
-          component={Settings}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <View style={{ alignItems: "center", justifyContent: "center" }}>
-                <Ionicons name="settings-sharp" size={30} color={focused ? '#01B0F1' : COLORS.black}/>
-                <Text
+              </Modal>
+              <Entypo name="home" size={30} color={focused ? '#01B0F1' : COLORS.black} />
+              <Text
+                style={{
+                  color: focused ? '#01B0F1' : COLORS.black,
+                  ...FONTS.body5,
+                }}
+              >
+                HOME
+              </Text>
+            </View>
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Transaction"
+        component={Home}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View>
+              <TouchableOpacity
+                style={{ width: "60%", margin: "3%" }}
+                onPress={() => {
+                  setIsVisible(true);
+                }}
+              >
+                <Image
+                  source={icons.transaction}
+                  resizeMode="contain"
                   style={{
-                    color: focused ? '#01B0F1' : COLORS.black,
-                    ...FONTS.body5,
+                    width: 40,
+                    height: 40,
+                    tintColor: COLORS.white,
                   }}
-                >
-                  SETTINGS
-                </Text>
+                />
+              </TouchableOpacity>
+            </View>
+          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
+        }}
+      />
+
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+              <Ionicons name="settings-sharp" size={30} color={focused ? '#01B0F1' : COLORS.black} />
+              <Text
+                style={{
+                  color: focused ? '#01B0F1' : COLORS.black,
+                  ...FONTS.body5,
+                }}
+              >
+                SETTINGS
+              </Text>
             </View>
           ),
         }}

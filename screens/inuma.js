@@ -282,7 +282,7 @@ const CryptoDetail = ({ navigation, }) => {
                     <View style={{ flex: 1, marginLeft: SIZES.radius }}>
                        
 
-                     <Text style={{ color: 'green',alignSelf:"center",fontSize:20 }}>Pay water</Text> 
+                     <Text style={{ color: 'green',alignSelf:"center",fontSize:20,fontWeight:"bold" }}>Pay water</Text> 
 
 
                         
@@ -342,24 +342,45 @@ const CryptoDetail = ({ navigation, }) => {
                         }}
                     >
                         {/* Currency */}
-                        <TouchableOpacity style={{ width: "30%" }}>
+                        {category.toUpperCase() === 'INUMA' ? (
+                            <TouchableOpacity style={{ width: "30%" }}>
 
-                            <View >
-                                <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                <View >
+                                    <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                    <Image
-                                        source={icons.filter}
-                                        resizeMode="contain"
-                                        style={{
-                                            width: 75,
-                                            height: 120,
+                                        <Image
+                                            source={icons.filter}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 75,
+                                                height: 120,
 
-                                        }}
-                                    />
+                                            }}
+                                        />
+                                    </View>
+                                    <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
                                 </View>
-                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
-                            </View>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+
+                        ) : (
+                            <TouchableOpacity style={{ width: "30%" }}
+                            onPress={() => navigation.navigate('request')}
+                            >
+                                <View >
+                                    <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+
+                                        <FontAwesome
+                                            name="send"
+                                            size={60}
+                                            color="white"
+                                            resizeMode="contain"
+                                        />
+                                    </View>
+                                    <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Request</Text>
+                                </View>
+
+                            </TouchableOpacity>
+                        )}
 
                         {/* Amount */}
                         <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }} onPress={() => navigation.navigate("Responses")}>
