@@ -27,6 +27,7 @@ import changepassword from './screens/changepassword';
 import Notifications from './screens/notifications'
 import Responses from './screens/Responses';
 import paywater from './screens/paywater';
+import request from './screens/request';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -278,6 +279,10 @@ const App = () => {
             <Stack.Screen
               name="Transaction"
               component={Transaction}
+            />
+            <Stack.Screen
+              name="request"
+              component={request}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -10,6 +10,7 @@ import {
     CheckBox,
     StatusBar,
     ActivityIndicator,
+    ImageBackground
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -17,7 +18,7 @@ import Icon from '@expo/vector-icons/Entypo';
 // import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { images } from '../constants'
+import { icons, images } from '../constants'
 import { AuthContext } from '../context/Context';
 import { RadioButton } from 'react-native-paper'
 
@@ -93,24 +94,28 @@ const Login = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor='#0B0123' barStyle="light-content" />
+            <StatusBar backgroundColor='#e6e4df' barStyle="light-content" />
             <View style={styles.header}>
-                <Image source={images.Logo} 
-                resizeMode="contain"
-                style={{
-                  width: 600,
-                  height: 180,
-                  marginTop:100,
-                  alignItems:"center",
-                  justifyContent:"center"
-                }}
-                />
+                <ImageBackground source={icons.asset} style={{ width: '110%', height: '100%', overflow: 'hidden' }}>
+
+                    <Image source={images.Logo}
+                        resizeMode="contain"
+                        style={{
+                            width: "100%",
+                            height: "50%",
+                            marginTop: 65,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    />
+                </ImageBackground>
             </View>
-            
+                <Text style={{textAlign:"center",fontSize:12,fontWeight:"bold",marginBottom:10,color:"#707070"}}>Providing Simple,Affordable, and Durable water solutions</Text>
+
             <Animatable.View
                 animation="fadeInUpBig"
-                style={[styles.footer, {
-                    backgroundColor: colors.background
+                style={[styles.footer,styles.shadow, {
+                    backgroundColor: "white",
                 }]}
             >
                 <Text style={{ textAlign: 'center', color: "#1B1C1E", fontWeight: "bold", paddingBottom: 20, fontSize: 18 }}>Welcome</Text>
@@ -186,10 +191,10 @@ const Login = ({ navigation }) => {
                 </View>
 
 
-                
 
 
-                <View style={{marginTop:30}}>
+
+                <View style={{ marginTop: 30 }}>
                     <TouchableOpacity
                         style={styles.signIn}
                         onPress={() => { loginHandle(data.phone, data.password) }}
@@ -198,7 +203,7 @@ const Login = ({ navigation }) => {
                             style={{ backgroundColor: "#01B0F1", width: "100%", height: "100%", alignItems: "center", borderRadius: 10 }}
                         >
                             {data.loading ? (
-                                <ActivityIndicator size='large' color='white' style={{marginTop:10}} />
+                                <ActivityIndicator size='large' color='white' style={{ marginTop: 10 }} />
                             ) :
                                 (
                                     <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Sign In</Text>
@@ -230,7 +235,7 @@ export default Login;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#695bf5'
+        backgroundColor: 'white'
     },
     header: {
         flex: 1,
@@ -239,15 +244,27 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingBottom: 50
     },
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
+    
+        elevation: 8,
+      },
     footer: {
         flex: 3,
         alignSelf: 'center',
         backgroundColor: '#fff',
         width: '90%',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         paddingHorizontal: 20,
-        paddingVertical: 30
+        paddingVertical: 30,
+        elevation:5
     },
     text_header: {
         color: '#fff',

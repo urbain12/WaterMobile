@@ -429,20 +429,20 @@ const CryptoDetail = ({ navigation }) => {
                 >
 
 
-                    <View style={{ flex: 1, marginLeft: SIZES.radius,justifyContent:"center",alignItems:"center" }}>
+                    <View style={{ flex: 1, marginLeft: SIZES.radius, justifyContent: "center", alignItems: "center" }}>
                         {balance == 0 ? (
                             <Text style={{ ...FONTS.h3, color: 'green' }}>Your instalment is fully paid</Text>
                         ) : (
 
                             <View>
-                            <Text style={{ ...FONTS.h3,fontFamily:"bold" }}>Instalment balance </Text>
-                            <Text style={{ color: 'green',textAlign:"center",fontSize:30,fontFamily:"bold" }}>{JSON.stringify(format(balance)).substring(1,JSON.stringify(format(balance)).length-4)} Rwf</Text> 
+                                <Text style={{ ...FONTS.h3, fontFamily: "bold" }}>Instalment balance </Text>
+                                <Text style={{ color: 'green', textAlign: "center", fontSize: 30, fontFamily: "bold" }}>{JSON.stringify(format(balance)).substring(1, JSON.stringify(format(balance)).length - 4)} Rwf</Text>
                             </View>
 
 
 
-                        )}            
-                        </View>
+                        )}
+                    </View>
 
 
                 </View>
@@ -468,24 +468,45 @@ const CryptoDetail = ({ navigation }) => {
                         }}
                     >
                         {/* Currency */}
-                        <View style={{ width: "30%" }}>
+                        {category.toUpperCase() === 'AMAZI' ? (
+                            <TouchableOpacity style={{ width: "30%" }}>
 
-                            <View >
-                                <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                <View >
+                                    <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
-                                    <Image
-                                        source={icons.filter}
-                                        resizeMode="contain"
-                                        style={{
-                                            width: 75,
-                                            height: 120,
+                                        <Image
+                                            source={icons.filter}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 75,
+                                                height: 120,
 
-                                        }}
-                                    />
+                                            }}
+                                        />
+                                    </View>
+                                    <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
                                 </View>
-                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Our systems</Text>
-                            </View>
-                        </View>
+                            </TouchableOpacity>
+
+                        ) : (
+                            <TouchableOpacity style={{ width: "30%" }}
+                            onPress={() => navigation.navigate('request')}
+                            >
+                                <View >
+                                    <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+
+                                        <FontAwesome
+                                            name="send"
+                                            size={60}
+                                            color="white"
+                                            resizeMode="contain"
+                                        />
+                                    </View>
+                                    <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Request</Text>
+                                </View>
+
+                            </TouchableOpacity>
+                        )}
 
                         {/* Amount */}
                         <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }} onPress={() => navigation.navigate("Responses")}>

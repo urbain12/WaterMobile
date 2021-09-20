@@ -1,5 +1,5 @@
 const banner = require("../assets/images/banner.png");
-const Logo = require("../assets/images/Logo.png");
+const Logo = require("../assets/images/Layer.png");
 const banner_settings = require("../assets/images/banner_settings.png");
 const modalbanner = require("../assets/images/modalbanner.png");
 const bannerhome = require("../assets/images/bannerhome.png");
