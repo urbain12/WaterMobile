@@ -146,8 +146,7 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                     marginHorizontal: 20
                 }}>Details</Text>
                 <Text style={{
-                    color: "#a4a4a9",
-                    fontWeight: "bold",
+                    color: "black",
                     fontSize: 15,
                     marginVertical: 10,
                     marginHorizontal: 20,

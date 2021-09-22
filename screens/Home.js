@@ -28,28 +28,29 @@ const Home = ({ navigation }) => {
   const [showAlert, setShowAlert] = useState('')
   const [showNotification, setShowNotification] = useState('')
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [balance, setBalance] = useState(0)
 
-  const dismissAlert=  ()=>{
-     AsyncStorage.setItem('showAlert','false').then(data=>{
-       AsyncStorage.getItem('showAlert').then(da=>{setShowAlert(da)})
-     })
-    
+  const dismissAlert = () => {
+    AsyncStorage.setItem('showAlert', 'false').then(data => {
+      AsyncStorage.getItem('showAlert').then(da => { setShowAlert(da) })
+    })
+
   }
 
-  const dismissNotification=  ()=>{
-    AsyncStorage.setItem('showNotification','false').then(data=>{
-      AsyncStorage.getItem('showNotification').then(da=>{setShowNotification(da)})
+  const dismissNotification = () => {
+    AsyncStorage.setItem('showNotification', 'false').then(data => {
+      AsyncStorage.getItem('showNotification').then(da => { setShowNotification(da) })
     })
-   
- }
+
+  }
 
   const windowWidth = Dimensions.get('window').width
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
     async function setInfo() {
-      const show=  await AsyncStorage.getItem('showAlert')
-      const notification=  await AsyncStorage.getItem('showNotification')
+      const show = await AsyncStorage.getItem('showAlert')
+      const notification = await AsyncStorage.getItem('showNotification')
       console.log(show)
       setShowAlert(show)
       setShowNotification(notification)
@@ -71,6 +72,11 @@ const Home = ({ navigation }) => {
       })
       axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
         setTransactionHistory(res.data)
+      }).catch(err => {
+        console.log(err)
+      })
+      axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+        setBalance(res.data.balance)
       }).catch(err => {
         console.log(err)
       })
@@ -170,41 +176,43 @@ const Home = ({ navigation }) => {
   function renderAlert() {
     return (
       <View
-      
-          style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: SIZES.padding * 1,
-              marginHorizontal: SIZES.padding,
-              paddingVertical: SIZES.padding,
-              paddingHorizontal: SIZES.radius,
-              backgroundColor: COLORS.white,
-              borderRadius: SIZES.radius,
-              ...styles.shadow
-          }}
-      >
-          <Image
-              resizeMode='contain'
-              source={icons.notification_color}
-              style={{
-                  width: 30,
-                  height: 30
-              }}
-          />
 
-          <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-              <Text style={{ ...FONTS.h3 }}>Notifications</Text>
-              <Text stlye={{ color:"#707070" }}>See your notifications here!!!</Text>
-          </View>
-              <TouchableOpacity onPress={()=>{dismissNotification();
-               navigation.navigate('Home')}}
-               
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: SIZES.padding * 1,
+          marginHorizontal: SIZES.padding,
+          paddingVertical: SIZES.padding,
+          paddingHorizontal: SIZES.radius,
+          backgroundColor: COLORS.white,
+          borderRadius: SIZES.radius,
+          ...styles.shadow
+        }}
       >
-                 <AntDesign name="close" size={24} color="#01b0f1"  />
-              </TouchableOpacity>
-          
+        <Image
+          resizeMode='contain'
+          source={icons.notification_color}
+          style={{
+            width: 30,
+            height: 30
+          }}
+        />
+
+        <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+          <Text style={{ ...FONTS.h3 }}>Notifications</Text>
+          <Text stlye={{ color: "#707070" }}>See your notifications here!!!</Text>
+        </View>
+        <TouchableOpacity onPress={() => {
+          dismissNotification();
+          navigation.navigate('Home')
+        }}
+
+        >
+          <AntDesign name="close" size={24} color="#01b0f1" />
+        </TouchableOpacity>
+
       </View>
-  )
+    )
   }
 
   function renderNotice() {
@@ -232,12 +240,12 @@ const Home = ({ navigation }) => {
 
         </View>
         <View style={{ width: '90%', marginLeft: "2%" }}>
-          <View style={{flexDirection:'row'}}>
-            <View style={{marginRight:'41%'}}>
-          <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ marginRight: '41%' }}>
+              <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
             </View>
-            <TouchableOpacity onPress={dismissAlert} style={{marginBottom:10}}>
-            <AntDesign name="close" size={24} color="white" />
+            <TouchableOpacity onPress={dismissAlert} style={{ marginBottom: 10 }}>
+              <AntDesign name="close" size={24} color="white" />
             </TouchableOpacity>
           </View>
 
@@ -282,7 +290,7 @@ const Home = ({ navigation }) => {
       <View style={{ flex: 1, paddingBottom: 130 }}>
 
         <View style={{ zIndex: 0, position: 'absolute' }}>
-          <Image resizeMode='cover' source={{uri:image.Image}} style={{ height: 250, width: windowWidth }} />
+          <Image resizeMode='cover' source={{ uri: image.Image }} style={{ height: 250, width: windowWidth }} />
         </View>
         <View
           style={{
@@ -298,33 +306,34 @@ const Home = ({ navigation }) => {
               alignItems: "center",
               justifyContent: "center",
             }}
-            // onPress={() => navigation.navigate('Shop')}
+          // onPress={() => navigation.navigate('Shop')}
           >
-            
+
           </TouchableOpacity>
         </View>
 
 
 
 
-        <ScrollView horizontal snapToInterval={180}  decelerationRate="fast" snapToAlignment={"center"} showsHorizontalScrollIndicator={false} >
+        <ScrollView horizontal snapToInterval={180} decelerationRate="fast" snapToAlignment={"center"} showsHorizontalScrollIndicator={false} >
 
 
 
-          <View style={{ flexDirection: "row", marginTop:"20%"}}>
+          <View style={{ flexDirection: "row", marginTop: "20%" }}>
 
 
 
             <TouchableOpacity
               style={{
-                width: 180,
-                paddingVertical: SIZES.padding,
-                paddingHorizontal: SIZES.padding,
-                marginLeft: 10,
-                marginRight: SIZES.radius,
+                width: 150,
+                height:100,
+                paddingVertical: 15,
+                paddingHorizontal: 12,
+                marginLeft: 6,
+                marginRight: 4,
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                marginBottom: 15,
+                marginTop:1,
                 ...styles.shadow
 
               }}
@@ -353,7 +362,7 @@ const Home = ({ navigation }) => {
                   </View>
 
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    245 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                    245 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
                 </View>
               </View>
@@ -364,14 +373,15 @@ const Home = ({ navigation }) => {
 
             <TouchableOpacity
               style={{
-                width: 180,
-                paddingVertical: SIZES.padding,
-                paddingHorizontal: SIZES.padding,
-                marginLeft: 10,
-                marginRight: SIZES.radius,
+                width: 150,
+                height:100,
+                paddingVertical: 15,
+                paddingHorizontal: 12,
+                marginLeft: 6,
+                marginRight: 4,
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                marginBottom: 15,
+                marginTop:1,
                 ...styles.shadow
 
               }}
@@ -400,7 +410,7 @@ const Home = ({ navigation }) => {
                   </View>
 
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                  2,342 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                    2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
                 </View>
               </View>
@@ -411,14 +421,15 @@ const Home = ({ navigation }) => {
 
             <TouchableOpacity
               style={{
-                width: 180,
-                paddingVertical: SIZES.padding,
-                paddingHorizontal: SIZES.padding,
-                marginLeft: 10,
-                marginRight: SIZES.radius,
+                width: 150,
+                height:100,
+                paddingVertical: 15,
+                paddingHorizontal: 15,
+                marginLeft: 6,
+                marginRight: 4,
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                marginBottom: 15,
+                marginBottom:8,
                 ...styles.shadow
 
               }}
@@ -447,7 +458,7 @@ const Home = ({ navigation }) => {
                   </View>
 
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                  3,142 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                    3,142 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
                 </View>
               </View>
@@ -458,42 +469,52 @@ const Home = ({ navigation }) => {
           </View>
 
         </ScrollView>
+        {balance > 0 ? (
+
         <TouchableOpacity
-                    style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent:'center',
-                        marginLeft:"8%",
-                        marginTop: SIZES.padding * 1,
-                        paddingVertical: SIZES.padding,
-                        paddingHorizontal: SIZES.radius,
-                        backgroundColor: COLORS.white,
-                        borderRadius: SIZES.radius,
-                        width:"85%",
-                        ...styles.shadow
-                    }}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginLeft: "8%",
+            marginTop: SIZES.padding * 1,
+            paddingVertical: SIZES.padding,
+            paddingHorizontal: SIZES.radius,
+            backgroundColor: COLORS.white,
+            borderRadius: SIZES.radius,
+            width: "85%",
+            ...styles.shadow
+          }}
 
-                    onPress={() => navigation.navigate('momo')}
+          onPress={() => navigation.navigate('momo')}
 
-                >
-
-
-                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                       
-
-                     <Text style={{ color: 'green',alignSelf:"center",fontSize:20,fontWeight:"bold" }}>Pay Subscriptions</Text> 
+        >
 
 
-                        
-                    </View>
+          <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
 
-                </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
-        { showNotification=='true' && renderAlert()}
+            <Text style={{ color: 'green', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Pay Subscriptions</Text>
+
+
+
+          </View>
+
+
         </TouchableOpacity>
-        {showAlert=='true' && renderNotice()}
-        
+        ):(
+
+          <>
+          </>
+
+        )}
+
+
+        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
+          {showNotification == 'true' && renderAlert()}
+        </TouchableOpacity>
+        {showAlert == 'true' && renderNotice()}
+
         {renderTransactionHistory()}
       </View>
     </ScrollView>
