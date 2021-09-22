@@ -177,7 +177,7 @@ const Settings = ({ navigation }) => {
 
                     </View>
                     
-                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
+                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}>
                         <View>
                             <MaterialIcons name="email" size={30}/>
                         </View>
@@ -186,7 +186,7 @@ const Settings = ({ navigation }) => {
                             <Text style={{color:'#707070'}}>{JSON.stringify(customer)!=='{}' && customer.user.email}</Text>
                         </View>
                     </View>
-                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
+                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}>
                         <View>
                             <Entypo name="location" size={30}/>
                         </View>
@@ -195,19 +195,11 @@ const Settings = ({ navigation }) => {
                             <Text style={{color:'#707070'}}>{customer.Province},{customer.District},{customer.Sector},{customer.Cell}</Text>
                         </View>
                     </View>
-                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}
+                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}
                     onPress={() => navigation.navigate("Notifications")}
                     >
                         <View>
-                            <Image 
-                            source={icons.notification_color}
-                            resizeMode="contain"
-                            style={{
-                              width:30 ,
-                              height: 30
-                            }}
-                            
-                            />
+                        <Entypo name="bell" size={30} color="black" />
 
                         </View>
                         <View style={{marginLeft:30}}>
@@ -215,7 +207,7 @@ const Settings = ({ navigation }) => {
                             <Text style={{color:'#707070'}}>View your recent notifications</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}>
+                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}>
                         <View>
                             <Image resizeMode='contain' style={{width:30,height:30}} source={require('../assets/icons/subscription.png')}/>
                         </View>
@@ -248,7 +240,7 @@ const Settings = ({ navigation }) => {
                         )}
                         
                     </View>
-                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10}}
+                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}
 
                     onPress={() => navigation.navigate("query")}
                     >
