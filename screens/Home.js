@@ -35,8 +35,9 @@ const Home =({navigation})=> {
   const [isInuma, setIsInuma] = useState(false)
   const [isUhira, setIsUhira] = useState(false)
   const [customer, setCustomer] = useState({})
-  useEffect( async () =>{
-    const id = await AsyncStorage.getItem('user_id')
+  useEffect(  () =>{
+    const setInfo=async()=>{
+      const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
       }).catch(err => {
@@ -62,6 +63,9 @@ const Home =({navigation})=> {
             }).catch(err => {
                 console.log(err)
             })
+    }
+    setInfo();
+    
   },[])
 
   
@@ -88,7 +92,7 @@ const Home =({navigation})=> {
     axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
-      navigation.navigate('Landing')
+      navigation.navigate('CryptoDetail')
     }).catch(err => {
       console.log(err)
     })
@@ -118,7 +122,7 @@ const Home =({navigation})=> {
     axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
-      navigation.navigate('Landing')
+      navigation.navigate('uhira')
     }).catch(err => {
       console.log(err)
     })
@@ -149,7 +153,7 @@ const Home =({navigation})=> {
     axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
-      navigation.navigate('Landing')
+      navigation.navigate('inuma')
     }).catch(err => {
       console.log(err)
     })
@@ -269,7 +273,7 @@ const Home =({navigation})=> {
          <ScrollView>
          
          {isAmazi?(
-          <TouchableOpacity style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+          <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
             <View
               style={{
                 width: '80%',
@@ -284,7 +288,7 @@ const Home =({navigation})=> {
                 ...styles.shadow
 
               }}
-              //onPress={() => navigation.navigate("Landing")}
+              
             >
               <View style={{ flexDirection: 'row' }}>
 
@@ -378,7 +382,7 @@ const Home =({navigation})=> {
 
 
             {isInuma?(
-              <TouchableOpacity style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+              <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
             <View
               style={{
                 width: '80%',
@@ -487,7 +491,7 @@ const Home =({navigation})=> {
 
 
             {isUhira?(
-              <TouchableOpacity style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+              <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
             <View
               style={{
                 width: '80%',

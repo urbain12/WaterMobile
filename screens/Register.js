@@ -8,7 +8,8 @@ import {
     TextInput,
     TouchableOpacity,
     Dimensions,
-    ImageBackground
+    ImageBackground,
+    ActivityIndicator
 } from "react-native";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
@@ -35,9 +36,12 @@ const Register = ({ navigation }) => {
     const [Sector, setSector] = useState('')
     const [Cell, setCell] = useState('')
     const [Language, setLanguage] = useState('')
+    const [loading, setLoading] = useState(false)
+
 
 
     const handleSubmit = (e) => {
+        setLoading(true)
         if (FirstName.length < 2) {
             alert('Please Enter first Name');
         }
@@ -85,10 +89,14 @@ const Register = ({ navigation }) => {
             axios.post('http://wateraccess.t3ch.rw:8234/register/', postObj).then((res) => {
                 console.log(res.status)
                 alert('Your are succesful register Please login with credentails sent on your phone number')
-                navigation.navigate('Landing')
+                navigation.navigate('Login')
             }).catch(err => {
                 console.log(err)
             })
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 5000)
         }
     }
 
@@ -183,7 +191,7 @@ const Register = ({ navigation }) => {
                     marginTop: 10
                 }}>
 
-                    <TouchableOpacity activeOpacity={1}>
+                    <View activeOpacity={1}>
                         <TextInput
                             style={{
                                 borderColor: "gray",
@@ -335,13 +343,27 @@ const Register = ({ navigation }) => {
                             <Picker.Item value="Kinyarwanda" label="Kinyarwanda" />
                             <Picker.Item value="English" label="English" />
                         </Picker>
-                        <TextButton
-                            label="Request"
-                            onPress={(e) => { handleSubmit(e) }}
+                        <TouchableOpacity 
+                            onPress={(e) => {
+                                handleSubmit(e)
+                            }}>
 
-                        />
+                            <View
+                                style={{ backgroundColor: "#01B0F1", width: "100%", height: "25%", alignItems: "center", borderRadius: 10 }}
+                            >
+                                {loading ? (
+                                    <ActivityIndicator size='large' color='white' style={{ margin: 15 }} />
+                                ) :
+                                    (
+                                        <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Register</Text>
+                                    )}
 
-                    </TouchableOpacity>
+                            </View>
+
+
+                        </TouchableOpacity>
+
+                    </View>
                 </View>
 
 
