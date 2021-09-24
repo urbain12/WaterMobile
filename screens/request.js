@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
+  ImageBackground
 } from "react-native";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
@@ -18,7 +19,7 @@ import {
   TextButton,
   TransactionHistory,
 } from "../components";
-import { dummyData, COLORS, SIZES, FONTS } from "../constants";
+import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
@@ -96,75 +97,72 @@ const request = ({ navigation }) => {
 
 
   }
-
-
-  function renderTrade() {
+  const renderHeader = () => {
 
     return (
-      <KeyboardAwareScrollView
-        contentContaineStyle={{
-          display: "flex",
-          fleex: 1,
-          justifyContent: "space-evenly0",
-          alignItems: "center",
-          height: Dimensions.get("window").height,
-          width: Dimensions.get("window").width,
-        }}
-        style={{
-          marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          padding: SIZES.padding,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.white,
-          ...styles.shadow,
-        }}
-      >
-        <ScrollView>
-
-          <View>
-            <TouchableOpacity activeOpacity={1}>
-
-
-
-              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Send Query</Text>
-              </View>
-
-              
-
-
-
-
-              <TextInput
+        <View
+            style={{
+                width: "100%",
+                height: 120,
+                ...styles.shadow,
+            }}
+        >
+            <ImageBackground
+                source={images.banner_settings}
+                resizeMode="cover"
                 style={{
-                  borderColor: "gray",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  height: 105,
-                  width: "100%",
-                  marginTop: 10,
-                  marginBottom: 10,
-                  textAlign: "center",
-                  padding: 10
+                    flex: 1,
+                    alignItems: "center",
                 }}
-                multiline={true}
-                name="Names"
-                placeholder="Message"
-                onChangeText={text => setMessage(text)}
-              />
+            >
+                {/* Header Bar */}
+                <View
+                    style={{
+                        marginTop: 20,
+                        width: "100%",
+                        flexDirection: "row",
+                        paddingHorizontal: SIZES.padding,
+                    }}
+                >
+                    <TouchableOpacity
+                        style={{
+                            width: 35,
+                            height: 35,
+                            marginRight: '80%',
+                            marginTop: 10,
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                        onPress={() => navigation.navigate('Home')}
+                    >
+                        <Ionicons
+                            name="arrow-back"
+                            size={40}
+                            color="white"
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </View>
 
-            </TouchableOpacity>
-          </View>
+                {/* Balance */}
+                <View
+                    style={{
+                        paddingTop: 10,
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
+                    Send Subscriptions Request
+                    </Text>
+                </View>
 
-          <TextButton
-            label="Request"
-            onPress={(e) => { handleSubmit(e) }}
-            style={{ marginTop: 100 }}
-          />
-        </ScrollView>
-      </KeyboardAwareScrollView>
+                {/* Trending */}
+
+            </ImageBackground>
+        </View>
     );
-  }
+}
 
 
   return (
@@ -172,31 +170,9 @@ const request = ({ navigation }) => {
     
     >
       <View
-        style={{
-          width: "100%",
-          flexDirection: "row",
-          paddingHorizontal: SIZES.padding,
-        }}
+        
       >
-        <TouchableOpacity
-          style={{
-            width: 35,
-            height: 35,
-            marginTop: 25,
-            marginBottom: 20,
-            marginRight: '80%',
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => navigation.navigate('Home')}
-        >
-          <Ionicons
-            name="arrow-back"
-            size={40}
-            color="black"
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
+        {renderHeader()}
 
       </View>
       <ScrollView>
@@ -209,14 +185,6 @@ const request = ({ navigation }) => {
           backgroundColor: COLORS.white,
           ...styles.shadow,}}>
             <TouchableOpacity activeOpacity={1}>
-
-
-
-              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Send Request</Text>
-              </View>
-
-
               <TextInput
                 style={{
                   borderColor: "gray",

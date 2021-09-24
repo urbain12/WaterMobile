@@ -29,6 +29,7 @@ import Responses from './screens/Responses';
 import paywater from './screens/paywater';
 import request from './screens/request';
 import Landing from './screens/Landing';
+import Register from './screens/Register';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -289,6 +290,7 @@ const App = () => {
               name="request"
               component={request}
             />
+             
           </Stack.Navigator>
         </NavigationContainer>
       </AuthContext.Provider>
@@ -298,7 +300,20 @@ const App = () => {
   }else{
       return (
           <AuthContext.Provider value={authContext}>
-              <Login/>
+              <NavigationContainer>
+              <Stack.Navigator screenOptions={{
+              headerShown: false
+            }}>
+                <Stack.Screen
+                  name="Login"
+                  component={Login}
+                />
+              <Stack.Screen
+              name="Register"
+              component={Register}
+            />
+              </Stack.Navigator>
+              </NavigationContainer>
           </AuthContext.Provider>
       )
   }
