@@ -65,7 +65,7 @@ const request = ({ navigation }) => {
       'Names': names,
       'Message': Message,
       'Subscriptions': subscriptions,
-      'category':category.category,
+      'category':category,
       'phonenumber': customer.user.phone,
       'Province': customer.Province,
       'District': customer.District,
@@ -75,6 +75,7 @@ const request = ({ navigation }) => {
 
     })
     console.log(postObj)
+    console.log(category)
 
     // let my_token = localStorage.getItem('token');
 
@@ -84,7 +85,6 @@ const request = ({ navigation }) => {
       "Content-Type": "application/json",
       // Authorization: `Token ${my_token}`,
     };
-
     axios.post('http://wateraccess.t3ch.rw:8234/subrequest/create/', postObj).then((res) => {
       console.log(res.status)
       alert('Your request is submitted')
