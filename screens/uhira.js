@@ -24,6 +24,7 @@ import axios from 'axios';
 const CryptoDetail = ({ navigation, }) => {
     const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
     const [customer, setCustomer] = useState({})
+    const [information, setinformation] = useState({})
     const [category, setCategory] = useState('')
     const [transactionHistory, setTransactionHistory] = useState([]);
     const [balance, setBalance] = useState(0)
@@ -63,12 +64,23 @@ const CryptoDetail = ({ navigation, }) => {
             }).catch(err => {
                 console.log(err)
             })
+            axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+                const sub = res.data.find(el => el.Category.Title.toUpperCase() === "UHIRA")
+                setinformation(sub)
+            }).catch(err => {
+                console.log(err)
+            })
 
         }
 
         setInfo()
 
     }, []);
+
+    const OverdueAmount = information.get_total_amount / 12 * information.get_overdue_months
+    const Monthly = information.get_total_amount / 12
+    const subbalance = information.get_total_amount
+
     const getInstalmentDays = (my_date) => {
         var sub_date = my_date
         var date = new Date(sub_date)
@@ -124,26 +136,15 @@ const CryptoDetail = ({ navigation, }) => {
                 </View>
                 <View style={{ width: '90%', marginLeft: "2%" }}>
                     <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
-                    {category.toUpperCase() === 'AMAZI' ? (
+                    <View>
 
-                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
-                    ) : (
-                        <View>
-                            {category.toUpperCase() === 'UHIRA' ? (
-                                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
-                                    Encourage your farmer friends to join our UHIRA.RW network!!</Text>
-                            ) : (
-                                <View>
-                                    {category.toUpperCase() === 'INUMA' ? (
-                                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
-                                            Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
-                                    ) : (
-                                        <Text></Text>
-                                    )}
-                                </View>
-                            )}
-                        </View>
-                    )}
+                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
+                            Encourage your farmer friends to join our UHIRA.RW network!!</Text>
+
+
+
+                    </View>
+
                 </View>
 
             </View>
@@ -213,61 +214,55 @@ const CryptoDetail = ({ navigation, }) => {
                         </View>
                     </View>
 
-                    <View
-                        style={{
-                            width: "80%",
-                            paddingVertical: SIZES.padding,
-                            paddingHorizontal: SIZES.padding,
-                            marginLeft: 40,
-                            marginTop: 40,
-                            marginRight: SIZES.radius,
-                            borderRadius: 10,
-                            backgroundColor: COLORS.white,
-                            marginBottom: 15,
-                            ...styles.shadow
 
+
+                </View>
+                {subbalance > 0 ? (
+
+                    <TouchableOpacity
+                        style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginLeft: "8%",
+                            marginTop: 130,
+                            paddingVertical: SIZES.padding,
+                            paddingHorizontal: SIZES.radius,
+                            backgroundColor: COLORS.white,
+                            borderRadius: SIZES.radius,
+                            width: "85%",
+                            ...styles.shadow
                         }}
 
+                        onPress={() => navigation.navigate('momo')}
+
                     >
-                        <View style={{ flexDirection: 'row', justifyContent: "center" }}>
 
-                            <View style={{ marginLeft: SIZES.base }}>
-                                <Image source={require("../assets/images/Uhira.png")}
-                                    style={{
-                                        resizeMode: 'contain',
-                                        width: "100%",
-                                        height: 30,
 
-                                    }}
+                        <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
-                                />
-                                <View style={{
-                                    borderBottomWidth: 2,
-                                    borderBottomColor: "#47315a",
-                                    width: 50,
-                                    marginLeft: 20,
-                                    marginTop: 5
-                                }}>
 
-                                </View>
+                            <Text style={{ color: 'green', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Pay Subscriptions</Text>
 
-                                <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                                    2,342 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
-                                </Text>
-                            </View>
+
+
                         </View>
 
 
-                    </View>
+                    </TouchableOpacity>
+                ) : (
 
-                </View>
+                    <>
+                    </>
+
+                )}
+
 
 
                 <View
                     style={{
                         flexDirection: 'row',
                         alignItems: 'center',
-                        marginTop: SIZES.padding * 1,
+                        marginTop: 20,
                         marginHorizontal: SIZES.padding,
                         paddingVertical: SIZES.padding,
                         paddingHorizontal: SIZES.radius,
@@ -278,15 +273,32 @@ const CryptoDetail = ({ navigation, }) => {
                 >
 
 
-                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                        {balance == 0 ? (
-                            <Text style={{ ...FONTS.h3, color: 'green' }}>Your instalment is fully paid</Text>
-                        ) : (
 
-                            <Text style={{ ...FONTS.h3 }}>Instalment balance: <Text style={{ color: 'green' }}>{JSON.stringify(format(balance)).substring(1, JSON.stringify(format(balance)).length - 4)} Rwf</Text> </Text>
+                    <View style={{ flex: 1, marginLeft: SIZES.radius, justifyContent: "center", alignItems: "center" }}>
 
 
-                        )}
+                        <View>
+                            <Text style={{ ...FONTS.h3, fontFamily: "bold" }}>Instalment balance </Text>
+                            <Text style={{ color: 'green', textAlign: "center", fontSize: 30, fontFamily: "bold" }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
+                        </View>
+
+
+
+                        <View>
+                            <Text style={{ ...FONTS.h3, fontFamily: "bold" }}>Monthly payment </Text>
+                            <Text style={{ color: 'green', textAlign: "center", fontSize: 30, fontFamily: "bold" }}>{Math.ceil(Monthly)}</Text>
+                        </View>
+
+                        <View>
+                            <Text style={{ ...FONTS.h3, fontFamily: "bold" }}>Overdue Month </Text>
+                            <Text style={{ color: 'green', textAlign: "center", fontSize: 30, fontFamily: "bold" }}>{information.get_overdue_months}</Text>
+                        </View>
+
+                        <View>
+                            <Text style={{ ...FONTS.h3, fontFamily: "bold" }}>Overdue Amount </Text>
+                            <Text style={{ color: 'green', textAlign: "center", fontSize: 30, fontFamily: "bold" }}>{Math.ceil(OverdueAmount)}</Text>
+                        </View>
+
                     </View>
 
 
