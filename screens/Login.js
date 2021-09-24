@@ -110,11 +110,11 @@ const Login = ({ navigation }) => {
                     />
                 </ImageBackground>
             </View>
-                <Text style={{textAlign:"center",fontSize:12,fontWeight:"bold",marginBottom:10,color:"#707070"}}>Providing Simple,Affordable, and Durable water solutions</Text>
+            <Text style={{ textAlign: "center", fontSize: 12, fontWeight: "bold", marginBottom: 10, color: "#707070" }}>Providing Simple,Affordable, and Durable water solutions</Text>
 
             <Animatable.View
                 animation="fadeInUpBig"
-                style={[styles.footer,styles.shadow, {
+                style={[styles.footer, styles.shadow, {
                     backgroundColor: "white",
                 }]}
             >
@@ -218,9 +218,14 @@ const Login = ({ navigation }) => {
                 <TouchableOpacity>
                     <Text style={{ color: '#1B1C1E', marginTop: 15, fontWeight: "bold" }}>Forgot password?  <Text style={{ color: "#01B0F1", fontWeight: "bold" }}>Recover credentials</Text></Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={{ color: '#1B1C1E', marginTop: 10, fontWeight: "bold" }}>Don't have an account?  <Text style={{ color: "#01B0F1", fontWeight: "bold" }}>Create one</Text></Text>
-                </TouchableOpacity>
+                <View style={{ flexDirection: "row" }}>
+                    <Text style={{ color: '#1B1C1E', marginTop: 10, fontWeight: "bold" }}>Don't have an account?  </Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Register')}
+                    >
+                        <Text style={{ color: "#01B0F1", fontWeight: "bold", marginTop:10 }}>Sign up</Text>
+                    </TouchableOpacity>
+                </View>
                 <View style={{ alignItems: "center", marginTop: "45%" }}>
                     <Text style={{ fontSize: 12, fontWeight: "bold", color: "#707070" }}>Copyright @ {year} Water access Rwanda</Text>
                 </View>
@@ -247,14 +252,14 @@ const styles = StyleSheet.create({
     shadow: {
         shadowColor: "#000",
         shadowOffset: {
-          width: 0,
-          height: 4,
+            width: 0,
+            height: 4,
         },
         shadowOpacity: 0.3,
         shadowRadius: 4.65,
-    
+
         elevation: 8,
-      },
+    },
     footer: {
         flex: 3,
         alignSelf: 'center',
@@ -264,7 +269,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 30,
-        elevation:5
+        elevation: 5
     },
     text_header: {
         color: '#fff',

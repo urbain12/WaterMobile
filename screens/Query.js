@@ -68,6 +68,7 @@ const Transaction = ({ navigation }) => {
 
     })
     console.log(postObj)
+    console.log
 
     // let my_token = localStorage.getItem('token');
 
@@ -89,87 +90,6 @@ const Transaction = ({ navigation }) => {
 
 
   }
-
-
-  function renderTrade() {
-
-    return (
-      <KeyboardAwareScrollView
-        contentContaineStyle={{
-          display: "flex",
-          fleex: 1,
-          justifyContent: "space-evenly0",
-          alignItems: "center",
-          height: Dimensions.get("window").height,
-          width: Dimensions.get("window").width,
-        }}
-        style={{
-          marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          padding: SIZES.padding,
-          borderRadius: SIZES.radius,
-          backgroundColor: COLORS.white,
-          ...styles.shadow,
-        }}
-      >
-        <ScrollView>
-
-          <View>
-            <TouchableOpacity activeOpacity={1}>
-
-
-
-              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Send Query</Text>
-              </View>
-
-              <Picker
-                style={{
-                  marginTop: 20
-                }}
-                selectedValue={service}
-                onValueChange={(val) => { setservice(val) }}
-              >
-                <Picker.Item label="Select Service" value="" />
-                <Picker.Item value="Maintenance" label="Maintenance" />
-                <Picker.Item value="Claims" label="Claims" />
-                <Picker.Item value="Query" label="query" />
-              </Picker>
-
-
-
-
-              <TextInput
-                style={{
-                  borderColor: "gray",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  height: 105,
-                  width: "100%",
-                  marginTop: 10,
-                  marginBottom: 10,
-                  textAlign: "center",
-                  padding: 10
-                }}
-                multiline={true}
-                name="Names"
-                placeholder="Message"
-                onChangeText={text => setMessage(text)}
-              />
-
-            </TouchableOpacity>
-          </View>
-
-          <TextButton
-            label="Request"
-            onPress={(e) => { handleSubmit(e) }}
-            style={{ marginTop: 100 }}
-          />
-        </ScrollView>
-      </KeyboardAwareScrollView>
-    );
-  }
-
 
   return (
     <KeyboardAwareScrollView 
