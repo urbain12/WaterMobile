@@ -23,11 +23,37 @@ import axios from 'axios';
 
 const CryptoDetail = ({ navigation }) => {
     const [balance, setBalance] = useState(0)
+    const [subscriptions, setSubscriptions] = useState([])
+    const [payments, setPayments] = useState([])
+    const [isAmazi, setIsAmazi] = useState(false)
     useEffect(() => {
         async function setInfo() {
             const id = await AsyncStorage.getItem('user_id')
             axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
                 setBalance(res.data.balance)
+            }).catch(err => {
+                console.log(err)
+            })
+            axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+                var subs=[]
+                console.log(res.data.length)
+                for(var i=0;i<res.data.length;i++){
+                    subs.push(res.data[i].Category.Title.toUpperCase())
+                    console.log(res.data[i].TotalBalance)
+                }
+                if(subs.includes('AMAZI')){
+                    setIsAmazi(true)
+                    console.log('true')
+                    const sub=res.data.find(subscr => subscr.Category.Title.toUpperCase()==='AMAZI')
+                    console.log(sub.CustomerID)
+                    axios.get(`http://wateraccess.t3ch.rw:8234/payments/${sub.id}`).then((res) => {
+                        console.log('lkj')
+                        setPayments(res.data)
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }
+                setSubscriptions(subs)
             }).catch(err => {
                 console.log(err)
             })
@@ -64,7 +90,7 @@ const CryptoDetail = ({ navigation }) => {
             var end_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
             var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
             var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-            console.log(diffDays)
+            // console.log(diffDays)
             setDays2(diffDays)
         }
         else {
@@ -72,7 +98,7 @@ const CryptoDetail = ({ navigation }) => {
             var end_date = new Date(year + '-' + ('0' + end_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
             var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
             var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-            console.log(diffDays)
+            // console.log(diffDays)
             setDays2(diffDays)
 
         }
@@ -101,14 +127,14 @@ const CryptoDetail = ({ navigation }) => {
                     var end_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                 }
                 else {
                     var end_date = new Date(year + '-' + ('0' + paymentMonths[1]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                     console.log('niho bigitangura')
                 }
@@ -117,7 +143,7 @@ const CryptoDetail = ({ navigation }) => {
                 var end_date = new Date(year + '-' + ('0' + paymentMonths[1]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                 var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                 var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                console.log(diffDays)
+                // console.log(diffDays)
                 setDays(diffDays)
                 // console.log('first')
             }
@@ -130,14 +156,14 @@ const CryptoDetail = ({ navigation }) => {
                     var end_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                 }
                 else {
                     var end_date = new Date(year + '-' + ('0' + paymentMonths[2]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                     console.log('niho bigitangura')
                 }
@@ -146,7 +172,7 @@ const CryptoDetail = ({ navigation }) => {
                 var end_date = new Date(year + '-' + ('0' + paymentMonths[2]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                 var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                 var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                console.log(diffDays)
+                // console.log(diffDays)
                 setDays(diffDays)
                 // console.log('second')
             }
@@ -160,14 +186,14 @@ const CryptoDetail = ({ navigation }) => {
                     var end_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                 }
                 else {
                     var end_date = new Date(year + '-' + ('0' + paymentMonths[3]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                     console.log('niho bigitangura')
                 }
@@ -176,7 +202,7 @@ const CryptoDetail = ({ navigation }) => {
                 var end_date = new Date(year + '-' + ('0' + paymentMonths[3]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                 var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                 var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                console.log(diffDays)
+                // console.log(diffDays)
                 setDays(diffDays)
                 // console.log('third')
             }
@@ -188,7 +214,7 @@ const CryptoDetail = ({ navigation }) => {
                     var end_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                 }
                 else {
@@ -196,7 +222,7 @@ const CryptoDetail = ({ navigation }) => {
                     var end_date = new Date(my_year + '-' + ('0' + paymentMonths[0]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                     var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                     var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                    console.log(diffDays)
+                    // console.log(diffDays)
                     setDays(diffDays)
                     console.log('niho bigitangura')
                 }
@@ -206,13 +232,13 @@ const CryptoDetail = ({ navigation }) => {
                 var end_date = new Date(my_year + '-' + ('0' + paymentMonths[0]).slice(-2) + '-' + ('0' + sub_day).slice(-2))
                 var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
                 var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-                console.log(diffDays)
+                // console.log(diffDays)
                 setDays(diffDays)
                 // console.log('second')
             }
             console.log('ntanakimwe')
         }
-        console.log(paymentMonths)
+        // console.log(paymentMonths)
     }
 
     React.useEffect(() => {
@@ -545,8 +571,20 @@ const CryptoDetail = ({ navigation }) => {
 
                     </View>
 
+                    
+
 
                 </View>
+                {isAmazi && payments.length>0? (
+                       
+                       <TransactionHistory
+                           customContainerStyle={{ ...styles.shadow }}
+                           history={payments}
+                       />
+   
+                   ):(
+                       <></>
+                   )}
             </View>
         </ScrollView>
     );

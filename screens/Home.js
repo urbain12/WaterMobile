@@ -515,7 +515,7 @@ const Home = ({ navigation }) => {
         </TouchableOpacity>
         {showAlert == 'true' && renderNotice()}
 
-        {renderTransactionHistory()}
+        {/* {renderTransactionHistory()} */}
       </View>
     </ScrollView>
   );
