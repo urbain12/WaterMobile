@@ -28,6 +28,7 @@ import Notifications from './screens/notifications'
 import Responses from './screens/Responses';
 import paywater from './screens/paywater';
 import request from './screens/request';
+import Landing from './screens/Landing';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -210,7 +211,7 @@ const App = () => {
             screenOptions={{
               headerShown: false
             }}
-            initialRouteName={'Home'}
+            
           >
 
             <Stack.Screen
@@ -220,6 +221,10 @@ const App = () => {
             <Stack.Screen
               name="query"
               component={query}
+            />
+            <Stack.Screen
+              name="Landing"
+              component={Landing}
             />
             <Stack.Screen
               name="momo"
