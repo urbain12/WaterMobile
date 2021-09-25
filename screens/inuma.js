@@ -27,6 +27,10 @@ const CryptoDetail = ({ navigation, }) => {
     const [transactionHistory, setTransactionHistory] = useState([]);
     const [balance, setBalance] = useState(0)
     const [days2, setDays2] = useState(0)
+    const [isAmazi, setIsAmazi] = useState(false)
+    const [payments, setPayments] = useState([])
+
+
 
     const windowWidth = Dimensions.get('window').width
     const subbalance = information.get_total_amount
@@ -68,6 +72,25 @@ const CryptoDetail = ({ navigation, }) => {
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "INUMA")
                 setinformation(sub)
+                var subs=[]
+                console.log(res.data.length)
+                for(var i=0;i<res.data.length;i++){
+                    subs.push(res.data[i].Category.Title.toUpperCase())
+                    console.log(res.data[i].TotalBalance)
+                }
+                if(subs.includes('INUMA')){
+                    setIsAmazi(true)
+                    console.log('true')
+                    const sub=res.data.find(subscr => subscr.Category.Title.toUpperCase()==='INUMA')
+                    console.log(sub.CustomerID)
+                    axios.get(`http://wateraccess.t3ch.rw:8234/payments/${sub.id}`).then((res) => {
+                        console.log('lkj')
+                        setPayments(res.data)
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }
+                setSubscriptions(subs)
             }).catch(err => {
                 console.log(err)
             })
@@ -76,7 +99,7 @@ const CryptoDetail = ({ navigation, }) => {
 
         setInfo()
 
-    }, []);
+    }, [])
 
     const OverdueAmount = information.get_total_amount / 12 * information.get_overdue_months
     const Monthly = information.get_total_amount / 12
@@ -214,11 +237,61 @@ const CryptoDetail = ({ navigation, }) => {
                         </View>
                     </View>
 
+                    <View
+                        style={{
+                            width: "80%",
+                            paddingVertical: SIZES.padding,
+                            paddingHorizontal: SIZES.padding,
+                            marginLeft: 40,
+                            marginTop: 40,
+                            marginRight: SIZES.radius,
+                            borderRadius: 10,
+                            backgroundColor: COLORS.white,
+                            marginBottom: 15,
+                            ...styles.shadow
+                            
+                             }}
+                            
+                             >
+                        <View style={{ flexDirection: 'row', justifyContent: "center" }}>
+
+                            <View style={{ marginLeft: SIZES.base }}>
+                                <Image source={require("../assets/images/Inuma.png")}
+                                    style={{
+                                        resizeMode: 'contain',
+                                        width: "100%",
+                                        height: 30,
+
+                                    }}
+
+                                />
+                                <View style={{
+                                    borderBottomWidth: 2,
+                                    borderBottomColor: "#47315a",
+                                    width: 50,
+                                    marginLeft: 20,
+                                    marginTop: 5
+                                }}>
+
+                                </View>
+
+                                <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                                3,142 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                                </Text>
+                            </View>
+                        </View>
+
+
+                    </View>
+
+                    
+
 
                     
 
 
                 </View>
+                
                 {subbalance > 0 ? (
 
                     <TouchableOpacity
@@ -226,7 +299,7 @@ const CryptoDetail = ({ navigation, }) => {
                             alignItems: 'center',
                             justifyContent: 'center',
                             marginLeft: "8%",
-                            marginTop: 130,
+                            marginTop: SIZES.padding * 1,
                             paddingVertical: SIZES.padding,
                             paddingHorizontal: SIZES.radius,
                             backgroundColor: COLORS.white,
@@ -235,7 +308,7 @@ const CryptoDetail = ({ navigation, }) => {
                             ...styles.shadow
                         }}
 
-                        onPress={() => navigation.navigate('momo')}
+                        onPress={() => navigation.navigate('Payinuma')}
 
                     >
 
@@ -263,13 +336,13 @@ const CryptoDetail = ({ navigation, }) => {
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginLeft: 40,
+                        marginLeft: "8%",
                         marginTop: 10,
                         paddingVertical: SIZES.padding,
                         paddingHorizontal: SIZES.radius,
                         backgroundColor: COLORS.white,
                         borderRadius: SIZES.radius,
-                        width: "80%",
+                        width: "85%",
                         ...styles.shadow
                     }}
 
@@ -434,6 +507,17 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                 </View>
+
+                {isAmazi ? (
+                       
+                       <TransactionHistory
+                           customContainerStyle={{ ...styles.shadow }}
+                           history={payments}
+                       />
+   
+                   ):(
+                       <></>
+                   )}
             </View>
         </ScrollView>
     );

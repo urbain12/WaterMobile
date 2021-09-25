@@ -215,7 +215,7 @@ const Login = ({ navigation }) => {
                 </View>
 
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Resetpassword')}>
                     <Text style={{ color: '#1B1C1E', marginTop: 15, fontWeight: "bold" }}>Forgot password?  <Text style={{ color: "#01B0F1", fontWeight: "bold" }}>Recover credentials</Text></Text>
                 </TouchableOpacity>
                 <View style={{ flexDirection: "row" }}>

@@ -47,6 +47,8 @@ const Register = ({ navigation }) => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
+            name:"image.jpg",
+            type:"image/jpg",
             aspect: [4, 3],
             quality: 1,
         });
@@ -54,7 +56,7 @@ const Register = ({ navigation }) => {
         console.log(result);
 
         if (!result.cancelled) {
-            setImage({image: result.uri});
+            setImage(result.uri);
         }
     };
 
@@ -334,6 +336,24 @@ const Register = ({ navigation }) => {
                                 borderBottomWidth: 1
                             }}
                             multiline={true}
+                            placeholderTextColor="#666666"
+                            placeholder="District"
+                            onChangeText={text => setDistrict(text)}
+                        />
+                        <TextInput
+                            style={{
+                                borderRadius: 10,
+                                alignSelf: 'center',
+                                height: 35,
+                                width: "90%",
+                                marginTop: 10,
+                                marginBottom: 10,
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
+                            }}
+                            multiline={true}
                             placeholder="Sector"
                             placeholderTextColor="#666666"
                             onChangeText={text => setSector(text)}
@@ -373,8 +393,7 @@ const Register = ({ navigation }) => {
                         </Picker>
 
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Button title="Pick an profile" onPress={pickImage} />
-                            {image && <Image source={{ uri: image }} style={{ width: 100, height: 100 }} />}
+                            <Button title="Pick a profile" onPress={pickImage} />
                         </View>
                         <TouchableOpacity
                             onPress={(e) => {
