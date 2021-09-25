@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import {inject, observer} from 'mobx-react';
 import {
   StyleSheet,
   View,
@@ -6,100 +7,218 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Image,
   ImageBackground,
-  Dimensions,
+  ActivityIndicator,
   LogBox,
+  Animated,
+  Alert
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
-import { AuthContext } from '../context/Context';
-import { WebView } from 'react-native-webview';
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather } from "@expo/vector-icons";
+import {AuthContext} from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
+import ProductCard from "../components/ProductCard";
+import { connect } from "react-redux";
+import { retrieveProducts } from "../redux/shopping/shopping-actions";
+import { loadCurrentItem } from "../redux/shopping/shopping-actions";
 
-const Home = ({ navigation }) => {
-  const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
+
+
+const Home =({navigation})=> {
+  const [subscriptions, setSubscriptions] = useState([])
+  const [isAmazi, setIsAmazi] = useState(false)
+  const [isInuma, setIsInuma] = useState(false)
+  const [isUhira, setIsUhira] = useState(false)
   const [customer, setCustomer] = useState({})
-  const [image, setImage] = useState({})
-  const [category, setCategory] = useState('')
-  const [showAlert, setShowAlert] = useState('')
-  const [showNotification, setShowNotification] = useState('')
-  const [transactionHistory, setTransactionHistory] = useState([]);
-  const [balance, setBalance] = useState(0)
-
-  const dismissAlert = () => {
-    AsyncStorage.setItem('showAlert', 'false').then(data => {
-      AsyncStorage.getItem('showAlert').then(da => { setShowAlert(da) })
-    })
-
-  }
-
-  const dismissNotification = () => {
-    AsyncStorage.setItem('showNotification', 'false').then(data => {
-      AsyncStorage.getItem('showNotification').then(da => { setShowNotification(da) })
-    })
-
-  }
-
-  const windowWidth = Dimensions.get('window').width
-
-  React.useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-    async function setInfo() {
-      const show = await AsyncStorage.getItem('showAlert')
-      const notification = await AsyncStorage.getItem('showNotification')
-      console.log(show)
-      setShowAlert(show)
-      setShowNotification(notification)
+  useEffect(  () =>{
+    const setInfo=async()=>{
       const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
       }).catch(err => {
         console.log(err)
       })
-      axios.get(`http://wateraccess.t3ch.rw:8234/backgroundlist/`).then((res) => {
-        setImage(res.data[0])
-      }).catch(err => {
-        console.log(err)
-      })
-      axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-        setCategory(res.data.category)
-      }).catch(err => {
-        console.log(err)
-      })
-      axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
-        setTransactionHistory(res.data)
-      }).catch(err => {
-        console.log(err)
-      })
-      axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-        setBalance(res.data.balance)
-      }).catch(err => {
-        console.log(err)
-      })
-
+    axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+                var subs=[]
+                console.log(res.data.length)
+                for(var i=0;i<res.data.length;i++){
+                    subs.push(res.data[i].Category.Title.toUpperCase())
+                    console.log(res.data[i].TotalBalance)
+                }
+                if(subs.includes('AMAZI')){
+                    setIsAmazi(true)
+                }
+                if(subs.includes('INUMA')){
+                  setIsInuma(true)
+              }
+              if(subs.includes('UHIRA')){
+                setIsUhira(true)
+              }
+                setSubscriptions(subs)
+            }).catch(err => {
+                console.log(err)
+            })
     }
+    setInfo();
+    
+  },[])
 
-    setInfo()
+  
+  
+  const sub_amazi = () => {
+    // e.preventDefault()
+    const names = customer.FirstName + ' ' + customer.LastName
+    const postObj = JSON.stringify({
+      'customerID': customer.id,
+      'category': 'AMAZI',
+      
+    })
+    console.log(postObj)
 
-  }, []);
+    // let my_token = localStorage.getItem('token');
 
-  function renderHeader() {
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      // Authorization: `Token ${my_token}`,
+    };
 
-    const context = React.useContext(AuthContext)
+    axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
+      console.log(res.status)
+      alert('Subscribed successfully')
+      navigation.navigate('CryptoDetail')
+    }).catch(err => {
+      console.log(err)
+    })
+
+
+
+  }
+
+  const sub_uhira = () => {
+    // e.preventDefault()
+    const postObj = JSON.stringify({
+      'customerID': customer.id,
+      'category': 'UHIRA',
+      
+    })
+    console.log(postObj)
+
+    // let my_token = localStorage.getItem('token');
+
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      // Authorization: `Token ${my_token}`,
+    };
+
+    axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
+      console.log(res.status)
+      alert('Subscribed successfully')
+      navigation.navigate('uhira')
+    }).catch(err => {
+      console.log(err)
+    })
+
+
+
+  }
+
+
+  const sub_inuma = () => {
+    // e.preventDefault()
+    const postObj = JSON.stringify({
+      'customerID': customer.id,
+      'category': 'INUMA',
+      
+    })
+    console.log(postObj)
+
+    // let my_token = localStorage.getItem('token');
+
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      // Authorization: `Token ${my_token}`,
+    };
+
+    axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
+      console.log(res.status)
+      alert('Subscribed successfully')
+      navigation.navigate('inuma')
+    }).catch(err => {
+      console.log(err)
+    })
+
+
+
+  }
+
+  const amazi_alert = () =>
+    Alert.alert(
+      "Subscribe",
+      "Are you sure you want to subscribe in AMAZI",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => sub_amazi() }
+      ]
+    );
+
+    const inuma_alert = () =>
+    Alert.alert(
+      "Subscribe",
+      "Are you sure you want to subscribe in INUMA",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => sub_inuma() }
+      ]
+    );
+
+    const uhira_alert = () =>
+    Alert.alert(
+      "Subscribe",
+      "Are you sure you want to subscribe in UHIRA",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => sub_uhira() }
+      ]
+    );
+
+  
+  
+
+  const renderHeader=()=> {
+    
     return (
       <View
         style={{
           width: "100%",
-          height: 290,
+          height: 150,
           ...styles.shadow,
         }}
       >
         <ImageBackground
-          source={images.bannerhome}
+          source={images.banner_settings}
           resizeMode="cover"
           style={{
             flex: 1,
@@ -109,244 +228,76 @@ const Home = ({ navigation }) => {
           {/* Header Bar */}
           <View
             style={{
-              marginTop: SIZES.padding * 2,
+              marginTop:20,
               width: "100%",
-              flexDirection: "row",
+              flexDirection:"row",
               paddingHorizontal: SIZES.padding,
             }}
           >
-
+            
+            
           </View>
 
           {/* Balance */}
           <View
             style={{
+              paddingTop:30,
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {/* {customer.FirstName} {customer.LastName} */}
+            <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
+              Welcome {customer.FirstName}
             </Text>
-            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-              {/* {customer.Phone} */}
-            </Text>
-            <Text
-              style={{
-                marginTop: SIZES.base,
-                color: COLORS.white,
-                ...FONTS.h3,
-              }}
-            >
-              {category}
-            </Text>
-
           </View>
 
           {/* Trending */}
-          <View
-            style={{
-              position: "absolute",
-              bottom: "-30%",
-            }}
-          >
-            <Text
-              style={{
-                marginLeft: SIZES.padding,
-                color: COLORS.white,
-                ...FONTS.h2,
-              }}
-            >
-              Services
-            </Text>
-            <FlatList
-              contentContainerStyle={{ marginTop: SIZES.base }}
-              data={trending}
-              renderItem={renderItem}
-              keyExtractor={(item) => `${item.id}`}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
+         
         </ImageBackground>
+            
+        
       </View>
     );
   }
 
-  function renderAlert() {
+
+
+  
+    
     return (
-      <View
+    
+      
+    <View style={{flex:1}}>
+         {renderHeader()}
 
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginTop: SIZES.padding * 1,
-          marginHorizontal: SIZES.padding,
-          paddingVertical: SIZES.padding,
-          paddingHorizontal: SIZES.radius,
-          backgroundColor: COLORS.white,
-          borderRadius: SIZES.radius,
-          ...styles.shadow
-        }}
-      >
-        <Image
-          resizeMode='contain'
-          source={icons.notification_color}
-          style={{
-            width: 30,
-            height: 30
-          }}
-        />
-
-        <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-          <Text style={{ ...FONTS.h3 }}>Notifications</Text>
-          <Text stlye={{ color: "#707070" }}>See your notifications here!!!</Text>
-        </View>
-        <TouchableOpacity onPress={() => {
-          dismissNotification();
-          navigation.navigate('Home')
-        }}
-
-        >
-          <AntDesign name="close" size={24} color="#01b0f1" />
-        </TouchableOpacity>
-
-      </View>
-    )
-  }
-
-  function renderNotice() {
-    return (
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: SIZES.padding,
-          marginHorizontal: SIZES.padding,
-          padding: 20,
-          borderRadius: SIZES.radius,
-          backgroundColor: "#01b0f1",
-          ...styles.shadow
-        }}
-      >
-        <View style={{ width: '10%', marginRight: "2%" }}>
-          <Image
-            source={icons.clap}
-            resizeMode="contain"
-            style={{
-              width: 35,
-              height: 90,
-            }}
-          />
-
-        </View>
-        <View style={{ width: '90%', marginLeft: "2%" }}>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ marginRight: '41%' }}>
-              <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
-            </View>
-            <TouchableOpacity onPress={dismissAlert} style={{ marginBottom: 10 }}>
-              <AntDesign name="close" size={24} color="white" />
-            </TouchableOpacity>
-          </View>
-
-          {category.toUpperCase() === 'AMAZI' ? (
-
-            <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You are part of the 50 Amazi.rw product users, who have collected and used a total of 20,000L  safe water this Month!!!</Text>
-          ) : (
-            <View>
-              {category.toUpperCase() === 'UHIRA' ? (
-                <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
-                  Encourage your farmer friends to join our UHIRA.RW network!!</Text>
-              ) : (
-                <View>
-                  {category.toUpperCase() === 'INUMA' ? (
-                    <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>You reduced your carbon footprint by 30% by using INUMA(TM) this month.
-                      Our Goal is to help you achieve 0% carbon footprint through the usage of safe water delivered to you at home!!</Text>
-                  ) : (
-                    <Text></Text>
-                  )}
-                </View>
-              )}
-            </View>
-          )}
-        </View>
-
-      </View>
-    )
-  }
-
-  function renderTransactionHistory() {
-    return (
-      <TransactionHistory
-        customContainerStyle={{ ...styles.shadow }}
-        history={transactionHistory}
-      />
-    );
-  }
-
-  return (
-    <ScrollView>
-
-      <View style={{ flex: 1, paddingBottom: 130 }}>
-
-        <View style={{ zIndex: 0, position: 'absolute' }}>
-          <Image resizeMode='cover' source={{ uri: image.Image }} style={{ height: 250, width: windowWidth }} />
-        </View>
-        <View
-          style={{
-            alignItems: 'center',
-            marginTop: '8%',
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: '80%',
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          // onPress={() => navigation.navigate('Shop')}
-          >
-
-          </TouchableOpacity>
-        </View>
-
-
-
-
-        <ScrollView horizontal snapToInterval={180} decelerationRate="fast" snapToAlignment={"center"} showsHorizontalScrollIndicator={false} >
-
-
-
-          <View style={{ flexDirection: "row", marginTop: "20%" }}>
-
-
-
-            <TouchableOpacity
+         <ScrollView>
+         
+         {isAmazi?(
+          <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+            <View
               style={{
-                width: 150,
-                height:100,
-                paddingVertical: 15,
-                paddingHorizontal: 12,
-                marginLeft: 6,
-                marginRight: 4,
+                width: '80%',
+                height:120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+              
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                marginTop:1,
+                alignItems:'center',
+                justifyContent:'center',
                 ...styles.shadow
 
               }}
-              onPress={() => navigation.navigate("CryptoDetail")}
+              
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base }}>
+                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
                   <Image source={require("../assets/images/Amazi.png")}
                     style={{
                       resizeMode: 'contain',
-                      width: "100%",
-                      height: 30,
+                      width: "180%",
+                      height: 50,
 
                     }}
 
@@ -364,37 +315,40 @@ const Home = ({ navigation }) => {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     245 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
+                  
+                  
                 </View>
               </View>
 
 
+            </View>
             </TouchableOpacity>
-
-
-            <TouchableOpacity
+         ):(
+          <View style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+            <View
               style={{
-                width: 150,
-                height:100,
-                paddingVertical: 15,
-                paddingHorizontal: 12,
-                marginLeft: 6,
-                marginRight: 4,
+                width: '80%',
+                height:120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+              
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                marginTop:1,
+                alignItems:'center',
+                justifyContent:'center',
                 ...styles.shadow
 
               }}
-              onPress={() => navigation.navigate("uhira")}
+              //onPress={() => navigation.navigate("Landing")}
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base }}>
-                  <Image source={require("../assets/images/Uhira.png")}
+                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                  <Image source={require("../assets/images/Amazi.png")}
                     style={{
                       resizeMode: 'contain',
-                      width: "100%",
-                      height: 30,
+                      width: "180%",
+                      height: 50,
 
                     }}
 
@@ -410,39 +364,49 @@ const Home = ({ navigation }) => {
                   </View>
 
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
+                    245 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
+                  <TouchableOpacity onPress={()=>{amazi_alert()}}>
+                  <Text style={{ color: 'red', ...FONTS.body3,marginTop:5}}>
+                    subscribe
+                  </Text>
+                  </TouchableOpacity>
+                  
                 </View>
               </View>
 
 
-            </TouchableOpacity>
+            </View>
+            </View>
+         )}
 
 
-            <TouchableOpacity
+            {isInuma?(
+              <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+            <View
               style={{
-                width: 150,
-                height:100,
-                paddingVertical: 15,
-                paddingHorizontal: 15,
-                marginLeft: 6,
-                marginRight: 4,
+                width: '80%',
+                height:120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+              
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                marginBottom:8,
+                alignItems:'center',
+                justifyContent:'center',
                 ...styles.shadow
 
               }}
-              onPress={() => navigation.navigate("inuma")}
+              //onPress={() => navigation.navigate("Landing")}
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base }}>
+                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
                   <Image source={require("../assets/images/Inuma.png")}
                     style={{
                       resizeMode: 'contain',
-                      width: "100%",
-                      height: 30,
+                      width: "180%",
+                      height: 50,
 
                     }}
 
@@ -460,67 +424,193 @@ const Home = ({ navigation }) => {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     3,142 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
+                  
+                  
                 </View>
               </View>
 
 
+            </View>
             </TouchableOpacity>
+            ):(
+              <View style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+            <View
+              style={{
+                width: '80%',
+                height:120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+              
+                borderRadius: 10,
+                backgroundColor: COLORS.white,
+                alignItems:'center',
+                justifyContent:'center',
+                ...styles.shadow
 
-          </View>
+              }}
+              //onPress={() => navigation.navigate("Landing")}
+            >
+              <View style={{ flexDirection: 'row' }}>
 
-        </ScrollView>
-        {balance > 0 ? (
+                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                  <Image source={require("../assets/images/Inuma.png")}
+                    style={{
+                      resizeMode: 'contain',
+                      width: "180%",
+                      height: 50,
 
-        <TouchableOpacity
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: "8%",
-            marginTop: SIZES.padding * 1,
-            paddingVertical: SIZES.padding,
-            paddingHorizontal: SIZES.radius,
-            backgroundColor: COLORS.white,
-            borderRadius: SIZES.radius,
-            width: "85%",
-            ...styles.shadow
-          }}
+                    }}
 
-          onPress={() => navigation.navigate('momo')}
+                  />
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 50,
+                    marginLeft: 20,
+                    marginTop: 5
+                  }}>
 
-        >
+                  </View>
 
-
-          <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-
-
-            <Text style={{ color: 'green', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Pay Subscriptions</Text>
-
-
-
-          </View>
-
-
-        </TouchableOpacity>
-        ):(
-
-          <>
-          </>
-
-        )}
+                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                    3,142 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
+                  </Text>
+                  <TouchableOpacity onPress={()=>{inuma_alert()}}>
+                  <Text style={{ color: 'red', ...FONTS.body3,marginTop:5}}>
+                    subscribe
+                  </Text>
+                  </TouchableOpacity>
+                  
+                </View>
+              </View>
 
 
-        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
-          {showNotification == 'true' && renderAlert()}
-        </TouchableOpacity>
-        {showAlert == 'true' && renderNotice()}
+            </View>
+            </View>
+            )}
 
-        {renderTransactionHistory()}
-      </View>
-    </ScrollView>
+
+            {isUhira?(
+              <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+            <View
+              style={{
+                width: '80%',
+                height:120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+              
+                borderRadius: 10,
+                backgroundColor: COLORS.white,
+                alignItems:'center',
+                justifyContent:'center',
+                ...styles.shadow
+
+              }}
+              //onPress={() => navigation.navigate("Landing")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                  <Image source={require("../assets/images/Uhira.png")}
+                    style={{
+                      resizeMode: 'contain',
+                      width: "180%",
+                      height: 50,
+
+                    }}
+
+                  />
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 50,
+                    marginLeft: 20,
+                    marginTop: 5
+                  }}>
+
+                  </View>
+
+                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                    2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
+                  </Text>
+                  
+                </View>
+              </View>
+
+
+            </View>
+            </TouchableOpacity>
+            ):(
+              <View style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+            <View
+              style={{
+                width: '80%',
+                height:120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+              
+                borderRadius: 10,
+                backgroundColor: COLORS.white,
+                alignItems:'center',
+                justifyContent:'center',
+                ...styles.shadow
+
+              }}
+              //onPress={() => navigation.navigate("Landing")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                  <Image source={require("../assets/images/Uhira.png")}
+                    style={{
+                      resizeMode: 'contain',
+                      width: "180%",
+                      height: 50,
+
+                    }}
+
+                  />
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 50,
+                    marginLeft: 20,
+                    marginTop: 5
+                  }}>
+
+                  </View>
+
+                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                    2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
+                  </Text>
+                  <TouchableOpacity onPress={()=>{uhira_alert()}}>
+                  <Text style={{ color: 'red', ...FONTS.body3,marginTop:5}}>
+                    subscribe
+                  </Text>
+                  </TouchableOpacity>
+                  
+                </View>
+              </View>
+
+
+            </View>
+            </View>
+            )}
+            
+         </ScrollView>
+    </View>
+
+
+    
+        
+        
   );
 };
 
+  
+  
+
+  
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -538,6 +628,105 @@ const styles = StyleSheet.create({
 
     elevation: 8,
   },
+  sliderContainer:{
+    height:200,
+    width:'90%',
+    marginTop:10,
+    justifyContent:"center",
+    alignSelf:"center",
+    borderRadius:8,
+},
+wrapper:{},
+slide:{
+    flex:1,
+    justifyContent:"center",
+    backgroundColor:"transparent",
+    borderRadius:8,
+},
+sliderImage:{
+    height:"100%",
+    width:"100%",
+    alignSelf:"center",
+    borderRadius:8,
+},
+categoryContainer:{
+    flexDirection:'row',
+    width:'100%',
+    alignSelf:'center',
+    marginTop:25,
+    marginBottom:10,
+},
+categoryBtn:{
+    flex:1,
+    width:"30%",
+    marginHorizontal:0,
+    alignSelf:"center",
+},
+categoryIcon:{
+    borderWidth:0,
+    alignItems:"center",
+    justifyContent:"center",
+    alignSelf:"center",
+    width:70,
+    height:70,
+    backgroundColor:"#fdeae7",
+    borderRadius:50,
+},
+categoryBtnTxt:{
+    alignSelf:"center",
+    marginTop:5,
+    color:"#de4f35",
+},
+cardsWrapper:{
+    marginTop:20,
+    marginLeft:20,
+    flexDirection:"row",
+    width:'100%'
+},
+card:{
+    height:150,
+    width:300,
+    marginHorizontal:10,
+    marginBottom:20,
+    flexDirection:'row',
+    shadowColor:'#999',
+    shadowOffset:{width:0,height:1},
+    shadowOpacity:0.8,
+    shadowRadius:2,
+    elevation:5,
+    paddingVertical:5,
+    paddingHorizontal:5,
+},
+cardImgWrapper:{
+    width:130,
+},
+cardImg:{
+    width:'100%',
+    height:'100%',
+    alignSelf:"center",
+    borderRadius:8,
+    borderBottomRightRadius:0,
+    borderTopRightRadius:0,
+},
+cardInfo:{
+    flex:2,
+    padding:10,
+    borderColor:'#ccc',
+    borderWidth:1,
+    borderLeftWidth:0,
+    borderBottomRightRadius:8,
+    borderTopRightRadius:8,
+    backgroundColor:"#e5e4eb",
+},
+cardTitle:{
+    fontWeight:'bold',
+},
+cardDetails:{
+    fontSize:12,
+    color:'#444'
+},
 });
+
+
 
 export default Home;

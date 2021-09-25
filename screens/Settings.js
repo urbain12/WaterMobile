@@ -164,7 +164,7 @@ const Settings = ({ navigation }) => {
                     ...styles.shadow
                 }}
             >   
-                    <View style={{flexDirection:'row'}}>
+                    <View style={{flexDirection:'row',marginLeft:10}}>
                         <View style={{width:'60%'}}>
                         <Text style={{ ...FONTS.h2 ,marginTop:20,marginLeft:10}}>{JSON.stringify(customer)!=='{}' && customer.FirstName} {JSON.stringify(customer)!=='{}' && customer.LastName} </Text>
                         <Text style={{ ...FONTS.h5 ,marginBottom:10,marginLeft:12,fontWeight:"bold",fontSize:15}}> {customer.Phone}</Text>

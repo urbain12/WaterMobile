@@ -36,12 +36,15 @@ const Momopay = ({ route, navigation }) => {
       const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
+        setPhonenumber(res.data[0].user.phone)
       }).catch(error => {
         console.log(error.message)
+        console.log(customer)
+        
       })
       axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
         setPaidAmount(res.data.paidAmount)
-
+        setAmount(JSON.stringify(res.data.paidAmount))
       }).catch(err => {
         console.log(err)
       })
@@ -69,7 +72,6 @@ const Momopay = ({ route, navigation }) => {
   const handleSubmit = (e) => {
     setLoading(true)
     e.preventDefault();
-
 
     const options = {
       headers: {
@@ -163,7 +165,7 @@ const Momopay = ({ route, navigation }) => {
         <View>
           <TouchableOpacity activeOpacity={1}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Pay instalment</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Pay instalment {paidAmount}</Text>
             </View>
             <TextInput
               style={{
@@ -180,6 +182,7 @@ const Momopay = ({ route, navigation }) => {
               maxLength={12}
               placeholder="Phone Number"
               keyboardType="numeric"
+              value = {Phonenumber}
               onChangeText={text => handlephone(text)}
             />
 
@@ -197,6 +200,7 @@ const Momopay = ({ route, navigation }) => {
               name="Names"
               placeholder="Amount"
               keyboardType="numeric"
+              value= {Amount}
               onChangeText={text => handleamount(text)}
             />
 
