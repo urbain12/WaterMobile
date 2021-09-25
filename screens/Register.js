@@ -171,16 +171,12 @@ const Register = ({ navigation }) => {
 
     return (
         <KeyboardAwareScrollView
-
         >
             <View
-
             >
                 {renderHeader()}
-
             </View>
             <ScrollView>
-
                 <View style={{
                     marginBottom: SIZES.padding,
                     marginHorizontal: SIZES.padding,
@@ -190,7 +186,6 @@ const Register = ({ navigation }) => {
                     ...styles.shadow,
                     marginTop: 10
                 }}>
-
                     <View activeOpacity={1}>
                         <TextInput
                             style={{
@@ -209,7 +204,6 @@ const Register = ({ navigation }) => {
                             placeholder="FirstName"
                             onChangeText={text => setFirstName(text)}
                         />
-
                         <TextInput
                             style={{
                                 borderColor: "gray",
@@ -357,10 +351,7 @@ const Register = ({ navigation }) => {
                                     (
                                         <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Register</Text>
                                     )}
-
                             </View>
-
-
                         </TouchableOpacity>
 
                     </View>

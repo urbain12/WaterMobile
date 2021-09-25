@@ -30,6 +30,7 @@ import paywater from './screens/paywater';
 import request from './screens/request';
 import Landing from './screens/Landing';
 import Register from './screens/Register';
+import UpdateCustomer from './screens/UpdateCustomer';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -289,6 +290,11 @@ const App = () => {
             <Stack.Screen
               name="request"
               component={request}
+            />
+
+            <Stack.Screen
+              name="UpdateCustomer"
+              component={UpdateCustomer}
             />
              
           </Stack.Navigator>
