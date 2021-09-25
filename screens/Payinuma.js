@@ -22,7 +22,7 @@ import axios from 'axios';
 
 const Momopay = ({ route, navigation }) => {
   const [customer, setCustomer] = useState('')
-  const [Amount, setAmount] = useState('')
+  const [Amount, setAmount] = useState('1')
   const [paidAmount, setPaidAmount] = useState('')
   const [Phonenumber, setPhonenumber] = useState('')
   const [paymentcode, setpaymentcode] = useState('1010')
@@ -44,7 +44,7 @@ const Momopay = ({ route, navigation }) => {
 
       })
       axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
-        const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
+        const sub = res.data.find(el => el.Category.Title.toUpperCase() === "INUMA")
         setinformation(sub)
         const Monthly = Math.ceil(sub.get_total_amount / 12)
         const month = JSON.stringify(Monthly)
