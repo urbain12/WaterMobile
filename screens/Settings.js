@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -22,9 +22,32 @@ const Settings = ({ navigation }) => {
   const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
   const [customer,setCustomer]=useState({})
   const [category,setCategory]=useState('')
+  const [subscriptions,setSubscriptions]=useState('')
   const [transactionHistory, setTransactionHistory] = useState([]);
  
-  
+  useEffect(() => {
+    async function setInfo() {
+        const id = await AsyncStorage.getItem('user_id')
+        
+        axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+            
+            var subs=[]
+            console.log(res.data)
+            for(var i=0;i<res.data.length;i++){
+                subs.push(res.data[i].Category.Title.toUpperCase())
+                console.log(res.data[i].TotalBalance)
+            }
+            
+            setSubscriptions(subs)
+        }).catch(err => {
+            console.log(err)
+        })
+
+    }
+
+    setInfo()
+
+}, [])
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -211,33 +234,10 @@ const Settings = ({ navigation }) => {
                         <View>
                             <Image resizeMode='contain' style={{width:30,height:30}} source={require('../assets/icons/subscription.png')}/>
                         </View>
-                        {category.toUpperCase() === 'AMAZI'  ? (
-                          <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{marginLeft:30}}>
+                        <TouchableOpacity style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
-                            <Text style={{color:'#707070'}}>{category}</Text>
+                            <Text style={{color:'#707070'}}>{subscriptions.join(',')}</Text>
                         </TouchableOpacity>
-                        ):(
-                          <>
-                          {category.toUpperCase() === 'INUMA' ?  (
-                          <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
-                            <Text style={{color:'#707070'}}>{category}</Text>
-                        </TouchableOpacity>
-                        ):(<>
-                          {category.toUpperCase() === 'UHIRA' ?  (
-                          <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
-                            <Text style={{color:'#707070'}}>{category}</Text>
-                        </TouchableOpacity>
-                        ):(
-                          <TouchableOpacity style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
-                            <Text style={{color:'#707070'}}>{category}</Text>
-                        </TouchableOpacity>
-                        )}
-                        </>)}
-                        </>
-                        )}
                         
                     </View>
                     <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}

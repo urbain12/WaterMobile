@@ -3,7 +3,9 @@ import {
     StyleSheet,
     SafeAreaView,
     View,
+    Button,
     Text,
+    ImageBackground,
     ScrollView,
     TextInput,
     TouchableOpacity,
@@ -19,7 +21,7 @@ import { dummyData, COLORS, SIZES, FONTS } from "../constants";
 import axios from 'axios';
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
-
+import * as ImagePicker from 'expo-image-picker';
 
 
 const UpdateCustomer = ({ navigation }) => {
@@ -33,7 +35,26 @@ const UpdateCustomer = ({ navigation }) => {
     const [Cell, setCell] = useState('')
     const [Sector, setSector] = useState('')
     const [Language, setLanguage] = useState('')
+    const [Image, setImage] = useState('')
     const [loading, setloading] = useState(false)
+
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            name:"image.jpg",
+            type:"image/jpg",
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
 
 
     useEffect(()=>{
@@ -50,6 +71,8 @@ const UpdateCustomer = ({ navigation }) => {
                 setCell(res.data[0].Cell)
                 setSector(res.data[0].Sector)
                 setLanguage(res.data[0].Language)
+                setImage(res.data[0].Image)
+                
             }).catch(err => {
                 console.log(err)
             })
@@ -65,16 +88,16 @@ const UpdateCustomer = ({ navigation }) => {
             
             setloading(true)
             e.preventDefault()
-            const postObj = JSON.stringify({
-                "FirstName":FirstName,
-                "LastName":LastName,
-                "IDnumber":IDnumber,
-                "Province":Province,
-                "District":District,
-                "Cell":Cell,
-                "Sector":Sector,
-                "Language":Language,
-            })
+            const postObj = new FormData();
+            postObj.append('Image', { type: 'image/jpg', uri: Image, name: 'my_image.jpg' })
+            postObj.append('FirstName', FirstName)
+            postObj.append('LastName', LastName)
+            postObj.append('IDnumber', IDnumber)
+            postObj.append('Province', Province)
+            postObj.append('District', District)
+            postObj.append('Cell', Cell)
+            postObj.append('Sector', Sector)
+            postObj.append('Language', Language)
             console.log(postObj)
 
             // let my_token = localStorage.getItem('token');
@@ -256,6 +279,30 @@ const UpdateCustomer = ({ navigation }) => {
 
                         </TouchableOpacity>
                     </View>
+
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Button title="Pick a profile" onPress={pickImage} />
+                        </View>
+
+                        <TouchableOpacity activeOpacity={1}>
+                  <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
+                    <ImageBackground
+                      source={{
+                        uri: Image,
+                      }}
+                      style={{ height: 150, width: 150, borderColor: 'black', borderWidth: 0.3 }}
+                      imageStyle={{ borderRadius: 15 }}>
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+
+                      </View>
+                    </ImageBackground>
+                  </View>
+                </TouchableOpacity>
 
                     <TouchableOpacity style={{ marginTop: 20 }}
                     onPress={(event) => {
