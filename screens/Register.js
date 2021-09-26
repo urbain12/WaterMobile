@@ -129,7 +129,7 @@ const Register = ({ navigation }) => {
                 navigation.navigate('Login')
                 }
                 else{
-                    alert('Password or email already taken')
+                    alert('Phone Number or email already taken')
                 }
                 
             }).catch(err => {
