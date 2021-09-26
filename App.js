@@ -30,6 +30,10 @@ import paywater from './screens/paywater';
 import request from './screens/request';
 import Landing from './screens/Landing';
 import Register from './screens/Register';
+import UpdateCustomer from './screens/UpdateCustomer';
+import Resetpassword from './screens/Resetpassword';
+import Payuhira from './screens/Payuhira';
+import Payinuma from './screens/Payinuma';
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -290,6 +294,20 @@ const App = () => {
               name="request"
               component={request}
             />
+
+            <Stack.Screen
+              name="UpdateCustomer"
+              component={UpdateCustomer}
+            />
+            <Stack.Screen
+              name="Payuhira"
+              component={Payuhira}
+            />
+            <Stack.Screen
+              name="Payinuma"
+              component={Payinuma}
+            />
+            
              
           </Stack.Navigator>
         </NavigationContainer>
@@ -311,6 +329,10 @@ const App = () => {
               <Stack.Screen
               name="Register"
               component={Register}
+            />
+            <Stack.Screen
+              name="Resetpassword"
+              component={Resetpassword}
             />
               </Stack.Navigator>
               </NavigationContainer>

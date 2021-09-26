@@ -9,7 +9,8 @@ import {
     TouchableOpacity,
     Dimensions,
     ImageBackground,
-    ActivityIndicator
+    ActivityIndicator,
+    Button
 } from "react-native";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
@@ -24,6 +25,8 @@ import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
+import * as ImagePicker from 'expo-image-picker';
+
 
 const Register = ({ navigation }) => {
     const [FirstName, setFirstName] = useState('')
@@ -35,9 +38,27 @@ const Register = ({ navigation }) => {
     const [District, setDistrict] = useState('')
     const [Sector, setSector] = useState('')
     const [Cell, setCell] = useState('')
+    const [Image, setImage] = useState(null)
     const [Language, setLanguage] = useState('')
     const [loading, setLoading] = useState(false)
 
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            name:"image.jpg",
+            type:"image/jpg",
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
 
 
     const handleSubmit = (e) => {
@@ -72,6 +93,7 @@ const Register = ({ navigation }) => {
                 'District': District,
                 'Sector': Sector,
                 'Cell': Cell,
+                'Image': Image,
                 'Language': Language,
 
             })
@@ -171,168 +193,188 @@ const Register = ({ navigation }) => {
 
     return (
         <KeyboardAwareScrollView
-
         >
             <View
-
             >
                 {renderHeader()}
-
             </View>
             <ScrollView>
-
                 <View style={{
                     marginBottom: SIZES.padding,
-                    marginHorizontal: SIZES.padding,
-                    padding: SIZES.padding,
-                    borderRadius: SIZES.radius,
+                    padding: 10,
+                    width: "100%",
                     backgroundColor: COLORS.white,
                     ...styles.shadow,
-                    marginTop: 10
                 }}>
-
                     <View activeOpacity={1}>
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1,
                             }}
                             multiline={true}
+                            placeholderTextColor="#666666"
                             placeholder="FirstName"
                             onChangeText={text => setFirstName(text)}
                         />
-
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1,
                             }}
                             multiline={true}
+                            placeholderTextColor="#666666"
                             placeholder="LastName"
                             onChangeText={text => setLastName(text)}
                         />
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
                             }}
                             multiline={true}
+                            placeholderTextColor="#666666"
                             placeholder="Email"
                             onChangeText={text => setemail(text)}
                         />
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
                             }}
                             multiline={true}
+                            placeholderTextColor="#666666"
                             placeholder="IDnumber"
                             onChangeText={text => setIDnumber(text)}
                         />
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
                             }}
                             multiline={true}
                             maxLength={10}
+                            placeholderTextColor="#666666"
                             placeholder="phone"
                             onChangeText={text => setphone(text)}
                         />
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
                             }}
                             multiline={true}
+                            placeholderTextColor="#666666"
                             placeholder="Province"
                             onChangeText={text => setProvince(text)}
                         />
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
+                            }}
+                            multiline={true}
+                            placeholderTextColor="#666666"
+                            placeholder="District"
+                            onChangeText={text => setDistrict(text)}
+                        />
+                        <TextInput
+                            style={{
+                                borderRadius: 10,
+                                alignSelf: 'center',
+                                height: 35,
+                                width: "90%",
+                                marginTop: 10,
+                                marginBottom: 10,
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
                             }}
                             multiline={true}
                             placeholder="Sector"
+                            placeholderTextColor="#666666"
                             onChangeText={text => setSector(text)}
                         />
                         <TextInput
                             style={{
-                                borderColor: "gray",
-                                borderWidth: 1,
                                 borderRadius: 10,
                                 alignSelf: 'center',
                                 height: 35,
-                                width: "100%",
+                                width: "90%",
                                 marginTop: 10,
                                 marginBottom: 10,
-                                textAlign: "center",
-                                padding: 10
+                                textAlign: "left",
+                                padding: 10,
+                                flex: 1,
+                                borderBottomWidth: 1
                             }}
                             multiline={true}
                             placeholder="Cell"
+                            placeholderTextColor="#666666"
                             onChangeText={text => setCell(text)}
                         />
                         <Picker
                             style={{
-                                marginTop: 20,
+                                marginTop: 10,
+                                marginBottom: 10,
+                                padding: 10,
                                 width: '100%',
                                 alignSelf: 'center'
                             }}
@@ -343,24 +385,25 @@ const Register = ({ navigation }) => {
                             <Picker.Item value="Kinyarwanda" label="Kinyarwanda" />
                             <Picker.Item value="English" label="English" />
                         </Picker>
-                        <TouchableOpacity 
+
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Button title="Pick a profile" onPress={pickImage} />
+                        </View>
+                        <TouchableOpacity
                             onPress={(e) => {
                                 handleSubmit(e)
                             }}>
 
                             <View
-                                style={{ backgroundColor: "#01B0F1", width: "100%", height: "25%", alignItems: "center", borderRadius: 10 }}
+                                style={{ backgroundColor: "#01B0F1", width: "100%", height: "25%", alignItems: "center", borderRadius: 10, marginTop: 10 }}
                             >
                                 {loading ? (
                                     <ActivityIndicator size='large' color='white' style={{ margin: 15 }} />
                                 ) :
                                     (
-                                        <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Register</Text>
+                                        <Text style={{ color: "white", marginTop: "3%", fontSize: 20, fontWeight: "bold" }}>Register</Text>
                                     )}
-
                             </View>
-
-
                         </TouchableOpacity>
 
                     </View>

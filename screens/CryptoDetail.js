@@ -30,14 +30,12 @@ const CryptoDetail = ({ navigation }) => {
     useEffect(() => {
         async function setInfo() {
             const id = await AsyncStorage.getItem('user_id')
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-                setBalance(res.data.balance)
-            }).catch(err => {
-                console.log(err)
-            })
+            
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
                 setinformation(sub)
+                getFilterDays(sub.From.slice(0, 10))
+                getInstalmentDays(sub.From.slice(0, 10))
                 var subs=[]
                 console.log(res.data.length)
                 for(var i=0;i<res.data.length;i++){
@@ -260,8 +258,7 @@ const CryptoDetail = ({ navigation }) => {
             })
             axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
-                getFilterDays(res.data.subscription_date.slice(0, 10))
-                getInstalmentDays(res.data.subscription_date.slice(0, 10))
+                
             }).catch(err => {
                 console.log(err)
             })
@@ -310,6 +307,7 @@ const CryptoDetail = ({ navigation }) => {
                 </View>
 
             </View>
+            
         )
     }
 
@@ -380,6 +378,53 @@ const CryptoDetail = ({ navigation }) => {
                             <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                         </View>
                     </View>
+                    <View
+                        style={{
+                            width: "80%",
+                            paddingVertical: SIZES.padding,
+                            paddingHorizontal: SIZES.padding,
+                            marginLeft: 40,
+                            marginTop: 40,
+                            marginRight: SIZES.radius,
+                            borderRadius: 10,
+                            backgroundColor: COLORS.white,
+                            marginBottom: 15,
+                            ...styles.shadow
+                            
+                             }}
+                            
+                             >
+                        <View style={{ flexDirection: 'row', justifyContent: "center" }}>
+
+                            <View style={{ marginLeft: SIZES.base }}>
+                                <Image source={require("../assets/images/Amazi.png")}
+                                    style={{
+                                        resizeMode: 'contain',
+                                        width: "100%",
+                                        height: 30,
+
+                                    }}
+
+                                />
+                                <View style={{
+                                    borderBottomWidth: 2,
+                                    borderBottomColor: "#47315a",
+                                    width: 50,
+                                    marginLeft: 20,
+                                    marginTop: 5
+                                }}>
+
+                                </View>
+
+                                <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                                    245 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
+                                </Text>
+                            </View>
+                        </View>
+
+
+                    </View>
+                    
 
                     { subbalance > 0 ? (
 
@@ -569,7 +614,7 @@ const CryptoDetail = ({ navigation }) => {
 
 
                 </View>
-                {isAmazi && payments.length>0? (
+                {isAmazi ? (
                        
                        <TransactionHistory
                            customContainerStyle={{ ...styles.shadow }}

@@ -170,7 +170,7 @@ const Settings = ({ navigation }) => {
                         <Text style={{ ...FONTS.h5 ,marginBottom:10,marginLeft:12,fontWeight:"bold",fontSize:15}}> {customer.Phone}</Text>
                         </View>
                         <TouchableOpacity style={{justifyContent:'center',alignItems:'flex-end',width:'40%'}}>
-                        <TouchableOpacity onPress={() => navigation.navigate("changepassword")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("UpdateCustomer")}>
                         <Image resizeMode='contain' style={{width:30,height:30,marginRight:10}} source={require('../assets/icons/editing.png')}/>
                         </TouchableOpacity>
                         </TouchableOpacity>
@@ -267,6 +267,9 @@ const Settings = ({ navigation }) => {
             <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
                 <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Version: 0.1</Text>
             </View>
+            <TouchableOpacity onPress={() => navigation.navigate("changepassword")} style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
+                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Change password</Text>
+            </TouchableOpacity>
             
         </View>
       </View>
