@@ -124,9 +124,14 @@ const Register = ({ navigation }) => {
             };
 
             axios.post('http://wateraccess.t3ch.rw:8234/register/', postObj).then((res) => {
-                console.log(res.status)
-                alert('Your are succesful register Please login with credentails sent on your phone number')
+                if(res.data.code==200){
+                    alert('Your are succesful register Please login with credentails sent on your phone number')
                 navigation.navigate('Login')
+                }
+                else{
+                    alert('Password or email already taken')
+                }
+                
             }).catch(err => {
                 console.log(err)
             })
