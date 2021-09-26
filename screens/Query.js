@@ -23,7 +23,7 @@ import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, En
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
 
-const Transaction = ({ navigation }) => {
+const Transaction = ({ navigation, props }) => {
   const [Names, setNames] = useState('')
   const [Message, setMessage] = useState('')
   const [Phonenumber, setPhonenumber] = useState('')
@@ -112,7 +112,7 @@ const Transaction = ({ navigation }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.goBack()}
         >
           <Ionicons
             name="arrow-back"

@@ -3,23 +3,26 @@ import {
     StyleSheet,
     SafeAreaView,
     View,
+    Button,
     Text,
+    ImageBackground,
     ScrollView,
     TextInput,
     TouchableOpacity,
     ActivityIndicator
 } from "react-native";
+import { MaterialIcons,Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo} from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
     HeaderBar,
     CurrencyLabel,
     TextButton,
 } from "../components";
-import { dummyData, COLORS, SIZES, FONTS } from "../constants";
+import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
 import axios from 'axios';
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
-
+import * as ImagePicker from 'expo-image-picker';
 
 
 const UpdateCustomer = ({ navigation }) => {
@@ -33,7 +36,26 @@ const UpdateCustomer = ({ navigation }) => {
     const [Cell, setCell] = useState('')
     const [Sector, setSector] = useState('')
     const [Language, setLanguage] = useState('')
+    const [Image, setImage] = useState('')
     const [loading, setloading] = useState(false)
+
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            name:"image.jpg",
+            type:"image/jpg",
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
 
 
     useEffect(()=>{
@@ -50,6 +72,8 @@ const UpdateCustomer = ({ navigation }) => {
                 setCell(res.data[0].Cell)
                 setSector(res.data[0].Sector)
                 setLanguage(res.data[0].Language)
+                setImage(res.data[0].Image)
+                
             }).catch(err => {
                 console.log(err)
             })
@@ -65,16 +89,16 @@ const UpdateCustomer = ({ navigation }) => {
             
             setloading(true)
             e.preventDefault()
-            const postObj = JSON.stringify({
-                "FirstName":FirstName,
-                "LastName":LastName,
-                "IDnumber":IDnumber,
-                "Province":Province,
-                "District":District,
-                "Cell":Cell,
-                "Sector":Sector,
-                "Language":Language,
-            })
+            const postObj = new FormData();
+            postObj.append('Image', { type: 'image/jpg', uri: Image, name: 'my_image.jpg' })
+            postObj.append('FirstName', FirstName)
+            postObj.append('LastName', LastName)
+            postObj.append('IDnumber', IDnumber)
+            postObj.append('Province', Province)
+            postObj.append('District', District)
+            postObj.append('Cell', Cell)
+            postObj.append('Sector', Sector)
+            postObj.append('Language', Language)
             console.log(postObj)
 
             // let my_token = localStorage.getItem('token');
@@ -105,6 +129,7 @@ const UpdateCustomer = ({ navigation }) => {
         function renderTrade() {
 
             return (
+
                 <View
                     style={{
                         marginTop: SIZES.padding,
@@ -116,6 +141,7 @@ const UpdateCustomer = ({ navigation }) => {
                         ...styles.shadow,
                     }}
                 >
+               
                     <View>
                         <TouchableOpacity activeOpacity={1}>
 
@@ -257,6 +283,30 @@ const UpdateCustomer = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Button title="Pick a profile" onPress={pickImage} />
+                        </View>
+
+                        <TouchableOpacity activeOpacity={1}>
+                  <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
+                    <ImageBackground
+                      source={{
+                        uri: Image,
+                      }}
+                      style={{ height: 150, width: 150, borderColor: 'black', borderWidth: 0.3 }}
+                      imageStyle={{ borderRadius: 15 }}>
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+
+                      </View>
+                    </ImageBackground>
+                  </View>
+                </TouchableOpacity>
+
                     <TouchableOpacity style={{ marginTop: 20 }}
                     onPress={(event) => {
                         handleSubmit(event)
@@ -284,7 +334,37 @@ const UpdateCustomer = ({ navigation }) => {
 
         return (
             <KeyboardAwareScrollView style={{ flex: 1 }}>
-                <HeaderBar right={false} />
+                 <ImageBackground source={images.banner_settings} style={{margin:0,flexDirection:'row'}}>
+
+<View style={{
+    width:'20%',
+    alignItems:'center',
+    marginTop:'10%',
+    marginBottom:'10%'
+}}>
+<TouchableOpacity onPress={() => navigation.goBack()}>
+<Ionicons name="ios-arrow-back" size={40} color="white" />
+</TouchableOpacity>
+</View>
+
+<View style={{
+    width:'60%',
+    alignItems:'center',
+    marginTop:'10%',
+    marginBottom:'10%'
+}}>
+  <Text style={{alignSelf:'center',color:'white',fontWeight:'bold', fontSize:20,marginTop:10}}>Update your information </Text>
+</View>
+
+<View style={{
+    width:'20%',
+    alignItems:'center',
+    marginTop:'10%',
+    marginBottom:'10%'
+}}>
+</View>
+
+</ImageBackground>
 
                 <ScrollView>
                     <View style={{ flex: 1, paddingBottom: SIZES.padding }}>

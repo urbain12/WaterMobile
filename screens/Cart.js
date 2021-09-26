@@ -154,6 +154,59 @@ const Cart = ({navigation,cart,removeFromCart}) => {
 
 };
 
+const handleSubmit2 = () => {
+  console.log("vip?")
+  setLoading(true)
+
+  // axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  // axios.defaults.xsrfCookieName = "csrftoken";
+  // axios.defaults.headers = {
+  //     "Content-Type": "application/json",
+  //     // Authorization: `Token ${my_token}`,
+  // };
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      "app-type": "none",
+      "app-version": "v1",
+      "app-device": "Postman",
+      "app-device-os": "Postman",
+      "app-device-id": "0",
+      "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
+    }
+  };
+
+ 
+
+  
+
+
+            const postObj2 = JSON.stringify({
+              'customerID':customer.id,
+              'order': cart,
+
+
+          })
+          console.log(postObj2)
+
+            axios.post('http://wateraccess.t3ch.rw:8234/pay_later_order/create/', postObj2).then((res) => {
+                console.log(res.status)
+                alert('Order completed!!!')
+                setpaid(true)
+                clearInterval(setint)
+                navigation.navigate('Home')
+            }).catch(err => {
+                console.log(err)
+            })
+
+
+setTimeout(() => {
+  setLoading(false)
+}, 5000)
+
+};
+
 
   const format = (amount) =>{
     return Number(amount)
@@ -198,6 +251,20 @@ const Cart = ({navigation,cart,removeFromCart}) => {
           style: "cancel"
         },
         { text: "OK", onPress: () => removeFromCart(itemID) }
+      ]
+    );
+
+    const Order = () =>
+    Alert.alert(
+      "Order",
+      "Do you want to pay Now or Later?",
+      [
+        {
+          text: "Now",
+          onPress: () => modalHandler(),
+          style: "cancel"
+        },
+        { text: "Later", onPress: () => handleSubmit2() }
       ]
     );
   
@@ -382,7 +449,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
         {cartCount > 0 && (
             <TouchableOpacity
             style={styles.signIn}
-            onPress={modalHandler}
+            onPress={Order}
         >
             <View
                 style={{ backgroundColor: "#01B0F1", width: "50%", height: "100%", alignItems: "center", borderRadius: 10, justifyContent:'center'}}

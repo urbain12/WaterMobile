@@ -63,25 +63,28 @@ const Register = ({ navigation }) => {
 
     const handleSubmit = (e) => {
         setLoading(true)
-        // if (FirstName.length < 2) {
-        //     alert('Please Enter first Name');
-        // }
-        // else if (LastName.length < 2) {
-        //     alert('Please Enter Last Name');
-        // }
-        // else if (email.length < 2) {
-        //     alert('Please Enter Email');
-        // }
-        // else if (IDnumber.length < 15) {
-        //     alert('Please Enter IDnumber');
-        // }
-        // else if (Phonenumber.length < 10) {
-        //     alert('Max length is 10 digit');
-        // }
-        // else if (Language.length < 1) {
-        //     alert('Please Enter Language');
-        // }
-        // else {
+        if (FirstName.length < 2) {
+            alert('Please Enter first Name');
+        }
+        else if (LastName.length < 2) {
+            alert('Please Enter Last Name');
+        }
+        else if (email.length < 2) {
+            alert('Please Enter Email');
+        }
+        else if (IDnumber.length < 15) {
+            alert('Please Enter IDnumber');
+        }
+        else if (Phonenumber.length < 10) {
+            alert('Max length is 10 digit');
+        }
+        else if (Language.length < 1) {
+            alert('Please Enter Language');
+        }
+        else if (Image == null) {
+            alert('Please pick profile picture');
+        }
+        else {
             e.preventDefault()
             // const postObj = JSON.stringify({
             //     'FirstName': FirstName,
@@ -130,8 +133,8 @@ const Register = ({ navigation }) => {
 
             setTimeout(() => {
                 setLoading(false)
-            }, 5000)
-        // }
+            }, 2000)
+        }
     }
 
     const renderHeader = () => {
@@ -190,7 +193,7 @@ const Register = ({ navigation }) => {
                         }}
                     >
                         <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                            Registration Form
+                          WAR client  Registration Form
                         </Text>
                     </View>
 
@@ -232,7 +235,6 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1,
                             }}
-                            multiline={true}
                             placeholderTextColor="#666666"
                             placeholder="FirstName"
                             onChangeText={text => setFirstName(text)}
@@ -250,7 +252,6 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1,
                             }}
-                            multiline={true}
                             placeholderTextColor="#666666"
                             placeholder="LastName"
                             onChangeText={text => setLastName(text)}
@@ -268,7 +269,7 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1
                             }}
-                            multiline={true}
+                            keyboardType="email-address"
                             placeholderTextColor="#666666"
                             placeholder="Email"
                             onChangeText={text => setemail(text)}
@@ -286,7 +287,9 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1
                             }}
-                            multiline={true}
+                            multiline={false}
+                            maxLength={17}
+                            keyboardType="numeric"
                             placeholderTextColor="#666666"
                             placeholder="IDnumber"
                             onChangeText={text => setIDnumber(text)}
@@ -304,8 +307,9 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1
                             }}
-                            multiline={true}
+                            multiline={false}
                             maxLength={10}
+                            keyboardType="numeric"
                             placeholderTextColor="#666666"
                             placeholder="phone"
                             onChangeText={text => setphone(text)}
@@ -323,7 +327,6 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1
                             }}
-                            multiline={true}
                             placeholderTextColor="#666666"
                             placeholder="Province"
                             onChangeText={text => setProvince(text)}
@@ -341,7 +344,6 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1
                             }}
-                            multiline={true}
                             placeholderTextColor="#666666"
                             placeholder="District"
                             onChangeText={text => setDistrict(text)}
@@ -359,7 +361,6 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1
                             }}
-                            multiline={true}
                             placeholder="Sector"
                             placeholderTextColor="#666666"
                             onChangeText={text => setSector(text)}
@@ -377,7 +378,6 @@ const Register = ({ navigation }) => {
                                 flex: 1,
                                 borderBottomWidth: 1
                             }}
-                            multiline={true}
                             placeholder="Cell"
                             placeholderTextColor="#666666"
                             onChangeText={text => setCell(text)}
@@ -401,6 +401,26 @@ const Register = ({ navigation }) => {
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Button title="Pick a profile" onPress={pickImage} />
                         </View>
+                        <TouchableOpacity activeOpacity={1}>
+                        <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
+                          <ImageBackground
+                            source={{
+                              uri: Image,
+                            }}
+                            style={{ height: 150, width: 150, borderColor: 'black', borderWidth: 0.3 }}
+                            imageStyle={{ borderRadius: 15 }}>
+                            <View
+                              style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}>
+
+                            </View>
+                          </ImageBackground>
+                        </View>
+                      </TouchableOpacity>
+
                         <TouchableOpacity
                             onPress={(e) => {
                                 handleSubmit(e)
