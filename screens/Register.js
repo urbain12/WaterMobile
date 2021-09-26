@@ -63,40 +63,52 @@ const Register = ({ navigation }) => {
 
     const handleSubmit = (e) => {
         setLoading(true)
-        if (FirstName.length < 2) {
-            alert('Please Enter first Name');
-        }
-        else if (LastName.length < 2) {
-            alert('Please Enter Last Name');
-        }
-        else if (email.length < 2) {
-            alert('Please Enter Email');
-        }
-        else if (IDnumber.length < 15) {
-            alert('Please Enter IDnumber');
-        }
-        else if (Phonenumber.length < 10) {
-            alert('Max length is 10 digit');
-        }
-        else if (Language.length < 1) {
-            alert('Please Enter Language');
-        }
-        else {
+        // if (FirstName.length < 2) {
+        //     alert('Please Enter first Name');
+        // }
+        // else if (LastName.length < 2) {
+        //     alert('Please Enter Last Name');
+        // }
+        // else if (email.length < 2) {
+        //     alert('Please Enter Email');
+        // }
+        // else if (IDnumber.length < 15) {
+        //     alert('Please Enter IDnumber');
+        // }
+        // else if (Phonenumber.length < 10) {
+        //     alert('Max length is 10 digit');
+        // }
+        // else if (Language.length < 1) {
+        //     alert('Please Enter Language');
+        // }
+        // else {
             e.preventDefault()
-            const postObj = JSON.stringify({
-                'FirstName': FirstName,
-                'LastName': LastName,
-                'email': email,
-                'IDnumber': IDnumber,
-                'phone': Phonenumber,
-                'Province': Province,
-                'District': District,
-                'Sector': Sector,
-                'Cell': Cell,
-                'Image': Image,
-                'Language': Language,
+            // const postObj = JSON.stringify({
+            //     'FirstName': FirstName,
+            //     'LastName': LastName,
+            //     'email': email,
+            //     'IDnumber': IDnumber,
+            //     'phone': Phonenumber,
+            //     'Province': Province,
+            //     'District': District,
+            //     'Sector': Sector,
+            //     'Cell': Cell,
+            //     'Image': Image,
+            //     'Language': Language,
 
-            })
+            // })
+            const postObj = new FormData();
+            postObj.append('Image', { type: 'image/jpg', uri: Image, name: 'my_image.jpg' })
+            postObj.append('FirstName', FirstName)
+            postObj.append('LastName', LastName)
+            postObj.append('IDnumber', IDnumber)
+            postObj.append('email', email)
+            postObj.append('phone', Phonenumber)
+            postObj.append('Province', Province)
+            postObj.append('District', District)
+            postObj.append('Cell', Cell)
+            postObj.append('Sector', Sector)
+            postObj.append('Language', Language)
             console.log(postObj)
 
             // let my_token = localStorage.getItem('token');
@@ -104,7 +116,7 @@ const Register = ({ navigation }) => {
             axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
             axios.defaults.xsrfCookieName = "csrftoken";
             axios.defaults.headers = {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
                 // Authorization: `Token ${my_token}`,
             };
 
@@ -119,7 +131,7 @@ const Register = ({ navigation }) => {
             setTimeout(() => {
                 setLoading(false)
             }, 5000)
-        }
+        // }
     }
 
     const renderHeader = () => {
