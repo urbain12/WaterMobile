@@ -74,7 +74,7 @@ const Momopay = ({ route, navigation }) => {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     setLoading(true)
     e.preventDefault();
 
@@ -114,7 +114,9 @@ const Momopay = ({ route, navigation }) => {
             if (my_data2[0].payment_status == "SUCCESSFUL") {
 
 
-              const id = await AsyncStorage.getItem('user_id')
+              const setPayment = async ()=>{
+                const id =  await AsyncStorage.getItem('user_id')
+              console.log(id)
         
         axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
             
@@ -143,10 +145,15 @@ const Momopay = ({ route, navigation }) => {
           }).catch(error => {
             console.log(error.message)
           })
+          
+
         }).catch(err => {
             console.log(err)
         })
+              }
 
+              setPayment();
+//======
               
 
             }

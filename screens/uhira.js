@@ -72,6 +72,7 @@ const CryptoDetail = ({ navigation, }) => {
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "UHIRA")
                 setinformation(sub)
+                getInstalmentDays(sub.From.slice(0, 10))
                 var subs=[]
                 console.log(res.data.length)
                 for(var i=0;i<res.data.length;i++){
