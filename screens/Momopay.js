@@ -113,28 +113,41 @@ const Momopay = ({ route, navigation }) => {
             console.log(my_data2[0].payment_status)
             if (my_data2[0].payment_status == "SUCCESSFUL") {
 
-              const postObj = JSON.stringify({
-                'customerID': customer.id,
-                'amount': my_data2[0].amount,
-              })
-              console.log(postObj)
-              axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-              axios.defaults.xsrfCookieName = "csrftoken";
-              axios.defaults.headers = {
-                'Content-Type': 'application/json',
-                // Authorization: `Token ${my_token}`,
-              };
 
-              axios.post('http://wateraccess.t3ch.rw:8234/pay_subscription/', postObj).then((res) => {
-                console.log(res.status)
-                alert('Subscription paid successfully!!')
-                setpaid(true)
-                clearInterval(setint)
-                navigation.navigate('Home')
+              const id = await AsyncStorage.getItem('user_id')
+        
+        axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+            
+          const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
+          const postObj = JSON.stringify({
+            'customerID': customer.id,
+            'amount': my_data2[0].amount,
+            'sub_id':sub.id
+          })
+          console.log(postObj)
+          axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+          axios.defaults.xsrfCookieName = "csrftoken";
+          axios.defaults.headers = {
+            'Content-Type': 'application/json',
+            // Authorization: `Token ${my_token}`,
+          };
 
-              }).catch(error => {
-                console.log(error.message)
-              })
+          axios.post('http://wateraccess.t3ch.rw:8234/pay_subscription/', postObj).then((res) => {
+            console.log(res.status)
+            alert('Subscription paid successfully!!')
+            setpaid(true)
+            clearInterval(setint)
+            navigation.navigate('Home')
+
+
+          }).catch(error => {
+            console.log(error.message)
+          })
+        }).catch(err => {
+            console.log(err)
+        })
+
+              
 
             }
 
