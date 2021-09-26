@@ -23,6 +23,7 @@ import { COLORS, FONTS, icons, images } from "../constants";
 import Modal from "react-native-modal";
 import Login from '../screens/Login';
 import Settings from '../screens/Settings';
+import CryptoDetail from '../screens/CryptoDetail'
 import { MaterialIcons, AntDesign, Ionicons, FontAwesome, Entypo } from "@expo/vector-icons";
 import axios from "axios";
 const Tab = createBottomTabNavigator();
@@ -115,7 +116,7 @@ const Tabs = ({ navigation }) => {
                 animationType="slide"
                 visible={isVisible}
                 style={{ backgroundColor: "#000000AA", margin: 0 }}
-              >
+               >
 
                 <TouchableOpacity
                   onPress={modalHandler}
@@ -124,7 +125,7 @@ const Tabs = ({ navigation }) => {
                     justifyContent: "center",
                     alignItems: "center",
                   }}
-                >
+                 >
 
                   <TouchableWithoutFeedback>
 

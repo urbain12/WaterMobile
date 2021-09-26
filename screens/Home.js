@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import {inject, observer} from 'mobx-react';
+import React, { useState, useEffect } from "react";
+import { inject, observer } from 'mobx-react';
 import {
   StyleSheet,
   View,
@@ -15,8 +15,8 @@ import {
   Animated,
   Alert
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather } from "@expo/vector-icons";
-import {AuthContext} from '../context/Context';
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather } from "@expo/vector-icons";
+import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 // import AsyncStorage from "@react-native-community/async-storage";
@@ -29,54 +29,55 @@ import { loadCurrentItem } from "../redux/shopping/shopping-actions";
 
 
 
-const Home =({navigation})=> {
+const Home = ({ navigation }) => {
   const [subscriptions, setSubscriptions] = useState([])
   const [isAmazi, setIsAmazi] = useState(false)
   const [isInuma, setIsInuma] = useState(false)
   const [isUhira, setIsUhira] = useState(false)
   const [customer, setCustomer] = useState({})
-  useEffect(  () =>{
-    const setInfo=async()=>{
+  useEffect(() => {
+    const setInfo = async () => {
       const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
       }).catch(err => {
         console.log(err)
       })
-    axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
-                var subs=[]
-                console.log(res.data.length)
-                for(var i=0;i<res.data.length;i++){
-                    subs.push(res.data[i].Category.Title.toUpperCase())
-                    console.log(res.data[i].TotalBalance)
-                }
-                if(subs.includes('AMAZI')){
-                    setIsAmazi(true)
-                }
-                if(subs.includes('INUMA')){
-                  setIsInuma(true)
-              }
-              if(subs.includes('UHIRA')){
-                setIsUhira(true)
-              }
-                setSubscriptions(subs)
-            }).catch(err => {
-                console.log(err)
-            })
+      axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+        var subs = []
+        console.log(res.data.length)
+        navigation.navigate('Home')
+        for (var i = 0; i < res.data.length; i++) {
+          subs.push(res.data[i].Category.Title.toUpperCase())
+          console.log(res.data[i].TotalBalance)
+        }
+        if (subs.includes('AMAZI')) {
+          setIsAmazi(true)
+        }
+        if (subs.includes('INUMA')) {
+          setIsInuma(true)
+        }
+        if (subs.includes('UHIRA')) {
+          setIsUhira(true)
+        }
+        setSubscriptions(subs)
+      }).catch(err => {
+        console.log(err)
+      })
     }
     setInfo();
-    
-  },[])
 
-  
-  
+  }, [])
+
+
+
   const sub_amazi = () => {
     // e.preventDefault()
     const names = customer.FirstName + ' ' + customer.LastName
     const postObj = JSON.stringify({
       'customerID': customer.id,
       'category': 'AMAZI',
-      
+
     })
     console.log(postObj)
 
@@ -92,7 +93,7 @@ const Home =({navigation})=> {
     axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
-      navigation.navigate('CryptoDetail')
+      navigation.push('Home')
     }).catch(err => {
       console.log(err)
     })
@@ -106,7 +107,7 @@ const Home =({navigation})=> {
     const postObj = JSON.stringify({
       'customerID': customer.id,
       'category': 'UHIRA',
-      
+
     })
     console.log(postObj)
 
@@ -122,7 +123,7 @@ const Home =({navigation})=> {
     axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
-      navigation.navigate('uhira')
+      navigation.push('Home')
     }).catch(err => {
       console.log(err)
     })
@@ -137,7 +138,7 @@ const Home =({navigation})=> {
     const postObj = JSON.stringify({
       'customerID': customer.id,
       'category': 'INUMA',
-      
+
     })
     console.log(postObj)
 
@@ -153,7 +154,7 @@ const Home =({navigation})=> {
     axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
-      navigation.navigate('inuma')
+      navigation.push('Home')
     }).catch(err => {
       console.log(err)
     })
@@ -176,7 +177,7 @@ const Home =({navigation})=> {
       ]
     );
 
-    const inuma_alert = () =>
+  const inuma_alert = () =>
     Alert.alert(
       "Subscribe",
       "Are you sure you want to subscribe in INUMA",
@@ -190,7 +191,7 @@ const Home =({navigation})=> {
       ]
     );
 
-    const uhira_alert = () =>
+  const uhira_alert = () =>
     Alert.alert(
       "Subscribe",
       "Are you sure you want to subscribe in UHIRA",
@@ -204,11 +205,11 @@ const Home =({navigation})=> {
       ]
     );
 
-  
-  
 
-  const renderHeader=()=> {
-    
+
+
+  const renderHeader = () => {
+
     return (
       <View
         style={{
@@ -228,20 +229,20 @@ const Home =({navigation})=> {
           {/* Header Bar */}
           <View
             style={{
-              marginTop:20,
+              marginTop: 20,
               width: "100%",
-              flexDirection:"row",
+              flexDirection: "row",
               paddingHorizontal: SIZES.padding,
             }}
           >
-            
-            
+
+
           </View>
 
           {/* Balance */}
           <View
             style={{
-              paddingTop:30,
+              paddingTop: 30,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -252,47 +253,47 @@ const Home =({navigation})=> {
           </View>
 
           {/* Trending */}
-         
+
         </ImageBackground>
-            
-        
+
+
       </View>
     );
   }
 
 
 
-  
-    
-    return (
-    
-      
-    <View style={{flex:1}}>
-         {renderHeader()}
 
-         <ScrollView>
-         
-         {isAmazi?(
-          <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+
+  return (
+
+
+    <View style={{ flex: 1, height: "100%" }}>
+      {renderHeader()}
+
+      <ScrollView style={{ height: "100%", marginBottom: 10 }}>
+
+        {isAmazi ? (
+          <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
                 width: '80%',
-                height:120,
+                height: 120,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-              
+
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                alignItems:'center',
-                justifyContent:'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 ...styles.shadow
 
               }}
-              
+
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
                   <Image source={require("../assets/images/Amazi.png")}
                     style={{
                       resizeMode: 'contain',
@@ -315,35 +316,40 @@ const Home =({navigation})=> {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     245 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
-                  
-                  
+                  <View>
+                    <Text style={{ color: '#01B0F1', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                      Subscribed
+                    </Text>
+                  </View>
+
+
                 </View>
               </View>
 
 
             </View>
-            </TouchableOpacity>
-         ):(
-          <View style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+          </TouchableOpacity>
+        ) : (
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
                 width: '80%',
-                height:120,
+                height: 120,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-              
+
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                alignItems:'center',
-                justifyContent:'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 ...styles.shadow
 
               }}
-              //onPress={() => navigation.navigate("Landing")}
+            //onPress={() => navigation.navigate("Landing")}
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
                   <Image source={require("../assets/images/Amazi.png")}
                     style={{
                       resizeMode: 'contain',
@@ -366,42 +372,42 @@ const Home =({navigation})=> {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     245 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
-                  <TouchableOpacity onPress={()=>{amazi_alert()}}>
-                  <Text style={{ color: 'red', ...FONTS.body3,marginTop:5}}>
-                    subscribe
-                  </Text>
+                  <TouchableOpacity onPress={() => { amazi_alert() }}>
+                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                      Subscribe
+                    </Text>
                   </TouchableOpacity>
-                  
+
                 </View>
               </View>
 
 
             </View>
-            </View>
-         )}
+          </View>
+        )}
 
 
-            {isInuma?(
-              <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+        {isInuma ? (
+          <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
                 width: '80%',
-                height:120,
+                height: 120,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-              
+
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                alignItems:'center',
-                justifyContent:'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 ...styles.shadow
 
               }}
-              //onPress={() => navigation.navigate("Landing")}
+            //onPress={() => navigation.navigate("Landing")}
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
                   <Image source={require("../assets/images/Inuma.png")}
                     style={{
                       resizeMode: 'contain',
@@ -424,35 +430,40 @@ const Home =({navigation})=> {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     3,142 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
-                  
-                  
+                  <View>
+                    <Text style={{ color: '#01B0F1', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                      Subscribed
+                    </Text>
+                  </View>
+
+
                 </View>
               </View>
 
 
             </View>
-            </TouchableOpacity>
-            ):(
-              <View style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+          </TouchableOpacity>
+        ) : (
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
                 width: '80%',
-                height:120,
+                height: 120,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-              
+
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                alignItems:'center',
-                justifyContent:'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 ...styles.shadow
 
               }}
-              //onPress={() => navigation.navigate("Landing")}
+            //onPress={() => navigation.navigate("Landing")}
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
                   <Image source={require("../assets/images/Inuma.png")}
                     style={{
                       resizeMode: 'contain',
@@ -475,42 +486,42 @@ const Home =({navigation})=> {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     3,142 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
-                  <TouchableOpacity onPress={()=>{inuma_alert()}}>
-                  <Text style={{ color: 'red', ...FONTS.body3,marginTop:5}}>
-                    subscribe
-                  </Text>
+                  <TouchableOpacity onPress={() => { inuma_alert() }}>
+                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                      Subscribe
+                    </Text>
                   </TouchableOpacity>
-                  
+
                 </View>
               </View>
 
 
             </View>
-            </View>
-            )}
+          </View>
+        )}
 
 
-            {isUhira?(
-              <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+        {isUhira ? (
+          <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom:100, }}>
             <View
               style={{
                 width: '80%',
-                height:120,
+                height: 120,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-              
+                marginBottom:100,
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                alignItems:'center',
-                justifyContent:'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 ...styles.shadow
 
               }}
-              //onPress={() => navigation.navigate("Landing")}
+            //onPress={() => navigation.navigate("Landing")}
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
                   <Image source={require("../assets/images/Uhira.png")}
                     style={{
                       resizeMode: 'contain',
@@ -533,34 +544,39 @@ const Home =({navigation})=> {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
-                  
+                  <View>
+                    <Text style={{ color: '#01B0F1', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                      Subscribed
+                    </Text>
+                  </View>
+
                 </View>
               </View>
 
 
             </View>
-            </TouchableOpacity>
-            ):(
-              <View style={{alignItems:'center',justifyContent:'center', marginTop:25}}>
+          </TouchableOpacity>
+        ) : (
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25,marginBottom:100, }}>
             <View
               style={{
                 width: '80%',
-                height:120,
+                height: 120,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-              
+
                 borderRadius: 10,
                 backgroundColor: COLORS.white,
-                alignItems:'center',
-                justifyContent:'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 ...styles.shadow
 
               }}
-              //onPress={() => navigation.navigate("Landing")}
+            //onPress={() => navigation.navigate("Landing")}
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base , alignItems:'center'}}>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
                   <Image source={require("../assets/images/Uhira.png")}
                     style={{
                       resizeMode: 'contain',
@@ -583,34 +599,34 @@ const Home =({navigation})=> {
                   <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
                     2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
                   </Text>
-                  <TouchableOpacity onPress={()=>{uhira_alert()}}>
-                  <Text style={{ color: 'red', ...FONTS.body3,marginTop:5}}>
-                    subscribe
-                  </Text>
+                  <TouchableOpacity onPress={() => { uhira_alert() }}>
+                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                      Subscribe
+                    </Text>
                   </TouchableOpacity>
-                  
+
                 </View>
               </View>
 
 
             </View>
-            </View>
-            )}
-            
-         </ScrollView>
+          </View>
+        )}
+
+      </ScrollView>
     </View>
 
 
-    
-        
-        
+
+
+
   );
 };
 
-  
-  
 
-  
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -628,103 +644,103 @@ const styles = StyleSheet.create({
 
     elevation: 8,
   },
-  sliderContainer:{
-    height:200,
-    width:'90%',
-    marginTop:10,
-    justifyContent:"center",
-    alignSelf:"center",
-    borderRadius:8,
-},
-wrapper:{},
-slide:{
-    flex:1,
-    justifyContent:"center",
-    backgroundColor:"transparent",
-    borderRadius:8,
-},
-sliderImage:{
-    height:"100%",
-    width:"100%",
-    alignSelf:"center",
-    borderRadius:8,
-},
-categoryContainer:{
-    flexDirection:'row',
-    width:'100%',
-    alignSelf:'center',
-    marginTop:25,
-    marginBottom:10,
-},
-categoryBtn:{
-    flex:1,
-    width:"30%",
-    marginHorizontal:0,
-    alignSelf:"center",
-},
-categoryIcon:{
-    borderWidth:0,
-    alignItems:"center",
-    justifyContent:"center",
-    alignSelf:"center",
-    width:70,
-    height:70,
-    backgroundColor:"#fdeae7",
-    borderRadius:50,
-},
-categoryBtnTxt:{
-    alignSelf:"center",
-    marginTop:5,
-    color:"#de4f35",
-},
-cardsWrapper:{
-    marginTop:20,
-    marginLeft:20,
-    flexDirection:"row",
-    width:'100%'
-},
-card:{
-    height:150,
-    width:300,
-    marginHorizontal:10,
-    marginBottom:20,
-    flexDirection:'row',
-    shadowColor:'#999',
-    shadowOffset:{width:0,height:1},
-    shadowOpacity:0.8,
-    shadowRadius:2,
-    elevation:5,
-    paddingVertical:5,
-    paddingHorizontal:5,
-},
-cardImgWrapper:{
-    width:130,
-},
-cardImg:{
-    width:'100%',
-    height:'100%',
-    alignSelf:"center",
-    borderRadius:8,
-    borderBottomRightRadius:0,
-    borderTopRightRadius:0,
-},
-cardInfo:{
-    flex:2,
-    padding:10,
-    borderColor:'#ccc',
-    borderWidth:1,
-    borderLeftWidth:0,
-    borderBottomRightRadius:8,
-    borderTopRightRadius:8,
-    backgroundColor:"#e5e4eb",
-},
-cardTitle:{
-    fontWeight:'bold',
-},
-cardDetails:{
-    fontSize:12,
-    color:'#444'
-},
+  sliderContainer: {
+    height: 200,
+    width: '90%',
+    marginTop: 10,
+    justifyContent: "center",
+    alignSelf: "center",
+    borderRadius: 8,
+  },
+  wrapper: {},
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    borderRadius: 8,
+  },
+  sliderImage: {
+    height: "100%",
+    width: "100%",
+    alignSelf: "center",
+    borderRadius: 8,
+  },
+  categoryContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    alignSelf: 'center',
+    marginTop: 25,
+    marginBottom: 10,
+  },
+  categoryBtn: {
+    flex: 1,
+    width: "30%",
+    marginHorizontal: 0,
+    alignSelf: "center",
+  },
+  categoryIcon: {
+    borderWidth: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    width: 70,
+    height: 70,
+    backgroundColor: "#fdeae7",
+    borderRadius: 50,
+  },
+  categoryBtnTxt: {
+    alignSelf: "center",
+    marginTop: 5,
+    color: "#de4f35",
+  },
+  cardsWrapper: {
+    marginTop: 20,
+    marginLeft: 20,
+    flexDirection: "row",
+    width: '100%'
+  },
+  card: {
+    height: 150,
+    width: 300,
+    marginHorizontal: 10,
+    marginBottom: 20,
+    flexDirection: 'row',
+    shadowColor: '#999',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+  },
+  cardImgWrapper: {
+    width: 130,
+  },
+  cardImg: {
+    width: '100%',
+    height: '100%',
+    alignSelf: "center",
+    borderRadius: 8,
+    borderBottomRightRadius: 0,
+    borderTopRightRadius: 0,
+  },
+  cardInfo: {
+    flex: 2,
+    padding: 10,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderBottomRightRadius: 8,
+    borderTopRightRadius: 8,
+    backgroundColor: "#e5e4eb",
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+  },
+  cardDetails: {
+    fontSize: 12,
+    color: '#444'
+  },
 });
 
 

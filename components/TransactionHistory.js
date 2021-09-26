@@ -59,6 +59,7 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
                 marginTop: SIZES.padding,
                 marginHorizontal: SIZES.padding,
                 padding: 20,
+                width:"90%",
                 borderRadius: SIZES.radius,
                 backgroundColor: COLORS.white,
                 ...customContainerStyle

@@ -178,7 +178,7 @@ const Register = ({ navigation }) => {
                         }}
                     >
                         <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                            Registration Form
+                          WAR client  Registration Form
                         </Text>
                     </View>
 
@@ -389,6 +389,26 @@ const Register = ({ navigation }) => {
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Button title="Pick a profile" onPress={pickImage} />
                         </View>
+                        <TouchableOpacity activeOpacity={1}>
+                        <View style={{ height: 200, alignItems: 'center', justifyContent: 'center' }}>
+                          <ImageBackground
+                            source={{
+                              uri: Image,
+                            }}
+                            style={{ height: 150, width: 150, borderColor: 'black', borderWidth: 0.3 }}
+                            imageStyle={{ borderRadius: 15 }}>
+                            <View
+                              style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}>
+
+                            </View>
+                          </ImageBackground>
+                        </View>
+                      </TouchableOpacity>
+
                         <TouchableOpacity
                             onPress={(e) => {
                                 handleSubmit(e)

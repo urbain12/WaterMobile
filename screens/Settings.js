@@ -126,7 +126,7 @@ const Settings = ({ navigation }) => {
         }}
         onPress={() => navigation.navigate("CryptoDetail")}
       >
-        <Image source={require('../assets/user.png')} style={{width:'100%',height:'100%'}}/>
+        <Image source={{ uri: customer.Image }} style={{width:'100%',height:'100%'}}/>
       </View>
           </View>
         </ImageBackground>
