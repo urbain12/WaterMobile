@@ -2,9 +2,10 @@ import React, { Component, useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { images } from '../constants/images';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { addToCart, decreaseQty } from '../redux/shopping/shopping-actions';
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
+
 
 const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty }) => {
     const [productCart, setProductCart] = useState({})
@@ -91,13 +92,15 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                     paddingVertical: 8,
                     marginTop: 5
                 }}>
-                    <TouchableOpacity onPress={() => { addToCart(currentItem.id) }}>
-                        <Text style={{
-                            fontWeight: "bold",
+                    <TouchableOpacity onPress={() => {
+                        decreaseQty(currentItem.id)
+                    }}>
+                        <AntDesign name="minus" size={30} color="black" style={{fontWeight: "bold",
                             color: "white",
-                            fontSize: 30,
-                        }}>+</Text>
+                            fontSize: 30,}} />
                     </TouchableOpacity>
+
+                    
 
                     <Text style={{
                         fontSize: 18,
@@ -107,16 +110,13 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                         {cart.find(prod => prod.id === currentItem.id) === undefined ? 0 : cart.find(prod => prod.id === currentItem.id).qty}
                     </Text>
 
-                    <TouchableOpacity onPress={() => {
-                        decreaseQty(currentItem.id)
-                    }}>
-                        <Text style={{
-                            fontWeight: "bold",
+                    <TouchableOpacity onPress={() => { addToCart(currentItem.id) }}>
+                    <AntDesign name="plus" size={30} color="black" style={{fontWeight: "bold",
                             color: "white",
-                            fontSize: 30
-                        }}>-</Text>
+                            fontSize: 30,}} />
                     </TouchableOpacity>
 
+                    
                 </View>
                 <View style={{
                     flexDirection: "row",

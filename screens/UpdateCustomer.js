@@ -293,7 +293,7 @@ const UpdateCustomer = ({ navigation }) => {
                       source={{
                         uri: Image,
                       }}
-                      style={{ height: 150, width: 150, borderColor: 'black', borderWidth: 0.3 }}
+                      style={{ height: 150, width: 150, borderColor: 'black',borderWidth: 0.3 }}
                       imageStyle={{ borderRadius: 15 }}>
                       <View
                         style={{
