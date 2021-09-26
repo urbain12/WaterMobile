@@ -261,15 +261,17 @@ const Settings = ({ navigation }) => {
             <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
                 <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>User Agreement</Text>
             </View>
-            <TouchableOpacity onPress={()=> context.signOut()} style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
-                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Sign Out</Text>
-            </TouchableOpacity>
-            <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
-                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Version: 0.1</Text>
-            </View>
             <TouchableOpacity onPress={() => navigation.navigate("changepassword")} style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
                 <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Change password</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={()=> context.signOut()} style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
+                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Sign Out</Text>
+            </TouchableOpacity>
+
+            <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
+                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Version: 0.1</Text>
+            </View>
+            
             
         </View>
       </View>
