@@ -11,13 +11,14 @@ import {
     TouchableOpacity,
     ActivityIndicator
 } from "react-native";
+import { MaterialIcons,Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo} from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
     HeaderBar,
     CurrencyLabel,
     TextButton,
 } from "../components";
-import { dummyData, COLORS, SIZES, FONTS } from "../constants";
+import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
 import axios from 'axios';
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
@@ -128,6 +129,7 @@ const UpdateCustomer = ({ navigation }) => {
         function renderTrade() {
 
             return (
+
                 <View
                     style={{
                         marginTop: SIZES.padding,
@@ -139,6 +141,7 @@ const UpdateCustomer = ({ navigation }) => {
                         ...styles.shadow,
                     }}
                 >
+               
                     <View>
                         <TouchableOpacity activeOpacity={1}>
 
@@ -331,7 +334,37 @@ const UpdateCustomer = ({ navigation }) => {
 
         return (
             <KeyboardAwareScrollView style={{ flex: 1 }}>
-                <HeaderBar right={false} />
+                 <ImageBackground source={images.banner_settings} style={{margin:0,flexDirection:'row'}}>
+
+<View style={{
+    width:'20%',
+    alignItems:'center',
+    marginTop:'10%',
+    marginBottom:'10%'
+}}>
+<TouchableOpacity onPress={() => navigation.goBack()}>
+<Ionicons name="ios-arrow-back" size={40} color="white" />
+</TouchableOpacity>
+</View>
+
+<View style={{
+    width:'60%',
+    alignItems:'center',
+    marginTop:'10%',
+    marginBottom:'10%'
+}}>
+  <Text style={{alignSelf:'center',color:'white',fontWeight:'bold', fontSize:20,marginTop:10}}>Update your information </Text>
+</View>
+
+<View style={{
+    width:'20%',
+    alignItems:'center',
+    marginTop:'10%',
+    marginBottom:'10%'
+}}>
+</View>
+
+</ImageBackground>
 
                 <ScrollView>
                     <View style={{ flex: 1, paddingBottom: SIZES.padding }}>

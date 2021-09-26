@@ -10,7 +10,7 @@ import {
   ImageBackground,
   LogBox,
 } from "react-native";
-import { MaterialIcons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo} from "@expo/vector-icons";
+import { MaterialIcons,Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo} from "@expo/vector-icons";
 import {AuthContext} from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -236,7 +236,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <TouchableOpacity style={{marginLeft:30}}>
                             <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
-                            <Text style={{color:'#707070'}}>{subscriptions.join(',')}</Text>
+                            <Text style={{color:'#707070'}}>{ subscriptions.length>0 && subscriptions.join(',')}</Text>
                         </TouchableOpacity>
                         
                     </View>
