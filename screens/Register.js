@@ -124,9 +124,14 @@ const Register = ({ navigation }) => {
             };
 
             axios.post('http://wateraccess.t3ch.rw:8234/register/', postObj).then((res) => {
-                console.log(res.status)
-                alert('Your are succesful register Please login with credentails sent on your phone number')
+                if(res.data.code==200){
+                    alert('Your are succesful register Please login with credentails sent on your phone number')
                 navigation.navigate('Login')
+                }
+                else{
+                    alert('Password or email already taken')
+                }
+                
             }).catch(err => {
                 console.log(err)
             })
@@ -407,7 +412,7 @@ const Register = ({ navigation }) => {
                             source={{
                               uri: Image,
                             }}
-                            style={{ height: 150, width: 150, borderColor: 'black', borderWidth: 0.3 }}
+                            style={{ height: 150, width: 150, borderColor: 'black',  }}
                             imageStyle={{ borderRadius: 15 }}>
                             <View
                               style={{

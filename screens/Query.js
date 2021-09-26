@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
+  ImageBackground
 } from "react-native";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
@@ -18,7 +19,7 @@ import {
   TextButton,
   TransactionHistory,
 } from "../components";
-import { dummyData, COLORS, SIZES, FONTS } from "../constants";
+import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
@@ -90,39 +91,81 @@ const Transaction = ({ navigation, props }) => {
 
 
   }
+  const renderHeader = () => {
+
+    return (
+        <View
+            style={{
+                width: "100%",
+                height: 120,
+                ...styles.shadow,
+            }}
+        >
+            <ImageBackground
+                source={images.banner_settings}
+                resizeMode="cover"
+                style={{
+                    flex: 1,
+                    alignItems: "center",
+                }}
+            >
+                {/* Header Bar */}
+                <View
+                    style={{
+                        marginTop: 20,
+                        width: "100%",
+                        flexDirection: "row",
+                        paddingHorizontal: SIZES.padding,
+                    }}
+                >
+                    <TouchableOpacity
+                        style={{
+                            width: 35,
+                            height: 35,
+                            marginRight: '80%',
+                            marginTop: 10,
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Ionicons
+                            name="arrow-back"
+                            size={40}
+                            color="white"
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </View>
+
+                {/* Balance */}
+                <View
+                    style={{
+                        paddingTop: 0,
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
+                      Send Query
+                    </Text>
+                </View>
+
+                {/* Trending */}
+
+            </ImageBackground>
+        </View>
+    );
+}
 
   return (
     <KeyboardAwareScrollView 
     
     >
       <View
-        style={{
-          width: "100%",
-          flexDirection: "row",
-          paddingHorizontal: SIZES.padding,
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            width: 35,
-            height: 35,
-            marginTop: 25,
-            marginBottom: 20,
-            marginRight: '80%',
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => navigation.goBack()}
-        >
-          <Ionicons
-            name="arrow-back"
-            size={40}
-            color="black"
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-
-      </View>
+            >
+                {renderHeader()}
+            </View>
       <ScrollView>
 
           <View style={{marginTop: SIZES.padding,
