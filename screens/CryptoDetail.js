@@ -107,7 +107,7 @@ const CryptoDetail = ({ navigation }) => {
             var end_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + sub_day).slice(-2))
             var start_date = new Date(year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + day).slice(-2))
             var diffDays = parseInt((end_date - start_date) / (1000 * 60 * 60 * 24))
-            console.log('jhgh:'+diffDays)
+            console.log('jhgh:' + diffDays)
             setDays2(diffDays)
         }
         else {
@@ -392,10 +392,10 @@ const CryptoDetail = ({ navigation }) => {
                         </View>
                         <View
                             style={{
-                                width: "80%",
+                                width: "85%",
                                 paddingVertical: SIZES.padding,
                                 paddingHorizontal: SIZES.padding,
-                                marginLeft: 40,
+                                marginLeft: 25,
                                 marginTop: 40,
                                 marginRight: SIZES.radius,
                                 borderRadius: 10,
@@ -445,13 +445,13 @@ const CryptoDetail = ({ navigation }) => {
                                     flexDirection: 'row',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    marginLeft: "8%",
+                                    marginLeft: "6%",
                                     marginTop: SIZES.padding * 1,
                                     paddingVertical: SIZES.padding,
                                     paddingHorizontal: SIZES.radius,
                                     backgroundColor: COLORS.white,
                                     borderRadius: SIZES.radius,
-                                    width: "85%",
+                                    width: "87%",
                                     ...styles.shadow
                                 }}
 
@@ -463,7 +463,7 @@ const CryptoDetail = ({ navigation }) => {
                                 <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
 
-                                    <Text style={{ color: 'green', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Pay Subscriptions</Text>
+                                    <Text style={{ color: '#01B0F1', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Pay Subscriptions</Text>
 
 
 
@@ -493,33 +493,60 @@ const CryptoDetail = ({ navigation }) => {
                         }}
                     >
 
+                        {information.complete == true ? (
 
-                        <View style={{ flex: 1, marginLeft: SIZES.radius, justifyContent: "center", alignItems: "center" }}>
+                            <View style={{ flex: 1, marginLeft: SIZES.radius, justifyContent: "center", alignItems: "center" }}>
 
 
-                            <View>
-                                <Text style={{ ...FONTS.h3, fontWeight: "bold" }}>Instalment balance </Text>
-                                <Text style={{ color: 'green', textAlign: "center", fontSize: 30, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
+                                <View style={{ flexDirection: "row" }}>
+                                    <View style={{marginRight:"8%"}}>
+                                        <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Instalment balance </Text>
+                                        <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
+                                    </View>
+
+                                    <View>
+                                        <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Monthly payment </Text>
+                                        <Text style={{ color: '#01B0F1', fontSize: 25, }}>{Math.ceil(Monthly)} Rwf</Text>
+                                    </View>
+                                </View>
+
+
+                                <View style={{ flexDirection: "row",marginTop:20 }}>
+                                <View style={{marginRight:"18%"}}>
+                                    <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Month </Text>
+                                    <Text style={{ color: '#01B0F1', fontSize: 30, }}>{information.get_overdue_months}</Text>
+                                </View>
+
+                                <View>
+                                    <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Amount </Text>
+                                    <Text style={{ color: '#01B0F1', fontSize: 30, }}>{Math.ceil(OverdueAmount)}</Text>
+                                </View>
+
+                                </View>
+
+
+                            </View>
+                        ) : (
+
+                            <View style={{ flex: 1, marginLeft: SIZES.radius, justifyContent: "center", alignItems: "center" }}>
+
+
+                                <View>
+                                    <Text style={{ ...FONTS.h3, fontWeight: "bold", color: '#01B0F1' }}>Descriptions </Text>
+                                    <Text style={{ color: '#707070', fontSize: 20, }}>To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators</Text>
+                                </View>
+
                             </View>
 
 
 
-                            <View>
-                                <Text style={{ ...FONTS.h3, fontWeight: "bold" }}>Monthly payment </Text>
-                                <Text style={{ color: 'green', textAlign: "center", fontSize: 30,  }}>{Math.ceil(Monthly)}</Text>
-                            </View>
 
-                            <View>
-                                <Text style={{ ...FONTS.h3, fontWeight: "bold" }}>Overdue Month </Text>
-                                <Text style={{ color: 'green', textAlign: "center", fontSize: 30,  }}>{information.get_overdue_months}</Text>
-                            </View>
+                        )}
 
-                            <View>
-                                <Text style={{ ...FONTS.h3, fontWeight: "bold" }}>Overdue Amount </Text>
-                                <Text style={{ color: 'green', textAlign: "center", fontSize: 30,  }}>{Math.ceil(OverdueAmount)}</Text>
-                            </View>
 
-                        </View>
+
+
+
 
 
                     </View>
@@ -663,7 +690,7 @@ const CryptoDetail = ({ navigation }) => {
                     }}
                     onPress={() => {
                         setIsVisible(true);
-                      }}
+                    }}
 
                 >
                     <View
@@ -699,110 +726,110 @@ const CryptoDetail = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <Modal
-                animationType="slide"
-                visible={isVisible}
-                style={{ backgroundColor: "#000000AA", margin: 0 }}
-               >
+                    animationType="slide"
+                    visible={isVisible}
+                    style={{ backgroundColor: "#000000AA", margin: 0 }}
+                >
 
-                <TouchableOpacity
-                  onPress={modalHandler}
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                 >
-
-                  <TouchableWithoutFeedback>
-
-
-                    <View
-                      style={{
-                        height: "45%",
-                        width: "95%",
-                        backgroundColor: "#fff",
-                        borderRadius: 40,
-
-                      }}
-
+                    <TouchableOpacity
+                        onPress={modalHandler}
+                        style={{
+                            flex: 1,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
                     >
-                      <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
+
+                        <TouchableWithoutFeedback>
 
 
-                        <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
+                            <View
+                                style={{
+                                    height: "45%",
+                                    width: "95%",
+                                    backgroundColor: "#fff",
+                                    borderRadius: 40,
 
-                          <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
-                            Quick Access </Text>
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              alignContent: "center",
-                              width: '100%'
-                            }}
-                          >
-
-                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
-
-                            onPress={() => {navigation.navigate("Shop"); setIsVisible(false);}}
+                                }}
 
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
-                                <FontAwesome
-                                  name="shopping-bag"
-                                  size={80}
-                                  color="#01B0F1"
-                                  resizeMode="contain"
-                                />
-                              </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Shop</Text>
-                            </TouchableOpacity>
+                                <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
 
 
-                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+                                    <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
 
-                            // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
+                                        <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                                            Quick Access </Text>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                alignContent: "center",
+                                                width: '100%'
+                                            }}
+                                        >
 
-                            >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
-                                <Image
-                                  source={icons.waterpipe}
-                                  resizeMode="contain"
-                                  style={{
-                                    width: 90,
-                                    height: 120,
-                                    marginLeft: 2,
-                                  }}
-                                />
-                              </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintanance</Text>
-                            </TouchableOpacity>
+                                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+
+                                                onPress={() => { navigation.navigate("Shop"); setIsVisible(false); }}
+
+                                            >
+                                                <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                    <FontAwesome
+                                                        name="shopping-bag"
+                                                        size={80}
+                                                        color="#01B0F1"
+                                                        resizeMode="contain"
+                                                    />
+                                                </View>
+                                                <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Shop</Text>
+                                            </TouchableOpacity>
 
 
-                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+                                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
 
-                              onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
-                            >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
-                                <Image
-                                  source={icons.watersupport}
-                                  resizeMode="contain"
-                                  style={{
-                                    width: 90,
-                                    height: 120,
-                                    marginLeft: 2,
-                                  }}
-                                />
-                              </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Support</Text>
-                            </TouchableOpacity>
+                                            // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
 
-                          </View>
-                        </ScrollView>
-                      </ImageBackground>
-                    </View>
-                  </TouchableWithoutFeedback>
-                </TouchableOpacity>
-              </Modal>
+                                            >
+                                                <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                    <Image
+                                                        source={icons.waterpipe}
+                                                        resizeMode="contain"
+                                                        style={{
+                                                            width: 90,
+                                                            height: 120,
+                                                            marginLeft: 2,
+                                                        }}
+                                                    />
+                                                </View>
+                                                <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintanance</Text>
+                                            </TouchableOpacity>
+
+
+                                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+
+                                                onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
+                                            >
+                                                <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                    <Image
+                                                        source={icons.watersupport}
+                                                        resizeMode="contain"
+                                                        style={{
+                                                            width: 90,
+                                                            height: 120,
+                                                            marginLeft: 2,
+                                                        }}
+                                                    />
+                                                </View>
+                                                <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Support</Text>
+                                            </TouchableOpacity>
+
+                                        </View>
+                                    </ScrollView>
+                                </ImageBackground>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </TouchableOpacity>
+                </Modal>
 
             </View>
         </View>

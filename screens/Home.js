@@ -214,7 +214,7 @@ const Home = ({ navigation }) => {
       <View
         style={{
           width: "100%",
-          height: 150,
+          height: 100,
           ...styles.shadow,
         }}
       >
@@ -229,7 +229,7 @@ const Home = ({ navigation }) => {
           {/* Header Bar */}
           <View
             style={{
-              marginTop: 20,
+              marginTop: 30,
               width: "100%",
               flexDirection: "row",
               paddingHorizontal: SIZES.padding,
@@ -242,7 +242,7 @@ const Home = ({ navigation }) => {
           {/* Balance */}
           <View
             style={{
-              paddingTop: 30,
+              paddingTop: 20,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -283,7 +283,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: COLORS.white,
+                backgroundColor: "#1c6388",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -294,30 +294,18 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Image source={require("../assets/images/Amazi.png")}
-                    style={{
-                      resizeMode: 'contain',
-                      width: "180%",
-                      height: 50,
-
-                    }}
-
-                  />
+                  <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
                     borderBottomColor: "#47315a",
-                    width: 50,
-                    marginLeft: 20,
+                    width: 100,
+                    marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
-
-                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    245 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
-                  </Text>
                   <View>
-                    <Text style={{ color: '#01B0F1', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
                       Subscribed
                     </Text>
                   </View>
@@ -339,7 +327,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: COLORS.white,
+                backgroundColor: "#1c6388",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -350,30 +338,19 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Image source={require("../assets/images/Amazi.png")}
-                    style={{
-                      resizeMode: 'contain',
-                      width: "180%",
-                      height: 50,
-
-                    }}
-
-                  />
+                  <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
                     borderBottomColor: "#47315a",
-                    width: 50,
-                    marginLeft: 20,
+                    width: 100,
+                    marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
 
-                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    245 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
-                  </Text>
                   <TouchableOpacity onPress={() => { amazi_alert() }}>
-                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
                       Subscribe
                     </Text>
                   </TouchableOpacity>
@@ -397,7 +374,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: COLORS.white,
+                backgroundColor: "#339ED6",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -408,30 +385,18 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Image source={require("../assets/images/Inuma.png")}
-                    style={{
-                      resizeMode: 'contain',
-                      width: "180%",
-                      height: 50,
-
-                    }}
-
-                  />
+                  <Text style={{ fontSize: 30, color: "white" }}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
                     borderBottomColor: "#47315a",
-                    width: 50,
-                    marginLeft: 20,
+                    width: 100,
+                    marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
-
-                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    3,142 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
-                  </Text>
                   <View>
-                    <Text style={{ color: '#01B0F1', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
                       Subscribed
                     </Text>
                   </View>
@@ -453,7 +418,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: COLORS.white,
+                backgroundColor: "#339ED6",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -464,30 +429,18 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Image source={require("../assets/images/Inuma.png")}
-                    style={{
-                      resizeMode: 'contain',
-                      width: "180%",
-                      height: 50,
-
-                    }}
-
-                  />
+                <Text style={{fontSize:30,color:"white"}}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
                     borderBottomColor: "#47315a",
-                    width: 50,
-                    marginLeft: 20,
+                    width: 100,
+                    marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
-
-                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    3,142 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
-                  </Text>
                   <TouchableOpacity onPress={() => { inuma_alert() }}>
-                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
                       Subscribe
                     </Text>
                   </TouchableOpacity>
@@ -502,16 +455,16 @@ const Home = ({ navigation }) => {
 
 
         {isUhira ? (
-          <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom:100, }}>
+          <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
             <View
               style={{
                 width: '80%',
                 height: 120,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-                marginBottom:100,
+                marginBottom: 100,
                 borderRadius: 10,
-                backgroundColor: COLORS.white,
+                backgroundColor: "#01B1AF",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -522,30 +475,18 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Image source={require("../assets/images/Uhira.png")}
-                    style={{
-                      resizeMode: 'contain',
-                      width: "180%",
-                      height: 50,
-
-                    }}
-
-                  />
+                <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
                     borderBottomColor: "#47315a",
-                    width: 50,
-                    marginLeft: 20,
+                    width: 100,
+                    marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
-
-                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
-                  </Text>
                   <View>
-                    <Text style={{ color: '#01B0F1', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
                       Subscribed
                     </Text>
                   </View>
@@ -557,7 +498,7 @@ const Home = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         ) : (
-          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25,marginBottom:100, }}>
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
             <View
               style={{
                 width: '80%',
@@ -566,7 +507,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: COLORS.white,
+                backgroundColor: "#01B1AF",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -577,30 +518,18 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Image source={require("../assets/images/Uhira.png")}
-                    style={{
-                      resizeMode: 'contain',
-                      width: "180%",
-                      height: 50,
-
-                    }}
-
-                  />
+                <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
                     borderBottomColor: "#47315a",
-                    width: 50,
-                    marginLeft: 20,
+                    width: 100,
+                    marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
-
-                  <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-                    2,342 <Text style={{ fontSize: 10 }}>Happy Clients</Text>
-                  </Text>
                   <TouchableOpacity onPress={() => { uhira_alert() }}>
-                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 5, fontSize: 20 }}>
+                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
                       Subscribe
                     </Text>
                   </TouchableOpacity>

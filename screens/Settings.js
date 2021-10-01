@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -10,8 +10,8 @@ import {
   ImageBackground,
   LogBox,
 } from "react-native";
-import { MaterialIcons,Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo} from "@expo/vector-icons";
-import {AuthContext} from '../context/Context';
+import { MaterialIcons, Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo } from "@expo/vector-icons";
+import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 // import AsyncStorage from "@react-native-community/async-storage";
@@ -20,34 +20,34 @@ import axios from 'axios';
 
 const Settings = ({ navigation }) => {
   const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
-  const [customer,setCustomer]=useState({})
-  const [category,setCategory]=useState('')
-  const [subscriptions,setSubscriptions]=useState('')
+  const [customer, setCustomer] = useState({})
+  const [category, setCategory] = useState('')
+  const [subscriptions, setSubscriptions] = useState('')
   const [transactionHistory, setTransactionHistory] = useState([]);
- 
+
   useEffect(() => {
     async function setInfo() {
-        const id = await AsyncStorage.getItem('user_id')
-        
-        axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
-            
-            var subs=[]
-            console.log(res.data)
-            for(var i=0;i<res.data.length;i++){
-                subs.push(res.data[i].Category.Title.toUpperCase())
-                console.log(res.data[i].TotalBalance)
-            }
-            
-            setSubscriptions(subs)
-        }).catch(err => {
-            console.log(err)
-        })
+      const id = await AsyncStorage.getItem('user_id')
+
+      axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+
+        var subs = []
+        console.log(res.data)
+        for (var i = 0; i < res.data.length; i++) {
+          subs.push(res.data[i].Category.Title.toUpperCase())
+          console.log(res.data[i].TotalBalance)
+        }
+
+        setSubscriptions(subs)
+      }).catch(err => {
+        console.log(err)
+      })
 
     }
 
     setInfo()
 
-}, [])
+  }, [])
 
   React.useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -72,7 +72,7 @@ const Settings = ({ navigation }) => {
     }
 
     setInfo()
-    
+
   }, []);
 
   function renderHeader() {
@@ -99,7 +99,7 @@ const Settings = ({ navigation }) => {
         </View>
       </TouchableOpacity>
     );
-    
+
     return (
       <View
         style={{
@@ -117,10 +117,10 @@ const Settings = ({ navigation }) => {
           }}
         >
           {/* Header Bar */}
-          
+
 
           {/* Balance */}
-          
+
 
           {/* Trending */}
           <View
@@ -138,19 +138,19 @@ const Settings = ({ navigation }) => {
             >
             </Text>
             <View
-        style={{
-          width: 120,
-          height: 120,
-          marginLeft: "-600%",
-          marginRight: SIZES.radius,
-          borderRadius: 60,
-          backgroundColor: COLORS.white,
-          marginBottom:20,overflow:"hidden"
-        }}
-        onPress={() => navigation.navigate("CryptoDetail")}
-      >
-        <Image source={{ uri: customer.Image }} style={{width:'100%',height:'100%'}}/>
-      </View>
+              style={{
+                width: 120,
+                height: 120,
+                marginLeft: "-600%",
+                marginRight: SIZES.radius,
+                borderRadius: 60,
+                backgroundColor: COLORS.white,
+                marginBottom: 20, overflow: "hidden"
+              }}
+              onPress={() => navigation.navigate("CryptoDetail")}
+            >
+              <Image source={{ uri: customer.Image }} style={{ width: '100%', height: '100%' }} />
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -161,7 +161,7 @@ const Settings = ({ navigation }) => {
     return <PriceAlert />;
   }
 
-  
+
   function renderTransactionHistory() {
     return (
       <TransactionHistory
@@ -170,109 +170,109 @@ const Settings = ({ navigation }) => {
       />
     );
   }
-  const context=React.useContext(AuthContext)
+  const context = React.useContext(AuthContext)
   return (
     <ScrollView>
       <View style={{ flex: 1, paddingBottom: 130 }}>
         {renderHeader()}
-        
-        <View style={{marginTop:20}}>
 
-        <View
-                style={{
-                    marginTop: SIZES.padding,
-                    marginHorizontal: SIZES.padding,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: COLORS.white,
-                    ...styles.shadow
-                }}
-            >   
-                    <View style={{flexDirection:'row',marginLeft:10}}>
-                        <View style={{width:'60%'}}>
-                        <Text style={{ ...FONTS.h2 ,marginTop:20,marginLeft:10}}>{JSON.stringify(customer)!=='{}' && customer.FirstName} {JSON.stringify(customer)!=='{}' && customer.LastName} </Text>
-                        <Text style={{ ...FONTS.h5 ,marginBottom:10,marginLeft:12,fontWeight:"bold",fontSize:15}}> {customer.Phone}</Text>
-                        </View>
-                        <TouchableOpacity style={{justifyContent:'center',alignItems:'flex-end',width:'40%'}}>
-                        <TouchableOpacity onPress={() => navigation.navigate("UpdateCustomer")}>
-                        <Image resizeMode='contain' style={{width:30,height:30,marginRight:10}} source={require('../assets/icons/editing.png')}/>
-                        </TouchableOpacity>
-                        </TouchableOpacity>
+        <View style={{ marginTop: 20 }}>
 
-                    </View>
-                    
-                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}>
-                        <View>
-                            <MaterialIcons name="email" size={30}/>
-                        </View>
-                        <View style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
-                            <Text style={{color:'#707070'}}>{JSON.stringify(customer)!=='{}' && customer.user.email}</Text>
-                        </View>
-                    </View>
-                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}>
-                        <View>
-                            <Entypo name="location" size={30}/>
-                        </View>
-                        <View style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Location</Text>
-                            <Text style={{color:'#707070'}}>{customer.Province},{customer.District},{customer.Sector},{customer.Cell}</Text>
-                        </View>
-                    </View>
-                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}
-                    onPress={() => navigation.navigate("Notifications")}
-                    >
-                        <View>
-                        <Entypo name="bell" size={30} color="black" />
+          <View
+            style={{
+              marginTop: SIZES.padding,
+              marginHorizontal: SIZES.padding,
+              borderRadius: SIZES.radius,
+              backgroundColor: COLORS.white,
+              ...styles.shadow
+            }}
+          >
+            <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+              <View style={{ width: '60%' }}>
+                <Text style={{ ...FONTS.h2, marginTop: 20, marginLeft: 10 }}>{JSON.stringify(customer) !== '{}' && customer.FirstName} {JSON.stringify(customer) !== '{}' && customer.LastName} </Text>
+                <Text style={{ ...FONTS.h5, marginBottom: 10, marginLeft: 12, fontWeight: "bold", fontSize: 15 }}> {customer.Phone}</Text>
+              </View>
+              <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'flex-end', width: '40%' }}>
+                <TouchableOpacity onPress={() => navigation.navigate("UpdateCustomer")}>
+                  <Image resizeMode='contain' style={{ width: 30, height: 30, marginRight: 10 }} source={require('../assets/icons/editing.png')} />
+                </TouchableOpacity>
+              </TouchableOpacity>
 
-                        </View>
-                        <View style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Notifications</Text>
-                            <Text style={{color:'#707070'}}>View your recent notifications</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}>
-                        <View>
-                            <Image resizeMode='contain' style={{width:30,height:30}} source={require('../assets/icons/subscription.png')}/>
-                        </View>
-                        <TouchableOpacity style={{marginLeft:30}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Subscriptions</Text>
-                            <Text style={{color:'#707070'}}>{ subscriptions.length>0 && subscriptions.join(',')}</Text>
-                        </TouchableOpacity>
-                        
-                    </View>
-                    <TouchableOpacity style={{height:60,borderTopColor:'#707070',borderTopWidth:0.2,flexDirection:'row',padding:10,marginLeft:10}}
-
-                    onPress={() => navigation.navigate("query")}
-                    >
-                        <View>
-                            <Image resizeMode='contain' style={{width:50,height:50}} source={require('../assets/icons/query.png')}/>
-                        </View>
-                        <View style={{marginLeft:8}}>
-                            <Text style={{fontSize:18,fontWeight:'bold'}}>Contact Us</Text>
-                            <Text style={{color:'#707070'}}>Please send any query</Text>
-                        </View>
-                    </TouchableOpacity>
-                
-                
             </View>
+
+            <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
+              <View>
+                <MaterialIcons name="email" size={30} />
+              </View>
+              <View style={{ marginLeft: 30 }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Email</Text>
+                <Text style={{ color: '#707070' }}>{JSON.stringify(customer) !== '{}' && customer.user.email}</Text>
+              </View>
+            </View>
+            <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
+              <View>
+                <Entypo name="location" size={30} />
+              </View>
+              <View style={{ marginLeft: 30 }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Location</Text>
+                <Text style={{ color: '#707070' }}>{customer.Province},{customer.District},{customer.Sector},{customer.Cell}</Text>
+              </View>
+            </View>
+            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
+              onPress={() => navigation.navigate("Notifications")}
+            >
+              <View>
+                <Entypo name="bell" size={30} color="black" />
+
+              </View>
+              <View style={{ marginLeft: 30 }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Notifications</Text>
+                <Text style={{ color: '#707070' }}>View your recent notifications</Text>
+              </View>
+            </TouchableOpacity>
+            <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
+              <View>
+                <Image resizeMode='contain' style={{ width: 30, height: 30 }} source={require('../assets/icons/subscription.png')} />
+              </View>
+              <TouchableOpacity style={{ marginLeft: 30 }} onPress={() => navigation.navigate('Home')}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Subscriptions</Text>
+                <Text style={{ color: '#707070' }}>{subscriptions.length > 0 && subscriptions.join(',')}</Text>
+              </TouchableOpacity>
+
+            </View>
+            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
+
+              onPress={() => navigation.navigate("query")}
+            >
+              <View>
+                <Image resizeMode='contain' style={{ width: 50, height: 50 }} source={require('../assets/icons/query.png')} />
+              </View>
+              <View style={{ marginLeft: 8 }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Contact Us</Text>
+                <Text style={{ color: '#707070' }}>Please send any query</Text>
+              </View>
+            </TouchableOpacity>
+
+
+          </View>
         </View>
 
-        <View style={{justifyContent:'center',alignItems:'center'}}>
-            <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
-                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>User Agreement</Text>
-            </View>
-            <TouchableOpacity onPress={() => navigation.navigate("changepassword")} style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
-                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Change password</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> context.signOut()} style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
-                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Sign Out</Text>
-            </TouchableOpacity>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => navigation.navigate("changepassword")} style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
+            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Change password</Text>
+          </TouchableOpacity>
+          <View style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
+            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>User Agreement</Text>
+          </View>
+          <TouchableOpacity onPress={() => context.signOut()} style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
+            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Sign Out</Text>
+          </TouchableOpacity>
 
-            <View style={{width:'90%',height:50,borderBottomWidth:0.2,borderBottomColor:'#707070'}}>
-                <Text style={{marginTop:15,marginLeft:20,fontSize:18,fontWeight:"bold"}}>Version: 0.1</Text>
-            </View>
-            
-            
+          <View style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
+            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Version: 0.1</Text>
+          </View>
+
+
         </View>
       </View>
     </ScrollView>
