@@ -188,7 +188,7 @@ const Tabs = ({ navigation }) => {
                                   }}
                                 />
                               </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintanance</Text>
+                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintenance</Text>
                             </TouchableOpacity>
 
 

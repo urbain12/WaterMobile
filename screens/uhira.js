@@ -72,7 +72,9 @@ const CryptoDetail = ({ navigation, }) => {
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "UHIRA")
                 setinformation(sub)
+                getInstalmentDays(sub.From.slice(0, 10))
                 var subs = []
+                var subs=[]
                 console.log(res.data.length)
                 for (var i = 0; i < res.data.length; i++) {
                     subs.push(res.data[i].Category.Title.toUpperCase())
@@ -652,7 +654,7 @@ const CryptoDetail = ({ navigation, }) => {
                                                         }}
                                                     />
                                                 </View>
-                                                <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintanance</Text>
+                                                <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintenance</Text>
                                             </TouchableOpacity>
 
 
