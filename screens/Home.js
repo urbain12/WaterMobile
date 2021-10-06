@@ -350,8 +350,8 @@ const Home = ({ navigation }) => {
                   </View>
 
                   <TouchableOpacity onPress={() => { amazi_alert() }}>
-                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
-                      Subscribe
+                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    Click to Subscribe
                     </Text>
                   </TouchableOpacity>
 
@@ -440,8 +440,8 @@ const Home = ({ navigation }) => {
 
                   </View>
                   <TouchableOpacity onPress={() => { inuma_alert() }}>
-                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
-                      Subscribe
+                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                     Click to Subscribe
                     </Text>
                   </TouchableOpacity>
 
@@ -529,8 +529,8 @@ const Home = ({ navigation }) => {
 
                   </View>
                   <TouchableOpacity onPress={() => { uhira_alert() }}>
-                    <Text style={{ color: 'red', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
-                      Subscribe
+                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    Click to Subscribe
                     </Text>
                   </TouchableOpacity>
 

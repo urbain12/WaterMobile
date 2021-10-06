@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Image,
   ImageBackground,
   LogBox,
@@ -17,6 +18,7 @@ import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
+import Modal from "react-native-modal";
 
 const Settings = ({ navigation }) => {
   const [trending, setTrending] = React.useState(dummyData.trendingCurrencies);
@@ -24,6 +26,11 @@ const Settings = ({ navigation }) => {
   const [category, setCategory] = useState('')
   const [subscriptions, setSubscriptions] = useState('')
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const modalHandler = () => {
+    setIsVisible(!isVisible);
+  };
 
   useEffect(() => {
     async function setInfo() {
@@ -172,7 +179,9 @@ const Settings = ({ navigation }) => {
   }
   const context = React.useContext(AuthContext)
   return (
+
     <ScrollView>
+
       <View style={{ flex: 1, paddingBottom: 130 }}>
         {renderHeader()}
 
@@ -261,9 +270,11 @@ const Settings = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("changepassword")} style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
             <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Change password</Text>
           </TouchableOpacity>
-          <View style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
+          <TouchableOpacity style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }} onPress={() => {
+            setIsVisible(true);
+          }}>
             <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>User Agreement</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => context.signOut()} style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
             <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Sign Out</Text>
           </TouchableOpacity>
@@ -273,9 +284,67 @@ const Settings = ({ navigation }) => {
           </View>
 
 
+
+
+
+
         </View>
       </View>
+          <Modal
+            animationType="slide"
+            visible={isVisible}
+            style={{ backgroundColor: "#000000AA", margin: 0 }}
+          >
+
+            <TouchableOpacity
+              onPress={modalHandler}
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+
+              <TouchableWithoutFeedback>
+
+
+                <View
+                  style={{
+                    height: "45%",
+                    width: "95%",
+                    backgroundColor: "#fff",
+                    borderRadius: 20,
+
+                  }}
+
+                  >
+                    <ScrollView >
+
+
+
+
+                      <Text style={{ textAlign: "center", fontSize: 30, color: "black", marginTop: 30, paddingBottom: 30 }}>
+                        User Agreement </Text>
+                      <View
+                        style={{
+                          alignContent: "center",
+                          width: '100%',
+                        }}
+                      >
+                      <Text style={{ color: 'black', fontSize: 20,paddingHorizontal:20 }}>
+                        
+                        To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators</Text>
+   
+
+                      </View>
+                    </ScrollView>
+                </View>
+              </TouchableWithoutFeedback>
+            </TouchableOpacity>
+          </Modal>
     </ScrollView>
+
+
   );
 };
 
