@@ -116,7 +116,7 @@ const Tabs = ({ navigation }) => {
                 animationType="slide"
                 visible={isVisible}
                 style={{ backgroundColor: "#000000AA", margin: 0 }}
-               >
+              >
 
                 <TouchableOpacity
                   onPress={modalHandler}
@@ -125,7 +125,7 @@ const Tabs = ({ navigation }) => {
                     justifyContent: "center",
                     alignItems: "center",
                   }}
-                 >
+                >
 
                   <TouchableWithoutFeedback>
 
@@ -157,7 +157,7 @@ const Tabs = ({ navigation }) => {
 
                             <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
 
-                            onPress={() => {navigation.navigate("Shop"); setIsVisible(false);}}
+                              onPress={() => { navigation.navigate("Shop"); setIsVisible(false); }}
 
                             >
                               <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
@@ -174,7 +174,7 @@ const Tabs = ({ navigation }) => {
 
                             <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
 
-                            // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
+                              onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible(false); }}
 
                             >
                               <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>

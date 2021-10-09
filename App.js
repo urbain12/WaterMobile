@@ -13,6 +13,9 @@ import axios from 'axios';
 // import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from 'react-native';
 import Shop from './screens/Shop';
+import Catridgeshop from './screens/Catridgeshop';
+import CatridgesDetails from './screens/CatridgesDetails';
+import Catridgecart from './screens/Catridgecart';
 import Cart from './screens/Cart';
 import query from './screens/Query';
 import momo from './screens/Momopay';
@@ -307,6 +310,18 @@ const App = () => {
               name="Payinuma"
               component={Payinuma}
             />
+            <Stack.Screen
+              name="Catridgeshop"
+              component={Catridgeshop}
+            />
+            <Stack.Screen
+            name="CatridgesDetails"
+            component={CatridgesDetails}
+          />
+          <Stack.Screen
+          name="Catridgecart"
+          component={Catridgecart}
+        />
             
              
           </Stack.Navigator>

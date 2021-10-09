@@ -1,0 +1,89 @@
+import React, { Component, useState } from 'react';
+import {
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  TouchableWithoutFeedback,
+  Animated,
+  Dimensions
+} from 'react-native';
+import { observer } from 'mobx-react/native';
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather } from "@expo/vector-icons";
+import { AuthContext } from '../context/Context';
+import { PriceAlert, TransactionHistory } from "../components";
+import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
+// import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from 'react-native';
+import axios from 'axios';
+import { connect } from 'react-redux';
+
+const BoxAnimated = Animated.createAnimatedComponent(View)
+const windowWidth = Dimensions.get('window').width / 2 - 20;
+
+
+const Catridges = ({ product }) => {
+
+  const format = (amount) => {
+    return Number(amount)
+      .toFixed(2)
+      .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
+  };
+  // const [isHover,setHover]=useState(false)
+  // const [opacity,setOpacity]=useState(new Animated.Value(1))
+  // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
+
+
+  // const handleClose=()=>{
+  // setHover(false)
+  // }
+
+  return (
+    <View key={product.id} style={{ height: 240, backgroundColor: 'white', width: windowWidth, position: 'relative', margin: 10, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
+      <View>
+        <View>
+          {/* <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.System.title} ...</Text> */}
+          <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.ToolID.Title.slice(0, 24)} ...</Text>
+          <Text style={{ fontWeight: 'bold', color: 'black', margin: 10 }}>{JSON.stringify(format(product.ToolID.Amount)).substring(1, JSON.stringify(format(product.ToolID.Amount)).length - 4)} Rwf</Text>
+        </View>
+      </View>
+
+      {/* {this.state.isHover && (
+            <BoxAnimated opacity={this.state.qtyOpacity} style={{backgroundColor:'#f2f0f5',borderRadius:6,position:'absolute',top:10,right:10,left:10,zIndex:99}}>
+              <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:2}}>
+                {product.cartQuantity>1?(
+                  <TouchableOpacity >
+                <Feather name="minus" size={20} color="#01B0F1"/>
+                </TouchableOpacity>
+                ):(
+                  <TouchableOpacity >
+                <Feather name="trash-2" size={20} color="#01B0F1"/>
+                </TouchableOpacity>
+                )}
+                
+
+                <Text>{product.cartQuantity}</Text>
+
+                <TouchableOpacity >
+                <Feather name="plus" size={20} color="#01B0F1"/>
+                </TouchableOpacity>
+
+              </View>
+            </BoxAnimated>
+          )} */}
+
+
+    </View>
+  )
+}
+
+// const mapStateToProps=state=>{
+//   return{
+//     products:state.shop.products
+//   }
+// }
+
+
+export default Catridges;
