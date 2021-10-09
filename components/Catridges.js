@@ -41,12 +41,12 @@ const Catridges = ({ product }) => {
   // }
 
   return (
-    <View key={product.id} style={{ height: 240, backgroundColor: 'white', width: windowWidth, position: 'relative', margin: 10, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
+    <View key={product.id} style={{ height: 80, backgroundColor: 'white', width: windowWidth,  margin: 10,marginTop:20, alignItems: 'center', justifyContent: 'center', borderRadius: 10,...styles.shadow }}>
       <View>
         <View>
           {/* <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.System.title} ...</Text> */}
-          <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.ToolID.Title.slice(0, 24)} ...</Text>
-          <Text style={{ fontWeight: 'bold', color: 'black', margin: 10 }}>{JSON.stringify(format(product.ToolID.Amount)).substring(1, JSON.stringify(format(product.ToolID.Amount)).length - 4)} Rwf</Text>
+          <Text style={{ fontWeight: 'bold', color: '#01B0F1', fontSize:"18" }}>{product.ToolID.Title}</Text>
+          <Text style={{ fontWeight: 'bold', color: 'black',  }}>{JSON.stringify(format(product.ToolID.Amount)).substring(1, JSON.stringify(format(product.ToolID.Amount)).length - 4)} Rwf</Text>
         </View>
       </View>
 
@@ -79,6 +79,24 @@ const Catridges = ({ product }) => {
   )
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
+
+        elevation: 8,
+    },
+});
 // const mapStateToProps=state=>{
 //   return{
 //     products:state.shop.products

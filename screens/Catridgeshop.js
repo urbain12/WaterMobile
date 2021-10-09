@@ -128,7 +128,7 @@ const Catridgeshop =({retrieveProducts,navigation,products,cart,loadCurrentItem}
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                My systems
+                My tools system
             </Text>
           </View>
 
@@ -156,7 +156,8 @@ const Catridgeshop =({retrieveProducts,navigation,products,cart,loadCurrentItem}
           data={products}
           numColumns={2}
           renderItem={({ item }) => (
-          <TouchableOpacity onPress={()=>{navigation.navigate('CatridgesDetails');loadCurrentItem(item)}}>
+          <TouchableOpacity
+           onPress={()=>{navigation.navigate('CatridgesDetails');loadCurrentItem(item)}}>
             <Catridges key={item.id} product={item}/>
           </TouchableOpacity>
           
