@@ -82,7 +82,7 @@ const CryptoDetail = ({ navigation, }) => {
                 setinformation(sub)
                 getInstalmentDays(sub.From.slice(0, 10))
                 var subs = []
-                var subs=[]
+                var subs = []
                 console.log(res.data.length)
                 for (var i = 0; i < res.data.length; i++) {
                     subs.push(res.data[i].Category.Title.toUpperCase())
@@ -679,7 +679,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                                             <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
 
-                                            // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
+                                                onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible(false); }}
 
                                             >
                                                 <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>

@@ -74,7 +74,7 @@ const CryptoDetail = ({ navigation, }) => {
                 setinformation(sub)
                 getInstalmentDays(sub.From.slice(0, 10))
                 var subs = []
-                var subs=[]
+                var subs = []
                 console.log(res.data.length)
                 for (var i = 0; i < res.data.length; i++) {
                     subs.push(res.data[i].Category.Title.toUpperCase())
@@ -386,7 +386,7 @@ const CryptoDetail = ({ navigation, }) => {
                                 <View>
                                     <Text style={{ ...FONTS.h3, fontWeight: "bold", color: '#01B0F1' }}>Descriptions </Text>
                                     <Text style={{ color: '#707070', fontSize: 20, }}>Targeted at farmers and off-grid businesses, uhira includes a borehole, a solar pump, a pipeline, elevated storage system and an optional cattle trough or tap system from the tank.</Text>
-                                    <Text style={{ color: '#707070', fontSize: 20,marginTop:5 }}>Our systems allow for reliable access to safe water anywhere, even when living far from surface water. Our team accompanies you from survey to maintenance. </Text>
+                                    <Text style={{ color: '#707070', fontSize: 20, marginTop: 5 }}>Our systems allow for reliable access to safe water anywhere, even when living far from surface water. Our team accompanies you from survey to maintenance. </Text>
                                 </View>
 
                             </View>
@@ -640,7 +640,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                                             <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
 
-                                            // onPress={() => {navigation.navigate("creditcard"); setIsVisible(false);}}
+                                                onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible(false); }}
 
                                             >
                                                 <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
