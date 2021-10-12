@@ -100,7 +100,7 @@ const Catridgeshop =({retrieveProducts,navigation,products,cart,loadCurrentItem}
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{navigation.navigate('Catridgecart')}} style={{
                    position:"relative",
-                   marginTop:100
+                   marginTop:10
                }}>
                  
 
