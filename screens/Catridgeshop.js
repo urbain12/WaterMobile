@@ -89,7 +89,7 @@ const Catridgeshop =({retrieveProducts,navigation,products,cart,loadCurrentItem}
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => navigation.goBack()}
             >
               <Ionicons
                 name="arrow-back"
@@ -100,7 +100,7 @@ const Catridgeshop =({retrieveProducts,navigation,products,cart,loadCurrentItem}
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{navigation.navigate('Catridgecart')}} style={{
                    position:"relative",
-                   marginTop:10
+                   marginTop:100
                }}>
                  
 

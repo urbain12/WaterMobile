@@ -190,6 +190,13 @@ const handleSubmit2 = () => {
           })
           console.log(postObj2)
 
+          axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+          axios.defaults.xsrfCookieName = "csrftoken";
+          axios.defaults.headers = {
+              "Content-Type": "application/json",
+              // Authorization: `Token ${my_token}`,
+          };
+
             axios.post('http://wateraccess.t3ch.rw:8234/pay_later_order_tool/create/', postObj2).then((res) => {
                 console.log(res.status)
                 alert('Order completed!!!')
@@ -351,7 +358,7 @@ setTimeout(() => {
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-              Catridges Cart
+              Catridges Cart 
             </Text>
           </View>
 

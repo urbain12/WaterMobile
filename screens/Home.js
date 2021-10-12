@@ -31,9 +31,9 @@ import { loadCurrentItem } from "../redux/shopping/shopping-actions";
 
 const Home = ({ navigation }) => {
   const [subscriptions, setSubscriptions] = useState([])
-  const [isAmazi, setIsAmazi] = useState(false)
-  const [isInuma, setIsInuma] = useState(false)
-  const [isUhira, setIsUhira] = useState(false)
+  const [isAmazi, setIsAmazi] = useState(undefined)
+  const [isInuma, setIsInuma] = useState(undefined)
+  const [isUhira, setIsUhira] = useState(undefined)
   const [customer, setCustomer] = useState({})
   useEffect(() => {
     const setInfo = async () => {
@@ -59,6 +59,15 @@ const Home = ({ navigation }) => {
         }
         if (subs.includes('UHIRA')) {
           setIsUhira(true)
+        }
+        if (!subs.includes('AMAZI')) {
+          setIsAmazi(false)
+        }
+        if (!subs.includes('INUMA')) {
+          setIsInuma(false)
+        }
+        if (!subs.includes('UHIRA')) {
+          setIsUhira(false)
         }
         setSubscriptions(subs)
       }).catch(err => {
@@ -272,8 +281,49 @@ const Home = ({ navigation }) => {
       {renderHeader()}
 
       <ScrollView style={{ height: "100%", marginBottom: 10 }}>
+        {isAmazi===undefined?(
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
+            <View
+              style={{
+                width: '80%',
+                height: 120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
 
-        {isAmazi ? (
+                borderRadius: 10,
+                backgroundColor: "#1c6388",
+                alignItems: 'center',
+                justifyContent: 'center',
+                ...styles.shadow
+
+              }}
+            //onPress={() => navigation.navigate("Landing")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
+                  <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 100,
+                    marginLeft: 1,
+                    marginTop: 5
+                  }}>
+
+                  </View>
+
+                  
+
+                </View>
+              </View>
+
+
+            </View>
+          </View>
+        ):(
+          <>
+          {isAmazi ? (
           <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
@@ -362,8 +412,52 @@ const Home = ({ navigation }) => {
             </View>
           </View>
         )}
+          </>
+        )}
+
+        
+
+        {isInuma===undefined?(
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
+            <View
+              style={{
+                width: '80%',
+                height: 120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+
+                borderRadius: 10,
+                backgroundColor: "#339ED6",
+                alignItems: 'center',
+                justifyContent: 'center',
+                ...styles.shadow
+
+              }}
+            //onPress={() => navigation.navigate("Landing")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
+                <Text style={{fontSize:30,color:"white"}}>INUMA</Text>
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 100,
+                    marginLeft: 1,
+                    marginTop: 5
+                  }}>
+
+                  </View>
+                  
+
+                </View>
+              </View>
 
 
+            </View>
+          </View>
+              ):(
+                <>
         {isInuma ? (
           <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
@@ -452,8 +546,52 @@ const Home = ({ navigation }) => {
             </View>
           </View>
         )}
+        </>
+        )}
 
 
+
+        {isUhira===undefined?(
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
+            <View
+              style={{
+                width: '80%',
+                height: 120,
+                paddingVertical: 5,
+                paddingHorizontal: 5,
+
+                borderRadius: 10,
+                backgroundColor: "#01B1AF",
+                alignItems: 'center',
+                justifyContent: 'center',
+                ...styles.shadow
+
+              }}
+            //onPress={() => navigation.navigate("Landing")}
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
+                <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
+                  <View style={{
+                    borderBottomWidth: 2,
+                    borderBottomColor: "#47315a",
+                    width: 100,
+                    marginLeft: 1,
+                    marginTop: 5
+                  }}>
+
+                  </View>
+                  
+
+                </View>
+              </View>
+
+
+            </View>
+          </View>
+              ):(
+                <>
         {isUhira ? (
           <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
             <View
@@ -540,6 +678,8 @@ const Home = ({ navigation }) => {
 
             </View>
           </View>
+        )}
+        </>
         )}
 
       </ScrollView>
