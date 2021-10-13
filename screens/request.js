@@ -33,8 +33,7 @@ const request = ({ navigation }) => {
   const [Sector, setSector] = useState('')
   const [customer, setCustomer] = useState({})
   const [Cell, setCell] = useState('')
-  const [category, setCategory] = useState('')
-  const [subscriptions, setSubscriptions] = useState('UHIRA')
+  
 
 
   useEffect(() => {
@@ -44,11 +43,6 @@ const request = ({ navigation }) => {
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
         console.log(res.data[0].Province)
-      }).catch(err => {
-        console.log(err)
-      })
-      axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-        setCategory(res.data.category)
       }).catch(err => {
         console.log(err)
       })
@@ -65,8 +59,6 @@ const request = ({ navigation }) => {
     const postObj = JSON.stringify({
       'Names': names,
       'Message': Message,
-      'Subscriptions': subscriptions,
-      'category':category,
       'phonenumber': customer.user.phone,
       'Province': customer.Province,
       'District': customer.District,
@@ -76,7 +68,6 @@ const request = ({ navigation }) => {
 
     })
     console.log(postObj)
-    console.log(category)
 
     // let my_token = localStorage.getItem('token');
 
@@ -133,8 +124,7 @@ const request = ({ navigation }) => {
                             alignItems: "center",
                             justifyContent: "center",
                         }}
-                        onPress={() => navigation.navigate('Home')}
-                    >
+                        onPress={() => navigation.goBack()}                    >
                         <Ionicons
                             name="arrow-back"
                             size={40}
@@ -153,7 +143,7 @@ const request = ({ navigation }) => {
                     }}
                 >
                     <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                    Send Subscriptions Request
+                    Request a technician
                     </Text>
                 </View>
 

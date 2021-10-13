@@ -34,9 +34,13 @@ const CryptoDetail = ({ navigation, }) => {
     const [isAmazi, setIsAmazi] = useState(false)
     const [payments, setPayments] = useState([])
     const [isVisible, setIsVisible] = useState(false);
+    const [isVisible2, setIsVisible2] = useState(false);
 
     const modalHandler = () => {
         setIsVisible(!isVisible);
+    };
+    const modalHandler2 = () => {
+        setIsVisible2(!isVisible2);
     };
 
 
@@ -81,10 +85,10 @@ const CryptoDetail = ({ navigation, }) => {
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "INUMA")
                 setinformation(sub)
-                if(sub.From!=null){
+                if (sub.From != null) {
                     getInstalmentDays(sub.From.slice(0, 10))
                 }
-                else if(sub.From==null){
+                else if (sub.From == null) {
                     setDays2('nulll')
                 }
                 var subs = []
@@ -148,7 +152,7 @@ const CryptoDetail = ({ navigation, }) => {
 
 
 
-    
+
 
 
 
@@ -214,19 +218,19 @@ const CryptoDetail = ({ navigation, }) => {
                                     {information.complete == true ? (
 
 
-                                    <View style={{ flex: 1, marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
-                                            {days2 > 0 ? (
-                                                <Text>{days2} Days</Text>
-                                            ) : (
-                                                <Text>Day of payment</Text>
-                                            )}
-                                        </Text>
-                                        <Text style={{ color: "white" }}>remaining to your next Installment</Text>
-                                    </View>
-                                    ):(
+                                        <View style={{ flex: 1, marginLeft: 20 }}>
+                                            <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
+                                                {days2 > 0 ? (
+                                                    <Text>{days2} Days</Text>
+                                                ) : (
+                                                    <Text>Day of payment</Text>
+                                                )}
+                                            </Text>
+                                            <Text style={{ color: "white" }}>remaining to your next Installment</Text>
+                                        </View>
+                                    ) : (
 
-                                        <Text style={{fontSize:25,color: "white",fontWeight:"bold",marginLeft:10,marginTop:20}}>Our team is working on your subscription</Text>
+                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginLeft: 10, marginTop: 20 }}>Our team is working on your subscription</Text>
 
 
                                     )}
@@ -641,6 +645,7 @@ const CryptoDetail = ({ navigation, }) => {
                                         <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
 
 
+
                                             <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
 
                                                 <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
@@ -672,8 +677,9 @@ const CryptoDetail = ({ navigation, }) => {
 
                                                     <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
 
-                                                        onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible(false); }}
-
+                                                        onPress={() => {
+                                                            setIsVisible2(true); setIsVisible(false);
+                                                        }}
                                                     >
                                                         <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
                                                             <Image
@@ -716,34 +722,123 @@ const CryptoDetail = ({ navigation, }) => {
                             </TouchableOpacity>
                         </Modal>
 
+
+
+
+
+
+
+
+
+                        <Modal
+                            animationType="slide"
+                            visible={isVisible2}
+                            style={{ backgroundColor: "#000000AA", margin: 0 }}
+                        >
+
+                            <TouchableOpacity
+                                onPress={modalHandler2}
+                                style={{
+                                    flex: 1,
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+
+                                <TouchableWithoutFeedback>
+
+
+                                    <View
+                                        style={{
+                                            height: "45%",
+                                            width: "95%",
+                                            backgroundColor: "#fff",
+                                            borderRadius: 40,
+
+                                        }}
+
+                                    >
+                                        <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
+
+
+                                            <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
+
+                                                <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                                                    Choose Maintenance type </Text>
+                                                <View
+                                                    style={{
+                                                        flexDirection: "row",
+                                                        alignContent: "center",
+                                                        width: '100%'
+                                                    }}
+                                                >
+
+                                                    <TouchableOpacity style={{ alignContent: "center", marginLeft: '4%', width: '45%' }}
+
+                                                        onPress={() => { navigation.navigate("request"); setIsVisible2(false); }}
+
+                                                    >
+                                                        <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                            <AntDesign name="tool" size={80} color="#01B0F1" />
+                                                        </View>
+                                                        <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Request Technician</Text>
+                                                    </TouchableOpacity>
+
+
+                                                    <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '45%' }}
+
+                                                        onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible2(false); }}
+
+                                                    >
+                                                        <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                            <Image
+                                                                source={icons.waterpipe}
+                                                                resizeMode="contain"
+                                                                style={{
+                                                                    width: 90,
+                                                                    height: 120,
+                                                                    marginLeft: 2,
+                                                                }}
+                                                            />
+                                                        </View>
+                                                        <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Catridge shop</Text>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            </ScrollView>
+                                        </ImageBackground>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </TouchableOpacity>
+                        </Modal>
+
                     </View>
 
 
 
 
                 </View>
-                )  }
-                </>
-            );
+            )}
+        </>
+    );
 };
 
-            const styles = StyleSheet.create({
-                container: {
-                flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
     },
-            shadow: {
-                shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
             height: 4,
         },
-            shadowOpacity: 0.3,
-            shadowRadius: 4.65,
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
 
-            elevation: 8,
+        elevation: 8,
     },
 });
 
-            export default CryptoDetail;
+export default CryptoDetail;

@@ -78,9 +78,13 @@ const CryptoDetail = ({ navigation }) => {
     }, [])
 
     const [isVisible, setIsVisible] = useState(false);
+    const [isVisible2, setIsVisible2] = useState(false);
 
     const modalHandler = () => {
         setIsVisible(!isVisible);
+    };
+    const modalHandler2 = () => {
+        setIsVisible2(!isVisible2);
     };
 
 
@@ -799,8 +803,9 @@ const CryptoDetail = ({ navigation }) => {
 
                                                     <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
 
-                                                        onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible(false); }}
-
+                                                        onPress={() => {
+                                                            setIsVisible2(true); setIsVisible(false);
+                                                        }}
                                                     >
                                                         <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
                                                             <Image
@@ -842,6 +847,95 @@ const CryptoDetail = ({ navigation }) => {
                                 </TouchableWithoutFeedback>
                             </TouchableOpacity>
                         </Modal>
+
+
+
+
+
+
+
+
+
+                        <Modal
+                animationType="slide"
+                visible={isVisible2}
+                style={{ backgroundColor: "#000000AA", margin: 0 }}
+              >
+
+                <TouchableOpacity
+                  onPress={modalHandler2}
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+
+                  <TouchableWithoutFeedback>
+
+
+                    <View
+                      style={{
+                        height: "45%",
+                        width: "95%",
+                        backgroundColor: "#fff",
+                        borderRadius: 40,
+
+                      }}
+
+                    >
+                      <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
+
+
+                        <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
+
+                          <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                            Choose Maintenance type </Text>
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignContent: "center",
+                              width: '100%'
+                            }}
+                          >
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '4%', width: '45%' }}
+
+                              onPress={() => { navigation.navigate("request"); setIsVisible2(false); }}
+
+                            >
+                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                <AntDesign name="tool" size={80} color="#01B0F1" />
+                              </View>
+                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Request Technician</Text>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '45%' }}
+
+                              onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible2(false); }}
+
+                            >
+                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                <Image
+                                  source={icons.waterpipe}
+                                  resizeMode="contain"
+                                  style={{
+                                    width: 90,
+                                    height: 120,
+                                    marginLeft: 2,
+                                  }}
+                                />
+                              </View>
+                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Catridge shop</Text>
+                            </TouchableOpacity>
+                          </View>
+                        </ScrollView>
+                      </ImageBackground>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </TouchableOpacity>
+              </Modal>
 
                     </View>
                 </View >
