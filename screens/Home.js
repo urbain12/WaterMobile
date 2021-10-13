@@ -175,42 +175,42 @@ const Home = ({ navigation }) => {
   const amazi_alert = () =>
     Alert.alert(
       "Subscribe",
-      "Are you sure you want to subscribe in AMAZI",
+      "To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators",
       [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "OK", onPress: () => sub_amazi() }
+        { text: "Comfirm", onPress: () => sub_amazi() }
       ]
     );
 
   const inuma_alert = () =>
     Alert.alert(
       "Subscribe",
-      "Are you sure you want to subscribe in INUMA",
+      "INUMA creates a borehole-fed micro-grid piped safe water network where purified safe water is available at public points and piped into households for private access. All water is purified through a treatment process, pumped using solar and AC and sold via pre-paid water meters activated through a token.",
       [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "OK", onPress: () => sub_inuma() }
+        { text: "Comfirm", onPress: () => sub_inuma() }
       ]
     );
 
   const uhira_alert = () =>
     Alert.alert(
       "Subscribe",
-      "Are you sure you want to subscribe in UHIRA",
+      "Targeted at farmers and off-grid businesses, uhira includes a borehole, a solar pump, a pipeline, elevated storage system and an optional cattle trough or tap system from the tank, our systems allow for reliable access to safe water anywhere, even when living far from surface water. Our team accompanies you from survey to maintenance.",
       [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "OK", onPress: () => sub_uhira() }
+        { text: "Comfirm", onPress: () => sub_uhira() }
       ]
     );
 
@@ -305,7 +305,7 @@ const Home = ({ navigation }) => {
                   <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -347,7 +347,7 @@ const Home = ({ navigation }) => {
                   <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -391,7 +391,7 @@ const Home = ({ navigation }) => {
                   <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -441,7 +441,7 @@ const Home = ({ navigation }) => {
                 <Text style={{fontSize:30,color:"white"}}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -482,7 +482,7 @@ const Home = ({ navigation }) => {
                   <Text style={{ fontSize: 30, color: "white" }}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -526,7 +526,7 @@ const Home = ({ navigation }) => {
                 <Text style={{fontSize:30,color:"white"}}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -575,7 +575,7 @@ const Home = ({ navigation }) => {
                 <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -616,7 +616,7 @@ const Home = ({ navigation }) => {
                 <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5
@@ -659,7 +659,7 @@ const Home = ({ navigation }) => {
                 <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "#47315a",
+                    borderBottomColor: "white",
                     width: 100,
                     marginLeft: 1,
                     marginTop: 5

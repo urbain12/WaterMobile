@@ -10,7 +10,8 @@ import {
     Image,
     ImageBackground,
     LogBox,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    ActivityIndicator
 } from "react-native";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Entypo } from "@expo/vector-icons";
 import { AuthContext } from '../context/Context';
@@ -31,7 +32,7 @@ const CryptoDetail = ({ navigation, }) => {
     const [category, setCategory] = useState('')
     const [transactionHistory, setTransactionHistory] = useState([]);
     const [balance, setBalance] = useState(0)
-    const [days2, setDays2] = useState(0)
+    const [days2, setDays2] = useState('null')
     const [isAmazi, setIsAmazi] = useState(false)
     const [payments, setPayments] = useState([])
     const [isVisible, setIsVisible] = useState(false);
@@ -64,7 +65,6 @@ const CryptoDetail = ({ navigation, }) => {
             })
             axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
-                getFilterDays(res.data.subscription_date.slice(0, 10))
                 getInstalmentDays(res.data.subscription_date.slice(0, 10))
             }).catch(err => {
                 console.log(err)
@@ -72,7 +72,12 @@ const CryptoDetail = ({ navigation, }) => {
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "UHIRA")
                 setinformation(sub)
-                getInstalmentDays(sub.From.slice(0, 10))
+                if(sub.From!=null){
+                    getInstalmentDays(sub.From.slice(0, 10))
+                }
+                else if(sub.From==null){
+                    setDays2('nulll')
+                }
                 var subs = []
                 var subs = []
                 console.log(res.data.length)
@@ -136,51 +141,25 @@ const CryptoDetail = ({ navigation, }) => {
 
 
 
-    function renderNotice() {
-        return (
-            <View
-                style={{
-                    flexDirection: "row",
-                    marginTop: SIZES.padding,
-                    marginHorizontal: SIZES.padding,
-                    padding: 20,
-                    borderRadius: SIZES.radius,
-                    backgroundColor: "#01b0f1",
-                    ...styles.shadow
-                }}
-            >
-                <View style={{ width: '10%', marginRight: "2%" }}>
-                    <Image
-                        source={icons.clap}
-                        resizeMode="contain"
-                        style={{
-                            width: 35,
-                            height: 90,
-                        }}
-                    />
-
-                </View>
-                <View style={{ width: '92%', marginLeft: "2%" }}>
-                    <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Congratulations!!</Text>
-                    <View>
-
-                        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>This month you saved 100,000 Rwf through the Usage of our UHIRA.RW system!
-                            Encourage your farmer friends to join our UHIRA.RW network!!</Text>
-
-
-
-                    </View>
-
-                </View>
-
-            </View>
-        )
-    }
-
+    
 
 
 
     return (
+        <>
+        {days2 == 'null' ? (
+
+            <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center" }}>
+
+                <ActivityIndicator size='large' color='black' />
+                <Text style={{ fontSize: 30 }}>Please wait</Text>
+            </View>
+
+
+
+
+
+        ) : (
         <View style={{ height: "100%" }}>
             <ScrollView>
                 <View style={{ flex: 1, paddingBottom: 130 }}>
@@ -225,8 +204,8 @@ const CryptoDetail = ({ navigation, }) => {
                             }}
                         >
 
+                            {information.complete == true ? (
 
-                            {/* Amount */}
                             <View>
                                 <View style={{ flex: 1, marginLeft: 20 }}>
                                     <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
@@ -239,6 +218,13 @@ const CryptoDetail = ({ navigation, }) => {
                                     <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                                 </View>
                             </View>
+                            ):(
+                                <Text style={{fontSize:25,color: "white",fontWeight:"bold",marginLeft:10,marginTop:20}}>Our team is working on your subscription</Text>
+
+
+                            )}
+
+                            {/* Amount */ }
                         </View>
                         <View
                             style={{
@@ -400,7 +386,6 @@ const CryptoDetail = ({ navigation, }) => {
 
                     </View>
 
-                    {renderNotice()}
                     <View
                         style={{
                             marginTop: SIZES.padding,
@@ -691,6 +676,8 @@ const CryptoDetail = ({ navigation, }) => {
 
 
         </View>
+        )}
+        </>
     );
 };
 

@@ -130,7 +130,7 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                         }}>{currentItem.name}:  </Text>
                         <Text style={{
                             fontSize: 20,
-                            fontFamily: "bold"
+                            fontWeight: "bold"
                         }}>{JSON.stringify(format(currentItem.price)).substring(1, JSON.stringify(format(currentItem.price)).length - 4)} Rwf</Text>
 
                     </View>
