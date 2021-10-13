@@ -130,7 +130,7 @@ const CatridgesDetails = ({ navigation, currentItem, addToCart, cart, decreaseQt
                         }}>{currentItem.ToolID.Title}:  </Text>
                         <Text style={{
                             fontSize: 20,
-                            fontFamily: "bold"
+                            fontWeight: "bold"
                         }}>{JSON.stringify(format(currentItem.ToolID.Amount)).substring(1, JSON.stringify(format(currentItem.ToolID.Amount)).length - 4)} Rwf</Text>
 
                     </View>
