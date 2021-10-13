@@ -352,7 +352,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                                 <View style={{ flexDirection: "row" }}>
                                     <View style={{ marginRight: "8%" }}>
-                                        <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Instalment balance </Text>
+                                        <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
                                         <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
                                     </View>
 
