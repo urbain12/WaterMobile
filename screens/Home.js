@@ -291,7 +291,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#1c6388",
+                backgroundColor: "#00b4e3",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -333,7 +333,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#1c6388",
+                backgroundColor: "#00b4e3",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -377,7 +377,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#1c6388",
+                backgroundColor: "#00b4e3",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -427,7 +427,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#339ED6",
+                backgroundColor: "#00b5de",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -468,7 +468,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#339ED6",
+                backgroundColor: "#00b5de",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -512,7 +512,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#339ED6",
+                backgroundColor: "#00b5de",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -561,7 +561,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#01B1AF",
+                backgroundColor: "#88B04B",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -602,7 +602,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
                 marginBottom: 100,
                 borderRadius: 10,
-                backgroundColor: "#01B1AF",
+                backgroundColor: "#88B04B",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -645,7 +645,7 @@ const Home = ({ navigation }) => {
                 paddingHorizontal: 5,
 
                 borderRadius: 10,
-                backgroundColor: "#01B1AF",
+                backgroundColor: "#88B04B",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
