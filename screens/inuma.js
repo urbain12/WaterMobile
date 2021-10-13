@@ -342,6 +342,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                     )}
 
+                    {information.complete == true ? (
                     <TouchableOpacity
                         style={{
                             flexDirection: 'row',
@@ -373,6 +374,14 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                     </TouchableOpacity>
+
+                    ): (
+                        <>
+                        </>
+
+                    )}
+
+
                     <View
                         style={{
                             flexDirection: 'row',
