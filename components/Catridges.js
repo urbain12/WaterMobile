@@ -45,8 +45,8 @@ const Catridges = ({ product }) => {
       <View>
         <View>
           {/* <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.System.title} ...</Text> */}
-          <Text style={{ fontWeight: 'bold', color: '#01B0F1', fontSize:18 }}>{JSON.stringify(product.ToolID) !== null && product.ToolID.Title}</Text>
-          <Text style={{ fontWeight: 'bold', color: 'black',  }}>{JSON.stringify(format(product.ToolID.Amount)).substring(1, JSON.stringify(format(product.ToolID.Amount)).length - 4)} Rwf</Text>
+          <Text style={{ fontWeight: 'bold', color: '#01B0F1', fontSize:18 }}>{JSON.stringify(product.ToolID) !== undefined && product.ToolID.Title}</Text>
+          <Text style={{ fontWeight: 'bold', color: 'black',  }}>{JSON.stringify(product.ToolID) !== undefined && JSON.stringify(format(product.ToolID.Amount)).substring(1, JSON.stringify(format(product.ToolID.Amount)).length - 4)} Rwf</Text>
         </View>
       </View>
 

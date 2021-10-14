@@ -168,7 +168,7 @@ const Catridgeshop =({retrieveProducts,navigation,products,cart,loadCurrentItem}
         ):(
           <View style={{justifyContent:'center',alignItems:'center'}}>
           <View style={{marginTop:50}}>
-          <ActivityIndicator size='large' color='black'/>
+          <Text style={{fontSize:18,fontWeight:"900"}}>No catridges yet</Text>
           </View>
           </View>
         )}
