@@ -275,7 +275,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                                             </View>
 
-                                            <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+                                            <Text style={{ color: 'white', ...FONTS.body3 }}>
                                                 3,142 <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
                                             </Text>
                                         </View>
