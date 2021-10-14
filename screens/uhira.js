@@ -353,11 +353,11 @@ const CryptoDetail = ({ navigation, }) => {
                                         </View>
 
 
-                                        <View style={{ flexDirection: "row", marginTop: 20 }}>
-                                            <View style={{ marginRight: "18%" }}>
-                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Month </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 30, }}>{information.get_overdue_months}</Text>
-                                            </View>
+                                <View style={{ flexDirection: "row" }}>
+                                    <View style={{ marginRight: "8%" }}>
+                                        <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
+                                        <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
+                                    </View>
 
                                             <View>
                                                 <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Amount </Text>
