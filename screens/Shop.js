@@ -168,6 +168,7 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
           <View style={{justifyContent:'center',alignItems:'center'}}>
           <View style={{marginTop:50}}>
           <ActivityIndicator size='large' color='black'/>
+          <Text style={{fontSize:18,fontWeight:"900"}}>No added product yet</Text>
           </View>
           </View>
         )}

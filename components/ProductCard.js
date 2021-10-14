@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
   // const [isHover,setHover]=useState(false)
   // const [opacity,setOpacity]=useState(new Animated.Value(1))
   // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
-  const name = JSON.stringify(product) !== null && product.name.slice(0,24)
+  const name = JSON.stringify(product) !== undefined && product.name.slice(0,24)
 
   // const handleClose=()=>{
   // setHover(false)

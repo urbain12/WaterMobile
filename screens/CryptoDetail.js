@@ -373,7 +373,7 @@ const CryptoDetail = ({ navigation }) => {
                                                         <Text>{days} Days</Text>
                                                     </Text>
                                                 ) : (
-                                                    <Text style={{ fontSize: 18, color: "white",fontWeight:"900" }}>Day to change your filter</Text>
+                                                    <Text style={{ fontSize: 18, color: "white",fontWeight:"900" }}>90 Days to change your filter</Text>
                                                 )}
                                                 <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
                                             </View>
@@ -390,7 +390,7 @@ const CryptoDetail = ({ navigation }) => {
                                                         )}
                                                         </>
                                                     ) : (
-                                                        <Text style={{ fontSize: 18, color: "white",fontWeight:"900" }}>Day of payment</Text>
+                                                        <Text style={{ fontSize: 18, color: "white",fontWeight:"900" }}>30 days</Text>
                                                     )}
                                                 </Text>
                                                 {information.get_overdue_months==0 && <Text style={{ color: "white" }}>remaining to your next Installment</Text>}
@@ -406,7 +406,7 @@ const CryptoDetail = ({ navigation }) => {
                                     ) : (
 
 
-                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginLeft: 10, marginTop: 20 }}>Our team is working on your subscription</Text>
+                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginTop: 20 }}>Our team is subscribing you- check back in 24 hours</Text>
 
 
 

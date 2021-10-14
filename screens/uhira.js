@@ -216,14 +216,14 @@ const CryptoDetail = ({ navigation, }) => {
                                                     {days2 > 0 ? (
                                                         <Text>{days2} Days</Text>
                                                     ) : (
-                                                        <Text>Day of payment</Text>
+                                                        <Text>30 Days</Text>
                                                     )}
                                                 </Text>
                                                 <Text style={{ color: "white" }}>remaining to your next Installment</Text>
                                             </View>
                                         </View>
                                     ) : (
-                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginLeft: 10, marginTop: 20 }}>Our team is working on your subscription</Text>
+                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginTop: 20 }}>Our team is subscribing you- check back in 24 hours</Text>
 
 
                                     )}

@@ -224,7 +224,7 @@ const Settings = ({ navigation }) => {
               </View>
               <View style={{ marginLeft: 30 }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Location</Text>
-                <Text style={{ color: '#707070' }}>{customer.Province},{customer.District},{customer.Sector},{customer.Cell}</Text>
+                <Text style={{ color: '#707070' }}>{customer.Province}, {customer.District}, {customer.Sector}, {customer.Cell}</Text>
               </View>
             </View>
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
@@ -245,7 +245,7 @@ const Settings = ({ navigation }) => {
               </View>
               <TouchableOpacity style={{ marginLeft: 30 }} onPress={() => navigation.navigate('Home')}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Subscriptions</Text>
-                <Text style={{ color: '#707070' }}>{subscriptions.length > 0 && subscriptions.join(',')}</Text>
+                <Text style={{ color: '#707070' }}>{subscriptions.length > 0 && subscriptions.join(', ')}</Text>
               </TouchableOpacity>
 
             </View>
