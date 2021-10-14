@@ -161,10 +161,10 @@ const CryptoDetail = ({ navigation, }) => {
         <>
             {days2 == 'null' ? (
 
-                <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center" }}>
+                <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center",backgroundColor:"#01B0F1",width:"100%" }}>
 
-                    <ActivityIndicator size='large' color='black' />
-                    <Text style={{ fontSize: 30 }}>Please wait</Text>
+                    <ActivityIndicator size='large' color='white' />
+                    <Text style={{ fontSize: 30,color:"white" }}>Please wait</Text>
                 </View>
 
 
@@ -355,7 +355,7 @@ const CryptoDetail = ({ navigation, }) => {
                                     <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
 
-                                        <Text style={{ color: '#01B0F1', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Pay water</Text>
+                                        <Text style={{ color: '#01B0F1', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Buy water</Text>
 
 
 

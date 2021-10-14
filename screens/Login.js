@@ -109,6 +109,7 @@ const Login = ({ navigation }) => {
                         }}
                     />
                 </ImageBackground>
+                    <Text style={{color: 'Black',fontWeight:"900",marginTop:8,fontSize:18}}>Water Access Rwanda</Text>
             </View>
             <Text style={{ textAlign: "center", fontSize: 12, fontWeight: "bold", marginBottom: 10, color: "#707070" }}>Providing Simple,Affordable, and Durable water solutions</Text>
 

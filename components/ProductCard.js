@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
   // const [isHover,setHover]=useState(false)
   // const [opacity,setOpacity]=useState(new Animated.Value(1))
   // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
-
+  const name = JSON.stringify(product) !== null && product.name.slice(0,24)
 
   // const handleClose=()=>{
   // setHover(false)
@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
           <Image style={{ width: 120, height: 100 }} resizeMode="contain" source={{ uri: product.image }} />
         </View>
         <View>
-          <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.name.slice(0,24)} ...</Text>
+          <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{name} ...</Text>
           <Text style={{ fontWeight: 'bold', color: 'black', margin: 10 }}>{JSON.stringify(format(product.price)).substring(1, JSON.stringify(format(product.price)).length - 4)} Rwf</Text>
         </View>
       </View>
