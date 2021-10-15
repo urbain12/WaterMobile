@@ -46,7 +46,7 @@ const CryptoDetail = ({ navigation, }) => {
 
 
     const windowWidth = Dimensions.get('window').width
-    const subbalance = information.get_total_amount
+    
 
 
     const format = (amount) => {
@@ -121,8 +121,10 @@ const CryptoDetail = ({ navigation, }) => {
 
     }, [])
 
-    const OverdueAmount = information.get_total_amount / 12 * information.get_overdue_months
-    const Monthly = information.get_total_amount / 12
+    const totalam = information.System != undefined && information.System.total
+    const OverdueAmount = totalam / 12 * information.get_overdue_months
+    const Monthly = totalam / 12
+    const subbalance = totalam
 
     const getInstalmentDays = (my_date) => {
         var sub_date = my_date

@@ -39,6 +39,7 @@ const CryptoDetail = ({ navigation }) => {
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
                 setinformation(sub)
+                console.log(information.System.total)
 
                 if (sub.From != null) {
                     getFilterDays(sub.From.slice(0, 10))
@@ -88,9 +89,10 @@ const CryptoDetail = ({ navigation }) => {
     };
 
 
-    const OverdueAmount = information.get_total_amount / 12 * information.get_overdue_months
-    const Monthly = information.get_total_amount / 12
-    const subbalance = information.get_total_amount
+    const totalam = information.System != undefined && information.System.total
+    const OverdueAmount = totalam / 12 * information.get_overdue_months
+    const Monthly = totalam / 12
+    const subbalance = totalam
     console.log(OverdueAmount)
     const format = (amount) => {
         return Number(amount)
@@ -276,12 +278,6 @@ const CryptoDetail = ({ navigation }) => {
             const id = await AsyncStorage.getItem('user_id')
             axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
                 setCustomer(res.data[0])
-            }).catch(err => {
-                console.log(err)
-            })
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-                setCategory(res.data.category)
-
             }).catch(err => {
                 console.log(err)
             })
@@ -529,13 +525,13 @@ const CryptoDetail = ({ navigation }) => {
 
                                         <View style={{ flexDirection: "row" }}>
                                             <View style={{ marginRight: "8%" }}>
-                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Instalment balance </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
+                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
+                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.System.total)).substring(1, JSON.stringify(format(information.System.total)).length - 4)} Rwf</Text>
                                             </View>
 
                                             <View>
                                                 <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Monthly payment </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{Math.ceil(Monthly)} Rwf</Text>
+                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{(Math.ceil(Monthly))} Rwf</Text>
                                             </View>
                                         </View>
 

@@ -61,18 +61,6 @@ const CryptoDetail = ({ navigation, }) => {
             }).catch(err => {
                 console.log(err)
             })
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-                setCategory(res.data.category)
-                setBalance(res.data.balance)
-            }).catch(err => {
-                console.log(err)
-            })
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
-                setCategory(res.data.category)
-                getInstalmentDays(res.data.subscription_date.slice(0, 10))
-            }).catch(err => {
-                console.log(err)
-            })
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "UHIRA")
                 setinformation(sub)
@@ -112,9 +100,10 @@ const CryptoDetail = ({ navigation, }) => {
 
     }, [])
 
-    const OverdueAmount = information.get_total_amount / 12 * information.get_overdue_months
-    const Monthly = information.get_total_amount / 12
-    const subbalance = information.get_total_amount
+    const totalam = information.System != undefined && information.System.total
+    const OverdueAmount = totalam / 12 * information.get_overdue_months
+    const Monthly = totalam / 12
+    const subbalance = totalam
 
     const getInstalmentDays = (my_date) => {
         var sub_date = my_date
@@ -340,24 +329,24 @@ const CryptoDetail = ({ navigation, }) => {
                                     <View style={{ flex: 1, marginLeft: SIZES.radius, justifyContent: "center", alignItems: "center" }}>
 
 
-                                        <View style={{ flexDirection: "row" }}>
+<View style={{ flexDirection: "row" }}>
                                             <View style={{ marginRight: "8%" }}>
-                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Instalment balance </Text>
+                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
                                                 <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
                                             </View>
 
                                             <View>
                                                 <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Monthly payment </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{Math.ceil(Monthly)} Rwf</Text>
+                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{(Math.ceil(Monthly))} Rwf</Text>
                                             </View>
                                         </View>
 
 
-                                <View style={{ flexDirection: "row" }}>
-                                    <View style={{ marginRight: "8%" }}>
-                                        <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
-                                        <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
-                                    </View>
+                                        <View style={{ flexDirection: "row", marginTop: 20 }}>
+                                            <View style={{ marginRight: "18%" }}>
+                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Month </Text>
+                                                <Text style={{ color: '#01B0F1', fontSize: 30, }}>{information.get_overdue_months}</Text>
+                                            </View>
 
                                             <View>
                                                 <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Amount </Text>
