@@ -39,7 +39,6 @@ const CryptoDetail = ({ navigation }) => {
             axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
                 setinformation(sub)
-                console.log(information.System.total)
 
                 if (sub.From != null) {
                     getFilterDays(sub.From.slice(0, 10))
