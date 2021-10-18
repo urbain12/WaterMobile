@@ -375,13 +375,18 @@ const CryptoDetail = ({ navigation }) => {
 
                                             <View style={{ flex: 1, marginLeft: 20 }}>
                                                 <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
+                                                
                                                     {days2 > 0 ? (
                                                         <>
-                                                        {information.get_overdue_months>0?(
+                                                        {JSON.stringify(information)!=='{}' && (
+                                                            <>
+                                                            {information.get_overdue_months>0?(
                                                             <Text style={{color:'red'}}>{(31-days2)+((information.get_overdue_months-1)*30)} Days</Text>
                                                         ):(
 
                                                         <Text>{days2} Days</Text>
+                                                        )}
+                                                            </>
                                                         )}
                                                         </>
                                                     ) : (
