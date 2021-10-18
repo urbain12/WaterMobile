@@ -234,7 +234,7 @@ const CryptoDetail = ({ navigation, }) => {
                                         </View>
                                     ) : (
 
-                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginTop: 20 }}>Our team is subscribing you- check back in 24 hours</Text>
+                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginTop: 20 }}>Our team is subscribing you - check back in 24 hours</Text>
 
 
                                     )}
