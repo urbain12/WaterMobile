@@ -92,6 +92,7 @@ const CryptoDetail = ({ navigation }) => {
     const OverdueAmount = totalam / 12 * information.get_overdue_months
     const Monthly = totalam / 12
     const subbalance = totalam
+    const formatednum = Math.ceil(Monthly)
     console.log(OverdueAmount)
     const format = (amount) => {
         return Number(amount)
@@ -535,7 +536,7 @@ const CryptoDetail = ({ navigation }) => {
 
                                             <View>
                                                 <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Monthly payment </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{(Math.ceil(Monthly))} Rwf</Text>
+                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(formatednum)).substring(1, JSON.stringify(format(formatednum)).length - 4)} Rwf</Text>
                                             </View>
                                         </View>
 

@@ -36,6 +36,7 @@ const Paywater = ({ route, navigation }) => {
       const id = await AsyncStorage.getItem('user_id')
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
+        setPhonenumber(res.data[0].user.phone)
       }).catch(error => {
         console.log(error.message)
       })
@@ -188,6 +189,7 @@ const Paywater = ({ route, navigation }) => {
               maxLength={12}
               placeholder="Phone Number"
               keyboardType="numeric"
+              value={Phonenumber}
               onChangeText={text => handlephone(text)}
             />
 
