@@ -88,7 +88,7 @@ const CryptoDetail = ({ navigation }) => {
     };
 
 
-    const totalam = information.System != undefined && information.System.total
+    const totalam = information.System != undefined && information.System.total-parseInt(information.Downpayment)
     const OverdueAmount = totalam / 12 * information.get_overdue_months
     const Monthly = totalam / 12
     const subbalance = totalam
@@ -531,7 +531,7 @@ const CryptoDetail = ({ navigation }) => {
                                         <View style={{ flexDirection: "row" }}>
                                             <View style={{ marginRight: "8%" }}>
                                                 <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.System.total)).substring(1, JSON.stringify(format(information.System.total)).length - 4)} Rwf</Text>
+                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.System.total)).length - 4)} Rwf</Text>
                                             </View>
 
                                             <View>

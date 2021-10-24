@@ -100,7 +100,7 @@ const CryptoDetail = ({ navigation, }) => {
 
     }, [])
 
-    const totalam = information.System != undefined && information.System.total
+    const totalam = JSON.stringify(information) != '{}' && information.Total-parseInt(information.Downpayment)
     const OverdueAmount = totalam / 12 * information.get_overdue_months
     const Monthly = totalam / 12
     const subbalance = totalam

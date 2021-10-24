@@ -45,7 +45,8 @@ const Momopay = ({ route, navigation }) => {
       axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
         const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
         setinformation(sub)
-        const Monthly = Math.ceil(sub.System.total / 12)
+        const newmonthly = sub.System.total-parseInt(sub.Downpayment)
+        const Monthly = Math.ceil(newmonthly / 12)
         const month = JSON.stringify(Monthly)
         setAmount(month)
       }).catch(err => {
