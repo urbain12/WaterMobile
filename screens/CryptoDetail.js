@@ -88,7 +88,7 @@ const CryptoDetail = ({ navigation }) => {
     };
 
 
-    const totalam = information.System != undefined && information.System.total-parseInt(information.Downpayment)
+    const totalam = information.System != undefined && information.System.total - parseInt(information.Downpayment)
     const OverdueAmount = totalam / 12 * information.get_overdue_months
     const Monthly = totalam / 12
     const subbalance = totalam
@@ -369,38 +369,38 @@ const CryptoDetail = ({ navigation }) => {
                                                         <Text>{days} Days</Text>
                                                     </Text>
                                                 ) : (
-                                                    <Text style={{ fontSize: 18, color: "white",fontWeight:"900" }}>90 Days to change your filter</Text>
+                                                    <Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>90 Days to change your filter</Text>
                                                 )}
                                                 <Text style={{ color: "white" }}>remaining to your next catridge replacement</Text>
                                             </View>
 
                                             <View style={{ flex: 1, marginLeft: 20 }}>
                                                 <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
-                                                
+
                                                     {days2 > 0 ? (
                                                         <>
-                                                        {JSON.stringify(information)!=='{}' && (
-                                                            <>
-                                                            {information.get_overdue_months>0?(
-                                                            <Text style={{color:'red'}}>{(31-days2)+((information.get_overdue_months-1)*30)} Days</Text>
-                                                        ):(
+                                                            {JSON.stringify(information) !== '{}' && (
+                                                                <>
+                                                                    {information.get_overdue_months > 0 ? (
+                                                                        <Text style={{ color: 'red' }}>{(31 - days2) + ((information.get_overdue_months - 1) * 30)} Days</Text>
+                                                                    ) : (
 
-                                                        <Text>{days2} Days</Text>
-                                                        )}
-                                                            </>
-                                                        )}
+                                                                        <Text>{days2} Days</Text>
+                                                                    )}
+                                                                </>
+                                                            )}
                                                         </>
                                                     ) : (
-                                                        <Text style={{ fontSize: 18, color: "white",fontWeight:"900" }}>30 days</Text>
+                                                        <Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>30 days</Text>
                                                     )}
                                                 </Text>
-                                                {information.get_overdue_months==0 && <Text style={{ color: "white" }}>remaining to your next Installment</Text>}
-                                                {information.get_overdue_months>0 && (
+                                                {information.get_overdue_months == 0 && <Text style={{ color: "white" }}>remaining to your next Installment</Text>}
+                                                {information.get_overdue_months > 0 && (
                                                     <>
-                                                    <Text style={{ color: "white" }}>overdue to pay installment</Text>
-                                                    <Text style={{ color: "white" }}>Pay now to avoid fees</Text>
+                                                        <Text style={{ color: "white" }}>overdue to pay installment</Text>
+                                                        <Text style={{ color: "white" }}>Pay now to avoid fees</Text>
                                                     </>
-                                                    )}
+                                                )}
                                             </View>
                                         </>
 
@@ -682,13 +682,16 @@ const CryptoDetail = ({ navigation }) => {
 
 
                             </View>
+
                             {isAmazi ? (
+                                <>
 
-                                <TransactionHistory
-                                    customContainerStyle={{ ...styles.shadow }}
-                                    history={payments}
-                                />
-
+                                    <TransactionHistory
+                                        customContainerStyle={{ ...styles.shadow }}
+                                        history={payments}
+                                        information={information}
+                                    />
+                                </>
                             ) : (
                                 <></>
                             )}

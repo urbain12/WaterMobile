@@ -17,6 +17,8 @@ import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
 
 import axios from 'axios';
+import { TextInputMask } from 'react-native-masked-text';
+
 
 
 const Momopay = ({ route, navigation }) => {
@@ -279,7 +281,7 @@ const Momopay = ({ route, navigation }) => {
               onChangeText={text => handlephone(text)}
             />
 
-            <TextInput
+            <TextInputMask
               style={{
                 borderColor: "gray",
                 borderWidth: 1,
@@ -294,6 +296,14 @@ const Momopay = ({ route, navigation }) => {
               placeholder="Amount"
               keyboardType="numeric"
               value={Amount}
+              type={'money'}
+              options={{
+                precision: 0,
+                separator: ',',
+                delimiter: ',',
+                unit: 'Rwf  ',
+                suffixUnit: ''
+              }}
               onChangeText={text => handleamount(text)}
             />
 

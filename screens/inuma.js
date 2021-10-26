@@ -548,6 +548,8 @@ const CryptoDetail = ({ navigation, }) => {
                                 <TransactionHistory
                                     customContainerStyle={{ ...styles.shadow }}
                                     history={payments}
+                                    information={information}
+
                                 />
 
                             ) : (

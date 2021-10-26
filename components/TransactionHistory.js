@@ -9,7 +9,7 @@ import {
 
 import { COLORS, SIZES, FONTS, icons } from "../constants"
 
-const TransactionHistory = ({ customContainerStyle, history }) => {
+const TransactionHistory = ({ customContainerStyle, history,information }) => {
     const format = (amount) =>{
         return Number(amount)
         .toFixed(2)
@@ -66,6 +66,40 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
             }}
         >   
                 <Text style={{ ...FONTS.h2 }}>Transaction History</Text>
+                {information.Downpayment>0&&(
+                    <TouchableOpacity
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingVertical: SIZES.base
+                    }}
+                >
+                    <Image
+                        source={icons.exchange}
+                        style={{
+                            width: 20,
+                            height: 20,
+
+                        }}
+                    />
+
+                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                        <Text style={{ ...FONTS.h3 }}>Down Payment</Text>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', height: '100%', alignItems: 'center' }}>
+                        <Text style={{ color: COLORS.black, ...FONTS.h3 }}>{JSON.stringify(format(information.Downpayment)).substring(1, JSON.stringify(format(information.Downpayment)).length - 4)} Rwf</Text>
+                        <Image
+                            source={icons.right_arrow}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                tintColor: COLORS.gray
+                            }}
+                        />
+                    </View>
+                </TouchableOpacity>
+                )}
             {history.length>0?(
                 <View>
             <FlatList
@@ -83,9 +117,11 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
             />
                 </View>
             ):(
-                <View style={{justifyContent:'center',alignItems:'center',marginTop:20,marginBottom:20}}>
-                    <Text>No Transaction yet!</Text>
-                </View>
+                <>
+                {(information.Downpayment==0 && history.length==0)&&(<View style={{justifyContent:'center',alignItems:'center',marginTop:20,marginBottom:20}}>
+                <Text>No Transaction yet!</Text>
+            </View>)}
+            </>
             )}
             
         </View>

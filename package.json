@@ -18,7 +18,7 @@
     "axios": "^0.21.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "expo": "^42.0.0",
-    "expo-image-picker": "^10.2.3",
+    "expo-image-picker": "~10.2.2",
     "expo-linear-gradient": "~9.2.0",
     "expo-linking": "~2.3.1",
     "expo-status-bar": "~1.0.4",
@@ -34,6 +34,7 @@
     "react-native-gesture-handler": "~1.10.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-keyboard-aware-scrollview": "^2.1.0",
+    "react-native-masked-text": "^1.13.0",
     "react-native-modal": "^11.10.0",
     "react-native-paper": "^4.8.1",
     "react-native-reanimated": "~2.2.0",
@@ -46,8 +47,7 @@
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "victory-native": "^35.3.1",
-    "expo-image-picker": "~10.2.2"
+    "victory-native": "^35.3.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
