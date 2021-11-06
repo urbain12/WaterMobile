@@ -48,7 +48,7 @@ const Momopay = ({ route, navigation }) => {
         const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
         setinformation(sub)
         const newmonthly = sub.System.total-parseInt(sub.Downpayment)
-        const Monthly = Math.ceil(newmonthly / 12)
+        const Monthly = Math.ceil(newmonthly / sub.InstallmentPeriod)
         const month = JSON.stringify(Monthly)
         setAmount(month)
       }).catch(err => {
