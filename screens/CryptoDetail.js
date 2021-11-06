@@ -468,7 +468,7 @@ const CryptoDetail = ({ navigation }) => {
                                 </View>
 
 
-                                {subbalance > 0 ? (
+                                {subbalance > 0 && information.complete == true ? (
 
                                     <TouchableOpacity
                                         style={{

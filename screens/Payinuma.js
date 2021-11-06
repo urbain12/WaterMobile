@@ -263,7 +263,7 @@ const Momopay = ({ route, navigation }) => {
         <View>
           <TouchableOpacity activeOpacity={1}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Pay instalment</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}></Text>
             </View>
             <TextInput
               style={{
