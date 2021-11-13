@@ -50,7 +50,7 @@ const Momopay = ({ route, navigation }) => {
         const sub = res.data.find(el => el.Category.Title.toUpperCase() === "UHIRA")
         setinformation(sub)
         const newmonthly = sub.Total-parseInt(sub.Downpayment)
-        const Monthly = Math.ceil(newmonthly / 12)
+        const Monthly = Math.ceil(newmonthly / sub.InstallmentPeriod)
         const month = JSON.stringify(Monthly)
         setAmount(month)
       }).catch(err => {
@@ -265,7 +265,6 @@ const Momopay = ({ route, navigation }) => {
         <View>
           <TouchableOpacity activeOpacity={1}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Pay instalment</Text>
             </View>
             <TextInput
               style={{

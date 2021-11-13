@@ -122,8 +122,8 @@ const CryptoDetail = ({ navigation, }) => {
     }, [])
 
     const totalam = JSON.stringify(information) != '{}' && information.Total-parseInt(information.Downpayment)
-    const OverdueAmount = totalam / 12 * information.get_overdue_months
-    const Monthly = totalam / 12
+    const OverdueAmount = totalam / information.InstallmentPeriod * information.get_overdue_months
+    const Monthly = totalam / information.InstallmentPeriod
     const subbalance = totalam
     const formatednum = Math.ceil(Monthly)
 
@@ -296,7 +296,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                             </View>
 
-                            {subbalance > 0 ? (
+                            {subbalance > 0 && information.complete == true ? (
 
                                 <TouchableOpacity
                                     style={{
