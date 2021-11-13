@@ -70,8 +70,20 @@ const TabBarCustomButton = ({ children, onPress }) => {
         }}
       >
         {children}
+         
       </View>
+      <View style={{marginBottom:10,width:"100%"}}>
+
+              <Text
+                style={{
+                  color:'black',fontFamily: "Roboto-Regular", fontSize: 12, lineHeight: 22
+                }}
+              >
+                QUICK ACCESS
+              </Text>
+              </View>
     </TouchableOpacity>
+    
   );
 };
 
@@ -327,7 +339,7 @@ const Tabs = ({ navigation }) => {
           tabBarIcon: ({ focused }) => (
             <View>
               <TouchableOpacity
-                style={{ width: "60%", margin: "3%" }}
+                style={{ width: "100%", margin: "3%" }}
                 onPress={() => {
                   setIsVisible(true);
                 }}
@@ -342,9 +354,12 @@ const Tabs = ({ navigation }) => {
                   }}
                 />
               </TouchableOpacity>
+             
             </View>
+
           ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
+         
         }}
       />
 
