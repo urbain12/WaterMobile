@@ -19,7 +19,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "water.access.rwanda",
+      "bundleIdentifier": "W.A.Rwanda",
       "buildNumber": "1.0.0"
     },
     "android": {
