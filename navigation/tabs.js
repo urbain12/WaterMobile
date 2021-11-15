@@ -112,13 +112,11 @@ const Tabs = ({ navigation }) => {
         showLabel: false,
         style: {
           position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
           elevation: 0,
           backgroundColor: COLORS.white,
           borderTopColor: "transparent",
           height: 100,
+          width:"100%"
         },
       }}
     >
@@ -127,7 +125,7 @@ const Tabs = ({ navigation }) => {
         component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <View style={{ alignItems: "center", justifyContent: "center" ,width:70}}>
               {/* modal1 */}
               <Modal
                 animationType="slide"
@@ -368,7 +366,7 @@ const Tabs = ({ navigation }) => {
         component={Settings}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <View style={{ alignItems: "center", justifyContent: "center",width:70 }}>
               <Ionicons name="settings-sharp" size={30} color={focused ? '#01B0F1' : COLORS.black} />
               <Text
                 style={{

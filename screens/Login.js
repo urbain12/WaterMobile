@@ -109,7 +109,7 @@ const Login = ({ navigation }) => {
                         }}
                     />
                 </ImageBackground>
-                    <Text style={{color: 'Black',fontWeight:"900",marginTop:8,fontSize:18}}>Water Access Rwanda</Text>
+                    <Text style={{fontWeight:"900",marginTop:8,fontSize:18}}>Water Access Rwanda</Text>
             </View>
             <Text style={{ textAlign: "center", fontSize: 12, fontWeight: "bold", marginBottom: 10, color: "#707070" }}>Providing Simple,Affordable, and Durable water solutions</Text>
 
@@ -133,7 +133,7 @@ const Login = ({ navigation }) => {
                         keyboardType="number-pad"
                         placeholderTextColor="#666666"
                         style={[styles.textInput, {
-                            color: colors.text
+                            color: colors.text,marginLeft:10
                         }]}
                         value={data.username}
                         onChangeText={(val) => textInputChange(val)}
@@ -161,13 +161,14 @@ const Login = ({ navigation }) => {
                         name="lock"
                         color={colors.text}
                         size={30}
+                        style={{marginLeft:-5}}
                     />
                     <TextInput
                         placeholder="Password"
                         placeholderTextColor="#666666"
                         secureTextEntry={data.secureTextEntry ? true : false}
                         style={[styles.textInput, {
-                            color: colors.text
+                            color: colors.text,marginLeft:10
                         }]}
                         autoCapitalize="none"
                         onChangeText={(val) => handlePasswordChange(val)}
@@ -207,7 +208,7 @@ const Login = ({ navigation }) => {
                                 <ActivityIndicator size='large' color='white' style={{ marginTop: 10 }} />
                             ) :
                                 (
-                                    <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Sign In</Text>
+                                    <Text style={{ color: "white", marginTop: 10, fontSize: 20, fontWeight: "bold" }}>Sign In</Text>
                                 )}
 
                         </View>

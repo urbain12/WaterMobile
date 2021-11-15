@@ -230,7 +230,7 @@ const Changepassword = ({ navigation }) => {
                             <ActivityIndicator size='large' color='white' style={{marginTop:10}} />
                         ) :
                             (
-                                <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Change</Text>
+                                <Text style={{ color: "white", marginTop: 15, fontSize: 20, fontWeight: "bold" }}>Change</Text>
                             )}
 
                     </View>

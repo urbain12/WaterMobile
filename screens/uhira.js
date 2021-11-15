@@ -100,7 +100,7 @@ const CryptoDetail = ({ navigation, }) => {
 
     }, [])
 
-    const totalam = JSON.stringify(information) != '{}' && information.Total-parseInt(information.Downpayment)
+    const totalam = JSON.stringify(information) != '{}' && information.Total - parseInt(information.Downpayment)
     const OverdueAmount = totalam / information.InstallmentPeriod * information.get_overdue_months
     const Monthly = totalam / information.InstallmentPeriod
     const subbalance = totalam
@@ -232,7 +232,8 @@ const CryptoDetail = ({ navigation, }) => {
                                         borderRadius: 10,
                                         backgroundColor: COLORS.white,
                                         marginBottom: 15,
-                                        ...styles.shadow
+                                        ...styles.shadow,
+                                        width:"90%"
 
                                     }}
 
@@ -277,13 +278,13 @@ const CryptoDetail = ({ navigation, }) => {
                                     style={{
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        marginLeft: "8%",
+                                        marginLeft: 25,
                                         marginTop: SIZES.padding * 1,
                                         paddingVertical: SIZES.padding,
                                         paddingHorizontal: SIZES.radius,
                                         backgroundColor: COLORS.white,
                                         borderRadius: SIZES.radius,
-                                        width: "85%",
+                                        width: "90%",
                                         ...styles.shadow
                                     }}
 
@@ -322,7 +323,8 @@ const CryptoDetail = ({ navigation, }) => {
                                     paddingHorizontal: SIZES.radius,
                                     backgroundColor: COLORS.white,
                                     borderRadius: SIZES.radius,
-                                    ...styles.shadow
+                                    ...styles.shadow,
+                                    width:"90%"
                                 }}
                             >
 
@@ -331,7 +333,7 @@ const CryptoDetail = ({ navigation, }) => {
                                     <View style={{ flex: 1, marginLeft: SIZES.radius, justifyContent: "center", alignItems: "center" }}>
 
 
-<View style={{ flexDirection: "row" }}>
+                                        <View style={{ flexDirection: "row" }}>
                                             <View style={{ marginRight: "8%" }}>
                                                 <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
                                                 <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
@@ -548,6 +550,16 @@ const CryptoDetail = ({ navigation, }) => {
                                         tintColor: COLORS.white,
                                     }}
                                 />
+                            </View>
+                            <View style={{ marginTop: 10, width: "80%", alignItems: "center", justifyContent: "center" }}>
+
+                                <Text
+                                    style={{
+                                        color: 'black', fontFamily: "Roboto-Regular", fontSize: 12, lineHeight: 22
+                                    }}
+                                >
+                                    QUICK ACCESS
+                                </Text>
                             </View>
                         </TouchableOpacity>
 

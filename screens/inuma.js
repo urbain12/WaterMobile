@@ -252,7 +252,8 @@ const CryptoDetail = ({ navigation, }) => {
                                         borderRadius: 10,
                                         backgroundColor: COLORS.white,
                                         marginBottom: 15,
-                                        ...styles.shadow
+                                        ...styles.shadow,
+                                        width:"90%"
 
                                     }}
 
@@ -302,13 +303,13 @@ const CryptoDetail = ({ navigation, }) => {
                                     style={{
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        marginLeft: "6%",
+                                        marginLeft: 25,
                                         marginTop: SIZES.padding * 1,
                                         paddingVertical: SIZES.padding,
                                         paddingHorizontal: SIZES.radius,
                                         backgroundColor: COLORS.white,
                                         borderRadius: SIZES.radius,
-                                        width: "87%",
+                                        width: "90%",
                                         ...styles.shadow
                                     }}
 
@@ -341,13 +342,13 @@ const CryptoDetail = ({ navigation, }) => {
                                         flexDirection: 'row',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        marginLeft: "6%",
-                                        marginTop: 10,
+                                        marginLeft: 25,
+                                        marginTop: 15,
                                         paddingVertical: SIZES.padding,
                                         paddingHorizontal: SIZES.radius,
                                         backgroundColor: COLORS.white,
                                         borderRadius: SIZES.radius,
-                                        width: "87%",
+                                        width: "90%",
                                         ...styles.shadow
                                     }}
 
@@ -385,7 +386,8 @@ const CryptoDetail = ({ navigation, }) => {
                                     paddingHorizontal: SIZES.radius,
                                     backgroundColor: COLORS.white,
                                     borderRadius: SIZES.radius,
-                                    ...styles.shadow
+                                    ...styles.shadow,
+                                    width:"90%"
                                 }}
                             >
 
@@ -608,6 +610,16 @@ const CryptoDetail = ({ navigation, }) => {
                                         tintColor: COLORS.white,
                                     }}
                                 />
+                            </View>
+                            <View style={{ marginTop: 10, width: "80%", alignItems: "center", justifyContent: "center" }}>
+
+                                <Text
+                                    style={{
+                                        color: 'black', fontFamily: "Roboto-Regular", fontSize: 12, lineHeight: 22
+                                    }}
+                                >
+                                    QUICK ACCESS
+                                </Text>
                             </View>
                         </TouchableOpacity>
 

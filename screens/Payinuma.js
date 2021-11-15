@@ -326,7 +326,7 @@ const Momopay = ({ route, navigation }) => {
               <ActivityIndicator size='large' color='white' style={{ margin: 15 }} />
             ) :
               (
-                <Text style={{ color: "white", marginTop: "5%", fontSize: 20, fontWeight: "bold" }}>Pay</Text>
+                <Text style={{ color: "white", marginTop: 15, fontSize: 20, fontWeight: "bold" }}>Pay</Text>
               )}
 
           </View>
