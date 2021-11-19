@@ -15,7 +15,7 @@ import {
   Animated,
   Alert
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather,SimpleLineIcons } from "@expo/vector-icons";
 import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -224,21 +224,21 @@ const Home = ({ navigation }) => {
         style={{
           width: "100%",
           height: 100,
-          ...styles.shadow,
         }}
-      >
-        <ImageBackground
-          source={images.banner_settings}
-          resizeMode="cover"
+       >
+        <View
+          // source={images.banner_settings}
+          // resizeMode="cover"
           style={{
             flex: 1,
             alignItems: "center",
+            backgroundColor:"#009cde"
           }}
         >
           {/* Header Bar */}
           <View
             style={{
-              marginTop: 30,
+              marginTop: 10,
               width: "100%",
               flexDirection: "row",
               paddingHorizontal: SIZES.padding,
@@ -256,14 +256,14 @@ const Home = ({ navigation }) => {
               justifyContent: "center",
             }}
           >
-            <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
+            <Text style={{ color: COLORS.white, ...FONTS.h2,marginTop:20 }}>
               Welcome {customer.FirstName}
-            </Text>
+            </Text> 
           </View>
 
           {/* Trending */}
 
-        </ImageBackground>
+        </View>
 
 
       </View>
@@ -277,32 +277,35 @@ const Home = ({ navigation }) => {
   return (
 
 
-    <View style={{ flex: 1, height: "100%" }}>
+    <View style={{ flex: 1, height: "100%",backgroundColor:"#f2f2f2" }}>
       {renderHeader()}
+
+      <Text  style={{fontSize: 24, color: "#303030",paddingTop:15,marginLeft:22,fontWeight:"bold"}}>Services</Text>
+
 
       <ScrollView style={{ height: "100%", marginBottom: 10 }}>
         {isAmazi===undefined?(
-          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
+          <View style={{  marginTop: 20 }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height: 90,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#00b4e3",
+                borderRadius: 8,
+                backgroundColor: "white",
                 alignItems: 'center',
                 justifyContent: 'center',
-                ...styles.shadow
+                ...styles.shadow,
+                
 
-              }}
-            //onPress={() => navigation.navigate("Landing")}
-            >
+                  }}
+                //onPress={() => navigation.navigate("Landing")}
+                >
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
+                  <Text style={{ fontSize: 12, color: "#00b4e3" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
                     borderBottomColor: "white",
@@ -327,40 +330,48 @@ const Home = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height: 90,
                 paddingVertical: 5,
-                paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#00b4e3",
-                alignItems: 'center',
-                justifyContent: 'center',
+                paddingHorizontal:25,
+                borderLeftWidth: 10,
+                borderLeftColor: "#00b4e3",
+                borderRadius: 8,
+                backgroundColor: "white",
+                
                 ...styles.shadow
 
               }}
 
             >
-              <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row'}}>
 
-                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
+              
+
+                <View>
+                  <Text style={{ fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
                   <View>
-                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
                       Subscribed
                     </Text>
                   </View>
 
 
+                </View>
+
+                <View style={{justifyContent:"center",marginLeft:"60%"}}>
+                  
+                  <SimpleLineIcons name="arrow-right" size={20} color="#00b4e3"  />
+   
                 </View>
               </View>
 
@@ -371,15 +382,14 @@ const Home = ({ navigation }) => {
           <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height : 90,
                 paddingVertical: 5,
-                paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#00b4e3",
-                alignItems: 'center',
-                justifyContent: 'center',
+                paddingHorizontal: 15,
+                borderLeftWidth: 10,
+                borderLeftColor: "#00b4e3",
+                borderRadius: 8,
+                backgroundColor: "#f2f2f2",
                 ...styles.shadow
 
               }}
@@ -387,12 +397,12 @@ const Home = ({ navigation }) => {
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Text style={{ fontSize: 30, color: "white" }}>AMAZI</Text>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'left' }}>
+                  <Text style={{ fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold" }}>AMAZI</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
@@ -400,7 +410,7 @@ const Home = ({ navigation }) => {
                   </View>
 
                   <TouchableOpacity onPress={() => { amazi_alert() }}>
-                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    <Text style={{ color: '#00b4e3', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
                     Click to Subscribe
                     </Text>
                   </TouchableOpacity>
@@ -421,13 +431,14 @@ const Home = ({ navigation }) => {
           <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height : 90,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#00b5de",
+                borderLeftWidth: 10,
+                borderLeftColor: "#00b5de",
+                borderRadius: 8,
+                backgroundColor: "white",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -438,11 +449,11 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                <Text style={{fontSize:30,color:"white"}}>INUMA</Text>
+                <Text style={{fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold"}}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
@@ -462,15 +473,14 @@ const Home = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height : 90,
                 paddingVertical: 5,
-                paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#00b5de",
-                alignItems: 'center',
-                justifyContent: 'center',
+                paddingHorizontal: 25,
+                borderLeftWidth: 10,
+                borderLeftColor: "#00b5de",
+                borderRadius: 8,
+                backgroundColor: "white",
                 ...styles.shadow
 
               }}
@@ -478,24 +488,29 @@ const Home = ({ navigation }) => {
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                  <Text style={{ fontSize: 30, color: "white" }}>INUMA</Text>
+                <View style={{ alignItems: 'left' }}>
+                  <Text style={{ fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold" }}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
                   <View>
-                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
                       Subscribed
                     </Text>
                   </View>
 
 
+                </View>
+                <View style={{justifyContent:"center",marginLeft:"60%"}}>
+                  
+                  <SimpleLineIcons name="arrow-right" size={20} color="#00b4e3"  />
+   
                 </View>
               </View>
 
@@ -506,15 +521,14 @@ const Home = ({ navigation }) => {
           <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height : 90,
                 paddingVertical: 5,
-                paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#00b5de",
-                alignItems: 'center',
-                justifyContent: 'center',
+                paddingHorizontal: 15,
+                borderLeftWidth: 10,
+                borderLeftColor: "#00b5de",
+                borderRadius: 8,
+                backgroundColor: "white",
                 ...styles.shadow
 
               }}
@@ -522,19 +536,19 @@ const Home = ({ navigation }) => {
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                <Text style={{fontSize:30,color:"white"}}>INUMA</Text>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'left' }}>
+                <Text style={{fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold"}}>INUMA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
                   <TouchableOpacity onPress={() => { inuma_alert() }}>
-                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    <Text style={{ color: '#00b4e3', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
                      Click to Subscribe
                     </Text>
                   </TouchableOpacity>
@@ -555,13 +569,14 @@ const Home = ({ navigation }) => {
           <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height : 90,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#88B04B",
+                borderLeftWidth: 10,
+                borderLeftColor: "#88b04b",
+                borderRadius: 8,
+                backgroundColor: "white",
                 alignItems: 'center',
                 justifyContent: 'center',
                 ...styles.shadow
@@ -572,11 +587,11 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'row' }}>
 
                 <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
+                <Text style={{fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
@@ -596,15 +611,15 @@ const Home = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height : 90,
                 paddingVertical: 5,
-                paddingHorizontal: 5,
+                paddingHorizontal: 15,
+                borderLeftWidth: 10,
+                borderLeftColor: "#88b04b",
                 marginBottom: 100,
-                borderRadius: 10,
-                backgroundColor: "#88B04B",
-                alignItems: 'center',
-                justifyContent: 'center',
+                borderRadius: 8,
+                backgroundColor: "white",
                 ...styles.shadow
 
               }}
@@ -612,23 +627,29 @@ const Home = ({ navigation }) => {
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'left' }}>
+                <Text style={{fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
                   <View>
-                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
                       Subscribed
                     </Text>
                   </View>
 
+                </View>
+
+                <View style={{justifyContent:"center",marginLeft:"55%"}}>
+                  
+                  <SimpleLineIcons name="arrow-right" size={20} color="#00b4e3"  />
+   
                 </View>
               </View>
 
@@ -639,15 +660,14 @@ const Home = ({ navigation }) => {
           <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
             <View
               style={{
-                width: '80%',
-                height: 120,
+                width: '90%',
+                height : 90,
                 paddingVertical: 5,
-                paddingHorizontal: 5,
-
-                borderRadius: 10,
-                backgroundColor: "#88B04B",
-                alignItems: 'center',
-                justifyContent: 'center',
+                paddingHorizontal: 10,
+                borderLeftWidth: 10,
+                borderLeftColor: "#88b04b",
+                borderRadius: 8,
+                backgroundColor: "white",
                 ...styles.shadow
 
               }}
@@ -655,19 +675,19 @@ const Home = ({ navigation }) => {
             >
               <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                <Text style={{fontSize:30,color:"white"}}>UHIRA</Text>
+                <View style={{ marginLeft: SIZES.base, alignItems: 'left' }}>
+                <Text style={{fontSize: 20, color: "#00b4e3",marginTop:10,fontWeight:"bold"}}>UHIRA</Text>
                   <View style={{
                     borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 100,
+                    borderBottomColor: "#00b4e3",
+                    width: 75,
                     marginLeft: 1,
                     marginTop: 5
                   }}>
 
                   </View>
                   <TouchableOpacity onPress={() => { uhira_alert() }}>
-                    <Text style={{ color: 'white', ...FONTS.body3, marginTop: 30, fontSize: 20 }}>
+                    <Text style={{ color: '#00b4e3', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
                     Click to Subscribe
                     </Text>
                   </TouchableOpacity>
@@ -703,7 +723,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   shadow: {
-    shadowColor: "#000",
+    shadowColor: "#707070",
     shadowOffset: {
       width: 0,
       height: 4,

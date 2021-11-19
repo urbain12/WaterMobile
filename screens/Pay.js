@@ -19,7 +19,7 @@ import {
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
 import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
 import axios from 'axios';
 // import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
@@ -92,12 +92,8 @@ const Pay = ({ navigation,route }) => {
               }}
               onPress={() => navigation.navigate('Home')}
             >
-              <Ionicons
-                name="arrow-back"
-                size={40}
-                color="white"
-                resizeMode="contain"
-              />
+            <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
+
             </TouchableOpacity>
             
           </View>

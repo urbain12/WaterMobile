@@ -209,7 +209,7 @@ const Landing = ({ navigation }) => {
         }}
 
         >
-          <AntDesign name="close" size={24} color="#01b0f1" />
+          <AntDesign name="close" size={24} color="#009cde" />
         </TouchableOpacity>
 
       </View>
@@ -225,7 +225,7 @@ const Landing = ({ navigation }) => {
           marginHorizontal: SIZES.padding,
           padding: 20,
           borderRadius: SIZES.radius,
-          backgroundColor: "#01b0f1",
+          backgroundColor: "#009cde",
           ...styles.shadow
         }}
       >

@@ -432,7 +432,7 @@ setTimeout(() => {
                         </View>
 
                         <View style={{ width:'33%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#01B0F1", }}>{JSON.stringify(format(totalAmount)).substring(1,JSON.stringify(format(totalAmount)).length-4)} Rwf</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: "#009cde", }}>{JSON.stringify(format(totalAmount)).substring(1,JSON.stringify(format(totalAmount)).length-4)} Rwf</Text>
                         </View>
                     </View>
 
@@ -452,7 +452,7 @@ setTimeout(() => {
             onPress={Order}
         >
             <View
-                style={{ backgroundColor: "#01B0F1", width: "50%", height: "100%", alignItems: "center", borderRadius: 10, justifyContent:'center'}}
+                style={{ backgroundColor: "#009cde", width: "50%", height: "100%", alignItems: "center", borderRadius: 10, justifyContent:'center'}}
             >
                 <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Order</Text>
             </View>
@@ -623,7 +623,7 @@ setTimeout(() => {
                     }}>
 
                     <View
-                        style={{ backgroundColor: "#01B0F1", width: "100%", height: "45%", alignItems: "center",justifyContent:'center', borderRadius: 10 }}
+                        style={{ backgroundColor: "#009cde", width: "100%", height: "45%", alignItems: "center",justifyContent:'center', borderRadius: 10 }}
                     >
                         {loading ? (
                             <ActivityIndicator size='large' color='white' style={{margin:15}}/>

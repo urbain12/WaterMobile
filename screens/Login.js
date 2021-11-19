@@ -202,7 +202,7 @@ const Login = ({ navigation }) => {
                         onPress={() => { loginHandle(data.phone, data.password) }}
                     >
                         <View
-                            style={{ backgroundColor: "#01B0F1", width: "100%", height: "100%", alignItems: "center", borderRadius: 10 }}
+                            style={{ backgroundColor: "#009cde", width: "100%", height: "100%", alignItems: "center", borderRadius: 10 }}
                         >
                             {data.loading ? (
                                 <ActivityIndicator size='large' color='white' style={{ marginTop: 10 }} />
@@ -218,14 +218,14 @@ const Login = ({ navigation }) => {
 
 
                 <TouchableOpacity onPress={() => navigation.navigate('Resetpassword')}>
-                    <Text style={{ color: '#1B1C1E', marginTop: 15, fontWeight: "bold" }}>Forgot password?  <Text style={{ color: "#01B0F1", fontWeight: "bold" }}>Recover credentials</Text></Text>
+                    <Text style={{ color: '#1B1C1E', marginTop: 15, fontWeight: "bold" }}>Forgot password?  <Text style={{ color: "#009cde", fontWeight: "bold" }}>Recover credentials</Text></Text>
                 </TouchableOpacity>
                 <View style={{ flexDirection: "row" }}>
                     <Text style={{ color: '#1B1C1E', marginTop: 10, fontWeight: "bold" }}>Don't have an account?  </Text>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Register')}
                     >
-                        <Text style={{ color: "#01B0F1", fontWeight: "bold", marginTop:10 }}>Sign up</Text>
+                        <Text style={{ color: "#009cde", fontWeight: "bold", marginTop:10 }}>Sign up</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ alignItems: "center", marginTop: "45%" }}>

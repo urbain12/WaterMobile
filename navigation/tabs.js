@@ -53,10 +53,9 @@ const TabBarCustomButton = ({ children, onPress }) => {
   return (
     <TouchableOpacity
       style={{
-        top: -30,
+        top: -15,
         justifyContent: "center",
         alignItems: "center",
-        ...styles.shadow,
       }}
       onPress={onPress}
     >
@@ -66,7 +65,7 @@ const TabBarCustomButton = ({ children, onPress }) => {
           width: 70,
           height: 70,
           borderRadius: 35,
-          backgroundColor: '#01B0F1'
+          backgroundColor: '#009cde'
         }}
       >
         {children}
@@ -76,7 +75,7 @@ const TabBarCustomButton = ({ children, onPress }) => {
 
               <Text
                 style={{
-                  color:'black',fontFamily: "Roboto-Regular", fontSize: 12, lineHeight: 22
+                  color:'#707070',fontFamily: "Roboto-Regular", fontSize: 12, lineHeight: 40
                 }}
               >
                 QUICK ACCESS
@@ -112,11 +111,9 @@ const Tabs = ({ navigation }) => {
         showLabel: false,
         style: {
           position: "absolute",
-          elevation: 0,
-          backgroundColor: COLORS.white,
-          borderTopColor: "transparent",
-          height: 100,
-          width:"100%"
+          height: 85,
+          width:"100%",
+          ...styles.footer,
         },
       }}
     >
@@ -125,7 +122,7 @@ const Tabs = ({ navigation }) => {
         component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" ,width:70}}>
+            <View style={{ width:70}}>
               {/* modal1 */}
               <Modal
                 animationType="slide"
@@ -155,12 +152,12 @@ const Tabs = ({ navigation }) => {
                       }}
 
                     >
-                      <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
+                      <View  style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden',backgroundColor:"#009cde" }}>
 
 
                         <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
 
-                          <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                          <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
                             Quick Access </Text>
                           <View
                             style={{
@@ -175,15 +172,15 @@ const Tabs = ({ navigation }) => {
                               onPress={() => { navigation.navigate("Shop"); setIsVisible(false); }}
 
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                              <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                 <FontAwesome
                                   name="shopping-bag"
-                                  size={80}
-                                  color="#01B0F1"
+                                  size={28}
+                                  color="#009cde"
                                   resizeMode="contain"
                                 />
                               </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Shop</Text>
+                              <Text style={{ color:"white",textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:9.5,fontSize:18 }}>Shop</Text>
                             </TouchableOpacity>
 
 
@@ -193,18 +190,18 @@ const Tabs = ({ navigation }) => {
                                 setIsVisible2(true); setIsVisible(false);
                               }}
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                              <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                 <Image
                                   source={icons.waterpipe}
                                   resizeMode="contain"
                                   style={{
-                                    width: 90,
+                                    width: 28,
                                     height: 120,
                                     marginLeft: 2,
                                   }}
                                 />
                               </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintenance</Text>
+                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:'-4%', color: "white",fontSize:18 }}>Maintenance</Text>
                             </TouchableOpacity>
 
 
@@ -212,23 +209,23 @@ const Tabs = ({ navigation }) => {
 
                               onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                              <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                 <Image
                                   source={icons.watersupport}
                                   resizeMode="contain"
                                   style={{
-                                    width: 90,
+                                    width: 28,
                                     height: 120,
                                     marginLeft: 2,
                                   }}
                                 />
                               </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Support</Text>
+                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:"9%", color: "white",fontSize:18 }}>Support</Text>
                             </TouchableOpacity>
 
                           </View>
                         </ScrollView>
-                      </ImageBackground>
+                      </View>
                     </View>
                   </TouchableWithoutFeedback>
                 </TouchableOpacity>
@@ -264,18 +261,20 @@ const Tabs = ({ navigation }) => {
                       }}
 
                     >
-                      <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
+                      <View  style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden',backgroundColor:"#009cde" }}>
 
 
                         <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
 
-                          <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                          <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
                             Choose Maintenance type </Text>
                           <View
                             style={{
                               flexDirection: "row",
                               alignContent: "center",
-                              width: '100%'
+                              width: '100%',
+                              alignItems:"center",
+                              marginLeft:"4%"
                             }}
                           >
 
@@ -284,10 +283,10 @@ const Tabs = ({ navigation }) => {
                               onPress={() => { navigation.navigate("request"); setIsVisible2(false); }}
 
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
-                                <AntDesign name="tool" size={80} color="#01B0F1" />
+                              <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                                <AntDesign name="tool" size={30} color="#009cde" />
                               </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Request Technician</Text>
+                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:2, color: "white" }}>Request Technician</Text>
                             </TouchableOpacity>
 
 
@@ -296,30 +295,30 @@ const Tabs = ({ navigation }) => {
                               onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible2(false); }}
 
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                              <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                 <Image
                                   source={icons.waterpipe}
                                   resizeMode="contain"
                                   style={{
-                                    width: 90,
+                                    width: 30,
                                     height: 120,
                                     marginLeft: 2,
                                   }}
                                 />
                               </View>
-                              <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Catridge shop</Text>
+                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:4, color: "white" }}>Catridge shop</Text>
                             </TouchableOpacity>
                           </View>
                         </ScrollView>
-                      </ImageBackground>
+                      </View>
                     </View>
                   </TouchableWithoutFeedback>
                 </TouchableOpacity>
               </Modal>
-              <Entypo name="home" size={30} color={focused ? '#01B0F1' : COLORS.black} />
+              <Entypo name="home" size={30} color={focused ? '#009cde' : '#707070'} />
               <Text
                 style={{
-                  color: focused ? '#01B0F1' : COLORS.black,
+                  color: focused ? '#009cde' : '#707070',
                   ...FONTS.body5,
                 }}
               >
@@ -366,11 +365,11 @@ const Tabs = ({ navigation }) => {
         component={Settings}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center",width:70 }}>
-              <Ionicons name="settings-sharp" size={30} color={focused ? '#01B0F1' : COLORS.black} />
+            <View style={{ alignItems: "center", justifyContent: "center",width:70,marginLeft:30 }}>
+              <Ionicons name="settings-sharp" size={30} color={focused ? '#009cde' : '#707070'} />
               <Text
                 style={{
-                  color: focused ? '#01B0F1' : COLORS.black,
+                  color: focused ? '#009cde' : '#707070',
                   ...FONTS.body5,
                 }}
               >
@@ -387,10 +386,21 @@ const Tabs = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   shadow: {
-    shadowColor: COLORS.primary,
+    shadowColor: "#009cde",
     shadowOffset: {
       width: 0,
       height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  footer: {
+    shadowColor: "red",
+    shadowOffset: {
+      width: 0,
+      height: 20,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,

@@ -13,7 +13,7 @@ import {
     TouchableWithoutFeedback,
     ActivityIndicator
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Entypo, SimpleLineIcons } from "@expo/vector-icons";
 import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -144,7 +144,7 @@ const CryptoDetail = ({ navigation, }) => {
         <>
             {days2 == 'null' ? (
 
-                <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center", backgroundColor: "#01B0F1", width: "100%" }}>
+                <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center", backgroundColor: "#009cde", width: "100%" }}>
 
                     <ActivityIndicator size='large' color='white' />
                     <Text style={{ fontSize: 30, color: "white" }}>Please wait</Text>
@@ -156,39 +156,50 @@ const CryptoDetail = ({ navigation, }) => {
 
             ) : (
                 <View style={{ height: "100%" }}>
+                    <View
+                        style={{
+
+                            width: "100%",
+                            backgroundColor: "#009cde",
+                            flexDirection: "row"
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                width: "15%",
+                                height: 45,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginTop: "10%",
+                            }}
+                            onPress={() => navigation.navigate('Home')}
+                        >
+                            <SimpleLineIcons name="arrow-left" size={20} color="white" />
+
+                        </TouchableOpacity>
+                        <View style={{
+                            width: "85%",
+                            height: 45,
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginTop: "10%",
+                            marginLeft: "14%"
+
+
+                        }}>
+                            <Text style={{ color: 'white', fontSize: 15, fontWeight: "bold" }}>
+                                Your own water point
+                            </Text>
+                        </View>
+
+                    </View>
                     <ScrollView>
                         <View style={{ flex: 1, paddingBottom: 130 }}>
                             <View style={{ zIndex: 0, position: 'absolute' }}>
-                                <Image resizeMode='cover' source={images.modalbanner} style={{ height: 250, width: windowWidth }} />
+                                <View style={{ height: 180, width: windowWidth, backgroundColor: "#009cde" }} />
                             </View>
                             <View>
-                                <View
-                                    style={{
-                                        marginTop: SIZES.padding * 1,
-                                        width: "100%",
-                                        flexDirection: "row",
-                                        paddingHorizontal: SIZES.padding,
-                                    }}
-                                >
-                                    <TouchableOpacity
-                                        style={{
-                                            width: 35,
-                                            height: 35,
-                                            marginRight: '80%',
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                        }}
-                                        onPress={() => navigation.navigate('Home')}
-                                    >
-                                        <Ionicons
-                                            name="arrow-back"
-                                            size={40}
-                                            color="white"
-                                            resizeMode="contain"
-                                        />
-                                    </TouchableOpacity>
 
-                                </View>
                                 <View
                                     style={{
                                         flexDirection: 'row',
@@ -205,16 +216,16 @@ const CryptoDetail = ({ navigation, }) => {
                                             <View style={{ flex: 1, marginLeft: 20 }}>
                                                 <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
                                                     {days2 > 0 ? (
-                                                        <Text>{days2} Days</Text>
+                                                        <Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>{days2} Days</Text>
                                                     ) : (
-                                                        <Text>30 Days</Text>
+                                                        <Text style={{ fontSize: 24, color: "white", fontWeight: "900" }}>30 Days</Text>
                                                     )}
                                                 </Text>
-                                                <Text style={{ color: "white" }}>remaining to your next Installment</Text>
+                                                <Text style={{ color: "white" }}>Remaining to your next Installment</Text>
                                             </View>
                                         </View>
                                     ) : (
-                                        <Text style={{ fontSize: 25, color: "white", fontWeight: "bold", marginTop: 20 }}>Our team is subscribing you- check back in 24 hours</Text>
+                                        <Text style={{ fontSize: 18, color: "white", fontWeight: "bold", marginTop: 20, textAlign: "center" }}>Our team is subscribing you, check back in 24 hours</Text>
 
 
                                     )}
@@ -224,16 +235,15 @@ const CryptoDetail = ({ navigation, }) => {
                                 <View
                                     style={{
                                         width: "85%",
-                                        paddingVertical: SIZES.padding,
+                                        paddingTop: 20,
                                         paddingHorizontal: SIZES.padding,
-                                        marginLeft: 25,
-                                        marginTop: 40,
+                                        marginLeft: 20,
+                                        marginTop: 90,
                                         marginRight: SIZES.radius,
-                                        borderRadius: 10,
+                                        borderRadius: 8,
                                         backgroundColor: COLORS.white,
-                                        marginBottom: 15,
-                                        ...styles.shadow,
-                                        width:"90%"
+                                        marginBottom: 10,
+                                        width: "90%",
 
                                     }}
 
@@ -250,15 +260,7 @@ const CryptoDetail = ({ navigation, }) => {
                                                 }}
 
                                             />
-                                            <View style={{
-                                                borderBottomWidth: 2,
-                                                borderBottomColor: "#47315a",
-                                                width: 50,
-                                                marginLeft: 20,
-                                                marginTop: 5
-                                            }}>
 
-                                            </View>
 
                                             <Text style={{ color: 'white', ...FONTS.body3 }}>
                                                 2,342  <Text style={{ fontSize: 12.5 }}>Happy Clients</Text>
@@ -276,10 +278,11 @@ const CryptoDetail = ({ navigation, }) => {
 
                                 <TouchableOpacity
                                     style={{
+                                        flexDirection: 'row',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        marginLeft: 25,
-                                        marginTop: SIZES.padding * 1,
+                                        marginLeft: 20,
+                                        marginTop: 10,
                                         paddingVertical: SIZES.padding,
                                         paddingHorizontal: SIZES.radius,
                                         backgroundColor: COLORS.white,
@@ -296,8 +299,7 @@ const CryptoDetail = ({ navigation, }) => {
                                     <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
 
-                                        <Text style={{ color: '#01B0F1', alignSelf: "center", fontSize: 20, fontWeight: "bold" }}>Pay Subscriptions</Text>
-
+                                        <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Pay Subscriptions</Text>
 
 
                                     </View>
@@ -317,14 +319,15 @@ const CryptoDetail = ({ navigation, }) => {
                                 style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    marginTop: 20,
+                                    marginTop: SIZES.padding * 1,
                                     marginHorizontal: SIZES.padding,
                                     paddingVertical: SIZES.padding,
                                     paddingHorizontal: SIZES.radius,
                                     backgroundColor: COLORS.white,
                                     borderRadius: SIZES.radius,
                                     ...styles.shadow,
-                                    width:"90%"
+                                    width: '90%',
+                                    marginLeft: 20
                                 }}
                             >
 
@@ -334,27 +337,27 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                                         <View style={{ flexDirection: "row" }}>
-                                            <View style={{ marginRight: "8%" }}>
-                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
+                                            <View style={{ width: "45%", alignItems: "flex-start" }}>
+                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
+                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", textAlign: "left" }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
                                             </View>
 
-                                            <View>
-                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Monthly payment </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 25, }}>{JSON.stringify(format(formatednum)).substring(1, JSON.stringify(format(formatednum)).length - 4)} Rwf</Text>
+                                            <View style={{ width: "45%", alignItems: "flex-start" }}>
+                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold", marginLeft: "20%" }}>Monthly payment </Text>
+                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", marginLeft: "20%" }}>{JSON.stringify(format(formatednum)).substring(1, JSON.stringify(format(formatednum)).length - 4)} Rwf</Text>
                                             </View>
                                         </View>
 
 
                                         <View style={{ flexDirection: "row", marginTop: 20 }}>
-                                            <View style={{ marginRight: "18%" }}>
-                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Month </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 30, }}>{information.get_overdue_months}</Text>
+                                            <View style={{ width: "45%", alignItems: "flex-start" }}>
+                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Month </Text>
+                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold" }}>{information.get_overdue_months}</Text>
                                             </View>
 
-                                            <View>
-                                                <Text style={{ ...FONTS.h3, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Amount </Text>
-                                                <Text style={{ color: '#01B0F1', fontSize: 30, }}>{Math.ceil(OverdueAmount)}</Text>
+                                            <View style={{ width: "45%", alignItems: "flex-start" }}>
+                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold", marginLeft: "20%" }}>Overdue Amount </Text>
+                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", marginLeft: "20%" }}>{Math.ceil(OverdueAmount)} Rwf</Text>
                                             </View>
 
                                         </View>
@@ -367,9 +370,9 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                                         <View>
-                                            <Text style={{ ...FONTS.h3, fontWeight: "bold", color: '#01B0F1' }}>Descriptions </Text>
-                                            <Text style={{ color: '#707070', fontSize: 20, }}>Targeted at farmers and off-grid businesses, uhira includes a borehole, a solar pump, a pipeline, elevated storage system and an optional cattle trough or tap system from the tank.</Text>
-                                            <Text style={{ color: '#707070', fontSize: 20, marginTop: 5 }}>Our systems allow for reliable access to safe water anywhere, even when living far from surface water. Our team accompanies you from survey to maintenance. </Text>
+                                            <Text style={{ fontSize: 18, fontWeight: "bold", color: '#009cde' }}>Descriptions </Text>
+                                            <Text style={{ ccolor: '#707070', fontSize: 18, marginTop: 10 }}>Targeted at farmers and off-grid businesses, uhira includes a borehole, a solar pump, a pipeline, elevated storage system and an optional cattle trough or tap system from the tank.</Text>
+                                            <Text style={{ ccolor: '#707070', fontSize: 18, marginTop: 5 }}>Our systems allow for reliable access to safe water anywhere, even when living far from surface water. Our team accompanies you from survey to maintenance. </Text>
                                         </View>
 
                                     </View>
@@ -391,7 +394,8 @@ const CryptoDetail = ({ navigation, }) => {
                                     padding: 20,
                                     borderRadius: SIZES.radius,
                                     backgroundColor: COLORS.white,
-                                    ...styles.shadow
+                                    ...styles.shadow,
+                                    marginLeft: 20,
                                 }}
                             >
                                 <Text style={{ ...FONTS.h2 }}>Services</Text>
@@ -404,12 +408,10 @@ const CryptoDetail = ({ navigation, }) => {
                                 >
                                     {/* Currency */}
                                     {category.toUpperCase() === 'UHIRA' ? (
-                                        <TouchableOpacity style={{ width: "30%" }}
-
-                                        >
+                                        <TouchableOpacity style={{ width: "30%" }}>
 
                                             <View >
-                                                <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                <View style={{ marginLeft: '3%', backgroundColor: "#009cde", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
 
                                                     <Image
                                                         source={icons.filter}
@@ -430,16 +432,16 @@ const CryptoDetail = ({ navigation, }) => {
                                             onPress={() => navigation.navigate('request')}
                                         >
                                             <View >
-                                                <View style={{ marginLeft: '3%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                <View style={{ marginLeft: '3%', backgroundColor: "#009cde", width: '80%', height: 90, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
 
                                                     <FontAwesome
                                                         name="send"
-                                                        size={60}
+                                                        size={24}
                                                         color="white"
                                                         resizeMode="contain"
                                                     />
                                                 </View>
-                                                <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Request</Text>
+                                                <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: 9.5 }}>Request</Text>
                                             </View>
 
                                         </TouchableOpacity>
@@ -449,11 +451,11 @@ const CryptoDetail = ({ navigation, }) => {
                                     <TouchableOpacity style={{ flex: 1, marginLeft: 10, width: '30%' }} onPress={() => navigation.navigate("Responses")}>
 
                                         <View >
-                                            <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                            <View style={{ marginLeft: '3%', backgroundColor: "#009cde", width: '80%', height: 90, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
 
-                                                <FontAwesome name="envelope-open-o" size={70} color="white" />
+                                                <FontAwesome name="envelope-open-o" size={24} color="white" />
                                             </View>
-                                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Responses</Text>
+                                            <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: '4%' }}>Responses</Text>
                                         </View>
                                     </TouchableOpacity>
 
@@ -465,28 +467,26 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                                         <View >
-                                            <View style={{ marginLeft: '2%', backgroundColor: "#01B0F1", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                            <View style={{ marginLeft: '3%', backgroundColor: "#009cde", width: '80%', height: 90, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
 
                                                 <Image
                                                     source={icons.support}
                                                     resizeMode="contain"
                                                     style={{
-                                                        width: 75,
+                                                        width: 24,
                                                         height: 120,
                                                     }}
                                                 />
                                             </View>
-                                            <Text style={{ textAlign: "center", fontWeight: "bold", paddingTop: 10 }}>Support</Text>
+                                            <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: "9%" }}>Support</Text>
                                         </View>
                                     </TouchableOpacity>
-
                                 </View>
 
 
                             </View>
 
                             {isAmazi ? (
-
                                 <TransactionHistory
                                     customContainerStyle={{ ...styles.shadow }}
                                     history={payments}
@@ -510,10 +510,10 @@ const CryptoDetail = ({ navigation, }) => {
                             onPress={() => navigation.navigate('Home')}
                         >
 
-                            <Entypo name="home" size={30} color="black" />
+                            <Entypo name="home" size={30} color="#707070" />
 
 
-                            <Text style={{ color: "black", fontSize: 12, marginTop: 5 }}>HOME</Text>
+                            <Text style={{ color: "#707070", fontSize: 12, marginTop: 5 }}>HOME</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
@@ -536,7 +536,7 @@ const CryptoDetail = ({ navigation, }) => {
                                     width: 70,
                                     height: 70,
                                     borderRadius: 35,
-                                    backgroundColor: '#01B0F1',
+                                    backgroundColor: '#009cde',
                                     alignItems: "center",
                                     justifyContent: "center"
                                 }}
@@ -555,7 +555,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                                 <Text
                                     style={{
-                                        color: 'black', fontFamily: "Roboto-Regular", fontSize: 12, lineHeight: 22
+                                        color: '#707070', fontFamily: "Roboto-Regular", fontSize: 12, lineHeight: 22
                                     }}
                                 >
                                     QUICK ACCESS
@@ -566,10 +566,10 @@ const CryptoDetail = ({ navigation, }) => {
 
                         <TouchableOpacity style={{ marginLeft: "10%", marginTop: 23, width: "33%" }} onPress={() => navigation.navigate("Settings")}>
 
-                            <Ionicons name="settings-sharp" size={30} color="black" />
+                            <Ionicons name="settings-sharp" size={30} color="#707070" />
 
 
-                            <Text style={{ color: "black", fontSize: 12, marginLeft: -10 }}>SETTINGS</Text>
+                            <Text style={{ color: "#707070", fontSize: 12, marginLeft: -10, marginTop: 5 }}>SETTINGS</Text>
                         </TouchableOpacity>
 
                         <Modal
@@ -600,13 +600,12 @@ const CryptoDetail = ({ navigation, }) => {
                                         }}
 
                                     >
-                                        <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
-
+                                        <View style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden', backgroundColor: "#009cde" }}>
 
 
                                             <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
 
-                                                <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                                                <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
                                                     Quick Access </Text>
                                                 <View
                                                     style={{
@@ -621,15 +620,15 @@ const CryptoDetail = ({ navigation, }) => {
                                                         onPress={() => { navigation.navigate("Shop"); setIsVisible(false); }}
 
                                                     >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                        <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                                             <FontAwesome
                                                                 name="shopping-bag"
-                                                                size={80}
-                                                                color="#01B0F1"
+                                                                size={28}
+                                                                color="#009cde"
                                                                 resizeMode="contain"
                                                             />
                                                         </View>
-                                                        <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Shop</Text>
+                                                        <Text style={{ color: "white", textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: 9.5, fontSize: 18 }}>Shop</Text>
                                                     </TouchableOpacity>
 
 
@@ -639,18 +638,18 @@ const CryptoDetail = ({ navigation, }) => {
                                                             setIsVisible2(true); setIsVisible(false);
                                                         }}
                                                     >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                        <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                                             <Image
                                                                 source={icons.waterpipe}
                                                                 resizeMode="contain"
                                                                 style={{
-                                                                    width: 90,
+                                                                    width: 28,
                                                                     height: 120,
                                                                     marginLeft: 2,
                                                                 }}
                                                             />
                                                         </View>
-                                                        <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Maintenance</Text>
+                                                        <Text style={{ extAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: '-4%', color: "white", fontSize: 18 }}>Maintenance</Text>
                                                     </TouchableOpacity>
 
 
@@ -658,23 +657,23 @@ const CryptoDetail = ({ navigation, }) => {
 
                                                         onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
                                                     >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                        <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                                             <Image
                                                                 source={icons.watersupport}
                                                                 resizeMode="contain"
                                                                 style={{
-                                                                    width: 90,
+                                                                    width: 28,
                                                                     height: 120,
                                                                     marginLeft: 2,
                                                                 }}
                                                             />
                                                         </View>
-                                                        <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Support</Text>
+                                                        <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: "9%", color: "white", fontSize: 18 }}>Support</Text>
                                                     </TouchableOpacity>
 
                                                 </View>
                                             </ScrollView>
-                                        </ImageBackground>
+                                        </View>
                                     </View>
                                 </TouchableWithoutFeedback>
                             </TouchableOpacity>
@@ -716,18 +715,20 @@ const CryptoDetail = ({ navigation, }) => {
                                         }}
 
                                     >
-                                        <ImageBackground source={images.modalbanner} style={{ width: '100%', height: '100%', borderRadius: 40, overflow: 'hidden' }}>
+                                        <View style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden', backgroundColor: "#009cde" }}>
 
 
                                             <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
 
-                                                <Text style={{ textAlign: "center", fontSize: 30, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                                                <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
                                                     Choose Maintenance type </Text>
                                                 <View
                                                     style={{
                                                         flexDirection: "row",
                                                         alignContent: "center",
-                                                        width: '100%'
+                                                        width: '100%',
+                                                        alignItems: "center",
+                                                        marginLeft: "4%"
                                                     }}
                                                 >
 
@@ -736,10 +737,10 @@ const CryptoDetail = ({ navigation, }) => {
                                                         onPress={() => { navigation.navigate("request"); setIsVisible2(false); }}
 
                                                     >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
-                                                            <AntDesign name="tool" size={80} color="#01B0F1" />
+                                                        <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                                                            <AntDesign name="tool" size={30} color="#009cde" />
                                                         </View>
-                                                        <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Request Technician</Text>
+                                                        <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: 2, color: "white" }}>Request Technician</Text>
                                                     </TouchableOpacity>
 
 
@@ -748,22 +749,22 @@ const CryptoDetail = ({ navigation, }) => {
                                                         onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible2(false); }}
 
                                                     >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                        <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                                             <Image
                                                                 source={icons.waterpipe}
                                                                 resizeMode="contain"
                                                                 style={{
-                                                                    width: 90,
+                                                                    width: 30,
                                                                     height: 120,
                                                                     marginLeft: 2,
                                                                 }}
                                                             />
                                                         </View>
-                                                        <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold", paddingTop: 10, fontWeight: "bold", color: "white" }}>Catridge shop</Text>
+                                                        <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: 4, color: "white" }}>Catridge shop</Text>
                                                     </TouchableOpacity>
                                                 </View>
                                             </ScrollView>
-                                        </ImageBackground>
+                                        </View>
                                     </View>
                                 </TouchableWithoutFeedback>
                             </TouchableOpacity>
@@ -788,7 +789,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     shadow: {
-        shadowColor: "#000",
+        shadowColor: "#707070",
         shadowOffset: {
             width: 0,
             height: 4,

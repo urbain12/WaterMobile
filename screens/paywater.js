@@ -18,7 +18,7 @@ import {
   TextButton,
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
 import axios from 'axios';
 
 
@@ -197,12 +197,7 @@ const Paywater = ({ route, navigation }) => {
               }}
               onPress={() => navigation.goBack()}
             >
-              <Ionicons
-                name="arrow-back"
-                size={40}
-                color="white"
-                resizeMode="contain"
-              />
+              <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
             </TouchableOpacity>
           </View>
 
@@ -292,7 +287,7 @@ const Paywater = ({ route, navigation }) => {
           }}>
 
           <View
-            style={{ backgroundColor: "#01B0F1", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
+            style={{ backgroundColor: "#009cde", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
           >
             {loading ? (
               <ActivityIndicator size='large' color='white' style={{ margin: 15 }} />

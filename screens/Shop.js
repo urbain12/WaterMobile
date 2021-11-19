@@ -14,7 +14,7 @@ import {
   LogBox,
   Animated
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather,SimpleLineIcons } from "@expo/vector-icons";
 import {AuthContext} from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -88,15 +88,12 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
                 marginRight:'80%',
                 alignItems: "center",
                 justifyContent: "center",
+                marginTop:10
               }}
               onPress={() => navigation.navigate('Home')}
             >
-              <Ionicons
-                name="arrow-back"
-                size={40}
-                color="white"
-                resizeMode="contain"
-              />
+             <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
+
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{navigation.navigate('Cart')}} style={{
                    position:"relative",
@@ -106,7 +103,7 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
 
                  <FontAwesome 
                  name="shopping-cart"
-                 size={24}
+                 size={25}
                  color="#fff"/>
                   
                  {cartCount>0 && (

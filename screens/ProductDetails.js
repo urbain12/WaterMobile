@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { images } from '../constants/images';
 import { connect } from 'react-redux';
 import { addToCart, decreaseQty } from '../redux/shopping/shopping-actions';
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
 
 
 const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty }) => {
@@ -48,11 +48,11 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                     // elevation: 8, 
                     borderBottomColor: "black", 
                     borderBottomWidth: 1,
-                    paddingBottom:10
+                    paddingBottom:10,
                  }}>
                     <View style={{ width: "10%" }}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Ionicons name="arrow-back-outline" size={24} color="black" />
+                        <SimpleLineIcons name="arrow-left" size={25} color="black" style={{marginRight:15}} />
                         </TouchableOpacity>
                     </View>
                     <View style={{ width: "80%", alignItems: "center" }}>

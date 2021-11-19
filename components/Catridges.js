@@ -44,8 +44,8 @@ const Catridges = ({ product }) => {
     <View key={product.id} style={{ height: 80, backgroundColor: 'white', width: windowWidth,  margin: 10,marginTop:20, alignItems: 'center', justifyContent: 'center', borderRadius: 10,...styles.shadow }}>
       <View>
         <View>
-          {/* <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{product.System.title} ...</Text> */}
-          <Text style={{ fontWeight: 'bold', color: '#01B0F1', fontSize:18 }}>{JSON.stringify(product.ToolID) !== undefined && product.ToolID.Title}</Text>
+          {/* <Text style={{ fontWeight: 'bold', color: '#009cde', margin: 10 }}>{product.System.title} ...</Text> */}
+          <Text style={{ fontWeight: 'bold', color: '#009cde', fontSize:18 }}>{JSON.stringify(product.ToolID) !== undefined && product.ToolID.Title}</Text>
           <Text style={{ fontWeight: 'bold', color: 'black',  }}>{JSON.stringify(product.ToolID) !== undefined && JSON.stringify(format(product.ToolID.Amount)).substring(1, JSON.stringify(format(product.ToolID.Amount)).length - 4)} Rwf</Text>
         </View>
       </View>
@@ -55,11 +55,11 @@ const Catridges = ({ product }) => {
               <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:2}}>
                 {product.cartQuantity>1?(
                   <TouchableOpacity >
-                <Feather name="minus" size={20} color="#01B0F1"/>
+                <Feather name="minus" size={20} color="#009cde"/>
                 </TouchableOpacity>
                 ):(
                   <TouchableOpacity >
-                <Feather name="trash-2" size={20} color="#01B0F1"/>
+                <Feather name="trash-2" size={20} color="#009cde"/>
                 </TouchableOpacity>
                 )}
                 
@@ -67,7 +67,7 @@ const Catridges = ({ product }) => {
                 <Text>{product.cartQuantity}</Text>
 
                 <TouchableOpacity >
-                <Feather name="plus" size={20} color="#01B0F1"/>
+                <Feather name="plus" size={20} color="#009cde"/>
                 </TouchableOpacity>
 
               </View>

@@ -7,7 +7,9 @@ import {
     Image
 } from 'react-native';
 
-import { COLORS, SIZES, FONTS, icons } from "../constants"
+import { COLORS, SIZES, FONTS, icons, } from "../constants"
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome5, Ionicons, Entypo, SimpleLineIcons } from "@expo/vector-icons";
+
 
 const TransactionHistory = ({ customContainerStyle, history,information }) => {
     const format = (amount) =>{
@@ -28,8 +30,8 @@ const TransactionHistory = ({ customContainerStyle, history,information }) => {
             <Image
                 source={icons.exchange}
                 style={{
-                    width: 20,
-                    height: 20,
+                    width: 14,
+                    height: 14,
                     
                 }}
             />
@@ -62,7 +64,8 @@ const TransactionHistory = ({ customContainerStyle, history,information }) => {
                 width:"90%",
                 borderRadius: SIZES.radius,
                 backgroundColor: COLORS.white,
-                ...customContainerStyle
+                ...customContainerStyle,
+                marginLeft:20
             }}
         >   
                 <Text style={{ ...FONTS.h2 }}>Transaction History</Text>
@@ -74,29 +77,14 @@ const TransactionHistory = ({ customContainerStyle, history,information }) => {
                         paddingVertical: SIZES.base
                     }}
                 >
-                    <Image
-                        source={icons.exchange}
-                        style={{
-                            width: 20,
-                            height: 20,
+                    <FontAwesome5 name="exchange-alt" size={20} color="#009cde" style={{marginTop:2}} />
 
-                        }}
-                    />
-
-                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                        <Text style={{ ...FONTS.h3 }}>Down Payment</Text>
+                    <View style={{ flex: 1, marginLeft: 20 }}>
+                        <Text style={{ fontSize:18,color:"#707070" }}>Down Payment</Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', height: '100%', alignItems: 'center' }}>
-                        <Text style={{ color: COLORS.black, ...FONTS.h3 }}>{JSON.stringify(format(information.Downpayment)).substring(1, JSON.stringify(format(information.Downpayment)).length - 4)} Rwf</Text>
-                        <Image
-                            source={icons.right_arrow}
-                            style={{
-                                width: 20,
-                                height: 20,
-                                tintColor: COLORS.gray
-                            }}
-                        />
+                        <Text style={{ color: '#009cde', ...FONTS.h3 }}>{JSON.stringify(format(information.Downpayment)).substring(1, JSON.stringify(format(information.Downpayment)).length - 4)} Rwf</Text>
                     </View>
                 </TouchableOpacity>
                 )}

@@ -11,7 +11,7 @@ import {
   ImageBackground,
   LogBox,
 } from "react-native";
-import { MaterialIcons, Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo, SimpleLineIcons } from "@expo/vector-icons";
 import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -115,12 +115,13 @@ const Settings = ({ navigation }) => {
           ...styles.shadow,
         }}
       >
-        <ImageBackground
-          source={images.banner_settings}
-          resizeMode="cover"
+        <View
           style={{
             flex: 1,
             alignItems: "center",
+            backgroundColor:"#009cde",
+            borderBottomLeftRadius:8,
+            borderBottomRightRadius:8
           }}
         >
           {/* Header Bar */}
@@ -148,18 +149,20 @@ const Settings = ({ navigation }) => {
               style={{
                 width: 120,
                 height: 120,
-                marginLeft: "-600%",
+                marginLeft: "-200%",
                 marginRight: SIZES.radius,
                 borderRadius: 60,
                 backgroundColor: COLORS.white,
-                marginBottom: 20, overflow: "hidden"
+                 marginBottom: 150,
+                top:70,
+                overflow: "hidden"
               }}
               onPress={() => navigation.navigate("CryptoDetail")}
             >
               <Image source={{ uri: customer.Image }} style={{ width: '100%', height: '100%' }} />
             </View>
           </View>
-        </ImageBackground>
+        </View>
       </View>
     );
   }
@@ -189,7 +192,6 @@ const Settings = ({ navigation }) => {
 
           <View
             style={{
-              marginTop: SIZES.padding,
               marginHorizontal: SIZES.padding,
               borderRadius: SIZES.radius,
               backgroundColor: COLORS.white,
@@ -251,36 +253,58 @@ const Settings = ({ navigation }) => {
             </View>
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
 
+              onPress={() => navigation.navigate("changepassword")}
+            >
+              <View>
+                <MaterialCommunityIcons name="form-textbox-password" size={38} color="black" />
+              </View>
+              <View style={{ marginLeft: "8%" }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Change password</Text>
+                <Text style={{ color: '#707070' }}>Click here to change password</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
+
               onPress={() => navigation.navigate("query")}
             >
               <View>
-                <Image resizeMode='contain' style={{ width: 50, height: 50 }} source={require('../assets/icons/query.png')} />
+                <MaterialCommunityIcons name="email-send" size={38} color="black" />
               </View>
-              <View style={{ marginLeft: 8 }}>
+              <View style={{ marginLeft: "8%" }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Contact Us</Text>
                 <Text style={{ color: '#707070' }}>Please send any query</Text>
               </View>
             </TouchableOpacity>
+
+            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
+
+              onPress={() => navigation.navigate("query")}
+            >
+              <View>
+              <AntDesign name="logout" size={38} color="#d00000" />
+              </View>
+              <View style={{ marginLeft: "8%" }}>
+                <Text style={{ fontSize: 18, fontWeight: 'bold',color:"#d00000" }}>Sign out</Text>
+                <Text style={{ color:"#d00000" }}>Click to log out</Text>
+              </View>
+            </TouchableOpacity>
+
+
+
 
 
           </View>
         </View>
 
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => navigation.navigate("changepassword")} style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
-            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Change password</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }} onPress={() => {
             setIsVisible(true);
           }}>
-            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>User Agreement</Text>
+            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold", color: "#707070" }}>User Agreement</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => context.signOut()} style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
-            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Sign Out</Text>
-          </TouchableOpacity>
-
           <View style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }}>
-            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold" }}>Version: 0.1</Text>
+            <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold", color: "#707070" }}>Version: 1.0.0</Text>
           </View>
 
 
@@ -290,58 +314,58 @@ const Settings = ({ navigation }) => {
 
         </View>
       </View>
-          <Modal
-            animationType="slide"
-            visible={isVisible}
-            style={{ backgroundColor: "#000000AA", margin: 0 }}
-          >
+      <Modal
+        animationType="slide"
+        visible={isVisible}
+        style={{ backgroundColor: "#000000AA", margin: 0 }}
+      >
 
-            <TouchableOpacity
-              onPress={modalHandler}
+        <TouchableOpacity
+          onPress={modalHandler}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+
+          <TouchableWithoutFeedback>
+
+
+            <View
               style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
+                height: "45%",
+                width: "95%",
+                backgroundColor: "#fff",
+                borderRadius: 20,
+
               }}
+
             >
+              <ScrollView >
 
-              <TouchableWithoutFeedback>
 
 
+
+                <Text style={{ textAlign: "center", fontSize: 30, color: "black", marginTop: 30, paddingBottom: 30 }}>
+                  User Agreement </Text>
                 <View
                   style={{
-                    height: "45%",
-                    width: "95%",
-                    backgroundColor: "#fff",
-                    borderRadius: 20,
-
+                    alignContent: "center",
+                    width: '100%',
                   }}
+                >
+                  <Text style={{ color: 'black', fontSize: 20, paddingHorizontal: 20 }}>
 
-                  >
-                    <ScrollView >
+                    To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators</Text>
 
 
-
-
-                      <Text style={{ textAlign: "center", fontSize: 30, color: "black", marginTop: 30, paddingBottom: 30 }}>
-                        User Agreement </Text>
-                      <View
-                        style={{
-                          alignContent: "center",
-                          width: '100%',
-                        }}
-                      >
-                      <Text style={{ color: 'black', fontSize: 20,paddingHorizontal:20 }}>
-                        
-                        To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators</Text>
-   
-
-                      </View>
-                    </ScrollView>
                 </View>
-              </TouchableWithoutFeedback>
-            </TouchableOpacity>
-          </Modal>
+              </ScrollView>
+            </View>
+          </TouchableWithoutFeedback>
+        </TouchableOpacity>
+      </Modal>
     </ScrollView>
 
 
@@ -355,7 +379,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   shadow: {
-    shadowColor: "#000",
+    shadowColor: "#707070",
     shadowOffset: {
       width: 0,
       height: 4,

@@ -162,7 +162,7 @@ const Creditcards = ({ navigation }) => {
                     }}>
 
                     <View
-                        style={{ backgroundColor: "#01B0F1", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
+                        style={{ backgroundColor: "#009cde", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
                     >
                         {loading ? (
                             <ActivityIndicator size='large' color='white' style={{marginTop:10}}/>

@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react";
 import { Text, StatusBar, View,ImageBackground, ScrollView, TouchableOpacity, Image, StyleSheet} from "react-native";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
-import {Ionicons,FontAwesome,MaterialIcons,MaterialCommunityIcons} from '@expo/vector-icons';
+import {Ionicons,FontAwesome,MaterialIcons,MaterialCommunityIcons,SimpleLineIcons} from '@expo/vector-icons';
 import axios from 'axios';
 
 
@@ -39,7 +39,7 @@ const Responses = (props) => {
               marginBottom:'10%'
           }}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          <Ionicons name="ios-arrow-back" size={40} color="white" />
+          <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
           </TouchableOpacity>
           </View>
 
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   gradient2:{
       maxWidth:220,
-      backgroundColor:'#01b0f1',
+      backgroundColor:'#009cde',
       alignItems:'center',
       justifyContent:'center',
       paddingHorizontal:15,

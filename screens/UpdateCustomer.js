@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     ActivityIndicator
 } from "react-native";
-import { MaterialIcons,Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo} from "@expo/vector-icons";
+import { MaterialIcons,Ionicons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome, Entypo,SimpleLineIcons} from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
     HeaderBar,
@@ -313,7 +313,7 @@ const UpdateCustomer = ({ navigation }) => {
                     }}>
 
                     <View
-                        style={{ backgroundColor: "#01B0F1", width: "100%", height: "30%", alignItems: "center", borderRadius: 10 }}
+                        style={{ backgroundColor: "#009cde", width: "100%", height:50, alignItems: "center", borderRadius: 10 }}
                     >
                         {loading ? (
                             <ActivityIndicator size='large' color='white' style={{marginTop:10}} />
@@ -343,8 +343,7 @@ const UpdateCustomer = ({ navigation }) => {
     marginBottom:'10%'
 }}>
 <TouchableOpacity onPress={() => navigation.goBack()}>
-<Ionicons name="ios-arrow-back" size={40} color="white" />
-</TouchableOpacity>
+<SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} /></TouchableOpacity>
 </View>
 
 <View style={{
@@ -353,7 +352,7 @@ const UpdateCustomer = ({ navigation }) => {
     marginTop:'10%',
     marginBottom:'10%'
 }}>
-  <Text style={{alignSelf:'center',color:'white',fontWeight:'bold', fontSize:20,marginTop:10}}>Update your information </Text>
+  <Text style={{alignSelf:'center',color:'white',fontWeight:'bold', fontSize:18,marginTop:10}}>Update your information </Text>
 </View>
 
 <View style={{

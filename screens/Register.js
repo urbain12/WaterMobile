@@ -22,7 +22,7 @@ import {
     TransactionHistory,
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
@@ -180,12 +180,7 @@ const Register = ({ navigation }) => {
                             }}
                             onPress={() => navigation.navigate('Login')}
                         >
-                            <Ionicons
-                                name="arrow-back"
-                                size={40}
-                                color="white"
-                                resizeMode="contain"
-                            />
+                            <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
                         </TouchableOpacity>
                     </View>
 
@@ -198,7 +193,7 @@ const Register = ({ navigation }) => {
                         }}
                     >
                         <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                          WAR client  Registration Form
+                          Client  Registration Form
                         </Text>
                     </View>
 
@@ -218,13 +213,14 @@ const Register = ({ navigation }) => {
             >
                 {renderHeader()}
             </View>
-            <ScrollView>
                 <View style={{
                     marginBottom: SIZES.padding,
                     padding: 10,
                     width: "100%",
                     backgroundColor: COLORS.white,
                     ...styles.shadow,
+                    height:"100%"
+                    
                 }}>
                     <View activeOpacity={1}>
                         <TextInput
@@ -432,7 +428,7 @@ const Register = ({ navigation }) => {
                             }}>
 
                             <View
-                                style={{ backgroundColor: "#01B0F1", width: "100%", height: "25%", alignItems: "center", borderRadius: 10, marginTop: 10 }}
+                                style={{ backgroundColor: "#009cde", width: "100%", height: 50, alignItems: "center", borderRadius: 10, marginTop: 10 }}
                             >
                                 {loading ? (
                                     <ActivityIndicator size='large' color='white' style={{ margin: 15 }} />
@@ -447,7 +443,6 @@ const Register = ({ navigation }) => {
                 </View>
 
 
-            </ScrollView>
 
 
         </KeyboardAwareScrollView>

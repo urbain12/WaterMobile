@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
   // const [isHover,setHover]=useState(false)
   // const [opacity,setOpacity]=useState(new Animated.Value(1))
   // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
-  const name = JSON.stringify(product) !== undefined && product.name.slice(0,24)
+  const name = JSON.stringify(product) == undefined && product.name.slice(0,24)
 
   // const handleClose=()=>{
   // setHover(false)
@@ -47,13 +47,13 @@ const ProductCard = ({ product }) => {
           <Image style={{ width: 120, height: 100 }} resizeMode="contain" source={{ uri: product.image }} />
         </View>
         <View>
-          <Text style={{ fontWeight: 'bold', color: '#01B0F1', margin: 10 }}>{name} ...</Text>
+          <Text style={{ fontWeight: 'bold', color: '#009cde', margin: 10 }}>{name} ...</Text>
           <Text style={{ fontWeight: 'bold', color: 'black', margin: 10 }}>{JSON.stringify(format(product.price)).substring(1, JSON.stringify(format(product.price)).length - 4)} Rwf</Text>
         </View>
       </View>
 
 
-      <TouchableOpacity style={{ position: 'absolute', width: 25, height: 25, alignItems: 'center', justifyContent: "center", top: 10, right: 5, backgroundColor: product.cartQuantity > 0 ? '#01B0F1' : 'white' }}>
+      <TouchableOpacity style={{ position: 'absolute', width: 25, height: 25, alignItems: 'center', justifyContent: "center", top: 10, right: 5, backgroundColor: product.cartQuantity > 0 ? '#009cde' : 'white' }}>
         {product.cartQuantity > 0 ? (
           <Text style={{ color: 'white' }}>{product.cartQuantity}</Text>
         ) : (
@@ -67,11 +67,11 @@ const ProductCard = ({ product }) => {
               <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',padding:2}}>
                 {product.cartQuantity>1?(
                   <TouchableOpacity >
-                <Feather name="minus" size={20} color="#01B0F1"/>
+                <Feather name="minus" size={20} color="#009cde"/>
                 </TouchableOpacity>
                 ):(
                   <TouchableOpacity >
-                <Feather name="trash-2" size={20} color="#01B0F1"/>
+                <Feather name="trash-2" size={20} color="#009cde"/>
                 </TouchableOpacity>
                 )}
                 
@@ -79,7 +79,7 @@ const ProductCard = ({ product }) => {
                 <Text>{product.cartQuantity}</Text>
 
                 <TouchableOpacity >
-                <Feather name="plus" size={20} color="#01B0F1"/>
+                <Feather name="plus" size={20} color="#009cde"/>
                 </TouchableOpacity>
 
               </View>
