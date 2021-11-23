@@ -82,7 +82,7 @@ const Settings = ({ navigation }) => {
 
   }, []);
 
-  
+
 
   function renderAlert() {
     return <PriceAlert />;
@@ -102,19 +102,19 @@ const Settings = ({ navigation }) => {
 
     <>
 
-    <View
+      <View
         style={{
           width: "100%",
           height: 200,
         }}
-        >
+      >
         <View
           style={{
             flex: 1,
             alignItems: "center",
-            backgroundColor:"#009cde",
-            borderBottomLeftRadius:8,
-            borderBottomRightRadius:8
+            backgroundColor: "#009cde",
+            borderBottomLeftRadius: 8,
+            borderBottomRightRadius: 8
           }}
         >
           {/* Header Bar */}
@@ -147,7 +147,7 @@ const Settings = ({ navigation }) => {
                 borderRadius: 60,
                 backgroundColor: COLORS.white,
                 marginBottom: 150,
-                top:70,
+                top: 70,
                 overflow: "hidden"
               }}
               onPress={() => navigation.navigate("CryptoDetail")}
@@ -158,13 +158,13 @@ const Settings = ({ navigation }) => {
         </View>
       </View>
 
-    <ScrollView style={{width:"97%"}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ width: "97%" }} showsVerticalScrollIndicator={false}>
 
-        <View style={{ marginTop: 10,marginLeft:2, }}>
+        <View style={{ marginTop: 10, marginLeft: 2, }}>
 
           <View
             style={{
-              marginLeft:8,
+              marginLeft: 8,
               borderRadius: 8,
               backgroundColor: COLORS.white,
               ...styles.shadow
@@ -193,12 +193,12 @@ const Settings = ({ navigation }) => {
               </View>
             </View>
             <View style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: "#f1f1f1",
-                    width: "97%",
-                    marginLeft: "20%",
-                    marginTop: 5
-                  }}>
+              borderBottomWidth: 1,
+              borderBottomColor: "#f1f1f1",
+              width: "97%",
+              marginLeft: "20%",
+              marginTop: 5
+            }}>
 
             </View>
             <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
@@ -211,12 +211,12 @@ const Settings = ({ navigation }) => {
               </View>
             </View>
             <View style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: "#f1f1f1",
-                    width: "97%",
-                    marginLeft: "20%",
-                    marginTop: 5
-                  }}>
+              borderBottomWidth: 1,
+              borderBottomColor: "#f1f1f1",
+              width: "97%",
+              marginLeft: "20%",
+              marginTop: 5
+            }}>
 
             </View>
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
@@ -232,12 +232,12 @@ const Settings = ({ navigation }) => {
               </View>
             </TouchableOpacity>
             <View style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: "#f1f1f1",
-                    width: "97%",
-                    marginLeft: "20%",
-                    marginTop: 5
-                  }}>
+              borderBottomWidth: 1,
+              borderBottomColor: "#f1f1f1",
+              width: "97%",
+              marginLeft: "20%",
+              marginTop: 5
+            }}>
 
             </View>
             <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
@@ -251,12 +251,12 @@ const Settings = ({ navigation }) => {
 
             </View>
             <View style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: "#f1f1f1",
-                    width: "97%",
-                    marginLeft: "20%",
-                    marginTop: 5
-                  }}>
+              borderBottomWidth: 1,
+              borderBottomColor: "#f1f1f1",
+              width: "97%",
+              marginLeft: "20%",
+              marginTop: 5
+            }}>
 
             </View>
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
@@ -272,12 +272,12 @@ const Settings = ({ navigation }) => {
               </View>
             </TouchableOpacity>
             <View style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: "#f1f1f1",
-                    width: "97%",
-                    marginLeft: "20%",
-                    marginTop: 5
-                  }}>
+              borderBottomWidth: 1,
+              borderBottomColor: "#f1f1f1",
+              width: "97%",
+              marginLeft: "20%",
+              marginTop: 5
+            }}>
 
             </View>
 
@@ -294,24 +294,26 @@ const Settings = ({ navigation }) => {
               </View>
             </TouchableOpacity>
             <View style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: "#f1f1f1",
-                    width: "97%",
-                    marginLeft: "20%",
-                    marginTop: 5
-                  }}>
+              borderBottomWidth: 1,
+              borderBottomColor: "#f1f1f1",
+              width: "97%",
+              marginLeft: "20%",
+              marginTop: 5
+            }}>
 
-            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
-              onPress={() => context.signOut()}
-            >
+            </View>
+
+            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10, marginBottom: 10 }}
+
+              onPress={() => context.signOut()}       >
               <View>
-              <AntDesign name="logout" size={25} color="black" />
+                <AntDesign name="logout" size={25} color="black" />
               </View>
               <View style={{ marginLeft: "8%" }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Sign out</Text>
-                <Text style={{ color:"#707070" }}>Click to log out</Text>
+                <Text style={{ color: "#707070" }}>Click to log out</Text>
               </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
 
 
 
@@ -320,7 +322,7 @@ const Settings = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center',marginBottom:100 }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 100 }}>
           <TouchableOpacity style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }} onPress={() => {
             setIsVisible(true);
           }}>
@@ -336,59 +338,59 @@ const Settings = ({ navigation }) => {
 
 
         </View>
-      <Modal
-        animationType="slide"
-        visible={isVisible}
-        style={{ backgroundColor: "#000000AA", margin: 0 }}
-      >
-
-        <TouchableOpacity
-          onPress={modalHandler}
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <Modal
+          animationType="slide"
+          visible={isVisible}
+          style={{ backgroundColor: "#000000AA", margin: 0 }}
         >
 
-          <TouchableWithoutFeedback>
+          <TouchableOpacity
+            onPress={modalHandler}
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+
+            <TouchableWithoutFeedback>
 
 
-            <View
-              style={{
-                height: "45%",
-                width: "95%",
-                backgroundColor: "#fff",
-                borderRadius: 20,
+              <View
+                style={{
+                  height: "45%",
+                  width: "95%",
+                  backgroundColor: "#fff",
+                  borderRadius: 20,
 
-              }}
+                }}
 
-            >
-              <ScrollView>
-
-
+              >
+                <ScrollView>
 
 
-                <Text style={{ textAlign: "center", fontSize: 30, color: "black", marginTop: 30, paddingBottom: 30 }}>
-                  User Agreement </Text>
-                <View
-                  style={{
-                    alignContent: "center",
-                    width: '100%',
-                  }}
-                >
-                  <Text style={{ color: 'black', fontSize: 20, paddingHorizontal: 20 }}>
-
-                    To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators</Text>
 
 
-                </View>
-              </ScrollView>
-            </View>
-          </TouchableWithoutFeedback>
-        </TouchableOpacity>
-      </Modal>
-    </ScrollView>
+                  <Text style={{ textAlign: "center", fontSize: 30, color: "black", marginTop: 30, paddingBottom: 30 }}>
+                    User Agreement </Text>
+                  <View
+                    style={{
+                      alignContent: "center",
+                      width: '100%',
+                    }}
+                  >
+                    <Text style={{ color: 'black', fontSize: 20, paddingHorizontal: 20 }}>
+
+                      To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators</Text>
+
+
+                  </View>
+                </ScrollView>
+              </View>
+            </TouchableWithoutFeedback>
+          </TouchableOpacity>
+        </Modal>
+      </ScrollView>
     </>
 
 
