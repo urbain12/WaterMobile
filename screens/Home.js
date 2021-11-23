@@ -286,18 +286,20 @@ const Home = ({ navigation }) => {
 
       <ScrollView style={{ height: "100%", marginBottom: 10 }}>
         {isAmazi===undefined?(
-          <View style={{  marginTop: 20 }}>
+          <View style={{ alignItems: 'center', marginTop: 20 }}>
             <View
               style={{
                 width: '90%',
-                height: 90,
+                height : 90,
                 paddingVertical: 5,
                 paddingHorizontal: 5,
+                borderLeftWidth: 10,
+                borderLeftColor: "#88b04b",
                 borderRadius: 8,
                 backgroundColor: "white",
                 alignItems: 'center',
                 justifyContent: 'center',
-                ...styles.shadow,
+                ...styles.shadow
                 
 
                   }}
