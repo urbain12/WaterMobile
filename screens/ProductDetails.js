@@ -40,19 +40,18 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                 <View style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    marginTop: 40,
-                    marginHorizontal: 20,
                     // shadowColor: "#000", 
                     // shadowOpacity: 0.3, 
                     // shadowRadius: 4.65, 
                     // elevation: 8, 
                     borderBottomColor: "black", 
                     borderBottomWidth: 1,
+                    backgroundColor:'#009cde',
                     paddingBottom:10,
                  }}>
-                    <View style={{ width: "10%" }}>
+                    <View style={{ width: "10%" ,marginTop:35}}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <SimpleLineIcons name="arrow-left" size={25} color="black" style={{marginRight:15}} />
+                        <SimpleLineIcons name="arrow-left" size={25} color="black" style={{marginLeft:15}} />
                         </TouchableOpacity>
                     </View>
                     <View style={{ width: "80%", alignItems: "center" }}>
@@ -64,7 +63,7 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
 
                         </View>
                     </View>
-                    <View style={{ width: "10%" }}>
+                    <View style={{ width: "10%",marginTop:40 }}>
                         <TouchableOpacity onPress={() => { navigation.navigate('Cart') }}>
                             <FontAwesome
                                 name="shopping-cart"
@@ -87,8 +86,9 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                     alignSelf: "center",
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: "#35b9e6",
-                    width: "80%",
+                    backgroundColor: "#009cde",
+                    borderRadius:8,
+                    width: "90%",
                     paddingVertical: 8,
                     marginTop: 5
                 }}>
@@ -148,7 +148,8 @@ const ProductDetails = ({ navigation, currentItem, addToCart, cart, decreaseQty 
                 <Text style={{
                     color: "black",
                     fontSize: 15,
-                    marginVertical: 10,
+                    marginTop: 10,
+                    marginBottom: 50,
                     marginHorizontal: 20,
                     textAlign: "justify"
                 }}>{currentItem.description}</Text>

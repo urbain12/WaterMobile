@@ -278,8 +278,7 @@ const Settings = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
-
-              onPress={() => navigation.navigate("query")}
+              onPress={() => context.signOut()}
             >
               <View>
               <AntDesign name="logout" size={38} color="#d00000" />

@@ -632,202 +632,197 @@ const CryptoDetail = ({ navigation, }) => {
                         </TouchableOpacity>
 
                         <Modal
-                            animationType="slide"
-                            visible={isVisible}
-                            style={{ backgroundColor: "#000000AA", margin: 0 }}
-                        >
+                animationType="slide"
+                visible={isVisible}
+                style={{ backgroundColor: "#000000AA", margin: 0 }}
+              >
 
-                            <TouchableOpacity
-                                onPress={modalHandler}
-                                style={{
-                                    flex: 1,
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                }}
+                <TouchableOpacity
+                  onPress={modalHandler}
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+
+                  <TouchableWithoutFeedback>
+
+
+                    <View
+                      style={{
+                        height: "36%",
+                        width: "95%",
+                        backgroundColor: "#fff",
+                        borderRadius: 40,
+
+                      }}
+
+                    >
+                      <View  style={{ width: '100%', height: '100%', borderRadius: 8, overflow: 'hidden',backgroundColor:"#707070" }}>
+
+
+                        <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
+
+                          <Text style={{ textAlign: "left", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30,marginLeft:'7%',fontWeight:"bold" }}>
+                            Quick Access </Text>
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "center",
+                              width: '100%',
+                              marginLeft:'5%'
+                            }}
+                          >
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '28%' }}
+
+                              onPress={() => { navigation.navigate("Shop"); setIsVisible(false); }}
+
                             >
-
-                                <TouchableWithoutFeedback>
-
-
-                                    <View
-                                        style={{
-                                            height: "45%",
-                                            width: "95%",
-                                            backgroundColor: "#fff",
-                                            borderRadius: 40,
-
-                                        }}
-
-                                    >
-                                        <View style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden', backgroundColor: "#009cde" }}>
-
-
-                                            <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
-
-                                                <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
-                                                    Quick Access </Text>
-                                                <View
-                                                    style={{
-                                                        flexDirection: "row",
-                                                        alignContent: "center",
-                                                        width: '100%'
-                                                    }}
-                                                >
-
-                                                    <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
-
-                                                        onPress={() => { navigation.navigate("Shop"); setIsVisible(false); }}
-
-                                                    >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
-                                                            <FontAwesome
-                                                                name="shopping-bag"
-                                                                size={28}
-                                                                color="#009cde"
-                                                                resizeMode="contain"
-                                                            />
-                                                        </View>
-                                                        <Text style={{ color: "white", textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: 9.5, fontSize: 18 }}>Shop</Text>
-                                                    </TouchableOpacity>
-
-
-                                                    <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
-
-                                                        onPress={() => {
-                                                            setIsVisible2(true); setIsVisible(false);
-                                                        }}
-                                                    >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
-                                                            <Image
-                                                                source={icons.waterpipe}
-                                                                resizeMode="contain"
-                                                                style={{
-                                                                    width: 28,
-                                                                    height: 120,
-                                                                    marginLeft: 2,
-                                                                }}
-                                                            />
-                                                        </View>
-                                                        <Text style={{ extAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: '-4%', color: "white", fontSize: 18 }}>Maintenance</Text>
-                                                    </TouchableOpacity>
-
-
-                                                    <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
-
-                                                        onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
-                                                    >
-                                                        <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
-                                                            <Image
-                                                                source={icons.watersupport}
-                                                                resizeMode="contain"
-                                                                style={{
-                                                                    width: 28,
-                                                                    height: 120,
-                                                                    marginLeft: 2,
-                                                                }}
-                                                            />
-                                                        </View>
-                                                        <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: "9%", color: "white", fontSize: 18 }}>Support</Text>
-                                                    </TouchableOpacity>
-
-                                                </View>
-                                            </ScrollView>
-                                        </View>
-                                    </View>
-                                </TouchableWithoutFeedback>
+                              <View style={{ backgroundColor: "white", width: '92%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                                <FontAwesome
+                                  name="shopping-bag"
+                                  size={28}
+                                  color="#009cde"
+                                  resizeMode="contain"
+                                />
+                              </View>
+                              <Text style={{ color:"white",textAlign: "left",  paddingTop: 10,marginLeft:'25%',fontSize:18 }}>Shop</Text>
                             </TouchableOpacity>
-                        </Modal>
 
 
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '28%' }}
 
-
-
-
-
-
-
-                        <Modal
-                            animationType="slide"
-                            visible={isVisible2}
-                            style={{ backgroundColor: "#000000AA", margin: 0 }}
-                        >
-
-                            <TouchableOpacity
-                                onPress={modalHandler2}
-                                style={{
-                                    flex: 1,
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                }}
+                              onPress={() => {
+                                setIsVisible2(true); setIsVisible(false);
+                              }}
                             >
-
-                                <TouchableWithoutFeedback>
-
-
-                                    <View
-                                        style={{
-                                            height: "45%",
-                                            width: "95%",
-                                            backgroundColor: "#fff",
-                                            borderRadius: 40,
-
-                                        }}
-
-                                    >
-                                        <View style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden', backgroundColor: "#009cde" }}>
-
-
-                                            <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
-
-                                                <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
-                                                    Choose Maintenance type </Text>
-                                                <View
-                                                    style={{
-                                                        flexDirection: "row",
-                                                        alignContent: "center",
-                                                        width: '100%',
-                                                        alignItems: "center",
-                                                        marginLeft: "4%"
-                                                    }}
-                                                >
-
-                                                    <TouchableOpacity style={{ alignContent: "center", marginLeft: '4%', width: '45%' }}
-
-                                                        onPress={() => { navigation.navigate("request"); setIsVisible2(false); }}
-
-                                                    >
-                                                        <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
-                                                            <AntDesign name="tool" size={30} color="#009cde" />
-                                                        </View>
-                                                        <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: 2, color: "white" }}>Request Technician</Text>
-                                                    </TouchableOpacity>
-
-
-                                                    <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '45%' }}
-
-                                                        onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible2(false); }}
-
-                                                    >
-                                                        <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
-                                                            <Image
-                                                                source={icons.waterpipe}
-                                                                resizeMode="contain"
-                                                                style={{
-                                                                    width: 30,
-                                                                    height: 120,
-                                                                    marginLeft: 2,
-                                                                }}
-                                                            />
-                                                        </View>
-                                                        <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10, marginLeft: 4, color: "white" }}>Catridge shop</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </ScrollView>
-                                        </View>
-                                    </View>
-                                </TouchableWithoutFeedback>
+                              <View style={{ backgroundColor: "white", width: '92%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                                <Image
+                                  source={icons.waterpipe}
+                                  resizeMode="contain"
+                                  style={{
+                                    width: 28,
+                                    height: 120,
+                                    marginLeft: 2,
+                                  }}
+                                />
+                              </View>
+                              <Text style={{ textAlign: "left",  paddingTop: 10,marginLeft:'-4%', color: "white",fontSize:18 }}>Maintenance</Text>
                             </TouchableOpacity>
-                        </Modal>
+
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '28%' }}
+
+                              onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
+                            >
+                              <View style={{ backgroundColor: "white", width: '92%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                                <Image
+                                  source={icons.watersupport}
+                                  resizeMode="contain"
+                                  style={{
+                                    width: 28,
+                                    height: 120,
+                                    marginLeft: 2,
+                                  }}
+                                />
+                              </View>
+                              <Text style={{ textAlign: "left",  paddingTop: 10,marginLeft:"15%", color: "white",fontSize:18 }}>Support</Text>
+                            </TouchableOpacity>
+
+                          </View>
+                        </ScrollView>
+                      </View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </TouchableOpacity>
+              </Modal>
+
+
+              {/* modal 2 */}
+              <Modal
+                animationType="slide"
+                visible={isVisible2}
+                style={{ backgroundColor: "#000000AA", margin: 0 }}
+              >
+
+                <TouchableOpacity
+                  onPress={modalHandler2}
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+
+                  <TouchableWithoutFeedback>
+
+
+                    <View
+                      style={{
+                        height: "37%",
+                        width: "95%",
+                        backgroundColor: "#fff",
+                        borderRadius: 40,
+
+                      }}
+
+                    >
+                      <View  style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden',backgroundColor:"#707070" }}>
+
+
+                        <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
+
+                          <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                            Choose Maintenance type </Text>
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignContent: "center",
+                              width: '100%',
+                              alignItems:"center",
+                              marginLeft:"4%"
+                            }}
+                          >
+
+                            <TouchableOpacity style={{ alignItems: "center", marginLeft: '4%', width: '45%' }}
+
+                              onPress={() => { navigation.navigate("request"); setIsVisible2(false); }}
+
+                            >
+                              <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                                <AntDesign name="tool" size={30} color="#009cde" />
+                              </View>
+                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:2, color: "white" }}>Request Technician</Text>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '45%' }}
+
+                              onPress={() => { navigation.navigate("Catridgeshop"); setIsVisible2(false); }}
+
+                            >
+                              <View style={{ backgroundColor: "white", width: '80%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                                <Image
+                                  source={icons.waterpipe}
+                                  resizeMode="contain"
+                                  style={{
+                                    width: 30,
+                                    height: 120,
+                                    marginLeft: 2,
+                                  }}
+                                />
+                              </View>
+                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:'12%', color: "white" }}>Catridge shop</Text>
+                            </TouchableOpacity>
+                          </View>
+                        </ScrollView>
+                      </View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </TouchableOpacity>
+              </Modal>
 
                     </View>
 
