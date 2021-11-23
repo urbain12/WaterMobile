@@ -144,134 +144,145 @@ const UpdateCustomer = ({ navigation }) => {
                
                     <View>
                         <TouchableOpacity activeOpacity={1}>
-
+                            <Text style={{marginLeft:3,color:"#707070"}}>First Name</Text>
                             <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
+
                                 }}
                                 name="Names"
                                 placeholder="FirstName"
                                 value={FirstName}
                                 onChangeText={text => setFirstName(text)}
                             />
+                            <Text style={{marginLeft:3,color:"#707070"}}>Last Name</Text>
                             <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
                                 }}
                                 name="Names"
                                 placeholder="LastName"
                                 value={LastName}
                                 onChangeText={text => setLastName(text)}
                             />
+                            <Text style={{marginLeft:3,color:"#707070"}}>ID number</Text>
                             <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
                                 }}
                                 name="Names"
                                 placeholder="IDnumber"
                                 value={IDnumber}
                                 onChangeText={text => setIDnumber(text)}
                             />
-
+                            <Text style={{marginLeft:3,color:"#707070"}}>Province</Text>
                             <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
                                 }}
                                 name="Names"
                                 placeholder="Province"
                                 value={Province}
                                 onChangeText={text => setProvince(text)}
                             />
-
-<TextInput
+                            <Text style={{marginLeft:3,color:"#707070"}}>District</Text>
+                                <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
                                 }}
                                 name="Names"
                                 placeholder="District"
                                 value={District}
                                 onChangeText={text => setDistrict(text)}
                             />
-
+                            <Text style={{marginLeft:3,color:"#707070"}}>Sector</Text>
                             <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
                                 }}
                                 name="Names"
                                 placeholder="Cell"
                                 value={Cell}
-                                onChangeText={text => setCell(text)}
+                                onChangeText={text => setSector(text)}
                             />
-
+                            <Text style={{marginLeft:3,color:"#707070"}}>Cell</Text>
                             <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
                                 }}
                                 name="Names"
                                 placeholder="Sector"
                                 value={Sector}
-                                onChangeText={text => setSector(text)}
+                                onChangeText={text => setCell(text)}
                             />
-
+                            <Text style={{marginLeft:3,color:"#707070"}}>Language</Text>
                             <TextInput
                                 style={{
                                     borderColor: "gray",
                                     borderWidth: 1,
-                                    borderRadius: 10,
+                                    borderRadius: 8,
                                     height: 35,
                                     width: "100%",
-                                    marginTop: 20,
+                                    marginTop: 10,
                                     marginBottom: 20,
-                                    textAlign: "center",
+                                    textAlign: "left",
+                                    paddingLeft:10
                                 }}
                                 name="Names"
                                 placeholder="Language"
@@ -284,7 +295,7 @@ const UpdateCustomer = ({ navigation }) => {
                     </View>
 
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Button title="Pick a profile" onPress={pickImage} />
+                            <Button title="Change your profile pricture" onPress={pickImage} />
                         </View>
 
                         <TouchableOpacity activeOpacity={1}>
@@ -330,48 +341,46 @@ const UpdateCustomer = ({ navigation }) => {
             );
         }
 
-        function renderTransactionHistory() { }
 
         return (
-            <KeyboardAwareScrollView style={{ flex: 1 }}>
-                 <ImageBackground source={images.banner_settings} style={{margin:0,flexDirection:'row'}}>
+            <>
+                    <ImageBackground source={images.banner_settings} style={{margin:0,flexDirection:'row'}}>
 
-<View style={{
-    width:'20%',
-    alignItems:'center',
-    marginTop:'10%',
-    marginBottom:'10%'
-}}>
-<TouchableOpacity onPress={() => navigation.goBack()}>
-<SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} /></TouchableOpacity>
-</View>
+                        <View style={{
+                            width:'20%',
+                            alignItems:'center',
+                            marginTop:'10%',
+                            marginBottom:'10%'
+                        }}>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} /></TouchableOpacity>
+                        </View>
 
-<View style={{
-    width:'60%',
-    alignItems:'center',
-    marginTop:'10%',
-    marginBottom:'10%'
-}}>
-  <Text style={{alignSelf:'center',color:'white',fontWeight:'bold', fontSize:18,marginTop:10}}>Update your information </Text>
-</View>
+                        <View style={{
+                            width:'60%',
+                            alignItems:'center',
+                            marginTop:'10%',
+                            marginBottom:'10%'
+                        }}>
+                        <Text style={{alignSelf:'center',color:'white',fontWeight:'bold', fontSize:18,marginTop:10}}>Update your information </Text>
+                        </View>
 
-<View style={{
-    width:'20%',
-    alignItems:'center',
-    marginTop:'10%',
-    marginBottom:'10%'
-}}>
-</View>
+                        <View style={{
+                            width:'20%',
+                            alignItems:'center',
+                            marginTop:'10%',
+                            marginBottom:'10%'
+                        }}>
+                        </View>
 
-</ImageBackground>
+                        </ImageBackground>
 
-                <ScrollView>
-                    <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-                        {renderTrade()}
-                        {renderTransactionHistory()}
-                    </View>
-                </ScrollView>
-            </KeyboardAwareScrollView>
+                        <KeyboardAwareScrollView>
+                            <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
+                              {renderTrade()}
+                            </View>
+                        </KeyboardAwareScrollView>
+                        </>
         );
     };
 

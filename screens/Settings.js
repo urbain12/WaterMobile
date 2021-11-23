@@ -82,39 +82,32 @@ const Settings = ({ navigation }) => {
 
   }, []);
 
-  function renderHeader() {
-    const renderItem = ({ item, index }) => (
-      <TouchableOpacity
-        style={{
-          width: 180,
-          paddingVertical: SIZES.padding,
-          paddingHorizontal: SIZES.padding,
-          marginLeft: index == 0 ? SIZES.padding : 0,
-          marginRight: SIZES.radius,
-          borderRadius: 10,
-          backgroundColor: COLORS.white,
-        }}
-        onPress={() => navigation.navigate("CryptoDetail", { currency: item })}
-      >
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ marginLeft: SIZES.base }}>
-            <Text style={{ ...FONTS.h2 }}>{item.currency}</Text>
-            <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
-              water access
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+  
 
+  function renderAlert() {
+    return <PriceAlert />;
+  }
+
+
+  function renderTransactionHistory() {
     return (
-      <View
+      <TransactionHistory
+        customContainerStyle={{ ...styles.shadow }}
+        history={transactionHistory}
+      />
+    );
+  }
+  const context = React.useContext(AuthContext)
+  return (
+
+    <>
+
+    <View
         style={{
           width: "100%",
           height: 200,
-          ...styles.shadow,
         }}
-      >
+        >
         <View
           style={{
             flex: 1,
@@ -153,7 +146,7 @@ const Settings = ({ navigation }) => {
                 marginRight: SIZES.radius,
                 borderRadius: 60,
                 backgroundColor: COLORS.white,
-                 marginBottom: 150,
+                marginBottom: 150,
                 top:70,
                 overflow: "hidden"
               }}
@@ -164,36 +157,15 @@ const Settings = ({ navigation }) => {
           </View>
         </View>
       </View>
-    );
-  }
 
-  function renderAlert() {
-    return <PriceAlert />;
-  }
+    <ScrollView style={{width:"97%"}} showsVerticalScrollIndicator={false}>
 
-
-  function renderTransactionHistory() {
-    return (
-      <TransactionHistory
-        customContainerStyle={{ ...styles.shadow }}
-        history={transactionHistory}
-      />
-    );
-  }
-  const context = React.useContext(AuthContext)
-  return (
-
-    <ScrollView>
-
-      <View style={{ flex: 1, paddingBottom: 130 }}>
-        {renderHeader()}
-
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 10,marginLeft:2, }}>
 
           <View
             style={{
-              marginHorizontal: SIZES.padding,
-              borderRadius: SIZES.radius,
+              marginLeft:8,
+              borderRadius: 8,
               backgroundColor: COLORS.white,
               ...styles.shadow
             }}
@@ -213,27 +185,45 @@ const Settings = ({ navigation }) => {
 
             <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
               <View>
-                <MaterialIcons name="email" size={30} />
+                <MaterialIcons name="email" size={25} />
               </View>
               <View style={{ marginLeft: 30 }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Email</Text>
                 <Text style={{ color: '#707070' }}>{JSON.stringify(customer) !== '{}' && customer.user.email}</Text>
               </View>
             </View>
+            <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#f1f1f1",
+                    width: "97%",
+                    marginLeft: "20%",
+                    marginTop: 5
+                  }}>
+
+            </View>
             <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
               <View>
-                <Entypo name="location" size={30} />
+                <Entypo name="location" size={25} />
               </View>
               <View style={{ marginLeft: 30 }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Location</Text>
                 <Text style={{ color: '#707070' }}>{customer.Province}, {customer.District}, {customer.Sector}, {customer.Cell}</Text>
               </View>
             </View>
+            <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#f1f1f1",
+                    width: "97%",
+                    marginLeft: "20%",
+                    marginTop: 5
+                  }}>
+
+            </View>
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
               onPress={() => navigation.navigate("Notifications")}
             >
               <View>
-                <Entypo name="bell" size={30} color="black" />
+                <Entypo name="bell" size={25} color="black" />
 
               </View>
               <View style={{ marginLeft: 30 }}>
@@ -241,9 +231,18 @@ const Settings = ({ navigation }) => {
                 <Text style={{ color: '#707070' }}>View your recent notifications</Text>
               </View>
             </TouchableOpacity>
+            <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#f1f1f1",
+                    width: "97%",
+                    marginLeft: "20%",
+                    marginTop: 5
+                  }}>
+
+            </View>
             <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
               <View>
-                <Image resizeMode='contain' style={{ width: 30, height: 30 }} source={require('../assets/icons/subscription.png')} />
+                <Image resizeMode='contain' style={{ width: 20, height: 20 }} source={require('../assets/icons/subscription.png')} />
               </View>
               <TouchableOpacity style={{ marginLeft: 30 }} onPress={() => navigation.navigate('Home')}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Subscriptions</Text>
@@ -251,42 +250,69 @@ const Settings = ({ navigation }) => {
               </TouchableOpacity>
 
             </View>
+            <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#f1f1f1",
+                    width: "97%",
+                    marginLeft: "20%",
+                    marginTop: 5
+                  }}>
+
+            </View>
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
 
               onPress={() => navigation.navigate("changepassword")}
             >
               <View>
-                <MaterialCommunityIcons name="form-textbox-password" size={38} color="black" />
+                <MaterialCommunityIcons name="form-textbox-password" size={25} color="black" />
               </View>
               <View style={{ marginLeft: "8%" }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Change password</Text>
                 <Text style={{ color: '#707070' }}>Click here to change password</Text>
               </View>
             </TouchableOpacity>
+            <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#f1f1f1",
+                    width: "97%",
+                    marginLeft: "20%",
+                    marginTop: 5
+                  }}>
+
+            </View>
 
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
 
               onPress={() => navigation.navigate("query")}
             >
               <View>
-                <MaterialCommunityIcons name="email-send" size={38} color="black" />
+                <MaterialCommunityIcons name="email-send" size={25} color="black" />
               </View>
               <View style={{ marginLeft: "8%" }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Contact Us</Text>
                 <Text style={{ color: '#707070' }}>Please send any query</Text>
               </View>
             </TouchableOpacity>
+            <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#f1f1f1",
+                    width: "97%",
+                    marginLeft: "20%",
+                    marginTop: 5
+                  }}>
 
-            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
+            </View>
+
+            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10,marginBottom:10 }}
 
               onPress={() => navigation.navigate("query")}
             >
               <View>
-              <AntDesign name="logout" size={38} color="#d00000" />
+              <AntDesign name="logout" size={25} color="black" />
               </View>
               <View style={{ marginLeft: "8%" }}>
-                <Text style={{ fontSize: 18, fontWeight: 'bold',color:"#d00000" }}>Sign out</Text>
-                <Text style={{ color:"#d00000" }}>Click to log out</Text>
+                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Sign out</Text>
+                <Text style={{ color:"#707070" }}>Click to log out</Text>
               </View>
             </TouchableOpacity>
 
@@ -297,7 +323,7 @@ const Settings = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center',marginBottom:100 }}>
           <TouchableOpacity style={{ width: '90%', height: 50, borderBottomWidth: 0.2, borderBottomColor: '#707070' }} onPress={() => {
             setIsVisible(true);
           }}>
@@ -313,7 +339,6 @@ const Settings = ({ navigation }) => {
 
 
         </View>
-      </View>
       <Modal
         animationType="slide"
         visible={isVisible}
@@ -342,7 +367,7 @@ const Settings = ({ navigation }) => {
               }}
 
             >
-              <ScrollView >
+              <ScrollView>
 
 
 
@@ -367,6 +392,7 @@ const Settings = ({ navigation }) => {
         </TouchableOpacity>
       </Modal>
     </ScrollView>
+    </>
 
 
   );

@@ -362,7 +362,7 @@ const CryptoDetail = ({ navigation }) => {
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={{ flex: 1, paddingBottom: 20 }}>
                                 <View style={{ zIndex: 0, position: 'absolute' }}>
-                                    <View style={{ height: 180, width: windowWidth, backgroundColor: "#009cde" }} />
+                                    <View style={{ height: 180, width: windowWidth, backgroundColor: "#009cde", borderBottomLeftRadius:8,borderBottomRightRadius:8, borderBottomLeftRadius:8,borderBottomRightRadius:8, }} />
                                 </View>
                                 <View>
 
