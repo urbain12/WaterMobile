@@ -56,6 +56,7 @@ const TabBarCustomButton = ({ children, onPress }) => {
         top: -15,
         justifyContent: "center",
         alignItems: "center",
+        ...styles.shadow,
       }}
       onPress={onPress}
     >
@@ -144,7 +145,7 @@ const Tabs = ({ navigation }) => {
 
                     <View
                       style={{
-                        height: "45%",
+                        height: "36%",
                         width: "95%",
                         backgroundColor: "#fff",
                         borderRadius: 40,
@@ -152,27 +153,28 @@ const Tabs = ({ navigation }) => {
                       }}
 
                     >
-                      <View  style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden',backgroundColor:"#009cde" }}>
+                      <View  style={{ width: '100%', height: '100%', borderRadius: 8, overflow: 'hidden',backgroundColor:"#707070" }}>
 
 
                         <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
 
-                          <Text style={{ textAlign: "center", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30 }}>
+                          <Text style={{ textAlign: "left", fontSize: 24, color: "white", marginTop: 30, paddingBottom: 30,marginLeft:'7%',fontWeight:"bold" }}>
                             Quick Access </Text>
                           <View
                             style={{
                               flexDirection: "row",
-                              alignContent: "center",
-                              width: '100%'
+                              alignItems: "center",
+                              width: '100%',
+                              marginLeft:'5%'
                             }}
                           >
 
-                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '28%' }}
 
                               onPress={() => { navigation.navigate("Shop"); setIsVisible(false); }}
 
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                              <View style={{ backgroundColor: "white", width: '92%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                 <FontAwesome
                                   name="shopping-bag"
                                   size={28}
@@ -180,17 +182,17 @@ const Tabs = ({ navigation }) => {
                                   resizeMode="contain"
                                 />
                               </View>
-                              <Text style={{ color:"white",textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:9.5,fontSize:18 }}>Shop</Text>
+                              <Text style={{ color:"white",textAlign: "left",  paddingTop: 10,marginLeft:'25%',fontSize:18 }}>Shop</Text>
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '28%' }}
 
                               onPress={() => {
                                 setIsVisible2(true); setIsVisible(false);
                               }}
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                              <View style={{ backgroundColor: "white", width: '92%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                 <Image
                                   source={icons.waterpipe}
                                   resizeMode="contain"
@@ -201,15 +203,15 @@ const Tabs = ({ navigation }) => {
                                   }}
                                 />
                               </View>
-                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:'-4%', color: "white",fontSize:18 }}>Maintenance</Text>
+                              <Text style={{ textAlign: "left",  paddingTop: 10,marginLeft:'-4%', color: "white",fontSize:18 }}>Maintenance</Text>
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '30%' }}
+                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '2%', width: '28%' }}
 
                               onPress={() => { navigation.navigate("query"); setIsVisible(false); }}
                             >
-                              <View style={{ backgroundColor: "white", width: '100%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
+                              <View style={{ backgroundColor: "white", width: '92%', height: 100, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
                                 <Image
                                   source={icons.watersupport}
                                   resizeMode="contain"
@@ -220,7 +222,7 @@ const Tabs = ({ navigation }) => {
                                   }}
                                 />
                               </View>
-                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:"9%", color: "white",fontSize:18 }}>Support</Text>
+                              <Text style={{ textAlign: "left",  paddingTop: 10,marginLeft:"15%", color: "white",fontSize:18 }}>Support</Text>
                             </TouchableOpacity>
 
                           </View>
@@ -253,7 +255,7 @@ const Tabs = ({ navigation }) => {
 
                     <View
                       style={{
-                        height: "45%",
+                        height: "37%",
                         width: "95%",
                         backgroundColor: "#fff",
                         borderRadius: 40,
@@ -261,7 +263,7 @@ const Tabs = ({ navigation }) => {
                       }}
 
                     >
-                      <View  style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden',backgroundColor:"#009cde" }}>
+                      <View  style={{ width: '100%', height: '100%', borderRadius: 18, overflow: 'hidden',backgroundColor:"#707070" }}>
 
 
                         <ScrollView showsVerticalScrollIndicator={false} style={{ width: '100%' }}>
@@ -278,7 +280,7 @@ const Tabs = ({ navigation }) => {
                             }}
                           >
 
-                            <TouchableOpacity style={{ alignContent: "center", marginLeft: '4%', width: '45%' }}
+                            <TouchableOpacity style={{ alignItems: "center", marginLeft: '4%', width: '45%' }}
 
                               onPress={() => { navigation.navigate("request"); setIsVisible2(false); }}
 
@@ -306,7 +308,7 @@ const Tabs = ({ navigation }) => {
                                   }}
                                 />
                               </View>
-                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:4, color: "white" }}>Catridge shop</Text>
+                              <Text style={{ textAlign: "left", fontWeight: "bold", paddingTop: 10,marginLeft:'12%', color: "white" }}>Catridge shop</Text>
                             </TouchableOpacity>
                           </View>
                         </ScrollView>
@@ -386,7 +388,7 @@ const Tabs = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   shadow: {
-    shadowColor: "#009cde",
+    shadowColor: "grey",
     shadowOffset: {
       width: 0,
       height: 10,

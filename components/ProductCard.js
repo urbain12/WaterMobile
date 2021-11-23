@@ -34,21 +34,21 @@ const ProductCard = ({ product }) => {
   // const [isHover,setHover]=useState(false)
   // const [opacity,setOpacity]=useState(new Animated.Value(1))
   // const [qtyOpacity,setQtyOpacity]=useState(new Animated.Value())
-  const name = JSON.stringify(product) == undefined && product.name.slice(0,24)
+  // const name = JSON.stringify(product) == undefined && product.name.slice(0,24)
 
   // const handleClose=()=>{
   // setHover(false)
   // }
 
   return (
-    <View key={product.id} style={{ height: 240, backgroundColor: 'white', width: windowWidth, position: 'relative', margin: 10, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}>
+    <View key={product.id} style={{ height: 200, backgroundColor: 'white', width: windowWidth, position: 'relative', margin: 10,  justifyContent: 'center', borderRadius: 8 }}>
       <View>
-        <View style={{ marginBottom: 10, marginTop: 30, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ marginBottom: 10, marginTop: 15, alignItems: 'center', justifyContent: 'center' }}>
           <Image style={{ width: 120, height: 100 }} resizeMode="contain" source={{ uri: product.image }} />
         </View>
         <View>
-          <Text style={{ fontWeight: 'bold', color: '#009cde', margin: 10 }}>{name} ...</Text>
-          <Text style={{ fontWeight: 'bold', color: 'black', margin: 10 }}>{JSON.stringify(format(product.price)).substring(1, JSON.stringify(format(product.price)).length - 4)} Rwf</Text>
+          <Text style={{ fontWeight: 'bold', color: '#009cde',marginLeft:20 }}>{JSON.stringify(product) !== undefined && product.name.slice(0,18)} {product.name && (product.name.length>18 && '...')}</Text>
+          <Text style={{ fontWeight: 'bold', color: 'black',marginTop:5,marginLeft:20 }}>{JSON.stringify(format(product.price)).substring(1, JSON.stringify(format(product.price)).length - 4)} Rwf</Text>
         </View>
       </View>
 

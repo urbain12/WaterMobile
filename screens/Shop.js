@@ -60,7 +60,7 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
       <View
         style={{
           width: "100%",
-          height: 185,
+          height: 80,
           ...styles.shadow,
         }}
       >
@@ -83,20 +83,36 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
           >
             <TouchableOpacity
               style={{
-                width: 35,
                 height: 35,
-                marginRight:'80%',
+                width:'20%',
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginTop:10
+              }}
+              onPress={() => navigation.navigate('Home')}
+            >
+             <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginLeft:-10}} />
+
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                height: 35,
+                width:'60%',
                 alignItems: "center",
                 justifyContent: "center",
                 marginTop:10
               }}
               onPress={() => navigation.navigate('Home')}
             >
-             <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
+             <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
+              Our products
+            </Text>
 
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{navigation.navigate('Cart')}} style={{
+                   width:'20%',
                    position:"relative",
+                   alignItems:'flex-end',
                    marginTop:10
                }}>
                  
@@ -117,17 +133,7 @@ const Shop =({retrieveProducts,navigation,products,cart,loadCurrentItem})=> {
           </View>
 
           {/* Balance */}
-          <View
-            style={{
-              paddingTop:30,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-              Our products
-            </Text>
-          </View>
+          
 
           {/* Trending */}
          
