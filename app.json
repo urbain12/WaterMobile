@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "WaterAccess",
+    "name": "Water_Access",
     "slug": "Water_Access",
     "description":" Water Access Rwanda's application",
     "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash2.jpg",
+      "image": "./assets/splash2.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
