@@ -69,7 +69,8 @@ const Momopay = ({ route, navigation }) => {
 
 
   const handleamount = (val) => {
-    setAmount(val)
+    var amount=val.split('  ')[1]
+    setAmount(amount)
   }
   const handlephone = (val) => {
     setPhonenumber(val)

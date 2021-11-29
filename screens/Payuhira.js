@@ -69,7 +69,8 @@ const Momopay = ({ route, navigation }) => {
 
 
   const handleamount = (val) => {
-    setAmount(val)
+    var amount=val.split('  ')[1]
+    setAmount(amount)
   }
   const handlephone = (val) => {
     setPhonenumber(val)
@@ -99,7 +100,7 @@ const Momopay = ({ route, navigation }) => {
     postObj.append('phone_number', Phonenumber)
     postObj.append('amount', Amount)
     postObj.append('payment_code', paymentcode)
-
+    console.log(postObj)
 
     axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
       console.log('success')
