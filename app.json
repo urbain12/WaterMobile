@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "W.A.Rwanda",
-      "buildNumber": "1.4.0"
+      "buildNumber": "2.0.0"
     },
     "android": {
       "adaptiveIcon": {
