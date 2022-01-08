@@ -361,7 +361,7 @@ const Home = ({ navigation }) => {
 
                 </View>
 
-                <View style={{justifyContent:"center",marginLeft:"47%",paddingTop:20}}>
+                <View style={{justifyContent:"center",marginLeft:"45%",paddingTop:20}}>
                   
                   <SimpleLineIcons name="arrow-right" size={20} color="white"  />
    
@@ -394,7 +394,7 @@ const Home = ({ navigation }) => {
               <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/amazii.png')} />
               </View>
 
-                <View style={{ marginLeft: 25, alignItems: 'left' }}>
+                <View style={{ marginLeft: 25,  }}>
                   <Text style={{ fontSize: 20, color: "#1f1f1f",marginTop:10,fontWeight:"bold" }}>AMAZI</Text>
                  
 
@@ -490,7 +490,7 @@ const Home = ({ navigation }) => {
 
 
                 </View>
-                <View style={{justifyContent:"center",marginLeft:"47%",paddingTop:20}}>
+                <View style={{justifyContent:"center",marginLeft:"45%",paddingTop:20}}>
                   
                   <SimpleLineIcons name="arrow-right" size={20} color="white"  />
    
@@ -523,7 +523,7 @@ const Home = ({ navigation }) => {
               <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/inumai.png')} />
               </View>
 
-                <View style={{ marginLeft: 25, alignItems: 'left' }}>
+                <View style={{ marginLeft: 25, }}>
                 <Text style={{fontSize: 20, color: "#1f1f1f",marginTop:10,fontWeight:"bold"}}>INUMA</Text>
                   
                   <TouchableOpacity onPress={() => { inuma_alert() }}>
@@ -652,7 +652,7 @@ const Home = ({ navigation }) => {
               <Image resizeMode='contain' style={{ width: 35, height: 35,marginLeft:"10%" }} source={require('../assets/icons/uhirai.png')} />
               </View>
 
-                <View style={{alignItems: 'left' }}>
+                <View >
                 <Text style={{fontSize: 20, color: "#1f1f1f",marginTop:10,fontWeight:"bold"}}>UHIRA</Text>
 
                   <TouchableOpacity onPress={() => { uhira_alert() }}>
