@@ -371,8 +371,8 @@ const CryptoDetail = ({ navigation, }) => {
 
                                         <View>
                                             <Text style={{ fontSize: 18, fontWeight: "bold", color: '#009cde' }}>Descriptions </Text>
-                                            <Text style={{ ccolor: '#707070', fontSize: 18, marginTop: 10 }}>Targeted at farmers and off-grid businesses, uhira includes a borehole, a solar pump, a pipeline, elevated storage system and an optional cattle trough or tap system from the tank.</Text>
-                                            <Text style={{ ccolor: '#707070', fontSize: 18, marginTop: 5 }}>Our systems allow for reliable access to safe water anywhere, even when living far from surface water. Our team accompanies you from survey to maintenance. </Text>
+                                            <Text style={{ color: '#707070', fontSize: 18, marginTop: 10 }}>Targeted at farmers and off-grid businesses, uhira includes a borehole, a solar pump, a pipeline, elevated storage system and an optional cattle trough or tap system from the tank.</Text>
+                                            <Text style={{ color: '#707070', fontSize: 18, marginTop: 5 }}>Our systems allow for reliable access to safe water anywhere, even when living far from surface water. Our team accompanies you from survey to maintenance. </Text>
                                         </View>
 
                                     </View>
