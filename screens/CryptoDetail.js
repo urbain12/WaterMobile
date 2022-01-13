@@ -90,11 +90,11 @@ const CryptoDetail = ({ navigation }) => {
 
 
     const totalam = information.System != undefined && information.System.total - parseInt(information.Downpayment)
-    const OverdueAmount = totalam / information.InstallmentPeriod * information.get_overdue_months
     const Monthly = totalam / information.InstallmentPeriod
+    const OverdueAmount = Monthly * information.get_overdue_months
     const subbalance = totalam
     const formatednum = Math.ceil(Monthly)
-    console.log(OverdueAmount)
+    console.log('Overdue amount :  ',OverdueAmount)
     const format = (amount) => {
         return Number(amount)
             .toFixed(2)
