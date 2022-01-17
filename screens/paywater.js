@@ -17,13 +17,14 @@ import {
   CurrencyLabel,
   TextButton,
 } from "../components";
-import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
+import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo, SimpleLineIcons } from "@expo/vector-icons";
 import axios from 'axios';
 
 
 const Paywater = ({ route, navigation }) => {
   const [customer, setCustomer] = useState('')
+  const [TokenNumber, setToken] = useState('')
   const [Amount, setAmount] = useState('')
   const [paidAmount, setPaidAmount] = useState('')
   const [Phonenumber, setPhonenumber] = useState('')
@@ -39,6 +40,7 @@ const Paywater = ({ route, navigation }) => {
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
         setPhonenumber(res.data[0].user.phone)
+        console.log(res.data[0].Meternumber.Meternumber)
       }).catch(error => {
         console.log(error.message)
       })
@@ -49,6 +51,17 @@ const Paywater = ({ route, navigation }) => {
       }).catch(err => {
         console.log(err)
       })
+
+      // axios.get('http://44.196.8.236:3038/generatePurchase/?payment=1000.00&meternumber=19190189167').then((res) => {
+      //   setToken(res.data)
+      //   const onlytoken = res.data.slice(-24)
+      //   // console.log(TokenNumber)
+      //   console.log(onlytoken)
+      // }).catch(error => {
+      //   console.log(error.message)
+      // })
+
+
 
       setUserId(id)
 
@@ -73,7 +86,7 @@ const Paywater = ({ route, navigation }) => {
   const handleSubmit = (e) => {
     setLoading(true)
     e.preventDefault();
-    if (Amount < 1000) {
+    if (Amount < 1) {
       alert("you not allowed to buy for amount less than 1000")
       navigation.navigate('inuma')
 
@@ -116,9 +129,8 @@ const Paywater = ({ route, navigation }) => {
               if (my_data2[0].payment_status == "SUCCESSFUL") {
 
                 const postObj = JSON.stringify({
-                  'Meternumber': customer.Meternumber.id,
+                  'Meternumber': customer.Meternumber.Meternumber,
                   'Amount': my_data2[0].amount,
-                  // 'Token': tokellist
                 })
                 console.log(postObj)
                 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -198,7 +210,7 @@ const Paywater = ({ route, navigation }) => {
               }}
               onPress={() => navigation.goBack()}
             >
-              <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
+              <SimpleLineIcons name="arrow-left" size={25} color="white" style={{ marginRight: 15 }} />
             </TouchableOpacity>
           </View>
 
@@ -308,7 +320,7 @@ const Paywater = ({ route, navigation }) => {
   function renderTransactionHistory() { }
 
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <View>
         {renderHeader()}
       </View>
@@ -321,7 +333,7 @@ const Paywater = ({ route, navigation }) => {
           {renderTransactionHistory()}
         </View>
       </ScrollView>
-      </View>
+    </View>
   );
 };
 
