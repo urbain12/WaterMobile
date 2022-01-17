@@ -86,7 +86,7 @@ const Paywater = ({ route, navigation }) => {
   const handleSubmit = (e) => {
     setLoading(true)
     e.preventDefault();
-    if (Amount < 1) {
+    if (Amount < 1000) {
       alert("you not allowed to buy for amount less than 1000")
       navigation.navigate('inuma')
 
