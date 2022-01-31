@@ -511,7 +511,7 @@ const Landing = ({ navigation }) => {
         )}
 
 
-        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Notification")}>
           {showNotification == 'true' && renderAlert()}
         </TouchableOpacity>
         {showAlert == 'true' && renderNotice()}

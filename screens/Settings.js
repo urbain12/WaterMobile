@@ -220,7 +220,7 @@ const Settings = ({ navigation }) => {
 
             </View>
             <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
-              onPress={() => navigation.navigate("Notifications")}
+              onPress={() => navigation.navigate("Notification")}
             >
               <View>
                 <Entypo name="bell" size={25} color="black" />

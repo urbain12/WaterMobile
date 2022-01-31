@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState ,useRef} from 'react';
 import { Provider } from 'react-redux';
 import { CryptoDetail, Transaction } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -27,7 +27,7 @@ import NoInternet from './components/NoInternet';
 import uhira from './screens/uhira';
 import inuma from './screens/inuma';
 import changepassword from './screens/changepassword';
-import Notifications from './screens/notifications'
+import Notification from './screens/notifications'
 import Responses from './screens/Responses';
 import paywater from './screens/paywater';
 import request from './screens/request';
@@ -37,14 +37,83 @@ import UpdateCustomer from './screens/UpdateCustomer';
 import Resetpassword from './screens/Resetpassword';
 import Payuhira from './screens/Payuhira';
 import Payinuma from './screens/Payinuma';
-
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+import Constants from 'expo-constants';
 const Stack = createStackNavigator();
 const screenOptionStyle = {
   headerShown: false
 }
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
+
+async function schedulePushNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "WAR App📬",
+      body: 'You are using Water Access App',
+      data: { data: 'goes here' },
+    },
+    trigger: { seconds: 2 },
+  });
+}
+
+async function registerForPushNotificationsAsync() {
+  let token;
+  console.log('token at start', token); 
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      Alert.alert(
+        "No Notification Permission",
+        "please goto setting and on notification permission manual",
+        [
+          { text: "cancel", onPress: () => console.log("cancel") },
+          { text: "Allow", onPress: () => Linking.openURL("app-settings:") },
+        ],
+        { cancelable: false }
+      );
+      return;
+    }
+//    if (finalStatus !== 'granted') {
+//      alert('Failed to get push token for push notification!');
+//      return;
+//    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  return token;
+}
+
 const App = () => {
   const [netState,setNetState]=useState(false)
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
   checkConnected().then(res=>{
     setNetState(res)
   })
@@ -155,7 +224,18 @@ const App = () => {
   }))
 
   useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+    setTimeout(async()=>{
+      await schedulePushNotification()
+    },4000)
     
 
     setTimeout(async () => {
@@ -185,6 +265,10 @@ const App = () => {
       }
 
     }, 2000)
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+      Notifications.removeNotificationSubscription(responseListener);
+    };
   }, [])
 
   const [loaded] = useFonts({
@@ -286,8 +370,8 @@ const App = () => {
               component={changepassword}
             />
             <Stack.Screen
-              name="Notifications"
-              component={Notifications}
+              name="Notification"
+              component={Notification}
             />
             <Stack.Screen
               name="Transaction"

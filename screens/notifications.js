@@ -21,7 +21,7 @@ import { MaterialIcons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesom
 
 
 
-const Notifications = ({ navigation }) => {
+const Notification = ({ navigation }) => {
     const [oldpassword, setoldpassword] = useState('')
     const [newpassword, setnewpassword] = useState('')
     const [confirmpassword, setconfirmpassword] = useState('')
@@ -151,4 +151,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Notifications;
+export default Notification;
