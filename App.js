@@ -56,7 +56,7 @@ Notifications.setNotificationHandler({
 async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "WAR App📬",
+      title: "Water Access Rwanda 📬",
       body: 'You are using Water Access App',
       data: { data: 'goes here' },
     },
