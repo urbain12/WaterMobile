@@ -249,8 +249,8 @@ const UpdateCustomer = ({ navigation }) => {
                                     paddingLeft:10
                                 }}
                                 name="Names"
-                                placeholder="Cell"
-                                value={Cell}
+                                placeholder="Sector"
+                                value={Sector}
                                 onChangeText={text => setSector(text)}
                             />
                             <Text style={{marginLeft:3,color:"#707070"}}>Cell</Text>
@@ -267,8 +267,8 @@ const UpdateCustomer = ({ navigation }) => {
                                     paddingLeft:10
                                 }}
                                 name="Names"
-                                placeholder="Sector"
-                                value={Sector}
+                                placeholder="Cell"
+                                value={Cell}
                                 onChangeText={text => setCell(text)}
                             />
                             <Text style={{marginLeft:3,color:"#707070"}}>Language</Text>

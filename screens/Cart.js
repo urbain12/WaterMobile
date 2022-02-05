@@ -27,10 +27,11 @@ import axios from 'axios';
 import ProductCard from "../components/ProductCard";
 import { connect } from "react-redux";
 import { removeFromCart } from "../redux/shopping/shopping-actions";
+import { clearCart } from "../redux/shopping/shopping-actions";
 
 
 
-const Cart = ({navigation,cart,removeFromCart}) => {
+const Cart = ({navigation,cart,removeFromCart,clearCart}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
   const [cname, setNames] = useState('')
@@ -92,6 +93,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
 
   axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
     console.log('success')
+    clearCart()
     console.log(res.data)
     setIsVisible2(false)
     setPhone('')
@@ -186,16 +188,16 @@ const handleSubmit2 = () => {
               'customerID':customer.id,
               'order': cart,
 
-
           })
           console.log(postObj2)
 
             axios.post('http://wateraccess.t3ch.rw:8234/pay_later_order/create/', postObj2).then((res) => {
                 console.log(res.status)
+                clearCart()
                 alert('Order completed!!!')
                 setpaid(true)
-                clearInterval(setint)
-                navigation.navigate('Home')
+                // clearInterval(setint)
+                navigation.push('Home')
             }).catch(err => {
                 console.log(err)
             })
@@ -250,7 +252,7 @@ setTimeout(() => {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "OK", onPress: () => removeFromCart(itemID) }
+        { text: "OK", onPress: () => clearCart() }
       ]
     );
 
@@ -779,6 +781,7 @@ signIn: {
 const mapDispatchToProps=(dispatch)=>{
   return{
       removeFromCart:(id)=>dispatch(removeFromCart(id)),
+      clearCart:()=>dispatch(clearCart())
   }
   }
 
