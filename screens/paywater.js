@@ -25,7 +25,7 @@ import axios from 'axios';
 const Paywater = ({ route, navigation }) => {
   const [customer, setCustomer] = useState('')
   const [TokenNumber, setToken] = useState('')
-  const [Amount, setAmount] = useState('')
+  const [Amount, setAmount] = useState('') 
   const [paidAmount, setPaidAmount] = useState('')
   const [Phonenumber, setPhonenumber] = useState('')
   const [paymentcode, setpaymentcode] = useState('1010')
@@ -86,7 +86,7 @@ const Paywater = ({ route, navigation }) => {
   const handleSubmit = (e) => {
     setLoading(true)
     e.preventDefault();
-    if (Amount < 1000) {
+    if (Amount < 100) {
       alert("you not allowed to buy for amount less than 1000")
       navigation.navigate('inuma')
 
@@ -131,6 +131,7 @@ const Paywater = ({ route, navigation }) => {
                 const postObj = JSON.stringify({
                   'Meternumber': customer.Meternumber.Meternumber,
                   'Amount': my_data2[0].amount,
+                  'Phone': customer.user.phone
                 })
                 console.log(postObj)
                 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
