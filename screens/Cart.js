@@ -27,11 +27,10 @@ import axios from 'axios';
 import ProductCard from "../components/ProductCard";
 import { connect } from "react-redux";
 import { removeFromCart } from "../redux/shopping/shopping-actions";
-import { clearCart } from "../redux/shopping/shopping-actions";
 
 
 
-const Cart = ({navigation,cart,removeFromCart,clearCart}) => {
+const Cart = ({navigation,cart,removeFromCart}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
   const [cname, setNames] = useState('')
@@ -93,7 +92,6 @@ const Cart = ({navigation,cart,removeFromCart,clearCart}) => {
 
   axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
     console.log('success')
-    clearCart()
     console.log(res.data)
     setIsVisible2(false)
     setPhone('')
@@ -188,12 +186,15 @@ const handleSubmit2 = () => {
               'customerID':customer.id,
               'order': cart,
 
+
           })
           console.log(postObj2)
 
             axios.post('http://wateraccess.t3ch.rw:8234/pay_later_order/create/', postObj2).then((res) => {
                 console.log(res.status)
-                clearCart()
+                for(var i=0;i<cart.length;i++){
+                  removeFromCart(cart[i].id)
+                }
                 alert('Order completed!!!')
                 setpaid(true)
                 // clearInterval(setint)
@@ -252,7 +253,7 @@ setTimeout(() => {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "OK", onPress: () => clearCart() }
+        { text: "OK", onPress: () => removeFromCart(itemID) }
       ]
     );
 
@@ -411,7 +412,7 @@ setTimeout(() => {
                         </View>
 
                         <View style={{ width:'30%',alignItems:'center' }}>
-                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: "green", }}>{JSON.stringify(format(product.total)).substring(1,JSON.stringify(format(product.total)).length-4)} Rwf</Text>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: "green", }}>{JSON.stringify(format(product.qty*product.price)).substring(1,JSON.stringify(format(product.qty*product.price)).length-4)} Rwf</Text>
                         </View>
 
                         <View style={{ width:'10%',alignItems:'center' }}>
@@ -781,7 +782,6 @@ signIn: {
 const mapDispatchToProps=(dispatch)=>{
   return{
       removeFromCart:(id)=>dispatch(removeFromCart(id)),
-      clearCart:()=>dispatch(clearCart())
   }
   }
 
