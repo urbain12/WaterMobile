@@ -125,10 +125,13 @@ const Cart = ({navigation,cart,removeFromCart}) => {
 
               axios.post('http://wateraccess.t3ch.rw:8234/create_order/', postObj2).then((res) => {
                   console.log(res.status)
+                  for(var i=0;i<cart.length;i++){
+                    removeFromCart(cart[i].id)
+                  }
                   alert('Order completed!!!')
                   setpaid(true)
                   clearInterval(setint)
-                  navigation.navigate('Home')
+                  navigation.push('Home')
               }).catch(err => {
                   console.log(err)
               })
