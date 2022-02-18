@@ -338,7 +338,7 @@ const CryptoDetail = ({ navigation, }) => {
 
                             )}
 
-                            {information.complete == true ? (
+                            {information.complete == true && information.customer_exception == false ? (
                                 <TouchableOpacity
                                     style={{
                                         flexDirection: 'row',
@@ -367,8 +367,33 @@ const CryptoDetail = ({ navigation, }) => {
                                 </TouchableOpacity>
 
                             ) : (
-                                <>
-                                </>
+                                <TouchableOpacity
+                                    style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginLeft: 20,
+                                        marginTop: SIZES.padding * 1,
+                                        paddingVertical: SIZES.padding,
+                                        paddingHorizontal: SIZES.radius,
+                                        backgroundColor: COLORS.white,
+                                        borderRadius: SIZES.radius,
+                                        width: "90%",
+                                        ...styles.shadow
+                                    }}
+
+                                    onPress={() => navigation.navigate("query")}
+
+                                >
+
+
+                                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                                        <Text style={{ color: '#707070', alignSelf: "center", fontSize: 16, fontWeight: "bold" }}>You can't buy water now</Text>
+                                        <Text style={{ color: '#707070', alignSelf: "center", fontSize: 16, fontWeight: "bold" }}>Please contact us</Text>
+                                    </View>
+
+
+                                </TouchableOpacity>
 
                             )}
 
