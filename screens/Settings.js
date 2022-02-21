@@ -219,27 +219,6 @@ const Settings = ({ navigation }) => {
             }}>
 
             </View>
-            <TouchableOpacity style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}
-              onPress={() => navigation.navigate("Notification")}
-            >
-              <View>
-                <Entypo name="bell" size={25} color="black" />
-
-              </View>
-              <View style={{ marginLeft: 30 }}>
-                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Notifications</Text>
-                <Text style={{ color: '#707070' }}>View your recent notifications</Text>
-              </View>
-            </TouchableOpacity>
-            <View style={{
-              borderBottomWidth: 1,
-              borderBottomColor: "#f1f1f1",
-              width: "97%",
-              marginLeft: "20%",
-              marginTop: 5
-            }}>
-
-            </View>
             <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
               <View>
                 <Image resizeMode='contain' style={{ width: 20, height: 20 }} source={require('../assets/icons/subscription.png')} />

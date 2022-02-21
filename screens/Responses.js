@@ -1,5 +1,14 @@
 import React,{useEffect, useState} from "react";
-import { Text, StatusBar, View,ImageBackground, ScrollView, TouchableOpacity, Image, StyleSheet} from "react-native";
+import { Text, 
+  StatusBar,
+   View,
+   ImageBackground, 
+   ScrollView, 
+   TouchableOpacity, 
+   Image, 
+   StyleSheet,
+   LogBox}
+    from "react-native";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import {Ionicons,FontAwesome,MaterialIcons,MaterialCommunityIcons,SimpleLineIcons} from '@expo/vector-icons';
 import axios from 'axios';

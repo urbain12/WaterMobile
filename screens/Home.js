@@ -15,7 +15,7 @@ import {
   Animated,
   Alert
 } from "react-native";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather,SimpleLineIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons,SimpleLineIcons } from "@expo/vector-icons";
 import { AuthContext } from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
@@ -480,7 +480,7 @@ const Home = ({ navigation }) => {
               <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/inuma2.png')} />
               </View>
                 <View>
-                  <Text style={{ fontSize: 20, color: "white",marginTop:13,fontWeight:"bold",marginLeft:20 }}>INUMA</Text>
+                  <Text style={{ fontSize: 20, color: "white",marginTop:13,fontWeight:"bold",marginLeft:20 }}>INUMA <MaterialCommunityIcons name="trademark" size={24} color="white" /></Text>
                   
                   <View>
                     <Text style={{ color: 'white', ...FONTS.body3, marginTop: 5, fontSize: 18,marginLeft:20 }}>
@@ -524,7 +524,7 @@ const Home = ({ navigation }) => {
               </View>
 
                 <View style={{ marginLeft: 25, }}>
-                <Text style={{fontSize: 20, color: "#1f1f1f",marginTop:10,fontWeight:"bold"}}>INUMA</Text>
+                <Text style={{fontSize: 20, color: "#1f1f1f",marginTop:10,fontWeight:"bold"}}>INUMA <MaterialCommunityIcons name="trademark" size={24} color="#1f1f1f" /></Text>
                   
                   <TouchableOpacity onPress={() => { inuma_alert() }}>
                     <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
