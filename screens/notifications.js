@@ -129,16 +129,15 @@ const Notification = ({ navigation }) => {
                     return(
                     <View
                         style={{
-                            marginLeft: 8,
+                            marginLeft: 10,
                             borderRadius: 8,
                             marginTop:20,
-                            height:"22%",
                             backgroundColor: COLORS.white,
                             ...styles.shadow
                         }}
                        >
 
-                        <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10 }}>
+                        <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10,height:80 }}>
                             <View>
                             <FontAwesome5 name="exchange-alt" size={20} color="#009cde" style={{marginTop:20}} />
                             </View>
@@ -148,6 +147,7 @@ const Notification = ({ navigation }) => {
                                 <Text style={{ fontSize: 16,color: '#707070' }}>{information.created_at.slice(0,10)}</Text>
                             </View>
                         </View>
+                        
 
 
                     </View>
