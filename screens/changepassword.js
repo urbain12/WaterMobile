@@ -16,46 +16,61 @@ import {
     CurrencyLabel,
     TextButton,
 } from "../components";
-import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
+import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
 import axios from 'axios';
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from 'react-native';
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
+import Icon from '@expo/vector-icons/Entypo';
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo, SimpleLineIcons } from "@expo/vector-icons";
 
 
 
 const Changepassword = ({ navigation }) => {
-    const [user_id,setUserId]=useState('')
+    const [user_id, setUserId] = useState('')
     const [oldpassword, setoldpassword] = useState('')
     const [newpassword, setnewpassword] = useState('')
     const [confirmpassword, setconfirmpassword] = useState('')
     const [loading, setloading] = useState('')
+    const [securetext, setsecuretext] = useState(true)
+    const [securetext1, setsecuretext1] = useState(true)
+    const [securetext2, setsecuretext2] = useState(true)
+
+    const updateSecureTextEntry = () => {
+        setsecuretext(!securetext)
+    }
+    const updateSecureTextEntry1 = () => {
+        setsecuretext1(!securetext1)
+    }
+    const updateSecureTextEntry2 = () => {
+        setsecuretext2(!securetext2)
+    }
 
 
-    useEffect(()=>{
+    useEffect(() => {
         async function setInfo() {
             const id = await AsyncStorage.getItem('user_id')
-            
+
             setUserId(id)
-      
-          }
-      
-          setInfo()
-        
-    },[])
+
+        }
+
+        setInfo()
+
+    }, [])
 
 
-        const handleSubmit = (e) => {
-            if(newpassword!==confirmpassword){
-                alert('Your passwords have to match!')
-            }
-           else{setloading(true)
+    const handleSubmit = (e) => {
+        if (newpassword !== confirmpassword) {
+            alert('Your passwords have to match!')
+        }
+        else {
+            setloading(true)
             e.preventDefault()
             const postObj = JSON.stringify({
-                'user_id':user_id,
+                'user_id': user_id,
                 'old_password': oldpassword,
                 'new_password': newpassword,
-    
+
 
             })
             console.log(postObj)
@@ -76,144 +91,193 @@ const Changepassword = ({ navigation }) => {
             }).catch(error => {
                 console.log(error.message)
             })
-            
+
             setTimeout(() => {
                 setloading(false)
-            }, 500)}
-
-
+            }, 500)
         }
 
-        const renderHeader = () => {
 
-            return (
-                <View
+    }
+
+    const renderHeader = () => {
+
+        return (
+            <View
+                style={{
+                    width: "100%",
+                    height: 120,
+                    ...styles.shadow,
+                }}
+            >
+                <ImageBackground
+                    source={images.banner_settings}
+                    resizeMode="cover"
                     style={{
-                        width: "100%",
-                        height: 120,
-                        ...styles.shadow,
+                        flex: 1,
+                        alignItems: "center",
                     }}
                 >
-                    <ImageBackground
-                        source={images.banner_settings}
-                        resizeMode="cover"
+                    {/* Header Bar */}
+                    <View
                         style={{
-                            flex: 1,
-                            alignItems: "center",
+                            marginTop: 20,
+                            width: "100%",
+                            flexDirection: "row",
+                            paddingHorizontal: SIZES.padding,
                         }}
                     >
-                        {/* Header Bar */}
-                        <View
+                        <TouchableOpacity
                             style={{
-                                marginTop: 20,
-                                width: "100%",
-                                flexDirection: "row",
-                                paddingHorizontal: SIZES.padding,
-                            }}
-                        >
-                            <TouchableOpacity
-                                style={{
-                                    width: 35,
-                                    height: 35,
-                                    marginRight: '80%',
-                                    marginTop: 10,
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                                onPress={() => navigation.goBack()}
-                            >
-                                <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
-                            </TouchableOpacity>
-                        </View>
-        
-                        {/* Balance */}
-                        <View
-                            style={{
-                                paddingTop: 0,
+                                width: 35,
+                                height: 35,
+                                marginRight: '80%',
+                                marginTop: 10,
                                 alignItems: "center",
                                 justifyContent: "center",
                             }}
+                            onPress={() => navigation.goBack()}
                         >
-                            <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                              Change Password
-                            </Text>
-                        </View>
-        
-                        {/* Trending */}
-        
-                    </ImageBackground>
-                </View>
-            );
-        }
-
-
-        function renderTrade() {
-
-            return (
-                <View
-                    style={{
-                        marginTop: SIZES.padding,
-                        marginHorizontal: SIZES.padding,
-                        padding: SIZES.padding,
-                        borderRadius: SIZES.radius,
-                        backgroundColor: COLORS.white,
-                        ...styles.shadow,
-                    }}
-                >
-                    <View>
-                        <TouchableOpacity activeOpacity={1}>
-
-                            <TextInput
-                                style={{
-                                    borderColor: "gray",
-                                    borderWidth: 1,
-                                    borderRadius: 10,
-                                    height: 35,
-                                    width: "100%",
-                                    marginTop: 20,
-                                    marginBottom: 20,
-                                    textAlign: "center",
-                                }}
-                                name="Names"
-                                placeholder="Old password"
-                                onChangeText={text => setoldpassword(text)}
-                            />
-                            <TextInput
-                                style={{
-                                    borderColor: "gray",
-                                    borderWidth: 1,
-                                    borderRadius: 10,
-                                    height: 35,
-                                    width: "100%",
-                                    marginTop: 20,
-                                    marginBottom: 20,
-                                    textAlign: "center",
-                                }}
-                                name="Names"
-                                placeholder="New password"
-                                onChangeText={text => setnewpassword(text)}
-                            />
-                            <TextInput
-                                style={{
-                                    borderColor: "gray",
-                                    borderWidth: 1,
-                                    borderRadius: 10,
-                                    height: 35,
-                                    width: "100%",
-                                    marginTop: 20,
-                                    marginBottom: 20,
-                                    textAlign: "center",
-                                }}
-                                name="Names"
-                                placeholder="confirm password"
-                                onChangeText={text => setconfirmpassword(text)}
-                            />
-
-
+                            <SimpleLineIcons name="arrow-left" size={25} color="white" style={{ marginRight: 15 }} />
                         </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity style={{ marginTop: 20 }}
+                    {/* Balance */}
+                    <View
+                        style={{
+                            paddingTop: 0,
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
+                            Change Password
+                        </Text>
+                    </View>
+
+                    {/* Trending */}
+
+                </ImageBackground>
+            </View>
+        );
+    }
+
+
+    function renderTrade() {
+
+        return (
+            <View
+                style={{
+                    marginTop: SIZES.padding,
+                    marginHorizontal: SIZES.padding,
+                    padding: SIZES.padding,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: COLORS.white,
+                    ...styles.shadow,
+                }}
+            >
+                <View>
+                    <TouchableOpacity activeOpacity={1}>
+
+                        <View style={styles.action}>
+                            <TextInput
+                                placeholder="Enter old password"
+                                placeholderTextColor="#666666"
+                                secureTextEntry={securetext ? true : false}
+                                style={[styles.textInput, {
+                                    color:"black", marginLeft: 10
+                                }]}
+                                autoCapitalize="none"
+                                onChangeText={(val) => setoldpassword(val)}
+                            />
+                            <TouchableOpacity
+                                onPress={updateSecureTextEntry}>
+                                {securetext ?
+
+                                    <Icon
+                                        name="eye-with-line"
+                                        color="grey"
+                                        size={20}
+                                        style={{marginTop:20,marginBottom:20}}
+                                    />
+                                    :
+                                    <Icon
+                                        name="eye"
+                                        color="black"
+                                        size={20}
+                                        style={{marginTop:20,marginBottom:20}}
+                                    />
+                                }
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.action}>
+                            <TextInput
+                                placeholder="Enter new Password"
+                                placeholderTextColor="#666666"
+                                secureTextEntry={securetext1 ? true : false}
+                                style={[styles.textInput, {
+                                    color:"black", marginLeft: 10
+                                }]}
+                                autoCapitalize="none"
+                                onChangeText={(val) => setnewpassword(val)}
+                            />
+                            <TouchableOpacity
+                                onPress={updateSecureTextEntry1}>
+                                {securetext1 ?
+
+                                    <Icon
+                                        name="eye-with-line"
+                                        color="grey"
+                                        size={20}
+                                        style={{marginTop:20,marginBottom:20}}
+                                    />
+                                    :
+                                    <Icon
+                                        name="eye"
+                                        color="black"
+                                        size={20}
+                                        style={{marginTop:20,marginBottom:20}}
+                                    />
+                                }
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.action}>
+                            <TextInput
+                                placeholder="Confirm new Password"
+                                placeholderTextColor="#666666"
+                                secureTextEntry={securetext2 ? true : false}
+                                style={[styles.textInput, {
+                                    color:"black", marginLeft: 10
+                                }]}
+                                autoCapitalize="none"
+                                onChangeText={(val) => setconfirmpassword(val)}
+                            />
+                            <TouchableOpacity
+                                onPress={updateSecureTextEntry2}>
+                                {securetext2 ?
+
+                                    <Icon
+                                        name="eye-with-line"
+                                        color="grey"
+                                        size={20}
+                                        style={{marginTop:20,marginBottom:20}}
+                                    />
+                                    :
+                                    <Icon
+                                        name="eye"
+                                        color="black"
+                                        size={20}
+                                        style={{marginTop:20,marginBottom:20}}
+                                    />
+                                }
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </TouchableOpacity>
+                </View>
+
+                <TouchableOpacity style={{ marginTop: 20 }}
                     onPress={(event) => {
                         handleSubmit(event)
                     }}>
@@ -222,7 +286,7 @@ const Changepassword = ({ navigation }) => {
                         style={{ backgroundColor: "#009cde", width: "100%", height: "40%", alignItems: "center", borderRadius: 10 }}
                     >
                         {loading ? (
-                            <ActivityIndicator size='large' color='white' style={{marginTop:10}} />
+                            <ActivityIndicator size='large' color='white' style={{ marginTop: 10 }} />
                         ) :
                             (
                                 <Text style={{ color: "white", marginTop: 15, fontSize: 20, fontWeight: "bold" }}>Change</Text>
@@ -232,47 +296,62 @@ const Changepassword = ({ navigation }) => {
 
 
                 </TouchableOpacity>
-                </View>
-            );
-        }
-
-        function renderTransactionHistory() { }
-
-        return (
-            <View style={{flex:1}}>
-      <View>
-        {renderHeader()}
-      </View>
-
-
-      <ScrollView>
-        <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-
-          {renderTrade()}
-          {renderTransactionHistory()}
-        </View>
-      </ScrollView>
-      </View>
+            </View>
         );
-    };
+    }
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
+    function renderTransactionHistory() { }
+
+    return (
+        <View style={{ flex: 1 }}>
+            <View>
+                {renderHeader()}
+            </View>
+
+
+            <ScrollView>
+                <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
+
+                    {renderTrade()}
+                    {renderTransactionHistory()}
+                </View>
+            </ScrollView>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
         },
-        shadow: {
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 4,
-            },
-            shadowOpacity: 0.3,
-            shadowRadius: 4.65,
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
 
-            elevation: 8,
-        },
-    });
+        elevation: 8,
+    },
+    action: {
+        flexDirection: 'row',
+        marginTop: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#f2f2f2',
+        paddingBottom: 5
+    },
+    textInput: {
+        flex: 1,
+        borderBottomWidth: 0.3,
+        marginTop: 20,
+        marginBottom: 20,
+        paddingLeft: 5,
+        color: '#05375a',
+    },
+});
 
-    export default Changepassword;
+export default Changepassword;

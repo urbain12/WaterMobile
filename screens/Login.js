@@ -223,7 +223,7 @@ const Login = ({ navigation }) => {
                 <View style={{ flexDirection: "row" }}>
                     <Text style={{ color: '#1B1C1E', marginTop: 10, fontWeight: "bold" }}>Don't have an account?  </Text>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Register')}
+                        onPress={() => navigation.navigate('checkPhone')}
                     >
                         <Text style={{ color: "#009cde", fontWeight: "bold", marginTop:10 }}>Sign up</Text>
                     </TouchableOpacity>

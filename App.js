@@ -33,6 +33,8 @@ import paywater from './screens/paywater';
 import request from './screens/request';
 import Landing from './screens/Landing';
 import Register from './screens/Register';
+import checkPhone from './screens/checkPhone';
+import verifyphone from './screens/verifyphone';
 import UpdateCustomer from './screens/UpdateCustomer';
 import Resetpassword from './screens/Resetpassword';
 import Payuhira from './screens/Payuhira';
@@ -428,6 +430,14 @@ const App = () => {
               <Stack.Screen
               name="Register"
               component={Register}
+            />
+            <Stack.Screen
+              name="checkPhone"
+              component={checkPhone}
+            />
+            <Stack.Screen
+              name="verifyphone"
+              component={verifyphone}
             />
             <Stack.Screen
               name="Resetpassword"

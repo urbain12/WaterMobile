@@ -28,12 +28,11 @@ import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 
 
-const Register = ({ navigation }) => {
+const Register = (props) => {
     const [FirstName, setFirstName] = useState('')
     const [LastName, setLastName] = useState('')
     const [email, setemail] = useState('')
     const [IDnumber, setIDnumber] = useState('')
-    const [Phonenumber, setphone] = useState('')
     const [Province, setProvince] = useState('')
     const [District, setDistrict] = useState('')
     const [Sector, setSector] = useState('')
@@ -75,9 +74,6 @@ const Register = ({ navigation }) => {
         else if (IDnumber.length < 15) {
             alert('Please Enter IDnumber');
         }
-        else if (Phonenumber.length < 10) {
-            alert('Max length is 10 digit');
-        }
         else if (Language.length < 1) {
             alert('Please Enter Language');
         }
@@ -106,7 +102,7 @@ const Register = ({ navigation }) => {
             postObj.append('LastName', LastName)
             postObj.append('IDnumber', IDnumber)
             postObj.append('email', email)
-            postObj.append('phone', Phonenumber)
+            postObj.append('phone', props.route.params.phone)
             postObj.append('Province', Province)
             postObj.append('District', District)
             postObj.append('Cell', Cell)
@@ -126,7 +122,7 @@ const Register = ({ navigation }) => {
             axios.post('http://wateraccess.t3ch.rw:8234/register/', postObj).then((res) => {
                 if(res.data.code==200){
                     alert('Your are succesful register Please login with credentails sent on your phone number')
-                navigation.navigate('Login')
+                props.navigation.navigate('Login')
                 }
                 else{
                     alert('Phone Number or email already taken')
@@ -138,7 +134,7 @@ const Register = ({ navigation }) => {
 
             setTimeout(() => {
                 setLoading(false)
-            }, 2000)
+            }, 5000)
         }
     }
 
@@ -178,7 +174,7 @@ const Register = ({ navigation }) => {
                                 alignItems: "center",
                                 justifyContent: "center",
                             }}
-                            onPress={() => navigation.navigate('Login')}
+                            onPress={() => props.navigation.navigate('Login')}
                         >
                             <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
                         </TouchableOpacity>
@@ -294,26 +290,6 @@ const Register = ({ navigation }) => {
                             placeholderTextColor="#666666"
                             placeholder="IDnumber"
                             onChangeText={text => setIDnumber(text)}
-                        />
-                        <TextInput
-                            style={{
-                                borderRadius: 10,
-                                alignSelf: 'center',
-                                height: 35,
-                                width: "90%",
-                                marginTop: 10,
-                                marginBottom: 10,
-                                textAlign: "left",
-                                padding: 10,
-                                flex: 1,
-                                borderBottomWidth: 1
-                            }}
-                            multiline={false}
-                            maxLength={10}
-                            keyboardType="numeric"
-                            placeholderTextColor="#666666"
-                            placeholder="phone"
-                            onChangeText={text => setphone(text)}
                         />
                         <TextInput
                             style={{

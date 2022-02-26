@@ -534,13 +534,13 @@ const CryptoDetail = ({ navigation, }) => {
                                         <TouchableOpacity style={{ width: "30%" }}>
 
                                             <View >
-                                                <View style={{ marginLeft: '3%', backgroundColor: "#009cde", width: '100%', height: 120, alignItems: "center", justifyContent: "center", borderRadius: 20 }}>
+                                                <View style={{ marginLeft: '3%', backgroundColor: "#009cde", width: '80%', height: 90, alignItems: "center", justifyContent: "center", borderRadius: 8 }}>
 
                                                     <Image
                                                         source={icons.filter}
                                                         resizeMode="contain"
                                                         style={{
-                                                            width: 75,
+                                                            width: 30,
                                                             height: 120,
 
                                                         }}
