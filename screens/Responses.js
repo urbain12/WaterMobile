@@ -12,30 +12,31 @@ import { Text,
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
 import {Ionicons,FontAwesome,MaterialIcons,MaterialCommunityIcons,SimpleLineIcons} from '@expo/vector-icons';
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
+
 
 
 
 const Responses = (props) => {
     const [responses,setResponses]=useState([])
-    useEffect(()=>{
-        const options = {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac133829",
-              "app-type": "none",
-              "app-version": "v1",
-              "app-device": "Postman",
-              "app-device-os": "Postman",
-              "app-device-id": "0",
-              "format": "json"
-            }
-          };
-          axios.get(`http://wateraccess.t3ch.rw:8234/Request/list/`).then(res => {
-            console.log(res.data)
-            const my_responses = res.data
-            setResponses(my_responses);
-          });
-    },[])
+
+    React.useEffect(() => {
+      LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+      async function setInfo() {
+          const id = await AsyncStorage.getItem('user_id')
+          axios.get(`http://wateraccess.t3ch.rw:8234/requestbyid/${id}`).then((res) => {
+            setResponses(res.data)
+              console.log(res.data)
+          }).catch(err => {
+              console.log(err)
+          })
+
+      }
+
+      setInfo()
+
+
+  }, []);
     return(
     <View style={{flex:1}}>
         <StatusBar backgroundColor='#4263ec' barStyle="light-content"/>
@@ -79,6 +80,7 @@ const Responses = (props) => {
     return (
       <View>
       <View style={styles.container}>
+              <Text style={{color:"black",marginRight:15,marginBottom:5}}>Me</Text>
             <View style={styles.gradient}>
                 <Text style={styles.text}>{response.Message} </Text>
             </View>
@@ -86,6 +88,7 @@ const Responses = (props) => {
         
         <View style={styles.container2}>
           <View>
+          <Text style={{color:"black",marginLeft:10,marginBottom:5,fontSize:10}}>Water Access</Text>
           <View style={styles.gradient2} >
                 <Text style={styles.text}>{response.reply}</Text>
             </View>

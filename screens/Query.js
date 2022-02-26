@@ -34,12 +34,14 @@ const Transaction = ({ navigation, props }) => {
   const [customer, setCustomer] = useState({})
   const [Cell, setCell] = useState('')
   const [service, setservice] = useState('')
+  const [myID, setMyID] = useState('')
 
 
   useEffect(() => {
     async function setInfo() {
 
       const id = await AsyncStorage.getItem('user_id')
+      setMyID(id)
       axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
         console.log(res.data[0].Province)
@@ -57,6 +59,7 @@ const Transaction = ({ navigation, props }) => {
     e.preventDefault()
     const names = customer.FirstName + ' ' + customer.LastName
     const postObj = JSON.stringify({
+      'user': myID,
       'Names': names,
       'Message': Message,
       'service': service,
