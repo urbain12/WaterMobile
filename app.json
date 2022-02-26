@@ -3,7 +3,7 @@
     "name": "Water Access",
     "slug": "Water_Access",
     "description":" Water Access Rwanda's application",
-    "version": "2.2.6",
+    "version": "2.2.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "W.A.Rwanda",
-      "buildNumber": "2.2.6"
+      "buildNumber": "2.2.7"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +28,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "water.access.rwanda",
-      "versionCode": 17
+      "versionCode": 18
     },
     "web": {
       "favicon": "./assets/icon.png"
