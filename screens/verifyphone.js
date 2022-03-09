@@ -105,43 +105,31 @@ const verifyphone = ( props ) => {
                         flex: 1,
                         alignItems: "center",
                     }}
-                >
+                         >
                     {/* Header Bar */}
                     <View
                         style={{
                             marginTop: 20,
                             width: "100%",
                             flexDirection: "row",
-                            paddingHorizontal: SIZES.padding,
                         }}
-                    >
+                      >
                         <TouchableOpacity
                             style={{
-                                width: 35,
+                                width: 150,
                                 height: 35,
-                                marginRight: '80%',
-                                marginTop: 10,
+                                marginRight: '10%',
+                                marginTop: 2,
                                 alignItems: "center",
                                 justifyContent: "center",
                             }}
                             onPress={() => props.navigation.navigate('checkPhone')}
                         >
-                            <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
+                            <Text style={{marginLeft:5,marginTop: 12,color:"white",fontSize:16,fontWeight:"bold"}}> <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:5}} />  Edit Phone </Text>
                         </TouchableOpacity>
                     </View>
 
                     {/* Balance */}
-                    <View
-                        style={{
-                            paddingTop: 10,
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                          Enter sent OTP
-                        </Text>
-                    </View>
 
                     {/* Trending */}
 
@@ -169,6 +157,7 @@ const verifyphone = ( props ) => {
                    marginLeft:10
                     
                 }}>
+                    <Text style={{marginLeft:5,marginBottom:10}}>We have sent Code to this number: {props.route.params.phone} </Text>
                     <View activeOpacity={1}>
                         <TextInput
                             style={{
@@ -187,7 +176,7 @@ const verifyphone = ( props ) => {
                             maxLength={6}
                             keyboardType="numeric"
                             placeholderTextColor="#666666"
-                            placeholder="Enter Code"
+                            placeholder="Enter Sent Code"
                             onChangeText={text => setOTP(text)}
                         />
                         <TouchableOpacity
