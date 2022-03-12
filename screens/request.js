@@ -40,7 +40,7 @@ const request = ({ navigation }) => {
     async function setInfo() {
 
       const id = await AsyncStorage.getItem('user_id')
-      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+      axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
         console.log(res.data[0].Province)
       }).catch(err => {
@@ -77,7 +77,7 @@ const request = ({ navigation }) => {
       "Content-Type": "application/json",
       // Authorization: `Token ${my_token}`,
     };
-    axios.post('http://wateraccess.t3ch.rw:8234/subrequest/create/', postObj).then((res) => {
+    axios.post('http://admin.amazi.rw/subrequest/create/', postObj).then((res) => {
       console.log(res.status)
       alert('Your request is submitted')
       navigation.navigate('Home')

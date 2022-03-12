@@ -84,7 +84,7 @@ const Changepassword = ({ navigation }) => {
                 // Authorization: `Token ${my_token}`,
             };
 
-            axios.put('http://wateraccess.t3ch.rw:8234/api/change-password/', postObj).then((res) => {
+            axios.put('http://admin.amazi.rw/api/change-password/', postObj).then((res) => {
                 console.log(res.status)
                 alert('Your request is submitted')
                 navigation.navigate('Settings')

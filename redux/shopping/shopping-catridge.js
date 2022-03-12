@@ -6,7 +6,7 @@ import { AsyncStorage } from 'react-native';
 export const retrieveProducts=()=>async dispatch=>{
 	try{
       const id = await AsyncStorage.getItem('user_id')
-      const res=await axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsTools/${id}`);
+      const res=await axios.get(`http://admin.amazi.rw/SubscriptionsTools/${id}`);
       dispatch({
       	type:actionTypes.RETRIEVE_PRODUCTS,
       	payload:res.data

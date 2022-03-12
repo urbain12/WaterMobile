@@ -62,7 +62,7 @@ const UpdateCustomer = ({ navigation }) => {
         async function setInfo() {
             const id = await AsyncStorage.getItem('user_id')
             setUserId(id)
-            axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
                 setCustomer(res.data[0])
                 setFirstName(res.data[0].FirstName)
                 setLastName(res.data[0].LastName)
@@ -110,7 +110,7 @@ const UpdateCustomer = ({ navigation }) => {
                 // Authorization: `Token ${my_token}`,
             };
 
-            axios.put(`http://wateraccess.t3ch.rw:8234/UpdateCustomer/${customer.id}/`, postObj).then((res) => {
+            axios.put(`http://admin.amazi.rw/UpdateCustomer/${customer.id}/`, postObj).then((res) => {
                 console.log(res.status)
                 alert('Submitted successfully!!')
                 navigation.push('Home')

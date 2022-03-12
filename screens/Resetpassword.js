@@ -58,7 +58,7 @@ const Resetpassword = ({ navigation }) => {
                 // Authorization: `Token ${my_token}`,
             };
 
-            axios.post('http://wateraccess.t3ch.rw:8234/api/resetpassword/', postObj).then((res) => {
+            axios.post('http://admin.amazi.rw/api/resetpassword/', postObj).then((res) => {
                 console.log(res.status)
                 alert('Your reset password sent on your phone number')
                 navigation.navigate('Login')

@@ -178,7 +178,7 @@ const App = () => {
       };
 
 
-      await axios.post("http://wateraccess.t3ch.rw:8234/customer_login/", postObj)
+      await axios.post("http://admin.amazi.rw/customer_login/", postObj)
         .then(res => {
 
           if (res.data.code == 200) {

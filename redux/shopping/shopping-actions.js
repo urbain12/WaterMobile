@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const retrieveProducts=()=>async dispatch=>{
 	try{
-      const res=await axios.get('http://wateraccess.t3ch.rw:8234/Productlist/');
+      const res=await axios.get('http://admin.amazi.rw/Productlist/');
       dispatch({
       	type:actionTypes.RETRIEVE_PRODUCTS,
       	payload:res.data

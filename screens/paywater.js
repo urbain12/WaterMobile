@@ -37,7 +37,7 @@ const Paywater = ({ route, navigation }) => {
   useEffect(() => {
     async function setInfo() {
       const id = await AsyncStorage.getItem('user_id')
-      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+      axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
         setPhonenumber(res.data[0].user.phone)
         console.log(res.data[0].Meternumber.Meternumber)
@@ -45,7 +45,7 @@ const Paywater = ({ route, navigation }) => {
         console.log(error.message)
       })
 
-      axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+      axios.get(`http://admin.amazi.rw/get_category/${id}`).then((res) => {
         setPaidAmount(res.data.paidAmount)
 
       }).catch(err => {
@@ -111,7 +111,7 @@ const Paywater = ({ route, navigation }) => {
       postObj.append('payment_code', paymentcode)
 
 
-      axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
+      axios.post('http://app.amazi.rw/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
         console.log('success')
         console.log(res.data)
         alert('Confirm with your phone and wait for approval')
@@ -122,7 +122,7 @@ const Paywater = ({ route, navigation }) => {
             console.log('not paid yet')
             const my_data = JSON.parse(res.data)
             console.log(my_data.transactionid)
-            axios.get(`http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`, options).then(res => {
+            axios.get(`http://app.amazi.rw/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`, options).then(res => {
               const my_data2 = JSON.parse(res.data)
               console.log(my_data2)
               console.log(my_data2[0].payment_status)
@@ -141,7 +141,7 @@ const Paywater = ({ route, navigation }) => {
                   // Authorization: `Token ${my_token}`,
                 };
 
-                axios.post('http://wateraccess.t3ch.rw:8234/pay_Water/', postObj).then((res) => {
+                axios.post('http://admin.amazi.rw/pay_Water/', postObj).then((res) => {
                   console.log(res.status)
                   alert('Water paid successfully!!')
                   setpaid(true)

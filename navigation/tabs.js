@@ -41,7 +41,7 @@ const handleSubmit = () => {
       "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
     }
   }
-  axios.get('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-payment-url', options,).then(res => {
+  axios.get('http://app.amazi.rw/api/web/index.php?r=v1/app/get-payment-url', options,).then(res => {
     const my_data = JSON.parse(res.data)
     Linking.openURL(my_data.url)
   }).catch(err => {

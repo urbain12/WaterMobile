@@ -55,7 +55,7 @@ const Transaction = ({ route }) => {
       // Authorization: `Token ${my_token}`,
     };
 
-    axios.post('http://wateraccess.t3ch.rw:8234/Request/create/', postObj).then((res) => {
+    axios.post('http://admin.amazi.rw/Request/create/', postObj).then((res) => {
       console.log(res.status)
       alert('Your request is submitted')
     }).catch(err => {

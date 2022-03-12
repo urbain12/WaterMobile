@@ -40,17 +40,17 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     const setInfo = async () => {
       const id = await AsyncStorage.getItem('user_id')
-      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+      axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
       }).catch(err => {
         console.log(err)
       })
-      axios.get(`http://wateraccess.t3ch.rw:8234/backgroundlist/`).then((res) => {
+      axios.get(`http://admin.amazi.rw/backgroundlist/`).then((res) => {
         setImage(res.data[0])
       }).catch(err => {
         console.log(err)
       })
-      axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+      axios.get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`).then((res) => {
         var subs = []
         console.log(res.data.length)
         navigation.navigate('Home')
@@ -106,7 +106,7 @@ const Home = ({ navigation }) => {
       // Authorization: `Token ${my_token}`,
     };
 
-    axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
+    axios.post('http://admin.amazi.rw/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
       navigation.push('Home')
@@ -136,7 +136,7 @@ const Home = ({ navigation }) => {
       // Authorization: `Token ${my_token}`,
     };
 
-    axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
+    axios.post('http://admin.amazi.rw/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
       navigation.push('Home')
@@ -167,7 +167,7 @@ const Home = ({ navigation }) => {
       // Authorization: `Token ${my_token}`,
     };
 
-    axios.post('http://wateraccess.t3ch.rw:8234/subscribe/', postObj).then((res) => {
+    axios.post('http://admin.amazi.rw/subscribe/', postObj).then((res) => {
       console.log(res.status)
       alert('Subscribed successfully')
       navigation.push('Home')

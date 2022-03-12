@@ -1,12 +1,12 @@
 import {ProductsStore,ShoppingCartStore,ProductModel} from './Product';
 import axios from 'axios';
 
-// axios.get(`http://wateraccess.t3ch.rw:8234/Productlist/`).then((res) => {
+// axios.get(`http://admin.amazi.rw/Productlist/`).then((res) => {
     
 //     }).catch(err => {
 //     console.log(err)
 // })
-var products=axios.get(`http://wateraccess.t3ch.rw:8234/Productlist/`)
+var products=axios.get(`http://admin.amazi.rw/Productlist/`)
 console.log(products)
 
 const my_data=[{

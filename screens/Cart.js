@@ -90,7 +90,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
 
     
 
-  axios.post('http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
+  axios.post('http://app.amazi.rw/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
     console.log('success')
     console.log(res.data)
     setIsVisible2(false)
@@ -103,7 +103,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
         console.log('not paid yet')
         const my_data=JSON.parse(res.data)
         console.log(my_data.transactionid)          
-        axios.get(`http://kwetu.t3ch.rw:5070/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`,options).then(res => {
+        axios.get(`http://app.amazi.rw/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`,options).then(res => {
         const my_data2=JSON.parse(res.data)
         console.log(my_data2)  
         console.log(my_data2[0].payment_status)  
@@ -123,7 +123,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
             })
             console.log(postObj2)
 
-              axios.post('http://wateraccess.t3ch.rw:8234/create_order/', postObj2).then((res) => {
+              axios.post('http://admin.amazi.rw/create_order/', postObj2).then((res) => {
                   console.log(res.status)
                   for(var i=0;i<cart.length;i++){
                     removeFromCart(cart[i].id)
@@ -193,7 +193,7 @@ const handleSubmit2 = () => {
           })
           console.log(postObj2)
 
-            axios.post('http://wateraccess.t3ch.rw:8234/pay_later_order/create/', postObj2).then((res) => {
+            axios.post('http://admin.amazi.rw/pay_later_order/create/', postObj2).then((res) => {
                 console.log(res.status)
                 for(var i=0;i<cart.length;i++){
                   removeFromCart(cart[i].id)
@@ -235,7 +235,7 @@ setTimeout(() => {
   useEffect(() => {
     async function setInfo() {
       const id = await AsyncStorage.getItem('user_id')
-      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+      axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
           setCustomer(res.data[0])
       }).catch(err => {
           console.log(err)

@@ -69,7 +69,7 @@ const verifyphone = ( props ) => {
                 // Authorization: `Token ${my_token}`,
             };
 
-            axios.post('http://wateraccess.t3ch.rw:8234/verify_otp/', postObj).then((res) => {
+            axios.post('http://admin.amazi.rw/verify_otp/', postObj).then((res) => {
                 if(res.data.code==200){
                     alert('Verified')
                 props.navigation.navigate('Register',{'phone':props.route.params.phone})

@@ -36,17 +36,17 @@ const Pay = ({ navigation,route }) => {
         LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
         async function setInfo() {
             const id = await AsyncStorage.getItem('user_id')
-            axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
                 setCustomer(res.data[0])
             }).catch(err => {
                 console.log(err)
             })
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
             }).catch(err => {
                 console.log(err)
             })
-            axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/SubscriptionsPayment/${id}`).then((res) => {
                 setTransactionHistory(res.data)
             }).catch(err => {
                 console.log(err)

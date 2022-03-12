@@ -34,7 +34,7 @@ const Notification = ({ navigation }) => {
         LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
         async function setInfo() {
             const id = await AsyncStorage.getItem('user_id')
-            axios.get(`http://wateraccess.t3ch.rw:8234/WaterBuyHistoryPayment/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/WaterBuyHistoryPayment/${id}`).then((res) => {
                 setinformation(res.data)
                 console.log(res.data)
             }).catch(err => {

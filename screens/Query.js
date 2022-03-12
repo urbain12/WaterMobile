@@ -42,7 +42,7 @@ const Transaction = ({ navigation, props }) => {
 
       const id = await AsyncStorage.getItem('user_id')
       setMyID(id)
-      axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+      axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
         setCustomer(res.data[0])
         console.log(res.data[0].Province)
       }).catch(err => {
@@ -83,7 +83,7 @@ const Transaction = ({ navigation, props }) => {
       // Authorization: `Token ${my_token}`,
     };
 
-    axios.post('http://wateraccess.t3ch.rw:8234/Request/create/', postObj).then((res) => {
+    axios.post('http://admin.amazi.rw/Request/create/', postObj).then((res) => {
       console.log(res.status)
       alert('Your request is submitted')
       navigation.navigate('Home')

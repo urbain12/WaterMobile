@@ -119,7 +119,7 @@ const Register = (props) => {
                 // Authorization: `Token ${my_token}`,
             };
 
-            axios.post('http://wateraccess.t3ch.rw:8234/register/', postObj).then((res) => {
+            axios.post('http://admin.amazi.rw/register/', postObj).then((res) => {
                 if(res.data.code==200){
                     alert('Your are succesful register Please login with credentails sent on your phone number')
                 props.navigation.navigate('Login')

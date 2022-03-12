@@ -68,7 +68,7 @@ const checkPhone = ({ navigation }) => {
                 // Authorization: `Token ${my_token}`,
             };
 
-            axios.post('http://wateraccess.t3ch.rw:8234/send_otp/', postObj).then((res) => {
+            axios.post('http://admin.amazi.rw/send_otp/', postObj).then((res) => {
                 if(res.data.code==200){
                     alert('Please wait for verification code')
                 navigation.navigate('verifyphone',{'phone':Phonenumber})

@@ -60,29 +60,29 @@ const CryptoDetail = ({ navigation, }) => {
         LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
         async function setInfo() {
             const id = await AsyncStorage.getItem('user_id')
-            axios.get(`http://wateraccess.t3ch.rw:8234/getcustomerbyid/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
                 setCustomer(res.data[0])
             }).catch(err => {
                 console.log(err)
             })
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
                 setBalance(res.data.balance)
             }).catch(err => {
                 console.log(err)
             })
-            axios.get(`http://wateraccess.t3ch.rw:8234/SubscriptionsPayment/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/SubscriptionsPayment/${id}`).then((res) => {
                 setTransactionHistory(res.data)
             }).catch(err => {
                 console.log(err)
             })
-            axios.get(`http://wateraccess.t3ch.rw:8234/get_category/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/get_category/${id}`).then((res) => {
                 setCategory(res.data.category)
                 getInstalmentDays(res.data.subscription_date.slice(0, 10))
             }).catch(err => {
                 console.log(err)
             })
-            axios.get(`http://wateraccess.t3ch.rw:8234/subscriptions_by_customer/${id}`).then((res) => {
+            axios.get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`).then((res) => {
                 const sub = res.data.find(el => el.Category.Title.toUpperCase() === "INUMA")
                 setinformation(sub)
                 if (sub.From != null) {
@@ -103,7 +103,7 @@ const CryptoDetail = ({ navigation, }) => {
                     console.log('true')
                     const sub = res.data.find(subscr => subscr.Category.Title.toUpperCase() === 'INUMA')
                     console.log(sub.CustomerID)
-                    axios.get(`http://wateraccess.t3ch.rw:8234/payments/${sub.id}`).then((res) => {
+                    axios.get(`http://admin.amazi.rw/payments/${sub.id}`).then((res) => {
                         console.log('lkj')
                         setPayments(res.data)
                     }).catch(err => {
