@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "W.A.Rwanda",
-      "buildNumber": "2.2.8"
+      "buildNumber": "2.2.9"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +28,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "water.access.rwanda",
-      "versionCode": 19
+      "versionCode": 20
     },
     "web": {
       "favicon": "./assets/icon.png"
