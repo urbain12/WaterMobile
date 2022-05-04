@@ -50,10 +50,10 @@ const Notification = ({ navigation }) => {
 
     const format = (amount) => {
         return Number(amount)
-          .toFixed(2)
-          .replace(/\d(?=(\d{3})+\.)/g, '$&,')
-    
-      };
+            .toFixed(2)
+            .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
+    };
 
 
     return (
@@ -124,40 +124,40 @@ const Notification = ({ navigation }) => {
 
 
 
-                {JSON.stringify(informations) !== 'null' && JSON.stringify(informations) !=='[]' ? (
-                    informations.map(information => {
-                    return(
-                    <View
-                        style={{
-                            marginLeft: 10,
-                            borderRadius: 8,
-                            marginTop:20,
-                            backgroundColor: COLORS.white,
-                            ...styles.shadow
-                        }}
-                       >
+                    {JSON.stringify(informations) !== 'null' && JSON.stringify(informations) !== '[]' ? (
+                        informations.map(information => {
+                            return (
+                                <View
+                                    style={{
+                                        marginLeft: 10,
+                                        borderRadius: 8,
+                                        marginTop: 20,
+                                        backgroundColor: COLORS.white,
+                                        ...styles.shadow
+                                    }}
+                                >
 
-                        <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10,height:80 }}>
-                            <View>
-                            <FontAwesome5 name="exchange-alt" size={20} color="#009cde" style={{marginTop:20}} />
-                            </View>
-                            <View style={{ marginLeft: 30,marginBottom:20 }}>
-                                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{information.Token}</Text>
-                                <Text style={{ fontSize: 16,color: '#707070' }}>{JSON.stringify(format(information.Amount)).substring(1,JSON.stringify(format(information.Amount)).length-4)} Rwf</Text>
-                                <Text style={{ fontSize: 16,color: '#707070' }}>{information.created_at.slice(0,10)}</Text>
-                            </View>
-                        </View>
-                        
+                                    <View style={{ height: 60, borderTopColor: '#707070', borderTopWidth: 0.2, flexDirection: 'row', padding: 10, marginLeft: 10, height: 80 }}>
+                                        <View>
+                                            <FontAwesome5 name="exchange-alt" size={20} color="#009cde" style={{ marginTop: 20 }} />
+                                        </View>
+                                        <View style={{ marginLeft: 30, marginBottom: 20 }}>
+                                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{information.Token}</Text>
+                                            <Text style={{ fontSize: 16, color: '#707070' }}>{JSON.stringify(format(information.Amount)).substring(1, JSON.stringify(format(information.Amount)).length - 4)} Rwf</Text>
+                                            <Text style={{ fontSize: 16, color: '#707070' }}>{information.created_at.slice(0, 10)}</Text>
+                                        </View>
+                                    </View>
 
 
-                    </View>
-                    )
-                    })
+
+                                </View>
+                            )
+                        })
                     ) : (
-                        <View style={{justifyContent:'center',alignItems:'center'}}>
-                          <Text>No Transaction yet...</Text>
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                            <Text>No Transaction yet...</Text>
                         </View>
-                      )}
+                    )}
 
                 </View>
             </ScrollView>

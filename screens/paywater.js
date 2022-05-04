@@ -115,7 +115,7 @@ const Paywater = ({ route, navigation }) => {
         console.log('success')
         console.log(res.data)
         alert('Confirm with your phone and wait for approval')
-        navigation.navigate('inuma')
+        navigation.navigate('WaitingScreen')
         const setint = setInterval(() => {
           console.log('checking status')
           if (!paid) {

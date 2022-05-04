@@ -39,9 +39,11 @@ import UpdateCustomer from './screens/UpdateCustomer';
 import Resetpassword from './screens/Resetpassword';
 import Payuhira from './screens/Payuhira';
 import Payinuma from './screens/Payinuma';
+import Constants from 'expo-constants';
+import WaitingScreen from './screens/WaitingScreen';
+
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
 const Stack = createStackNavigator();
 const screenOptionStyle = {
   headerShown: false
@@ -395,6 +397,10 @@ const App = () => {
             <Stack.Screen
               name="Payinuma"
               component={Payinuma}
+            />
+            <Stack.Screen
+              name="WaitingScreen"
+              component={WaitingScreen}
             />
             <Stack.Screen
               name="Catridgeshop"
