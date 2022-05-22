@@ -131,7 +131,8 @@ const Paywater = ({ route, navigation }) => {
                 const postObj = JSON.stringify({
                   'Meternumber': customer.Meternumber.Meternumber,
                   'Amount': my_data2[0].amount,
-                  'Phone': customer.user.phone
+                  'Phone': customer.user.phone,
+                  'trans_id':my_data.transactionid
                 })
                 console.log(postObj)
                 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
