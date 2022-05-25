@@ -7,8 +7,7 @@ import {
     Image
 } from 'react-native';
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
-// import AsyncStorage from "@react-native-community/async-storage";
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { COLORS, SIZES, FONTS, icons } from "../constants"
 
 const PriceAlert = ({ customContainerStyle,navigation }) => {

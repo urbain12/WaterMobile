@@ -10,9 +10,7 @@ import {
   ActivityIndicator,
   ImageBackground
 } from "react-native";
-// import AsyncStorage from "@react-native-community/async-storage";
-import { AsyncStorage } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
 

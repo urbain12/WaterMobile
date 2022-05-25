@@ -16,8 +16,7 @@ import {
   BottomTabBar,
 } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
-// import AsyncStorage from '@react-native-community/async-storage';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Home } from "../screens";
 import { COLORS, FONTS, icons, images } from "../constants";
 import Modal from "react-native-modal";

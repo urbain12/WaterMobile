@@ -19,7 +19,7 @@ import {
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { MaterialIcons, MaterialCommunityIcons, AntDesign, EvilIcons, FontAwesome5, Entypo, SimpleLineIcons } from "@expo/vector-icons";
 
 

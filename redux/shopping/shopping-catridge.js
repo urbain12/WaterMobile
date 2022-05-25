@@ -1,7 +1,6 @@
 import * as actionTypes from './shopping-types';
 import axios from 'axios'
-import { AsyncStorage } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const retrieveProducts=()=>async dispatch=>{
 	try{

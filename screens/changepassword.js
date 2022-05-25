@@ -18,8 +18,7 @@ import {
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
 import axios from 'axios';
-// import AsyncStorage from "@react-native-community/async-storage";
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Icon from '@expo/vector-icons/Entypo';
 import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo, SimpleLineIcons } from "@expo/vector-icons";
 

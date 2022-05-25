@@ -10,8 +10,7 @@ import Tabs from "./navigation/tabs";
 import { AuthContext } from './context/Context';
 import store from './redux/store';
 import axios from 'axios';
-// import AsyncStorage from '@react-native-community/async-storage';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Shop from './screens/Shop';
 import Catridgeshop from './screens/Catridgeshop';
 import CatridgesDetails from './screens/CatridgesDetails';

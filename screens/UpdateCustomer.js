@@ -20,8 +20,7 @@ import {
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS,images } from "../constants";
 import axios from 'axios';
-// import AsyncStorage from "@react-native-community/async-storage";
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as ImagePicker from 'expo-image-picker';
 
 

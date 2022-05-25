@@ -18,8 +18,7 @@ import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons,Feather,Simp
 import {AuthContext} from '../context/Context';
 import { PriceAlert, TransactionHistory } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, icons, images } from "../constants";
-// import AsyncStorage from "@react-native-community/async-storage";
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
 import ProductCard from "../components/ProductCard";
 import { connect } from "react-redux";
