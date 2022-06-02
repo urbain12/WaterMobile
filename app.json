@@ -27,7 +27,6 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permission":[],
       "package": "water.access.rwanda",
       "versionCode": 23
     },
