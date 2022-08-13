@@ -19,7 +19,7 @@ import {
   TransactionHistory,
 } from "../components";
 import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
+import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo, SimpleLineIcons } from "@expo/vector-icons";
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
 
@@ -32,7 +32,7 @@ const request = ({ navigation }) => {
   const [Sector, setSector] = useState('')
   const [customer, setCustomer] = useState({})
   const [Cell, setCell] = useState('')
-  
+
 
 
   useEffect(() => {
@@ -90,118 +90,128 @@ const request = ({ navigation }) => {
   const renderHeader = () => {
 
     return (
-        <View
-            style={{
-                width: "100%",
-                height: 120,
-                ...styles.shadow,
-            }}
+      <View
+        style={{
+          width: "100%",
+          height: 120,
+          ...styles.shadow,
+        }}
+      >
+        <ImageBackground
+          source={images.banner_settings}
+          resizeMode="cover"
+          style={{
+            flex: 1,
+            alignItems: "center",
+          }}
         >
-            <ImageBackground
-                source={images.banner_settings}
-                resizeMode="cover"
-                style={{
-                    flex: 1,
-                    alignItems: "center",
-                }}
-            >
-                {/* Header Bar */}
-                <View
-                    style={{
-                        marginTop: 20,
-                        width: "100%",
-                        flexDirection: "row",
-                        paddingHorizontal: SIZES.padding,
-                    }}
-                >
-                    <TouchableOpacity
-                        style={{
-                            width: 35,
-                            height: 35,
-                            marginRight: '80%',
-                            marginTop: 10,
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                        onPress={() => navigation.goBack()}                    >
-                       <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
+          {/* Header Bar */}
+          <View
+            style={{
+              marginTop: 20,
+              width: "100%",
+              flexDirection: "row",
+              paddingHorizontal: SIZES.padding,
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                width: 35,
+                height: 35,
+                marginRight: '80%',
+                marginTop: 10,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onPress={() => navigation.goBack()}                    >
+              <SimpleLineIcons name="arrow-left" size={25} color="white" style={{ marginRight: 15 }} />
 
-                    </TouchableOpacity>
-                </View>
+            </TouchableOpacity>
+          </View>
 
-                {/* Balance */}
-                <View
-                    style={{
-                        paddingTop: 10,
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-                    Request a technician
-                    </Text>
-                </View>
+          {/* Balance */}
+          <View
+            style={{
+              paddingTop: 10,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
+              Request a technician
+            </Text>
+          </View>
 
-                {/* Trending */}
+          {/* Trending */}
 
-            </ImageBackground>
-        </View>
+        </ImageBackground>
+      </View>
     );
-}
+  }
 
 
   return (
-    <KeyboardAwareScrollView 
-    
+    <KeyboardAwareScrollView
+
     >
       <View
-        
+
       >
         {renderHeader()}
 
       </View>
       <ScrollView>
 
-          <View style={{marginTop: SIZES.padding,
+        <View style={{
+          marginTop: SIZES.padding,
           marginBottom: SIZES.padding,
           marginHorizontal: SIZES.padding,
           padding: SIZES.padding,
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.white,
-          ...styles.shadow,}}>
-            <TouchableOpacity activeOpacity={1}>
-              <TextInput
-                style={{
-                  borderColor: "gray",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  alignSelf:'center',
-                  height: 105,
-                  width: "100%",
-                  marginTop: 10,
-                  marginBottom: 10,
-                  textAlign: "center",
-                  padding: 10
-                }}
-                multiline={true}
-                name="Names"
-                placeholder="Message"
-                onChangeText={text => setMessage(text)}
-              />
+          ...styles.shadow,
+        }}>
+          <TouchableOpacity activeOpacity={1}>
+            <TextInput
+              style={{
+                borderColor: "gray",
+                borderWidth: 1,
+                borderRadius: 10,
+                alignSelf: 'center',
+                height: 115,
+                width: "100%",
+                marginTop: 10,
+                marginBottom: 10,
+                textAlign: "center",
+                padding: 10
+              }}
+              multiline={true}
+              name="Names"
+              placeholder="Message"
+              onChangeText={text => setMessage(text)}
+            />
 
-              <TextButton
-            label="Request"
-            onPress={(e) => { handleSubmit(e) }}
-           
-          />
+            <TouchableOpacity style={{ marginTop: 20 }}
+              onPress={(e) => {
+                handleSubmit(e)
+              }}>
+
+              <View
+                style={{ backgroundColor: "#009cde", width: "100%", height: "45%", alignItems: "center", borderRadius: 10,justifyContent:"center" }}
+              >
+                    <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Request</Text>
+              </View>
+
 
             </TouchableOpacity>
-          </View>
 
-          
-        </ScrollView>
+          </TouchableOpacity>
+        </View>
 
-        
+
+      </ScrollView>
+
+
     </KeyboardAwareScrollView>
   );
 };
