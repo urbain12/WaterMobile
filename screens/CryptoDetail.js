@@ -370,6 +370,7 @@ const CryptoDetail = ({ navigation }) => {
                                             flexDirection: 'row',
                                             alignItems: 'center',
                                             marginTop: '5%',
+                                            marginBottom: '-8%',
                                             marginLeft: 40
                                         }}
                                     >
@@ -390,11 +391,11 @@ const CryptoDetail = ({ navigation }) => {
 
                                                 <View style={{ marginLeft: 20, width: "40%" }}>
                                                     <Text style={{ fontSize: 40, color: "white", fontWeight: "bold" }}>
-
                                                         {days2 > 0 ? (
                                                             <>
                                                                 {JSON.stringify(information) !== '{}' && (
                                                                     <>
+<<<<<<< HEAD
                                                                         {information.TotalBalance==0?(<Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>0 Days</Text>):(
                                                                             information.get_overdue_months > 0 ? (
                                                                                 <Text style={{ color: 'red' }}>{(31 - days2) + ((information.get_overdue_months - 1) * 30)} Days</Text>
@@ -402,6 +403,13 @@ const CryptoDetail = ({ navigation }) => {
     
                                                                                 <Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>{days2} Days</Text>
                                                                             )
+=======
+                                                                        {information.get_overdue_months > 0 ? (
+                                                                            <Text style={{ color: 'red',fontSize: 18 }}>{(31 - days2) + ((information.get_overdue_months - 1) * 30)} Days</Text>
+                                                                        ) : (
+
+                                                                            <Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>{days2} Days</Text>
+>>>>>>> 24fe30d288cf5e695cbe4cc2dddad229d8c6dd0f
                                                                         )}
                                                                         
                                                                     </>
@@ -414,7 +422,7 @@ const CryptoDetail = ({ navigation }) => {
                                                     {information.get_overdue_months == 0 && <Text style={{ color: "white" }}>Remaining to your next Installment</Text>}
                                                     {information.get_overdue_months > 0 && (
                                                         <>
-                                                            <Text style={{ color: "white" }}>overdue to pay installment</Text>
+                                                            <Text style={{ color: "white" }}>Overdue to pay installment</Text>
                                                             <Text style={{ color: "white" }}>Pay now to avoid fees</Text>
                                                         </>
                                                     )}
@@ -506,7 +514,7 @@ const CryptoDetail = ({ navigation }) => {
                                             <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
 
-                                                <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Pay Subscriptions</Text>
+                                                <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Pay subscriptions</Text>
 
 
 
@@ -547,7 +555,11 @@ const CryptoDetail = ({ navigation }) => {
                                             <View style={{ flexDirection: "row", }}>
                                                 <View style={{ width: "45%", alignItems: "flex-start" }}>
                                                     <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
+<<<<<<< HEAD
                                                     <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", textAlign: "left" }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
+=======
+                                                    <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", textAlign: "left" }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.System.total)).length - 4)} Rwf</Text>
+>>>>>>> 24fe30d288cf5e695cbe4cc2dddad229d8c6dd0f
                                                 </View>
 
                                                 <View style={{ width: "45%", alignItems: "flex-start" }}>
@@ -559,13 +571,13 @@ const CryptoDetail = ({ navigation }) => {
 
                                             <View style={{ flexDirection: "row", marginTop: 20 }}>
                                                 <View style={{ width: "45%", alignItems: "flex-start" }}>
-                                                    <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Month </Text>
+                                                    <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Overdue month </Text>
                                                     <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold" }}>{information.get_overdue_months}</Text>
                                                 </View>
 
                                                 <View style={{ width: "45%", alignItems: "flex-start" }}>
-                                                    <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold", marginLeft: "20%" }}>Overdue Amount </Text>
-                                                    <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", marginLeft: "20%" }}>{Math.ceil(OverdueAmount)} Rwf</Text>
+                                                    <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold", marginLeft: "20%" }}>Overdue amount </Text>
+                                                    <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", marginLeft: "20%" }}>{JSON.stringify(format(OverdueAmount)).substring(1, JSON.stringify(format(OverdueAmount)).length - 4)} Rwf</Text>
                                                 </View>
 
                                             </View>

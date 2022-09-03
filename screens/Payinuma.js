@@ -232,7 +232,7 @@ const Momopay = ({ route, navigation }) => {
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-              Pay Inuma Installment
+              Pay inuma installment
             </Text>
           </View>
 

@@ -68,7 +68,7 @@ const TransactionHistory = ({ customContainerStyle, history,information }) => {
                 marginLeft:20
             }}
         >   
-                <Text style={{ ...FONTS.h2 }}>Transaction History</Text>
+                <Text style={{ ...FONTS.h2 }}>Installment History</Text>
                 {information.Downpayment>0&&(
                     <TouchableOpacity
                     style={{
@@ -107,7 +107,7 @@ const TransactionHistory = ({ customContainerStyle, history,information }) => {
             ):(
                 <>
                 {(information.Downpayment==0 && history.length==0)&&(<View style={{justifyContent:'center',alignItems:'center',marginTop:20,marginBottom:20}}>
-                <Text>No Transaction yet!</Text>
+                <Text>No transaction yet!</Text>
             </View>)}
             </>
             )}

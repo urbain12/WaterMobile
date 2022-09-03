@@ -224,7 +224,7 @@ const Paywater = ({ route, navigation }) => {
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-              Buy Water
+              Buy water
             </Text>
           </View>
 

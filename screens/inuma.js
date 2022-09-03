@@ -322,7 +322,7 @@ const CryptoDetail = ({ navigation, }) => {
                                     <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
 
-                                        <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Pay Subscriptions</Text>
+                                        <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Pay subscriptions</Text>
 
 
 
@@ -359,7 +359,7 @@ const CryptoDetail = ({ navigation, }) => {
 
 
                                     <View style={{ flex: 1, marginLeft: SIZES.radius }}>
-                                        <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Buy Water</Text>
+                                        <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Buy water</Text>
                                     </View>
 
 
@@ -422,7 +422,7 @@ const CryptoDetail = ({ navigation, }) => {
                                     <View style={{ flex: 1, marginLeft: SIZES.radius }}>
 
 
-                                        <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Water Buy Transaction</Text>
+                                        <Text style={{ color: '#009cde', alignSelf: "center", fontSize: 18, fontWeight: "bold" }}>Water buy transactions</Text>
 
 
 
@@ -467,20 +467,20 @@ const CryptoDetail = ({ navigation, }) => {
 
                                             <View style={{ width: "45%", alignItems: "flex-start" }}>
                                                 <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold", marginLeft: "20%" }}>Monthly payment </Text>
-                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", marginLeft: "20%" }}>{JSON.stringify(format(formatednum)).substring(1, JSON.stringify(format(formatednum)).length - 4)} Rwf</Text>
+                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 17, fontWeight: "bold", marginLeft: "20%" }}>{JSON.stringify(format(formatednum)).substring(1, JSON.stringify(format(formatednum)).length - 4)} Rwf</Text>
                                             </View>
                                         </View>
 
 
                                         <View style={{ flexDirection: "row", marginTop: 20 }}>
                                             <View style={{ width: "45%", alignItems: "flex-start" }}>
-                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Overdue Month </Text>
+                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Overdue month </Text>
                                                 <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold" }}>{information.get_overdue_months}</Text>
                                             </View>
 
                                             <View style={{ width: "45%", alignItems: "flex-start" }}>
-                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold", marginLeft: "20%" }}>Overdue Amount </Text>
-                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", marginLeft: "20%" }}>{Math.ceil(OverdueAmount)} Rwf</Text>
+                                                <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold", marginLeft: "20%" }}>Overdue amount </Text>
+                                                <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", marginLeft: "20%" }}>{JSON.stringify(format(OverdueAmount)).substring(1, JSON.stringify(format(OverdueAmount)).length - 4)}Rwf</Text>
                                             </View>
 
                                         </View>
