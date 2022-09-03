@@ -8,7 +8,8 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  ActivityIndicator
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -24,16 +25,12 @@ import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
 
 const Transaction = ({ navigation, props }) => {
-  const [Names, setNames] = useState('')
   const [Message, setMessage] = useState('')
-  const [Phonenumber, setPhonenumber] = useState('')
-  const [Province, setProvince] = useState('')
-  const [District, setDistrict] = useState('')
-  const [Sector, setSector] = useState('')
   const [customer, setCustomer] = useState({})
-  const [Cell, setCell] = useState('')
   const [service, setservice] = useState('')
   const [myID, setMyID] = useState('')
+  const [loading, setloading] = useState('')
+
 
 
   useEffect(() => {
@@ -55,6 +52,7 @@ const Transaction = ({ navigation, props }) => {
   }, [])
 
   const handleSubmit = (e) => {
+    setloading(true)
     e.preventDefault()
     const names = customer.FirstName + ' ' + customer.LastName
     const postObj = JSON.stringify({
@@ -89,6 +87,10 @@ const Transaction = ({ navigation, props }) => {
     }).catch(err => {
       console.log(err)
     })
+
+    setTimeout(() => {
+      setloading(false)
+    }, 5000)
 
 
 
@@ -220,7 +222,12 @@ const Transaction = ({ navigation, props }) => {
               <View
                 style={{ backgroundColor: "#009cde", width: "100%", height: "30%", alignItems: "center", borderRadius: 10, justifyContent: "center" }}
               >
-                <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Request</Text>
+                {loading ? (
+                  <ActivityIndicator size='large' color='white' style={{ marginTop: 10 }} />
+                ) :
+                  (
+                    <Text style={{ color: "white", marginTop: 10, fontSize: 20, fontWeight: "bold" }}>Request</Text>
+                  )}
               </View>
 
 
