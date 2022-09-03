@@ -8,7 +8,8 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  ActivityIndicator
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -24,16 +25,9 @@ import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
 
 const request = ({ navigation }) => {
-  const [Names, setNames] = useState('')
+  const [loading, setloading] = useState('')
   const [Message, setMessage] = useState('')
-  const [Phonenumber, setPhonenumber] = useState('')
-  const [Province, setProvince] = useState('')
-  const [District, setDistrict] = useState('')
-  const [Sector, setSector] = useState('')
   const [customer, setCustomer] = useState({})
-  const [Cell, setCell] = useState('')
-
-
 
   useEffect(() => {
     async function setInfo() {
@@ -53,6 +47,7 @@ const request = ({ navigation }) => {
   }, [])
 
   const handleSubmit = (e) => {
+    setloading(true)
     e.preventDefault()
     const names = customer.FirstName + ' ' + customer.LastName
     const postObj = JSON.stringify({
@@ -83,6 +78,10 @@ const request = ({ navigation }) => {
     }).catch(err => {
       console.log(err)
     })
+
+    setTimeout(() => {
+      setloading(false)
+    }, 5000)
 
 
 
@@ -197,9 +196,14 @@ const request = ({ navigation }) => {
               }}>
 
               <View
-                style={{ backgroundColor: "#009cde", width: "100%", height: "45%", alignItems: "center", borderRadius: 10,justifyContent:"center" }}
+                style={{ backgroundColor: "#009cde", width: "100%", height: "45%", alignItems: "center", borderRadius: 10, justifyContent: "center" }}
               >
-                    <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }}>Request</Text>
+                {loading ? (
+                  <ActivityIndicator size='large' color='white' style={{ marginTop: 10 }} />
+                ) :
+                  (
+                    <Text style={{ color: "white", marginTop: 10, fontSize: 20, fontWeight: "bold" }}>Request</Text>
+                  )}
               </View>
 
 
