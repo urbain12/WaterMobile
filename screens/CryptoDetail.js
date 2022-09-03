@@ -395,12 +395,15 @@ const CryptoDetail = ({ navigation }) => {
                                                             <>
                                                                 {JSON.stringify(information) !== '{}' && (
                                                                     <>
-                                                                        {information.get_overdue_months > 0 ? (
-                                                                            <Text style={{ color: 'red' }}>{(31 - days2) + ((information.get_overdue_months - 1) * 30)} Days</Text>
-                                                                        ) : (
-
-                                                                            <Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>{days2} Days</Text>
+                                                                        {information.TotalBalance==0?(<Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>0 Days</Text>):(
+                                                                            information.get_overdue_months > 0 ? (
+                                                                                <Text style={{ color: 'red' }}>{(31 - days2) + ((information.get_overdue_months - 1) * 30)} Days</Text>
+                                                                            ) : (
+    
+                                                                                <Text style={{ fontSize: 18, color: "white", fontWeight: "900" }}>{days2} Days</Text>
+                                                                            )
                                                                         )}
+                                                                        
                                                                     </>
                                                                 )}
                                                             </>
@@ -544,7 +547,7 @@ const CryptoDetail = ({ navigation }) => {
                                             <View style={{ flexDirection: "row", }}>
                                                 <View style={{ width: "45%", alignItems: "flex-start" }}>
                                                     <Text style={{ fontSize: 12, color: '#1B1C1E', fontWeight: "bold" }}>Installment balance </Text>
-                                                    <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", textAlign: "left" }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.System.total)).length - 3)} Rwf</Text>
+                                                    <Text style={{ marginTop: 3, color: '#009cde', fontSize: 18, fontWeight: "bold", textAlign: "left" }}>{JSON.stringify(format(information.TotalBalance)).substring(1, JSON.stringify(format(information.TotalBalance)).length - 4)} Rwf</Text>
                                                 </View>
 
                                                 <View style={{ width: "45%", alignItems: "flex-start" }}>

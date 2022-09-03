@@ -126,7 +126,8 @@ const Momopay = ({ route, navigation }) => {
           const postObj = JSON.stringify({
             'customerID': customer.id,
             'amount': my_data2[0].amount,
-            'sub_id':sub.id
+            'sub_id':sub.id,
+            'trans_id':my_data.transactionid
           })
           console.log(postObj)
           axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
