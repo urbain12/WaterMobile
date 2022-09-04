@@ -89,7 +89,7 @@ const CryptoDetail = ({ navigation }) => {
 
 
     const totalam = information.System != undefined && information.System.total - parseInt(information.Downpayment)
-    const Monthly = totalam / information.InstallmentPeriod
+    const Monthly = (information.Total - information.Downpayment) / information.InstallmentPeriod
     const OverdueAmount = Monthly * information.get_overdue_months
     const subbalance = totalam
     const formatednum = Math.ceil(Monthly)
