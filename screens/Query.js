@@ -83,7 +83,7 @@ const Transaction = ({ navigation, props }) => {
     axios.post('http://admin.amazi.rw/Request/create/', postObj).then((res) => {
       console.log(res.status)
       alert('Your request is submitted')
-      navigation.navigate('Home')
+      navigation.navigate('Responses')
     }).catch(err => {
       console.log(err)
     })
@@ -104,7 +104,7 @@ const Transaction = ({ navigation, props }) => {
           height: 120,
           ...styles.shadow,
         }}
-      >
+       >
         <ImageBackground
           source={images.banner_settings}
           resizeMode="cover"
@@ -112,7 +112,7 @@ const Transaction = ({ navigation, props }) => {
             flex: 1,
             alignItems: "center",
           }}
-        >
+         >
           {/* Header Bar */}
           <View
             style={{

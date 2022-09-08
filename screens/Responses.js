@@ -34,7 +34,9 @@ const Responses = (props) => {
 
     }
 
-    setInfo()
+    setInterval(() => {
+      setInfo()
+    }, 500)
 
 
   }, []);
