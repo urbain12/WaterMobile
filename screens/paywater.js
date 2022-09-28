@@ -140,12 +140,12 @@ const Paywater = ({ route, navigation }) => {
                   'Content-Type': 'application/json',
                   // Authorization: `Token ${my_token}`,
                 };
-
+                  setpaid(true)
+                  clearInterval(setint)
                 axios.post('http://admin.amazi.rw/pay_Water/', postObj).then((res) => {
                   console.log(res.status)
                   alert('Water paid successfully!!')
-                  setpaid(true)
-                  clearInterval(setint)
+                  
                   navigation.navigate('inuma')
 
                 }).catch(error => {
