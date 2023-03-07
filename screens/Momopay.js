@@ -45,7 +45,7 @@ const Momopay = ({ route, navigation }) => {
       axios.get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`).then((res) => {
         const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
         setinformation(sub)
-        const newmonthly = sub.System.total-parseInt(sub.Downpayment)
+        const newmonthly = sub.Total-parseInt(sub.Downpayment)
         const Monthly = Math.ceil(newmonthly / sub.InstallmentPeriod)
         const month = JSON.stringify(Monthly)
         setAmount(month)
@@ -230,7 +230,7 @@ const Momopay = ({ route, navigation }) => {
             }}
           >
             <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
-              Pay Amazi Installment
+              Pay Amazi Installments
             </Text>
           </View>
 

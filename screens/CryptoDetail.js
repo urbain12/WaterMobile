@@ -41,7 +41,7 @@ const CryptoDetail = ({ navigation }) => {
                 setinformation(sub)
 
                 if (sub.From != null) {
-                    getFilterDays(sub.From.slice(0, 10))
+                    getFilterDays(sub.changeDate.slice(0, 10))
                     getInstalmentDays(sub.From.slice(0, 10))
                 }
                 else if (sub.From == null) {
