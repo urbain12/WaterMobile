@@ -2,7 +2,7 @@
   "expo": {
     "name": "Water Access",
     "slug": "Water_Access",
-    "description":" Water Access Rwanda's application",
+    "description": " Water Access Rwanda's application",
     "version": "2.7.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,12 +27,17 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions":[],
+      "permissions": [],
       "package": "water.access.rwanda",
       "versionCode": 25
     },
     "web": {
       "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b1523979-1340-4395-8d92-8ddaafface0c"
+      }
     }
   }
 }
