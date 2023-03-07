@@ -1,12 +1,13 @@
-{
-    "build": {
-      "development": {
-        "developmentClient": true,
-        "distribution": "internal"
+{"build": {
+    "preview": {
+      "android": {
+        "buildType": "apk",
+        "artifactPath" : "android/build"
       },
-      "preview": {
-        "distribution": "internal"
+      "ios" : {
+        "simulator" : true,
+        "artifactPath" : "ios/build"
       },
-      "production": {}
+      "distribution": "internal"
     }
-  }
+  }}
