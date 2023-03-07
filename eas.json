@@ -7,9 +7,10 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {},
-    "cli": {
-        "requireCommit": true
-      }
+    "production": {}
+    
+  },
+  "cli": {
+    "requireCommit": true
   }
 }
