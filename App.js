@@ -43,6 +43,7 @@ import WaitingScreen from './screens/WaitingScreen';
 
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
+import { AccountDeleted } from './screens/AccountDeleted';
 const Stack = createStackNavigator();
 const screenOptionStyle = {
   headerShown: false
@@ -316,6 +317,10 @@ const App = () => {
             <Stack.Screen
               name="query"
               component={query}
+            />
+            <Stack.Screen
+              name="AccountDeleted"
+              component={AccountDeleted}
             />
             <Stack.Screen
               name="Landing"

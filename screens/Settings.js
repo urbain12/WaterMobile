@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Image,
+  Alert,
   ImageBackground,
   LogBox,
 } from "react-native";
@@ -30,6 +31,39 @@ const Settings = ({ navigation }) => {
   const modalHandler = () => {
     setIsVisible(!isVisible);
   };
+
+  const deleteAlert = () =>
+    Alert.alert(
+      "Delete",
+      "Are you sure you want to delete your account?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => deleteUser ()}
+      ]
+    );
+
+  const deleteUser = async () => {
+    const id = await AsyncStorage.getItem('user_id')
+    const obj = JSON.stringify({
+      'email': "raimable@gmail.com",
+      'deleted':true
+    })
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+          axios.defaults.xsrfCookieName = "csrftoken";
+          axios.defaults.headers = {
+            'Content-Type': 'application/json',
+            // Authorization: `Token ${my_token}`,
+          };
+    axios.put(`http://admin.amazi.rw/user_update/${id}/`,obj).then((res)=>{
+      alert('Account deleted successfully')
+      context.signOut()
+    })
+
+  }
 
   useEffect(() => {
     async function setInfo() {
@@ -310,12 +344,19 @@ const Settings = ({ navigation }) => {
             <Text style={{ marginTop: 15, marginLeft: 20, fontSize: 18, fontWeight: "bold", color: "#707070" }}>Version: 1.0.0</Text>
           </View>
 
+          <TouchableOpacity style={styles.signIn} onPress={() => deleteAlert()}>
+            <View style={{ backgroundColor: "red", marginLeft: 20,paddingHorizontal:20, alignItems: "center",alignSelf:"flex-start", borderRadius: 10 }}>
+                {/* {data.loading ? (
+                    <ActivityIndicator size='large' color='white' style={{ marginTop: 10 }} />
+                ) :
+                ( */}
+                    <Text style={{ color: "white",marginVertical:10, fontSize: 16, fontWeight: "bold" }}>Delete Account</Text>
+                 {/* )} */}
 
-
-
-
-
+            </View>
+          </TouchableOpacity>
         </View>
+
         <Modal
           animationType="slide"
           visible={isVisible}
@@ -357,7 +398,7 @@ const Settings = ({ navigation }) => {
                       width: '100%',
                     }}
                   >
-                    <Text style={{ color: 'black', fontSize: 20, paddingHorizontal: 20 }}>
+                    <Text style={{ color: 'black', fontSize: 16, paddingHorizontal: 20 }}>
 
                       To ensure all taps provide safe water and encourage rain water harvesting, Amazi provides first flush diverter systems and point of entry filtration systems. With this solution, households, schools, clinics can save on their water bill in the rain season while reducing the amount of run-off water that would otherwise cause flooding. The systems come with a one-year warranty. Filters include in-line filters, table-top, portable and Aquatabs Chlorinators</Text>
 
@@ -392,6 +433,14 @@ const styles = StyleSheet.create({
 
     elevation: 8,
   },
+  signIn: {
+    width: '100%',
+    marginTop:10,
+    marginBottom:50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10
+},
 });
 
 export default Settings;

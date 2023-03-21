@@ -35,53 +35,53 @@ const Home = ({ navigation }) => {
   const [customer, setCustomer] = useState({})
   const [image, setImage] = useState({})
 
-  useEffect(() => {
-    const setInfo = async () => {
-      const id = await AsyncStorage.getItem('user_id')
-      axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
-        setCustomer(res.data[0])
-      }).catch(err => {
-        console.log(err)
-      })
-      axios.get(`http://admin.amazi.rw/backgroundlist/`).then((res) => {
-        setImage(res.data[0])
-      }).catch(err => {
-        console.log(err)
-      })
-      axios.get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`).then((res) => {
-        var subs = []
-        console.log(res.data.length)
-        navigation.navigate('Home')
-        for (var i = 0; i < res.data.length; i++) {
-          subs.push(res.data[i].Category.Title.toUpperCase())
-          console.log(res.data[i].TotalBalance)
-        }
-        if (subs.includes('AMAZI')) {
-          setIsAmazi(true)
-        }
-        if (subs.includes('INUMA')) {
-          setIsInuma(true)
-        }
-        if (subs.includes('UHIRA')) {
-          setIsUhira(true)
-        }
-        if (!subs.includes('AMAZI')) {
-          setIsAmazi(false)
-        }
-        if (!subs.includes('INUMA')) {
-          setIsInuma(false)
-        }
-        if (!subs.includes('UHIRA')) {
-          setIsUhira(false)
-        }
-        setSubscriptions(subs)
-      }).catch(err => {
-        console.log(err)
-      })
-    }
-    setInfo();
+  const setInfo = async () => {
+    const id = await AsyncStorage.getItem('user_id')
+    axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
+      setCustomer(res.data[0])
+    }).catch(err => {
+      console.log(err)
+    })
+    axios.get(`http://admin.amazi.rw/backgroundlist/`).then((res) => {
+      setImage(res.data[0])
+    }).catch(err => {
+      console.log(err)
+    })
+    axios.get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`).then((res) => {
+      var subs = []
+      console.log(res.data.length)
+      for (var i = 0; i < res.data.length; i++) {
+        subs.push(res.data[i].Category.Title.toUpperCase())
+        console.log(res.data[i].TotalBalance)
+      }
+      if (subs.includes('AMAZI')) {
+        setIsAmazi(true)
+      }
+      if (subs.includes('INUMA')) {
+        setIsInuma(true)
+      }
+      if (subs.includes('UHIRA')) {
+        setIsUhira(true)
+      }
+      if (!subs.includes('AMAZI')) {
+        setIsAmazi(false)
+      }
+      if (!subs.includes('INUMA')) {
+        setIsInuma(false)
+      }
+      if (!subs.includes('UHIRA')) {
+        setIsUhira(false)
+      }
+      setSubscriptions(subs)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
-  }, [])
+  useEffect(()=>{
+        setInfo()
+   
+  },[])
 
 
 
@@ -274,415 +274,439 @@ const Home = ({ navigation }) => {
 
 
   return (
-    <>
-    { isAmazi != undefined && isUhira != undefined && isInuma != undefined ?
-      (
-        <View style={{ flex: 1, height: "100%", backgroundColor: "#f2f2f2" }}>
-          {renderHeader()}
+    JSON.stringify(customer)==="{}"?(
+      <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center", backgroundColor: "#fff", width: "100%" }}>
 
-          < Text style={{ fontSize: 24, color: "#009cde", paddingTop: 10, marginLeft: 22, fontWeight: "bold", marginBottom: 10 }}> Services</ Text>
+      <ActivityIndicator size='large' color='black' />
+      <Text style={{ fontSize: 30, color: "black" }}>Please wait</Text>
+    </View>
+    ):(
+      customer?(
 
-
-          <ScrollView style={{ height: "100%", marginBottom: 10 }}>
-            {isAmazi === undefined ? (
-              <View style={{ alignItems: 'center', marginTop: 20 }}>
-                <View
-                  style={{
-                    width: '90%',
-                    height: 90,
-                    paddingVertical: 5,
-                    paddingHorizontal: 5,
-                    borderLeftWidth: 10,
-                    borderLeftColor: "#88b04b",
-                    borderRadius: 8,
-                    backgroundColor: "white",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    ...styles.shadow
-
-
-                  }}
-                //onPress={() => navigation.navigate("Landing")}
-                >
-                  <View style={{ flexDirection: 'row' }}>
-
-                    <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                      <Text style={{ fontSize: 12, color: "#00b4e3" }}>AMAZI</Text>
-                      <View style={{
-                        borderBottomWidth: 2,
-                        borderBottomColor: "white",
-                        width: 100,
-                        marginLeft: 1,
-                        marginTop: 5
-                      }}>
-
-                      </View>
-
-
-
-                    </View>
-                  </View>
-
-
-                </View>
-              </View>
-            ) : (
-              <>
-                {isAmazi ? (
-                  <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
-                    <View
-                      style={{
-                        width: '95%',
-                        height: 90,
-                        paddingVertical: 5,
-                        paddingHorizontal: 18,
-                        borderRadius: 8,
-                        backgroundColor: "#00b4e3",
-
-                        ...styles.shadow
-
-                      }}
-
-                    >
-                      <View style={{ flexDirection: 'row' }}>
-                        <View style={{ paddingTop: 22 }}>
-                          <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/amazi2.png')} />
-                        </View>
-                        <View>
-                          <Text style={{ fontSize: 20, color: "white", marginTop: 13, fontWeight: "bold", marginLeft: 20 }}>AMAZI</Text>
-
-                          <View>
-                            <Text style={{ color: 'white', ...FONTS.body3, marginTop: 5, fontSize: 18, marginLeft: 20 }}>
-                              Subscribed
-                            </Text>
+        !customer.user.deleted?(
+          <>
+          { isAmazi != undefined && isUhira != undefined && isInuma != undefined ?
+            (
+              <View style={{ flex: 1, height: "100%", backgroundColor: "#f2f2f2" }}>
+                {renderHeader()}
+      
+                < Text style={{ fontSize: 24, color: "#009cde", paddingTop: 10, marginLeft: 22, fontWeight: "bold", marginBottom: 10 }}> Services</ Text>
+      
+      
+                <ScrollView style={{ height: "100%", marginBottom: 10 }}>
+                  {isAmazi === undefined ? (
+                    <View style={{ alignItems: 'center', marginTop: 20 }}>
+                      <View
+                        style={{
+                          width: '90%',
+                          height: 90,
+                          paddingVertical: 5,
+                          paddingHorizontal: 5,
+                          borderLeftWidth: 10,
+                          borderLeftColor: "#88b04b",
+                          borderRadius: 8,
+                          backgroundColor: "white",
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          ...styles.shadow
+      
+      
+                        }}
+                      //onPress={() => navigation.navigate("Landing")}
+                      >
+                        <View style={{ flexDirection: 'row' }}>
+      
+                          <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
+                            <Text style={{ fontSize: 12, color: "#00b4e3" }}>AMAZI</Text>
+                            <View style={{
+                              borderBottomWidth: 2,
+                              borderBottomColor: "white",
+                              width: 100,
+                              marginLeft: 1,
+                              marginTop: 5
+                            }}>
+      
+                            </View>
+      
+      
+      
                           </View>
-
-
                         </View>
-
-                        <View style={{ justifyContent: "center", marginLeft: "45%", paddingTop: 20 }}>
-
-                          <SimpleLineIcons name="arrow-right" size={20} color="white" />
-
-                        </View>
+      
+      
                       </View>
-
-
                     </View>
-                  </TouchableOpacity>
-                ) : (
-                  <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
-                    <View
-                      style={{
-                        width: '95%',
-                        height: 90,
-                        paddingVertical: 5,
-                        paddingHorizontal: 15,
-                        borderLeftWidth: 10,
-                        borderLeftColor: "#00b4e3",
-                        borderRadius: 8,
-                        backgroundColor: "#f2f2f2",
-                        ...styles.shadow
-
-                      }}
-                    //onPress={() => navigation.navigate("Landing")}
-                    >
-                      <View style={{ flexDirection: 'row' }}>
-
-                        <View style={{ paddingTop: 20 }}>
-                          <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/amazii.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: 25, }}>
-                          <Text style={{ fontSize: 20, color: "#1f1f1f", marginTop: 10, fontWeight: "bold" }}>AMAZI</Text>
-
-
-                          <TouchableOpacity onPress={() => { amazi_alert() }}>
-                            <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
-                              Tap to Subscribe
-                            </Text>
-                          </TouchableOpacity>
-
-                        </View>
-                      </View>
-
-
-                    </View>
-                  </View>
-                )}
-              </>
-            )}
-
-
-
-            {isInuma === undefined ? (
-              <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
-                <View
-                  style={{
-                    width: '90%',
-                    height: 90,
-                    paddingVertical: 5,
-                    paddingHorizontal: 5,
-                    borderLeftWidth: 10,
-                    borderLeftColor: "#00b5de",
-                    borderRadius: 8,
-                    backgroundColor: "white",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    ...styles.shadow
-
-                  }}
-                //onPress={() => navigation.navigate("Landing")}
-                >
-                  <View style={{ flexDirection: 'row' }}>
-
-                    <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                      <Text style={{ fontSize: 20, color: "#00b4e3", marginTop: 10, fontWeight: "bold" }}>INUMA</Text>
-                      <View style={{
-                        borderBottomWidth: 2,
-                        borderBottomColor: "#00b4e3",
-                        width: 75,
-                        marginLeft: 1,
-                        marginTop: 5
-                      }}>
-
-                      </View>
-
-
-                    </View>
-                  </View>
-
-
-                </View>
-              </View>
-            ) : (
-              <>
-                {isInuma ? (
-                  <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
-                    <View
-                      style={{
-                        width: '95%',
-                        height: 90,
-                        paddingVertical: 5,
-                        paddingHorizontal: 18,
-                        borderRadius: 8,
-                        backgroundColor: "#00b5de",
-                        ...styles.shadow
-
-                      }}
-                    //onPress={() => navigation.navigate("Landing")}
-                    >
-                      <View style={{ flexDirection: 'row' }}>
-
-
-                        <View style={{ paddingTop: 22 }}>
-                          <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/inuma2.png')} />
-                        </View>
-                        <View>
-                          <Text style={{ fontSize: 20, color: "white", marginTop: 13, fontWeight: "bold", marginLeft: 20 }}>INUMA <MaterialCommunityIcons name="trademark" size={24} color="white" /></Text>
-
-                          <View>
-                            <Text style={{ color: 'white', ...FONTS.body3, marginTop: 5, fontSize: 18, marginLeft: 20 }}>
-                              Subscribed
-                            </Text>
+                  ) : (
+                    <>
+                      {isAmazi ? (
+                        <TouchableOpacity onPress={() => navigation.navigate("CryptoDetail")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
+                          <View
+                            style={{
+                              width: '95%',
+                              height: 90,
+                              paddingVertical: 5,
+                              paddingHorizontal: 18,
+                              borderRadius: 8,
+                              backgroundColor: "#00b4e3",
+      
+                              ...styles.shadow
+      
+                            }}
+      
+                          >
+                            <View style={{ flexDirection: 'row' }}>
+                              <View style={{ paddingTop: 22 }}>
+                                <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/amazi2.png')} />
+                              </View>
+                              <View>
+                                <Text style={{ fontSize: 20, color: "white", marginTop: 13, fontWeight: "bold", marginLeft: 20 }}>AMAZI</Text>
+      
+                                <View>
+                                  <Text style={{ color: 'white', ...FONTS.body3, marginTop: 5, fontSize: 18, marginLeft: 20 }}>
+                                    Subscribed
+                                  </Text>
+                                </View>
+      
+      
+                              </View>
+      
+                              <View style={{ justifyContent: "center", marginLeft: "45%", paddingTop: 20 }}>
+      
+                                <SimpleLineIcons name="arrow-right" size={20} color="white" />
+      
+                              </View>
+                            </View>
+      
+      
                           </View>
-
-
-                        </View>
-                        <View style={{ justifyContent: "center", marginLeft: "45%", paddingTop: 20 }}>
-
-                          <SimpleLineIcons name="arrow-right" size={20} color="white" />
-
-                        </View>
-                      </View>
-
-
-                    </View>
-                  </TouchableOpacity>
-                ) : (
-                  <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
-                    <View
-                      style={{
-                        width: '95%',
-                        height: 90,
-                        paddingVertical: 5,
-                        paddingHorizontal: 15,
-                        borderLeftWidth: 10,
-                        borderLeftColor: "#00b5de",
-                        borderRadius: 8,
-                        backgroundColor: "white",
-                        ...styles.shadow
-
-                      }}
-                    //onPress={() => navigation.navigate("Landing")}
-                    >
-                      <View style={{ flexDirection: 'row' }}>
-
-                        <View style={{ paddingTop: 20 }}>
-                          <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/inumai.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: 25, }}>
-                          <Text style={{ fontSize: 20, color: "#1f1f1f", marginTop: 10, fontWeight: "bold" }}>INUMA <MaterialCommunityIcons name="trademark" size={24} color="#1f1f1f" /></Text>
-
-                          <TouchableOpacity onPress={() => { inuma_alert() }}>
-                            <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
-                              Tap to Subscribe
-                            </Text>
-                          </TouchableOpacity>
-
-                        </View>
-                      </View>
-
-
-                    </View>
-                  </View>
-                )}
-              </>
-            )}
-
-
-
-            {isUhira === undefined ? (
-              <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
-                <View
-                  style={{
-                    width: '90%',
-                    height: 90,
-                    paddingVertical: 5,
-                    paddingHorizontal: 5,
-                    borderLeftWidth: 10,
-                    borderLeftColor: "#88b04b",
-                    borderRadius: 8,
-                    backgroundColor: "white",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    ...styles.shadow
-
-                  }}
-                //onPress={() => navigation.navigate("Landing")}
-                >
-                  <View style={{ flexDirection: 'row' }}>
-
-                    <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
-                      <Text style={{ fontSize: 20, color: "#00b4e3", marginTop: 10, fontWeight: "bold" }}>UHIRA</Text>
-                      <View style={{
-                        borderBottomWidth: 2,
-                        borderBottomColor: "#00b4e3",
-                        width: 75,
-                        marginLeft: 1,
-                        marginTop: 5
-                      }}>
-
-                      </View>
-
-
-                    </View>
-                  </View>
-
-
-                </View>
-              </View>
-            ) : (
-              <>
-                {isUhira ? (
-                  <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15, marginBottom: 100, }}>
-                    <View
-                      style={{
-                        width: '95%',
-                        height: 90,
-                        paddingVertical: 5,
-                        paddingHorizontal: 12,
-                        marginBottom: 100,
-                        borderRadius: 8,
-                        backgroundColor: "#88b04b",
-                        ...styles.shadow
-
-                      }}
-                    //onPress={() => navigation.navigate("Landing")}
-                    >
-                      <View style={{ flexDirection: 'row' }}>
-
-                        <View style={{ paddingTop: 22 }}>
-                          <Image resizeMode='contain' style={{ width: 35, height: 35, marginLeft: "8%" }} source={require('../assets/icons/uhira2.png')} />
-                        </View>
-                        <View>
-                          <Text style={{ fontSize: 20, color: "white", marginTop: 13, fontWeight: "bold" }}>UHIRA</Text>
-
-                          <View>
-                            <Text style={{ color: 'white', ...FONTS.body3, marginTop: 5, fontSize: 18 }}>
-                              Subscribed
-                            </Text>
+                        </TouchableOpacity>
+                      ) : (
+                        <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
+                          <View
+                            style={{
+                              width: '95%',
+                              height: 90,
+                              paddingVertical: 5,
+                              paddingHorizontal: 15,
+                              borderLeftWidth: 10,
+                              borderLeftColor: "#00b4e3",
+                              borderRadius: 8,
+                              backgroundColor: "#f2f2f2",
+                              ...styles.shadow
+      
+                            }}
+                          //onPress={() => navigation.navigate("Landing")}
+                          >
+                            <View style={{ flexDirection: 'row' }}>
+      
+                              <View style={{ paddingTop: 20 }}>
+                                <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/amazii.png')} />
+                              </View>
+      
+                              <View style={{ marginLeft: 25, }}>
+                                <Text style={{ fontSize: 20, color: "#1f1f1f", marginTop: 10, fontWeight: "bold" }}>AMAZI</Text>
+      
+      
+                                <TouchableOpacity onPress={() => { amazi_alert() }}>
+                                  <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
+                                    Tap to Subscribe
+                                  </Text>
+                                </TouchableOpacity>
+      
+                              </View>
+                            </View>
+      
+      
                           </View>
-
-
                         </View>
-
-                        <View style={{ justifyContent: "center", marginLeft: "45%", paddingTop: 20 }}>
-
-                          <SimpleLineIcons name="arrow-right" size={20} color="white" />
-
+                      )}
+                    </>
+                  )}
+      
+      
+      
+                  {isInuma === undefined ? (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
+                      <View
+                        style={{
+                          width: '90%',
+                          height: 90,
+                          paddingVertical: 5,
+                          paddingHorizontal: 5,
+                          borderLeftWidth: 10,
+                          borderLeftColor: "#00b5de",
+                          borderRadius: 8,
+                          backgroundColor: "white",
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          ...styles.shadow
+      
+                        }}
+                      //onPress={() => navigation.navigate("Landing")}
+                      >
+                        <View style={{ flexDirection: 'row' }}>
+      
+                          <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
+                            <Text style={{ fontSize: 20, color: "#00b4e3", marginTop: 10, fontWeight: "bold" }}>INUMA</Text>
+                            <View style={{
+                              borderBottomWidth: 2,
+                              borderBottomColor: "#00b4e3",
+                              width: 75,
+                              marginLeft: 1,
+                              marginTop: 5
+                            }}>
+      
+                            </View>
+      
+      
+                          </View>
                         </View>
+      
+      
                       </View>
-
-
                     </View>
-                  </TouchableOpacity>
-                ) : (
-                  <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15, marginBottom: 100, }}>
-                    <View
-                      style={{
-                        width: '95%',
-                        height: 90,
-                        paddingVertical: 5,
-                        paddingHorizontal: 10,
-                        borderLeftWidth: 10,
-                        borderLeftColor: "#88b04b",
-                        borderRadius: 8,
-                        backgroundColor: "white",
-                        ...styles.shadow
-
-                      }}
-                    //onPress={() => navigation.navigate("Landing")}
-                    >
-                      <View style={{ flexDirection: 'row' }}>
-
-                        <View style={{ paddingTop: 20 }}>
-                          <Image resizeMode='contain' style={{ width: 35, height: 35, marginLeft: "10%" }} source={require('../assets/icons/uhirai.png')} />
+                  ) : (
+                    <>
+                      {isInuma ? (
+                        <TouchableOpacity onPress={() => navigation.navigate("inuma")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                          <View
+                            style={{
+                              width: '95%',
+                              height: 90,
+                              paddingVertical: 5,
+                              paddingHorizontal: 18,
+                              borderRadius: 8,
+                              backgroundColor: "#00b5de",
+                              ...styles.shadow
+      
+                            }}
+                          //onPress={() => navigation.navigate("Landing")}
+                          >
+                            <View style={{ flexDirection: 'row' }}>
+      
+      
+                              <View style={{ paddingTop: 22 }}>
+                                <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/inuma2.png')} />
+                              </View>
+                              <View>
+                                <Text style={{ fontSize: 20, color: "white", marginTop: 13, fontWeight: "bold", marginLeft: 20 }}>INUMA <MaterialCommunityIcons name="trademark" size={24} color="white" /></Text>
+      
+                                <View>
+                                  <Text style={{ color: 'white', ...FONTS.body3, marginTop: 5, fontSize: 18, marginLeft: 20 }}>
+                                    Subscribed
+                                  </Text>
+                                </View>
+      
+      
+                              </View>
+                              <View style={{ justifyContent: "center", marginLeft: "45%", paddingTop: 20 }}>
+      
+                                <SimpleLineIcons name="arrow-right" size={20} color="white" />
+      
+                              </View>
+                            </View>
+      
+      
+                          </View>
+                        </TouchableOpacity>
+                      ) : (
+                        <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                          <View
+                            style={{
+                              width: '95%',
+                              height: 90,
+                              paddingVertical: 5,
+                              paddingHorizontal: 15,
+                              borderLeftWidth: 10,
+                              borderLeftColor: "#00b5de",
+                              borderRadius: 8,
+                              backgroundColor: "white",
+                              ...styles.shadow
+      
+                            }}
+                          //onPress={() => navigation.navigate("Landing")}
+                          >
+                            <View style={{ flexDirection: 'row' }}>
+      
+                              <View style={{ paddingTop: 20 }}>
+                                <Image resizeMode='contain' style={{ width: 35, height: 35 }} source={require('../assets/icons/inumai.png')} />
+                              </View>
+      
+                              <View style={{ marginLeft: 25, }}>
+                                <Text style={{ fontSize: 20, color: "#1f1f1f", marginTop: 10, fontWeight: "bold" }}>INUMA <MaterialCommunityIcons name="trademark" size={24} color="#1f1f1f" /></Text>
+      
+                                <TouchableOpacity onPress={() => { inuma_alert() }}>
+                                  <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
+                                    Tap to Subscribe
+                                  </Text>
+                                </TouchableOpacity>
+      
+                              </View>
+                            </View>
+      
+      
+                          </View>
                         </View>
-
-                        <View >
-                          <Text style={{ fontSize: 20, color: "#1f1f1f", marginTop: 10, fontWeight: "bold" }}>UHIRA</Text>
-
-                          <TouchableOpacity onPress={() => { uhira_alert() }}>
-                            <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
-                              Tap to Subscribe
-                            </Text>
-                          </TouchableOpacity>
-
+                      )}
+                    </>
+                  )}
+      
+      
+      
+                  {isUhira === undefined ? (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 100, }}>
+                      <View
+                        style={{
+                          width: '90%',
+                          height: 90,
+                          paddingVertical: 5,
+                          paddingHorizontal: 5,
+                          borderLeftWidth: 10,
+                          borderLeftColor: "#88b04b",
+                          borderRadius: 8,
+                          backgroundColor: "white",
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          ...styles.shadow
+      
+                        }}
+                      //onPress={() => navigation.navigate("Landing")}
+                      >
+                        <View style={{ flexDirection: 'row' }}>
+      
+                          <View style={{ marginLeft: SIZES.base, alignItems: 'center' }}>
+                            <Text style={{ fontSize: 20, color: "#00b4e3", marginTop: 10, fontWeight: "bold" }}>UHIRA</Text>
+                            <View style={{
+                              borderBottomWidth: 2,
+                              borderBottomColor: "#00b4e3",
+                              width: 75,
+                              marginLeft: 1,
+                              marginTop: 5
+                            }}>
+      
+                            </View>
+      
+      
+                          </View>
                         </View>
+      
+      
                       </View>
-
-
                     </View>
-                  </View>
-                )}
-              </>
+                  ) : (
+                    <>
+                      {isUhira ? (
+                        <TouchableOpacity onPress={() => navigation.navigate("uhira")} style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15, marginBottom: 100, }}>
+                          <View
+                            style={{
+                              width: '95%',
+                              height: 90,
+                              paddingVertical: 5,
+                              paddingHorizontal: 12,
+                              marginBottom: 100,
+                              borderRadius: 8,
+                              backgroundColor: "#88b04b",
+                              ...styles.shadow
+      
+                            }}
+                          //onPress={() => navigation.navigate("Landing")}
+                          >
+                            <View style={{ flexDirection: 'row' }}>
+      
+                              <View style={{ paddingTop: 22 }}>
+                                <Image resizeMode='contain' style={{ width: 35, height: 35, marginLeft: "8%" }} source={require('../assets/icons/uhira2.png')} />
+                              </View>
+                              <View>
+                                <Text style={{ fontSize: 20, color: "white", marginTop: 13, fontWeight: "bold" }}>UHIRA</Text>
+      
+                                <View>
+                                  <Text style={{ color: 'white', ...FONTS.body3, marginTop: 5, fontSize: 18 }}>
+                                    Subscribed
+                                  </Text>
+                                </View>
+      
+      
+                              </View>
+      
+                              <View style={{ justifyContent: "center", marginLeft: "45%", paddingTop: 20 }}>
+      
+                                <SimpleLineIcons name="arrow-right" size={20} color="white" />
+      
+                              </View>
+                            </View>
+      
+      
+                          </View>
+                        </TouchableOpacity>
+                      ) : (
+                        <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 15, marginBottom: 100, }}>
+                          <View
+                            style={{
+                              width: '95%',
+                              height: 90,
+                              paddingVertical: 5,
+                              paddingHorizontal: 10,
+                              borderLeftWidth: 10,
+                              borderLeftColor: "#88b04b",
+                              borderRadius: 8,
+                              backgroundColor: "white",
+                              ...styles.shadow
+      
+                            }}
+                          //onPress={() => navigation.navigate("Landing")}
+                          >
+                            <View style={{ flexDirection: 'row' }}>
+      
+                              <View style={{ paddingTop: 20 }}>
+                                <Image resizeMode='contain' style={{ width: 35, height: 35, marginLeft: "10%" }} source={require('../assets/icons/uhirai.png')} />
+                              </View>
+      
+                              <View >
+                                <Text style={{ fontSize: 20, color: "#1f1f1f", marginTop: 10, fontWeight: "bold" }}>UHIRA</Text>
+      
+                                <TouchableOpacity onPress={() => { uhira_alert() }}>
+                                  <Text style={{ color: '#707070', ...FONTS.body3, marginTop: 10, fontSize: 18 }}>
+                                    Tap to Subscribe
+                                  </Text>
+                                </TouchableOpacity>
+      
+                              </View>
+                            </View>
+      
+      
+                          </View>
+                        </View>
+                      )}
+                    </>
+                  )}
+      
+                </ScrollView>
+              </View >
+            ) : (
+      
+              <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center", backgroundColor: "#009cde", width: "100%" }}>
+      
+              <ActivityIndicator size='large' color='white' />
+              <Text style={{ fontSize: 30, color: "white" }}>Please wait</Text>
+            </View>
             )}
+      
+          
+      </>
+      
+        ):(
+       navigation.navigate('AccountDeleted')
 
-          </ScrollView>
-        </View >
-      ) : (
+        )
 
-        <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center", backgroundColor: "#009cde", width: "100%" }}>
+      ):(
+        <View style={{ height: "100%", justifyContent: "center", alignItems: "center", alignContent: "center", alignSelf: "center", backgroundColor: "#fff", width: "100%" }}>
 
-        <ActivityIndicator size='large' color='white' />
-        <Text style={{ fontSize: 30, color: "white" }}>Please wait</Text>
-      </View>
-      )}
-
+      <Text style={{ fontSize: 30, color: "black" }}>You must be a customer to login</Text>
+    </View>
+      )
+    )
     
-</>
 
 
 
@@ -808,6 +832,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#444'
   },
+  signIn: {
+    width: '100%',
+    marginTop:10,
+    marginBottom:50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10
+},
 });
 
 
