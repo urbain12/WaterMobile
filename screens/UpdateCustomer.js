@@ -320,7 +320,8 @@ const UpdateCustomer = ({ navigation }) => {
                     <TouchableOpacity style={{ marginTop: 20 }}
                     onPress={(event) => {
                         handleSubmit(event)
-                    }}>
+                    }}
+                    >
 
                     <View
                         style={{ backgroundColor: "#009cde", width: "100%", height:50, alignItems: "center", borderRadius: 10 }}
