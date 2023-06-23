@@ -24,7 +24,7 @@ import axios from 'axios';
 const Paywater = ({ route, navigation }) => {
   const [customer, setCustomer] = useState('')
   const [TokenNumber, setToken] = useState('')
-  const [Amount, setAmount] = useState('') 
+  const [Amount, setAmount] = useState('')
   const [paidAmount, setPaidAmount] = useState('')
   const [Phonenumber, setPhonenumber] = useState('')
   const [paymentcode, setpaymentcode] = useState('1010')
@@ -85,7 +85,7 @@ const Paywater = ({ route, navigation }) => {
   const handleSubmit = (e) => {
     setLoading(true)
     e.preventDefault();
-    if (Amount < 1000) {
+    if (Amount < 100) {
       alert("you not allowed to buy for amount less than 1000")
       navigation.navigate('inuma')
 
@@ -109,8 +109,10 @@ const Paywater = ({ route, navigation }) => {
       postObj.append('amount', Amount)
       postObj.append('payment_code', paymentcode)
 
+      console.log(postObj)
 
-      axios.post('http://app.amazi.rw/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
+
+      axios.post('http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
         console.log('success')
         console.log(res.data)
         alert('Confirm with your phone and wait for approval')
@@ -121,7 +123,7 @@ const Paywater = ({ route, navigation }) => {
             console.log('not paid yet')
             const my_data = JSON.parse(res.data)
             console.log(my_data.transactionid)
-            axios.get(`http://app.amazi.rw/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`, options).then(res => {
+            axios.get(`http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`, options).then(res => {
               const my_data2 = JSON.parse(res.data)
               console.log(my_data2)
               console.log(my_data2[0].payment_status)
@@ -131,7 +133,7 @@ const Paywater = ({ route, navigation }) => {
                   'Meternumber': customer.Meternumber.Meternumber,
                   'Amount': my_data2[0].amount,
                   'Phone': customer.user.phone,
-                  'trans_id':my_data.transactionid
+                  'trans_id': my_data.transactionid
                 })
                 console.log(postObj)
                 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -140,12 +142,12 @@ const Paywater = ({ route, navigation }) => {
                   'Content-Type': 'application/json',
                   // Authorization: `Token ${my_token}`,
                 };
-                  setpaid(true)
-                  clearInterval(setint)
+                setpaid(true)
+                clearInterval(setint)
                 axios.post('http://admin.amazi.rw/pay_Water/', postObj).then((res) => {
                   console.log(res.status)
                   alert('Water paid successfully!!')
-                  
+
                   navigation.navigate('inuma')
 
                 }).catch(error => {

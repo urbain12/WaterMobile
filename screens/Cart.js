@@ -88,7 +88,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
 
     
 
-  axios.post('http://app.amazi.rw/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
+  axios.post('http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
     console.log('success')
     console.log(res.data)
     setIsVisible2(false)
@@ -101,7 +101,7 @@ const Cart = ({navigation,cart,removeFromCart}) => {
         console.log('not paid yet')
         const my_data=JSON.parse(res.data)
         console.log(my_data.transactionid)          
-        axios.get(`http://app.amazi.rw/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`,options).then(res => {
+        axios.get(`http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`,options).then(res => {
         const my_data2=JSON.parse(res.data)
         console.log(my_data2)  
         console.log(my_data2[0].payment_status)  
