@@ -160,12 +160,10 @@ const Paywater = ({ route, navigation }) => {
           }
 
         }, 30000)
-
-
-
-
-
-
+        setTimeout(() => {
+          clearInterval(setint);
+        }, 240000);
+        
       })
       setTimeout(() => {
         setLoading(false)

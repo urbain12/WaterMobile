@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,76 +8,80 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { dummyData, COLORS, SIZES, FONTS, images } from "../constants";
-import { MaterialIcons, AntDesign, EvilIcons, FontAwesome, Ionicons, Feather, Entypo,SimpleLineIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  AntDesign,
+  EvilIcons,
+  FontAwesome,
+  Ionicons,
+  Feather,
+  Entypo,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 
-import axios from 'axios';
-import { TextInputMask } from 'react-native-masked-text';
-
-
+import axios from "axios";
+import { TextInputMask } from "react-native-masked-text";
 
 const Momopay = ({ route, navigation }) => {
-  const [customer, setCustomer] = useState('')
-  const [Amount, setAmount] = useState('')
-  const [paidAmount, setPaidAmount] = useState('')
-  const [Phonenumber, setPhonenumber] = useState('')
-  const [paymentcode, setpaymentcode] = useState('1010')
-  const [paid, setpaid] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [information, setinformation] = useState(false)
-  const [user_id, setUserId] = useState('')
-
+  const [customer, setCustomer] = useState("");
+  const [Amount, setAmount] = useState("");
+  const [paidAmount, setPaidAmount] = useState("");
+  const [Phonenumber, setPhonenumber] = useState("");
+  const [paymentcode, setpaymentcode] = useState("1010");
+  const [paid, setpaid] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [information, setinformation] = useState(false);
+  const [user_id, setUserId] = useState("");
 
   useEffect(() => {
     async function setInfo() {
-      const id = await AsyncStorage.getItem('user_id')
-      axios.get(`http://admin.amazi.rw/getcustomerbyid/${id}`).then((res) => {
-        setCustomer(res.data[0])
-        setPhonenumber(res.data[0].user.phone)
-      }).catch(error => {
-        console.log(error.message)
-        console.log(customer)
+      const id = await AsyncStorage.getItem("user_id");
+      axios
+        .get(`http://admin.amazi.rw/getcustomerbyid/${id}`)
+        .then((res) => {
+          setCustomer(res.data[0]);
+          setPhonenumber(res.data[0].user.phone);
+        })
+        .catch((error) => {
+          console.log(error.message);
+          console.log(customer);
+        });
+      axios
+        .get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`)
+        .then((res) => {
+          const sub = res.data.find(
+            (el) => el.Category.Title.toUpperCase() === "AMAZI"
+          );
+          setinformation(sub);
+          const newmonthly = sub.Total - parseInt(sub.Downpayment);
+          const Monthly = Math.ceil(newmonthly / sub.InstallmentPeriod);
+          const month = JSON.stringify(Monthly);
+          setAmount(month);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-      })
-      axios.get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`).then((res) => {
-        const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
-        setinformation(sub)
-        const newmonthly = sub.Total-parseInt(sub.Downpayment)
-        const Monthly = Math.ceil(newmonthly / sub.InstallmentPeriod)
-        const month = JSON.stringify(Monthly)
-        setAmount(month)
-      }).catch(err => {
-        console.log(err)
-      })
-
-      setUserId(id)
-
+      setUserId(id);
     }
 
-    setInfo()
-
-  }, [])
-
-
-
+    setInfo();
+  }, []);
 
   const handleamount = (val) => {
-    var amount=val.split('  ')[1]
-    setAmount(amount)
-  }
+    var amount = val.split("  ")[1];
+    setAmount(amount);
+  };
   const handlephone = (val) => {
-    setPhonenumber(val)
-  }
+    setPhonenumber(val);
+  };
 
-
-
-
-
-  const handleSubmit =  (e) => {
-    setLoading(true)
+  const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const options = {
@@ -88,98 +92,105 @@ const Momopay = ({ route, navigation }) => {
         "app-device": "Postman",
         "app-device-os": "Postman",
         "app-device-id": "0",
-        "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003"
-      }
+        "x-auth": "705d3a96-c5d7-11ea-87d0-0242ac130003",
+      },
     };
     const postObj = new FormData();
 
-    postObj.append('phone_number', Phonenumber)
-    postObj.append('amount', Amount)
-    postObj.append('payment_code', paymentcode)
+    postObj.append("phone_number", Phonenumber);
+    postObj.append("amount", Amount);
+    postObj.append("payment_code", paymentcode);
 
+    axios
+      .post(
+        "http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/send-transaction",
+        postObj,
+        options
+      )
+      .then((res) => {
+        console.log("success");
+        console.log(res.data);
+        alert("Confirm with your phone and wait for approval");
+        navigation.navigate("Home");
+        const setint = setInterval(() => {
+          console.log("checking status");
+          if (!paid) {
+            console.log("not paid yet");
+            const my_data = JSON.parse(res.data);
+            console.log(my_data.transactionid);
+            axios
+              .get(
+                `http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`,
+                options
+              )
+              .then((res) => {
+                const my_data2 = JSON.parse(res.data);
+                console.log(my_data2);
+                console.log(my_data2[0].payment_status);
+                if (my_data2[0].payment_status == "SUCCESSFUL") {
+                  const setPayment = async () => {
+                    const id = await AsyncStorage.getItem("user_id");
+                    console.log(id);
 
-    axios.post('http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/send-transaction', postObj, options).then(res => {
-      console.log('success')
-      console.log(res.data)
-      alert('Confirm with your phone and wait for approval')
-      navigation.navigate('Home')
-      const setint = setInterval(() => {
-        console.log('checking status')
-        if (!paid) {
-          console.log('not paid yet')
-          const my_data = JSON.parse(res.data)
-          console.log(my_data.transactionid)
-          axios.get(`http://war.t3ch.rw:8231/wa-api/api/web/index.php?r=v1/app/get-transaction-status&transactionID=${my_data.transactionid}`, options).then(res => {
-            const my_data2 = JSON.parse(res.data)
-            console.log(my_data2)
-            console.log(my_data2[0].payment_status)
-            if (my_data2[0].payment_status == "SUCCESSFUL") {
+                    axios
+                      .get(
+                        `http://admin.amazi.rw/subscriptions_by_customer/${id}`
+                      )
+                      .then((res) => {
+                        const sub = res.data.find(
+                          (el) => el.Category.Title.toUpperCase() === "AMAZI"
+                        );
+                        const postObj = JSON.stringify({
+                          customerID: customer.id,
+                          amount: my_data2[0].amount,
+                          sub_id: sub.id,
+                          trans_id: my_data.transactionid,
+                        });
+                        console.log(postObj);
+                        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+                        axios.defaults.xsrfCookieName = "csrftoken";
+                        axios.defaults.headers = {
+                          "Content-Type": "application/json",
+                          // Authorization: `Token ${my_token}`,
+                        };
 
+                        axios
+                          .post(
+                            "http://admin.amazi.rw/pay_subscription/",
+                            postObj
+                          )
+                          .then((res) => {
+                            console.log(res.status);
+                            alert("Subscription paid successfully!!");
+                            setpaid(true);
+                            clearInterval(setint);
+                            navigation.navigate("Home");
+                          })
+                          .catch((error) => {
+                            console.log(error.message);
+                          });
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  };
 
-              const setPayment = async ()=>{
-                const id =  await AsyncStorage.getItem('user_id')
-              console.log(id)
-        
-        axios.get(`http://admin.amazi.rw/subscriptions_by_customer/${id}`).then((res) => {
-            
-          const sub = res.data.find(el => el.Category.Title.toUpperCase() === "AMAZI")
-          const postObj = JSON.stringify({
-            'customerID': customer.id,
-            'amount': my_data2[0].amount,
-            'sub_id':sub.id,
-            'trans_id':my_data.transactionid
-          })
-          console.log(postObj)
-          axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-          axios.defaults.xsrfCookieName = "csrftoken";
-          axios.defaults.headers = {
-            'Content-Type': 'application/json',
-            // Authorization: `Token ${my_token}`,
-          };
-
-          axios.post('http://admin.amazi.rw/pay_subscription/', postObj).then((res) => {
-            console.log(res.status)
-            alert('Subscription paid successfully!!')
-            setpaid(true)
-            clearInterval(setint)
-            navigation.navigate('Home')
-
-
-          }).catch(error => {
-            console.log(error.message)
-          })
-          
-
-        }).catch(err => {
-            console.log(err)
-        })
-              }
-
-              setPayment();
-//======
-              
-
-            }
-
-          })
-        }
-
-      }, 30000)
-
-
-
-
-
-
-    })
+                  setPayment();
+                  //======
+                }
+              });
+          }
+        }, 30000);
+        setTimeout(() => {
+          clearInterval(setint);
+        }, 240000);
+      });
     setTimeout(() => {
-      setLoading(false)
-    }, 5000)
-
-  }
+      setLoading(false);
+    }, 5000);
+  };
 
   const renderHeader = () => {
-
     return (
       <View
         style={{
@@ -209,15 +220,19 @@ const Momopay = ({ route, navigation }) => {
               style={{
                 width: 35,
                 height: 35,
-                marginRight: '80%',
+                marginRight: "80%",
                 marginTop: 10,
                 alignItems: "center",
                 justifyContent: "center",
               }}
               onPress={() => navigation.goBack()}
             >
-             <SimpleLineIcons name="arrow-left" size={25} color="white" style={{marginRight:15}} />
-
+              <SimpleLineIcons
+                name="arrow-left"
+                size={25}
+                color="white"
+                style={{ marginRight: 15 }}
+              />
             </TouchableOpacity>
           </View>
 
@@ -235,14 +250,12 @@ const Momopay = ({ route, navigation }) => {
           </View>
 
           {/* Trending */}
-
         </ImageBackground>
       </View>
     );
-  }
+  };
 
   function renderTrade() {
-
     return (
       <View
         style={{
@@ -254,10 +267,8 @@ const Momopay = ({ route, navigation }) => {
           ...styles.shadow,
         }}
       >
-
         <View>
           <TouchableOpacity activeOpacity={1}>
-
             <TextInput
               style={{
                 borderColor: "gray",
@@ -274,7 +285,7 @@ const Momopay = ({ route, navigation }) => {
               placeholder="Phone Number"
               keyboardType="numeric"
               value={Phonenumber}
-              onChangeText={text => handlephone(text)}
+              onChangeText={(text) => handlephone(text)}
             />
 
             <TextInputMask
@@ -292,66 +303,75 @@ const Momopay = ({ route, navigation }) => {
               placeholder="Amount"
               keyboardType="numeric"
               value={Amount}
-              type={'money'}
+              type={"money"}
               options={{
                 precision: 0,
-                separator: ',',
-                delimiter: ',',
-                unit: 'Rwf  ',
-                suffixUnit: ''
+                separator: ",",
+                delimiter: ",",
+                unit: "Rwf  ",
+                suffixUnit: "",
               }}
-              onChangeText={text => handleamount(text)}
+              onChangeText={(text) => handleamount(text)}
             />
-
-
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={{ marginTop: 20 }}
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
           onPress={(e) => {
-            handleSubmit(e)
-          }}>
-
+            handleSubmit(e);
+          }}
+        >
           <View
-            style={{ backgroundColor: "#009cde", width: "100%", height: "50%", alignItems: "center", borderRadius: 10 }}
+            style={{
+              backgroundColor: "#009cde",
+              width: "100%",
+              height: "50%",
+              alignItems: "center",
+              borderRadius: 10,
+            }}
           >
             {loading ? (
-              <ActivityIndicator size='large' color='white' style={{ margin: 15 }} />
-            ) :
-              (
-                <Text style={{ color: "white", marginTop: 15, fontSize: 20, fontWeight: "bold" }}>Pay</Text>
-              )}
-
+              <ActivityIndicator
+                size="large"
+                color="white"
+                style={{ margin: 15 }}
+              />
+            ) : (
+              <Text
+                style={{
+                  color: "white",
+                  marginTop: 15,
+                  fontSize: 20,
+                  fontWeight: "bold",
+                }}
+              >
+                Pay
+              </Text>
+            )}
           </View>
-
-
         </TouchableOpacity>
       </View>
     );
   }
 
-  function renderTransactionHistory() { }
+  function renderTransactionHistory() {}
 
   return (
-    <View style={{flex:1}}>
-      <View>
-        {renderHeader()}
-      </View>
-
+    <View style={{ flex: 1 }}>
+      <View>{renderHeader()}</View>
 
       <ScrollView>
         <View style={{ flex: 1, paddingBottom: SIZES.padding }}>
-
           {renderTrade()}
           {renderTransactionHistory()}
         </View>
       </ScrollView>
-      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     alignItems: "center",

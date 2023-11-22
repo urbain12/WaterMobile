@@ -138,12 +138,9 @@ const Cart = ({navigation,cart,removeFromCart}) => {
       }
 
     }, 30000)
-    
-
-    
-
-
-
+    setTimeout(() => {
+      clearInterval(setint);
+    }, 240000);
   })
 
   setTimeout(() => {
